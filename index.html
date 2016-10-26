@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en" ng-app="starter" ng-cloak>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Quickly start your Vert.x Project">
+	<link rel="shortcut icon" type="image/x-icon" href="/img/favicon.png" />
+
+	<title>Vert.x Starter</title>
+
+	<link rel="stylesheet" href="css/pure-min.css">
+	<link rel="stylesheet" href="css/grids-responsive-min.css">
+	<link rel="stylesheet" href="css/style.css">
+
+	<style>
+		/* Customization to limit height of the menu */
+
+		.custom-restricted {
+			height: 320px;
+			border: 1px solid gray;
+			border-radius: 4px;
+		}
+	</style>
+
+	<script src="js/menus.js"></script>
+	<script src="js/angular.min.js"></script>
+	<script src="js/jszip.min.js"></script>
+	<script src="js/FileSaver.js"></script>
+
+	<script src="js/app.js"></script>
+
+	<script src="js/handlebars.runtime.min.js"></script>
+	<script src="templ/pom.xml.js"></script>
+	<script src="templ/build.gradle.js"></script>
+	<script src="templ/package.json.js"></script>
+</head>
+
+<body ng-controller="MainCtrl" ng-init="selectMaven()">
+
+	<div id="layout" class="pure-g">
+		<div class="sidebar pure-u-1 pure-u-md-1-4">
+			<div class="header">
+				<h1 class="brand-title">Vert.x Starter</h1>
+				<h2 class="brand-tagline">Create a Vert.x project with</h2>
+
+				<nav class="nav">
+					<ul class="nav-list">
+						<li class="nav-item">
+							<a class="pure-button" style="{{ selected.maven }}" href="#" ng-click="selectMaven()">Maven</a>
+						</li>
+						<li class="nav-item">
+							<a class="pure-button" style="{{ selected.gradle }}" href="#" ng-click="selectGradle()">Gradle</a>
+						</li>
+						<li class="nav-item">
+							<a class="pure-button" style="{{ selected.npm }}" href="#" ng-click="selectNPM()">NPM</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+
+		<div class="content pure-u-1 pure-u-md-3-4">
+
+			<!-- A wrapper for all the project metadata -->
+			<div class="posts">
+				<h1 class="content-subhead">{{ title }} metadata</h1>
+				<div class="pure-u-1">
+					<form class="pure-form pure-form-aligned">
+						<fieldset>
+							<div class="pure-control-group" ng-repeat="f in fields">
+								<label for="{{ f.key }}">{{ f.value }}</label>
+								<input id="{{ f.key }}" type="text">
+							</div>
+						</fieldset>
+					</form>
+				</div>
+			</div>
+
+			<!-- A wrapper for all the project metadata -->
+			<div class="posts">
+				<h1 class="content-subhead">Select dependencies</h1>
+				<div class="pure-u-5-12">
+					<div class="pure-menu pure-menu-scrollable custom-restricted">
+						<ul class="pure-menu-list">
+							<li class="pure-menu-item" ng-repeat="d in components">
+								<a href="#" ng-click="dependencies.push(d); components.splice($index, 1)" class="pure-menu-link">{{ d.name }} <small>({{ d.description }})</small> <img ng-src="img/stack.svg" width="16px" ng-if="d.stack" /></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="pure-u-5-12">
+					<div class="pure-menu pure-menu-scrollable custom-restricted">
+						<ul class="pure-menu-list">
+							<li class="pure-menu-item" ng-repeat="d in dependencies">
+								<a href="#" ng-click="components.push(d); dependencies.splice($index, 1)" class="pure-menu-link">{{ d.name }} <small>({{ d.description }})</small> <img ng-src="img/stack.svg" width="16px" ng-if="d.stack" /></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<!-- A wrapper for all the project metadata -->
+			<div class="posts">
+				<p>
+					<a href="#" ng-click="generate()" class="pure-button">Generate</a>
+				</p>
+			</div>
+		</div>
+	</div>
+	<div class="footer">
+		<div class="pure-menu pure-menu-horizontal">
+			<ul>
+				<li class="pure-menu-item"><a href="http://vertx.io/" class="pure-menu-link">About</a></li>
+				<li class="pure-menu-item"><a href="http://twitter.com/vertx_project/" class="pure-menu-link">Twitter</a></li>
+				<li class="pure-menu-item"><a href="http://github.com/eclipse/vert.x/" class="pure-menu-link">GitHub</a></li>
+			</ul>
+		</div>
+	</div>
+</body>
+
+</html>
