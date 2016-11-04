@@ -8,14 +8,14 @@ app.controller('MainCtrl', function ($scope, $http) {
   $scope.dependencies = [];
 
   // get the components from the server
-  $http.get('/components.json')
+  $http.get('components.json')
     .then(function (res) {
       // TODO: handle status != 200
       $scope.components = res.data;
     });
 
   // get the buildtools from the server
-  $http.get('/buildtools.json')
+  $http.get('buildtools.json')
     .then(function (res) {
       // TODO: handle status != 200
       $scope.buildtools = res.data;
