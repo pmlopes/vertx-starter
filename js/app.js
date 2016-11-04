@@ -61,7 +61,7 @@ app.controller('MainCtrl', function ($scope, $http) {
       var dep = $scope.dependencies[i];
       ga('send', {
         hitType: 'event',
-        eventCategory: $scope.tool.toLowerCase() + ':dependency',
+        eventCategory: $scope.tool + ':dependency',
         eventAction: dep.groupId + ':' + dep.artifactId + ':' + dep.version
       });
     }

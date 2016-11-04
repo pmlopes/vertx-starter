@@ -1,6 +1,6 @@
 [
   {
-    "name": "Maven",
+    "name": "maven",
     "metadata": "pom.xml",
     "fields" :[
       { "key": "name", "value": "Project Name" },
@@ -17,7 +17,7 @@
   },
 
   {
-    "name": "Gradle",
+    "name": "gradle",
     "metadata": "build.gradle",
     "fields" :[
       { "key": "name", "value": "Project Name" },
@@ -32,7 +32,7 @@
   },
 
   {
-    "name": "NPM",
+    "name": "npm",
     "metadata": "package.json",
     "fields": [
       { "key": "name", "value": "Project Name" },
