@@ -34,14 +34,27 @@ app.controller('MainCtrl', function ($scope, $http) {
   };
 
   $scope.generate = function () {
+    var i;
+    // track what project type is being generated
     ga('send', {
       hitType: 'event',
-      eventCategory: $scope.tool,
-      eventAction: 'new'
+      eventCategory: 'project',
+      eventAction: $scope.tool
     });
 
+    // track what dependencies are being selected
+    for (i = 0; i < $scope.dependencies.length; i++) {
+      var dep = $scope.dependencies[i];
+      ga('send', {
+        hitType: 'event',
+        eventCategory: 'dependency',
+        eventAction: dep.groupId + ':' + dep.artifactId + ':' + dep.version,
+        eventLabel: $scope.tool
+      });
+    }
+
     // get all data from the form
-    for (var i = 0; i < $scope.fields.length; i++) {
+    for (i = 0; i < $scope.fields.length; i++) {
       $scope[$scope.fields[i].key] = document.getElementById($scope.fields[i].key).value;
     }
 
