@@ -64,51 +64,51 @@
     </div>
 
     <div class="content pure-u-1 pure-u-md-3-4">
+      <form class="pure-form pure-form-aligned" ng-submit="generate()">
+        <fieldset>
 
-      <!-- A wrapper for all the project metadata -->
-      <div class="posts">
-        <h1 class="content-subhead">{{ title }} metadata</h1>
-        <div class="pure-u-1">
-          <form class="pure-form pure-form-aligned">
-            <fieldset>
+          <!-- A wrapper for all the project metadata -->
+          <div class="posts">
+            <h1 class="content-subhead">{{ title }} metadata</h1>
+            <div class="pure-u-1">
               <div class="pure-control-group" ng-repeat="f in fields">
                 <label for="{{ f.key }}">{{ f.value }}</label>
-                <input id="{{ f.key }}" type="text" value="{{ f.prefill }}">
+                <input id="{{ f.key }}" type="text" value="{{ f.prefill }}" ng-required="f.required" >
               </div>
-            </fieldset>
-          </form>
-        </div>
-      </div>
-
-      <!-- A wrapper for all the project metadata -->
-      <div class="posts">
-        <h1 class="content-subhead">Select dependencies</h1>
-        <div class="pure-u-5-12">
-          <div class="pure-menu pure-menu-scrollable custom-restricted">
-            <ul class="pure-menu-list">
-              <li class="pure-menu-item" ng-repeat="d in components">
-                <a href="#" ng-click="dependencies.push(d); components.splice($index, 1)" class="pure-menu-link">{{ d.artifactId }} <small ng-if="d.description">({{ d.description }})</small> <img ng-src="img/stack.svg" width="16px" ng-if="d.stack" /></a>
-              </li>
-            </ul>
+            </div>
           </div>
-        </div>
-        <div class="pure-u-5-12">
-          <div class="pure-menu pure-menu-scrollable custom-restricted">
-            <ul class="pure-menu-list">
-              <li class="pure-menu-item" ng-repeat="d in dependencies">
-                <a href="#" ng-click="components.push(d); dependencies.splice($index, 1)" class="pure-menu-link">{{ d.artifactId }} <small ng-if="d.description">({{ d.description }})</small> <img ng-src="img/stack.svg" width="16px" ng-if="d.stack" /></a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
 
-      <!-- A wrapper for all the project metadata -->
-      <div class="posts">
-        <p>
-          <a href="#" ng-click="generate()" class="pure-button">Generate</a>
-        </p>
-      </div>
+          <!-- A wrapper for all the project metadata -->
+          <div class="posts">
+            <h1 class="content-subhead">Select dependencies</h1>
+            <div class="pure-u-5-12">
+              <div class="pure-menu pure-menu-scrollable custom-restricted">
+                <ul class="pure-menu-list">
+                  <li class="pure-menu-item" ng-repeat="d in components">
+                    <a href="#" ng-click="dependencies.push(d); components.splice($index, 1)" class="pure-menu-link">{{ d.artifactId }} <small ng-if="d.description">({{ d.description }})</small> <img ng-src="img/stack.svg" width="16px" ng-if="d.stack" /></a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="pure-u-5-12">
+              <div class="pure-menu pure-menu-scrollable custom-restricted">
+                <ul class="pure-menu-list">
+                  <li class="pure-menu-item" ng-repeat="d in dependencies">
+                    <a href="#" ng-click="components.push(d); dependencies.splice($index, 1)" class="pure-menu-link">{{ d.artifactId }} <small ng-if="d.description">({{ d.description }})</small> <img ng-src="img/stack.svg" width="16px" ng-if="d.stack" /></a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- A wrapper for all the project metadata -->
+          <div class="posts">
+            <p>
+              <button type="submit" class="pure-button pure-button-primary">Generate</button>
+            </p>
+          </div>
+        </fieldset>
+      </form>
     </div>
   </div>
   <div class="footer">

@@ -3,7 +3,7 @@
     "name": "maven",
     "metadata": "pom.xml",
     "fields" :[
-      { "key": "name", "value": "Project Name" },
+      { "key": "name", "value": "Project Name", "required": true },
       { "key": "description", "value": "Project Description" },
       { "key": "groupId", "value": "Maven Group Id", "prefill": "com.example" },
       { "key": "artifactId", "value": "Maven Artifact Id", "prefill": "demo" },
@@ -24,7 +24,7 @@
     "name": "gradle",
     "metadata": "build.gradle",
     "fields" :[
-      { "key": "name", "value": "Project Name" },
+      { "key": "name", "value": "Project Name", "required": true },
       { "key": "description", "value": "Project Description" },
       { "key": "version", "value": "Project Version", "prefill": "0.0.1-SNAPSHOT" },
       { "key": "main", "value": "Main Verticle", "prefill": "com.example.demo.MainVerticle" }
@@ -43,7 +43,7 @@
     "name": "npm",
     "metadata": "package.json",
     "fields": [
-      { "key": "name", "value": "Project Name" },
+      { "key": "name", "value": "Project Name", "required": true },
       { "key": "description", "value": "Project Description" },
       { "key": "version", "value": "Project Version", "prefill": "0.0.1" },
       { "key": "main", "value": "Main Verticle", "prefill": "server.js" }
@@ -57,6 +57,21 @@
     "defaults": [
       "io.vertx:vertx-core",
       "io.vertx:vertx-lang-js"
+    ]
+  },
+
+  {
+    "name": "stack",
+    "metadata": "vertx-stack.json",
+    "fields": [
+      { "key": "name", "value": "Project Name", "required": true }
+    ],
+    "templates": [
+      "stack/vertx-stack.json",
+      "stack/README.md"
+    ],
+    "defaults": [
+      "io.vertx:vertx-core"
     ]
   }
 ]

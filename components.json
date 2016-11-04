@@ -6,6 +6,12 @@
     "stack": true
   },
   {
+    "groupId": "io.netty",
+    "artifactId": "netty-tcnative-boringssl-static",
+    "version": "1.1.33.Fork21",
+    "included": true
+  },
+  {
     "groupId": "io.vertx",
     "artifactId": "vertx-lang-js",
     "version": "3.3.3",
@@ -165,24 +171,32 @@
     "groupId": "io.vertx",
     "artifactId": "vertx-web-templ-thymeleaf",
     "version": "3.3.3",
+    "classifier": "shaded",
+    "transitive": "false",
     "stack": true
   },
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-web-templ-handlebars",
     "version": "3.3.3",
+    "classifier": "shaded",
+    "transitive": "false",
     "stack": true
   },
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-web-templ-jade",
     "version": "3.3.3",
+    "classifier": "shaded",
+    "transitive": "false",
     "stack": true
   },
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-web-templ-mvel",
     "version": "3.3.3",
+    "classifier": "shaded",
+    "transitive": "false",
     "stack": true
   },
   {
@@ -340,11 +354,5 @@
     "artifactId": "vertx-proton",
     "version": "3.3.3",
     "stack": true
-  },
-  {
-    "artifactId": "vertx3-eventbus-client",
-    "version": "3.3.3",
-    "stack": true,
-    "npm": true
   }
 ]

@@ -73,15 +73,26 @@ app.controller('MainCtrl', function ($scope, $http) {
       eventAction: $scope.tool
     });
 
-    // track what dependencies are being selected
     for (i = 0; i < $scope.dependencies.length; i++) {
       var dep = $scope.dependencies[i];
+      // add stack meta-data
+      dep.included = true;
+      // track what dependencies are being selected
       ga('send', {
         hitType: 'event',
         eventCategory: $scope.tool + ':dependency',
         eventAction: dep.groupId + ':' + dep.artifactId + ':' + dep.version
       });
     }
+
+    for (i = 0; i < $scope.components.length; i++) {
+      var dep = $scope.components[i];
+      // add stack meta-data
+      dep.included = false;
+    }
+
+    // put all into a single array
+    $scope.stack = $scope.dependencies.concat($scope.components);
 
     // get all data from the form
     for (i = 0; i < $scope.fields.length; i++) {
