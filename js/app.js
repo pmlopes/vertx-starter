@@ -38,13 +38,30 @@ app.controller('MainCtrl', function ($scope, $http) {
     });
 
   $scope.selectBuildTool = function (idx) {
+    var i;
+
     $scope.selected = {};
     $scope.tool = $scope.buildtools[idx].name;
     $scope.fields = $scope.buildtools[idx].fields;
     $scope.title = $scope.buildtools[idx].metadata;
     $scope.templates = $scope.buildtools[idx].templates;
+    $scope.fqcnTemplate = $scope.buildtools[idx].fqcnTemplate;
 
+    // highlight choice
     $scope.selected[$scope.buildtools[idx].name] = 'background: rgb(202, 60, 60)';
+    // reset dependencies
+    for (i = 0; i < $scope.dependencies.length; i++) {
+        $scope.components.push($scope.dependencies[i]);
+        $scope.dependencies.splice(i, 1)
+    }
+    // add the defaults
+    for (i = 0; i < $scope.components.length; i++) {
+      var ref = $scope.components[i];
+      if ($scope.buildtools[idx].defaults.indexOf(ref.groupId + ':' + ref.artifactId) != -1) {
+        $scope.dependencies.push(ref);
+        $scope.components.splice(i, 1)
+      }
+    }
   };
 
   $scope.generate = function () {
@@ -87,10 +104,23 @@ app.controller('MainCtrl', function ($scope, $http) {
       zip.file(file, fn($scope));
     }
 
+    if ($scope.fqcnTemplate) {
+      // generate the main verticle if supported
+      fn = Handlebars.templates[$scope.fqcnTemplate];
+      var dot = $scope.fqcnTemplate.indexOf('.');
+      file = $scope.fqcnTemplate.substr(0, dot) + $scope.main.replace(/\./g, '/') + $scope.fqcnTemplate.substr(dot);
+      slash = file.indexOf('/');
+      if (slash > 0) {
+        file = file.substr(slash + 1);
+      }
+      zip.file(file, fn({
+        packageName: $scope.main.substr(0, $scope.main.lastIndexOf('.')),
+        className: $scope.main.substr($scope.main.lastIndexOf('.') + 1)
+      }));
+    }
+
     if (JSZip.support.blob) {
       zip.generateAsync({ type: 'blob' }).then(function (blob) {
-        console.log($scope.name + '.zip')
-        console.log(saveAs);
         saveAs(blob, $scope.name + '.zip');
       }, function (err) {
         ga('send', 'exception', {

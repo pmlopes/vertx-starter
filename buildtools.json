@@ -5,14 +5,18 @@
     "fields" :[
       { "key": "name", "value": "Project Name" },
       { "key": "description", "value": "Project Description" },
-      { "key": "groupId", "value": "Maven Group Id" },
-      { "key": "artifactId", "value": "Maven Artifact Id" },
-      { "key": "version", "value": "Project Version" },
-      { "key": "main", "value": "Main Verticle" }
+      { "key": "groupId", "value": "Maven Group Id", "prefill": "com.example" },
+      { "key": "artifactId", "value": "Maven Artifact Id", "prefill": "demo" },
+      { "key": "version", "value": "Project Version", "prefill": "0.0.1-SNAPSHOT" },
+      { "key": "main", "value": "Main Verticle", "prefill": "com.example.demo.MainVerticle" }
     ],
+    "fqcnTemplate": "maven/src/main/java/.java",
     "templates": [
       "maven/.gitignore",
       "maven/pom.xml"
+    ],
+    "defaults": [
+      "io.vertx:vertx-core"
     ]
   },
 
@@ -22,12 +26,16 @@
     "fields" :[
       { "key": "name", "value": "Project Name" },
       { "key": "description", "value": "Project Description" },
-      { "key": "version", "value": "Project Version" },
-      { "key": "main", "value": "Main Verticle" }
+      { "key": "version", "value": "Project Version", "prefill": "0.0.1-SNAPSHOT" },
+      { "key": "main", "value": "Main Verticle", "prefill": "com.example.demo.MainVerticle" }
     ],
+    "fqcnTemplate": "maven/src/main/java/.java",
     "templates": [
       "gradle/.gitignore",
       "gradle/build.gradle"
+    ],
+    "defaults": [
+      "io.vertx:vertx-core"
     ]
   },
 
@@ -37,14 +45,18 @@
     "fields": [
       { "key": "name", "value": "Project Name" },
       { "key": "description", "value": "Project Description" },
-      { "key": "version", "value": "Project Version" },
-      { "key": "main", "value": "Main Verticle" }
+      { "key": "version", "value": "Project Version", "prefill": "0.0.1" },
+      { "key": "main", "value": "Main Verticle", "prefill": "server.js" }
     ],
     "templates": [
       "npm/.gitignore",
       "npm/webpack.config.js",
       "npm/package.json",
       "npm/src/main.js"
+    ],
+    "defaults": [
+      "io.vertx:vertx-core",
+      "io.vertx:vertx-lang-js"
     ]
   }
 ]

@@ -3,6 +3,15 @@
 templates['maven/.gitignore'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "# build files\ntarget\n# runtime files\n.vertx\n";
 },"useData":true});
+templates['maven/src/main/java/.java'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+
+  return "package "
+    + alias4(((helper = (helper = helpers.packageName || (depth0 != null ? depth0.packageName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"packageName","hash":{},"data":data}) : helper)))
+    + ";\n\nimport io.vertx.core.AbstractVerticle;\n\npublic class "
+    + alias4(((helper = (helper = helpers.className || (depth0 != null ? depth0.className : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"className","hash":{},"data":data}) : helper)))
+    + " extends AbstractVerticle {\n\n  @Override\n  public void start() {\n    // TODO: your code goes here...\n  }\n}\n";
+},"useData":true});
 templates['maven/pom.xml'] = template({"1":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
@@ -35,6 +44,15 @@ templates['maven/pom.xml'] = template({"1":function(container,depth0,helpers,par
 templates['gradle/.gitignore'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "# build files\nbuild\n# runtime files\n.vertx\n";
 },"useData":true});
+templates['gradle/src/main/java/.java'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+
+  return "package "
+    + alias4(((helper = (helper = helpers.packageName || (depth0 != null ? depth0.packageName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"packageName","hash":{},"data":data}) : helper)))
+    + ";\n\nimport io.vertx.core.AbstractVerticle;\n\npublic class "
+    + alias4(((helper = (helper = helpers.className || (depth0 != null ? depth0.className : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"className","hash":{},"data":data}) : helper)))
+    + " extends AbstractVerticle {\n\n  @Override\n  public void start() {\n    // TODO: your code goes here...\n  }\n}\n";
+},"useData":true});
 templates['gradle/build.gradle'] = template({"1":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
@@ -62,7 +80,7 @@ templates['npm/.gitignore'] = template({"compiler":[7,">= 4.0.0"],"main":functio
     return "# temp files\npom.xml\n# build files\ntarget\nnode_modules\n# compiled file (your app)\nserver.js\n# runtime files\n.vertx\nrun.jar\n";
 },"useData":true});
 templates['npm/src/main.js'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "// your application code goes here...\n";
+    return "// TODO: your application code goes here...\n";
 },"useData":true});
 templates['npm/package.json'] = template({"1":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;

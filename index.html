@@ -73,7 +73,7 @@
             <fieldset>
               <div class="pure-control-group" ng-repeat="f in fields">
                 <label for="{{ f.key }}">{{ f.value }}</label>
-                <input id="{{ f.key }}" type="text">
+                <input id="{{ f.key }}" type="text" value="{{ f.prefill }}">
               </div>
             </fieldset>
           </form>
