@@ -10,14 +10,28 @@ app.controller('MainCtrl', function ($scope, $http) {
   // get the components from the server
   $http.get('components.json')
     .then(function (res) {
-      // TODO: handle status != 200
+      if (res.status != 200) {
+        ga('send', 'exception', {
+          'exDescription': res.statusText,
+          'exFatal': true
+        });
+        alert('Cannot download list of components!');
+        return;
+      }
       $scope.components = res.data;
     });
 
   // get the buildtools from the server
   $http.get('buildtools.json')
     .then(function (res) {
-      // TODO: handle status != 200
+      if (res.status != 200) {
+        ga('send', 'exception', {
+          'exDescription': res.statusText,
+          'exFatal': true
+        });
+        alert('Cannot download list of build tools!');
+        return;
+      }
       $scope.buildtools = res.data;
       // initially select the first element
       $scope.selectBuildTool(0);
@@ -47,9 +61,8 @@ app.controller('MainCtrl', function ($scope, $http) {
       var dep = $scope.dependencies[i];
       ga('send', {
         hitType: 'event',
-        eventCategory: 'dependency',
-        eventAction: dep.groupId + ':' + dep.artifactId + ':' + dep.version,
-        eventLabel: $scope.tool
+        eventCategory: $scope.tool.toLowerCase() + ':dependency',
+        eventAction: dep.groupId + ':' + dep.artifactId + ':' + dep.version
       });
     }
 
@@ -80,6 +93,10 @@ app.controller('MainCtrl', function ($scope, $http) {
         console.log(saveAs);
         saveAs(blob, $scope.name + '.zip');
       }, function (err) {
+        ga('send', 'exception', {
+          'exDescription': err.message,
+          'exFatal': true
+        });
         alert(err);
       });
     } else {
@@ -87,6 +104,10 @@ app.controller('MainCtrl', function ($scope, $http) {
       zip.generateAsync({ type: "base64" }).then(function (base64) {
         window.location = "data:application/zip;base64," + base64;
       }, function (err) {
+        ga('send', 'exception', {
+          'exDescription': err.message,
+          'exFatal': true
+        });
         alert(err);
       });
     }
