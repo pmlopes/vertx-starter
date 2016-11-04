@@ -6,6 +6,8 @@ app.controller('MainCtrl', function ($scope, $http) {
   $scope.components = [];
   // this will hold all selected dependencies
   $scope.dependencies = [];
+  // this will hold all presets
+  $scope.presets = [];
 
   // get the components from the server
   $http.get('components.json')
@@ -37,6 +39,19 @@ app.controller('MainCtrl', function ($scope, $http) {
       $scope.selectBuildTool(0);
     });
 
+  // get the buildtools from the server
+  $http.get('presets.json')
+    .then(function (res) {
+      if (res.status != 200) {
+        ga('send', 'exception', {
+          'exDescription': res.statusText,
+          'exFatal': false
+        });
+        return;
+      }
+      $scope.presets = res.data;
+    });
+
   $scope.selectBuildTool = function (idx) {
     var i;
 
@@ -50,16 +65,37 @@ app.controller('MainCtrl', function ($scope, $http) {
     // highlight choice
     $scope.selected[$scope.buildtools[idx].name] = 'background: rgb(202, 60, 60)';
     // reset dependencies
-    for (i = 0; i < $scope.dependencies.length; i++) {
-        $scope.components.push($scope.dependencies[i]);
-        $scope.dependencies.splice(i, 1)
+    while ($scope.dependencies.length) {
+      $scope.components.push($scope.dependencies[0]);
+      $scope.dependencies.splice(0, 1)
     }
     // add the defaults
     for (i = 0; i < $scope.components.length; i++) {
       var ref = $scope.components[i];
       if ($scope.buildtools[idx].defaults.indexOf(ref.groupId + ':' + ref.artifactId) != -1) {
         $scope.dependencies.push(ref);
-        $scope.components.splice(i, 1)
+        $scope.components.splice(i, 1);
+        i--;
+      }
+    }
+  };
+
+  $scope.selectPreset = function () {
+    for (var i = 0; i < $scope.presets.length; i++) {
+      if ($scope.presets[i].name == $scope.preset) {
+        var p = $scope.presets[i];
+        // add the defaults
+        for (var j = 0; j < $scope.components.length; j++) {
+          var ref = $scope.components[j];
+          if (p.dependencies.indexOf(ref.groupId + ':' + ref.artifactId) != -1) {
+            $scope.dependencies.push(ref);
+            $scope.components.splice(j, 1)
+            j--;
+          }
+        }
+        $scope.clearPresetSelection = true;
+        $scope.preset = null;
+        break;
       }
     }
   };

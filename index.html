@@ -15,7 +15,6 @@
 
   <style>
     /* Customization to limit height of the menu */
-
     .custom-restricted {
       height: 320px;
       border: 1px solid gray;
@@ -75,6 +74,13 @@
                 <label for="{{ f.key }}">{{ f.value }}</label>
                 <input id="{{ f.key }}" type="text" value="{{ f.prefill }}" ng-required="f.required" >
               </div>
+              <div class="pure-control-group">
+                <label for="preset">Preset</label>
+                <select id="preset" ng-model="preset" ng-change="selectPreset()">
+                  <option ng-selected="clearPresetSelection"></option>
+                  <option ng-repeat="p in presets" >{{ p.name }}</option>
+                </select>
+              </div>
             </div>
           </div>
 
@@ -107,6 +113,7 @@
               <button type="submit" class="pure-button pure-button-primary">Generate</button>
             </p>
           </div>
+
         </fieldset>
       </form>
     </div>

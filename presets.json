@@ -1,0 +1,19 @@
+[
+  {
+    "name": "webapp + mongo",
+    "dependencies": [
+      "io.vertx:vertx-core",
+      "io.vertx:vertx-web",
+      "io.vertx:vertx-mongo-client"
+    ]
+  },
+  {
+    "name": "webapp + mongo + security",
+    "dependencies": [
+      "io.vertx:vertx-core",
+      "io.vertx:vertx-web",
+      "io.vertx:vertx-mongo-client",
+      "io.vertx:vertx-auth-oauth2"
+    ]
+  }
+]
