@@ -1,0 +1,350 @@
+[
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-core",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-lang-js",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-lang-ruby",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-lang-groovy",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-lang-ceylon",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-service-proxy",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-service-factory",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-maven-service-factory",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-http-service-factory",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-hazelcast",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-dropwizard-metrics",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-hawkular-metrics",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-reactive-streams",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-rx-java",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-rx-js",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-rx-groovy",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-mongo-client",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-mongo-service",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-mongo-embedded-db",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-jdbc-client",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-auth-common",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-auth-jwt",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-auth-jdbc",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-auth-shiro",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-auth-oauth2",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-auth-mongo",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-web",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-web-templ-thymeleaf",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-web-templ-handlebars",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-web-templ-jade",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-web-templ-mvel",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-web-templ-pebble",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-web-templ-freemarker",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-sockjs-service-proxy",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-unit",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-mail-client",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-mail-service",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-redis-client",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-shell",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-sync",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-stomp",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-jgroups",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-bridge-common",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-tcp-eventbus-bridge",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-mysql-postgresql-client",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-camel-bridge",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-ignite",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-rabbitmq-client",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-service-discovery",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-circuit-breaker",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-service-discovery-bridge-kubernetes",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-service-discovery-bridge-docker-links",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-service-discovery-bridge-docker",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-service-discovery-backend-redis",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-service-discovery-bridge-consul",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-amqp-bridge",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-proton",
+    "version": "3.3.3",
+    "stack": true
+  },
+  {
+    "artifactId": "vertx3-eventbus-client",
+    "version": "3.3.3",
+    "stack": true,
+    "npm": true
+  }
+]

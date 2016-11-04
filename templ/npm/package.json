@@ -1,0 +1,36 @@
+{
+  "name": "{{ name }}",
+  "version": "{{ version }}",
+  "description": "{{ description }}",
+
+  "mainVerticle": "{{ main }}",
+
+  "scripts": {
+    "install": "node ./webpack.config.js",
+    "postinstall": "mvn clean package",
+
+    "build": "./node_modules/.bin/webpack",
+    "build:release": "./node_modules/.bin/webpack -p",
+
+    "prestart": "./node_modules/.bin/webpack",
+    "start": "java -jar run.jar",
+
+    "watch": "npm run start -- --redeploy=\"src/**\" --on-redeploy=\"npm run watch\""
+  },
+
+  "dependencies": {
+  },
+
+  "devDependencies": {
+    "babel-core": "^6.5.1",
+    "babel-loader": "^6.2.2",
+    "babel-preset-es2015": "^6.5.0",
+    "webpack": "^1.12.13"
+  },
+
+  "javaDependencies": {
+  {{#each dependencies}}
+    "{{ groupId }}:{{ artifactId }}": "{{ version }}"{{#unless @last}},{{/unless}}
+  {{/each}}
+  }
+}

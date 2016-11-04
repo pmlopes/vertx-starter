@@ -1,0 +1,49 @@
+[
+  {
+    "name": "Maven",
+    "metadata": "pom.xml",
+    "fields" :[
+      { "key": "name", "value": "Project Name" },
+      { "key": "description", "value": "Project Description" },
+      { "key": "groupId", "value": "Maven Group Id" },
+      { "key": "artifactId", "value": "Maven Artifact Id" },
+      { "key": "version", "value": "Project Version" },
+      { "key": "main", "value": "Main Verticle" }
+    ],
+    "templates": [
+      "maven/.gitignore",
+      "maven/pom.xml"
+    ]
+  },
+
+  {
+    "name": "Gradle",
+    "metadata": "build.gradle",
+    "fields" :[
+      { "key": "name", "value": "Project Name" },
+      { "key": "description", "value": "Project Description" },
+      { "key": "version", "value": "Project Version" },
+      { "key": "main", "value": "Main Verticle" }
+    ],
+    "templates": [
+      "gradle/.gitignore",
+      "gradle/build.gradle"
+    ]
+  },
+
+  {
+    "name": "NPM",
+    "metadata": "package.json",
+    "fields": [
+      { "key": "name", "value": "Project Name" },
+      { "key": "description", "value": "Project Description" },
+      { "key": "version", "value": "Project Version" },
+      { "key": "main", "value": "Main Verticle" }
+    ],
+    "templates": [
+      "npm/.gitignore",
+      "npm/webpack.config.js",
+      "npm/package.json"
+    ]
+  }
+]

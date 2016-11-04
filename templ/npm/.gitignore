@@ -1,0 +1,10 @@
+# temp files
+pom.xml
+# build files
+target
+node_modules
+# compiled file (your app)
+server.js
+# runtime files
+.vertx
+run.jar
