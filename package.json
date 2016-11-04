@@ -1,6 +1,9 @@
 {
   "name": "vertx-generator",
   "version": "0.0.1",
+  "scripts": {
+    "templates": "./node_modules/.bin/handlebars -r templ `find templ` > templates.js"
+  },
   "dependencies": {
     "handlebars": "4.0.5"
   }
