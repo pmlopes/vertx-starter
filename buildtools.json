@@ -43,7 +43,8 @@
     "templates": [
       "npm/.gitignore",
       "npm/webpack.config.js",
-      "npm/package.json"
+      "npm/package.json",
+      "npm/src/main.js"
     ]
   }
 ]
