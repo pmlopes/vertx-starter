@@ -67,6 +67,8 @@ app.controller('MainCtrl', function ($scope, $http) {
       $scope.components.push($scope.dependencies[0]);
       $scope.dependencies.splice(0, 1)
     }
+    // reset preset
+    $scope.preset = 'empty';
     // add the defaults
     for (var i = 0; i < $scope.components.length; i++) {
       var ref = $scope.components[i];
@@ -116,7 +118,8 @@ app.controller('MainCtrl', function ($scope, $http) {
     // need to process the fqcn
     if (fqcn) {
       var dot = file.indexOf('.');
-      file = file.substr(0, dot) + $scope.main.replace(/\./g, '/') + file.substr(dot);
+      var lslash = file.lastIndexOf('/');
+      file = file.substr(0, Math.max(0, Math.min(dot, lslash + 1))) + $scope.main.replace(/\./g, '/') + file.substr(dot);
       $scope.packageName = $scope.main.substr(0, $scope.main.lastIndexOf('.'));
       $scope.className = $scope.main.substr($scope.main.lastIndexOf('.') + 1);
     }

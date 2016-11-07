@@ -1,6 +1,6 @@
 {
   "maven": {
-    "metadata": "pom.xml",
+    "file": "pom.xml",
     "fields" :[
       { "key": "name", "value": "Project Name", "required": true },
       { "key": "description", "value": "Project Description" },
@@ -28,7 +28,7 @@
   },
 
   "gradle": {
-    "metadata": "build.gradle",
+    "file": "build.gradle",
     "fields" :[
       { "key": "name", "value": "Project Name", "required": true },
       { "key": "description", "value": "Project Description" },
@@ -51,7 +51,7 @@
   },
 
   "npm": {
-    "metadata": "package.json",
+    "file": "package.json",
     "fields": [
       { "key": "name", "value": "Project Name", "required": true },
       { "key": "description", "value": "Project Description" },
@@ -75,7 +75,7 @@
   },
 
   "stack": {
-    "metadata": "vertx-stack.json",
+    "file": "vertx-stack.json",
     "fields": [
       { "key": "name", "value": "Project Name", "required": true }
     ],

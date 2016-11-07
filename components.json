@@ -3,7 +3,8 @@
     "groupId": "io.vertx",
     "artifactId": "vertx-core",
     "version": "3.3.3",
-    "stack": true
+    "stack": true,
+    "description": "Vert.x Core"
   },
   {
     "groupId": "io.netty",

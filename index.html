@@ -68,7 +68,7 @@
 
           <!-- A wrapper for all the project metadata -->
           <div class="posts">
-            <h1 class="content-subhead">{{ metadata.buildtools[buildtool].title }} metadata</h1>
+            <h1 class="content-subhead">{{ metadata.buildtools[buildtool].file }}</h1>
             <div class="pure-u-1">
               <div class="pure-control-group" ng-repeat="f in metadata.buildtools[buildtool].fields">
                 <label for="{{ f.key }}">{{ f.value }}</label>
@@ -84,7 +84,7 @@
                 <label for="preset">Application type</label>
                 <select id="preset" ng-model="preset" ng-change="selectPreset()">
                   <option>empty</option>
-                  <option ng-repeat="p in presets | filter:filterPreset()" >{{ p }}</option>
+                  <option ng-repeat="p in presets | filter:filterPreset()">{{ p }}</option>
                 </select>
               </div>
             </div>
