@@ -25,7 +25,7 @@
   <script src="js/menus.js"></script>
   <script src="js/angular.min.js"></script>
   <script src="js/jszip.min.js"></script>
-  <script src="js/FileSaver.js"></script>
+  <script src="js/FileSaver.min.js"></script>
 
   <script src="js/app.js"></script>
 
@@ -55,7 +55,7 @@
         <nav class="nav">
           <ul class="nav-list">
             <li class="nav-item" ng-repeat="t in buildtools">
-              &nbsp;<a class="pure-button" style="{{ selected[t.name] }}" href="#" ng-click="selectBuildTool($index)">{{ t.name }}</a>
+              &nbsp;<a class="pure-button" style="{{ t == buildtool ? 'background: rgb(202, 60, 60)' : ''}}" href="#" ng-click="reset(t)">{{ t }}</a>
             </li>
           </ul>
         </nav>
@@ -68,17 +68,23 @@
 
           <!-- A wrapper for all the project metadata -->
           <div class="posts">
-            <h1 class="content-subhead">{{ title }} metadata</h1>
+            <h1 class="content-subhead">{{ metadata.buildtools[buildtool].title }} metadata</h1>
             <div class="pure-u-1">
-              <div class="pure-control-group" ng-repeat="f in fields">
+              <div class="pure-control-group" ng-repeat="f in metadata.buildtools[buildtool].fields">
                 <label for="{{ f.key }}">{{ f.value }}</label>
                 <input id="{{ f.key }}" type="text" value="{{ f.prefill }}" ng-required="f.required" >
               </div>
+              <div class="pure-control-group" ng-if="languages.length > 1">
+                <label for="language">Language</label>
+                <select id="language" ng-model="language">
+                  <option ng-repeat="l in languages">{{ l }}</option>
+                </select>
+              </div>
               <div class="pure-control-group">
-                <label for="preset">Preset</label>
+                <label for="preset">Application type</label>
                 <select id="preset" ng-model="preset" ng-change="selectPreset()">
-                  <option ng-selected="clearPresetSelection"></option>
-                  <option ng-repeat="p in presets" >{{ p.name }}</option>
+                  <option>empty</option>
+                  <option ng-repeat="p in presets | filter:filterPreset()" >{{ p }}</option>
                 </select>
               </div>
             </div>
@@ -113,7 +119,6 @@
               <button type="submit" class="pure-button pure-button-primary">Generate</button>
             </p>
           </div>
-
         </fieldset>
       </form>
     </div>

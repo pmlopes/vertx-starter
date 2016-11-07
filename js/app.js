@@ -2,46 +2,26 @@ var app = angular.module('starter', []);
 
 app.controller('MainCtrl', function ($scope, $http) {
 
-  // this will hold all the components we allow in the simple project
-  $scope.components = [];
+  // where all data driven data is stored:
+  $scope.metadata = {};
+
   // this will hold all selected dependencies
   $scope.dependencies = [];
-  // this will hold all presets
-  $scope.presets = [];
 
   // get the components from the server
-  $http.get('components.json')
-    .then(function (res) {
-      if (res.status != 200) {
-        ga('send', 'exception', {
-          'exDescription': res.statusText,
-          'exFatal': true
-        });
-        alert('Cannot download list of components!');
-        return;
-      }
-      $scope.components = res.data;
-    });
+  $http.get('components.json').then(function (res) {
+    if (res.status != 200) {
+      ga('send', 'exception', {
+        'exDescription': res.statusText,
+        'exFatal': true
+      });
+      alert('Cannot download list of components!');
+      return;
+    }
+    $scope.components = res.data;
 
-  // get the buildtools from the server
-  $http.get('buildtools.json')
-    .then(function (res) {
-      if (res.status != 200) {
-        ga('send', 'exception', {
-          'exDescription': res.statusText,
-          'exFatal': true
-        });
-        alert('Cannot download list of build tools!');
-        return;
-      }
-      $scope.buildtools = res.data;
-      // initially select the first element
-      $scope.selectBuildTool(0);
-    });
-
-  // get the buildtools from the server
-  $http.get('presets.json')
-    .then(function (res) {
+    // get the buildtools from the server
+    $http.get('presets.json').then(function (res) {
       if (res.status != 200) {
         ga('send', 'exception', {
           'exDescription': res.statusText,
@@ -49,55 +29,99 @@ app.controller('MainCtrl', function ($scope, $http) {
         });
         return;
       }
-      $scope.presets = res.data;
+
+      $scope.metadata.presets = res.data;
+      // extract keys in order to make iteration a simple step
+      $scope.presets = Object.keys($scope.metadata.presets || {});
+      // reset
+      $scope.preset = 'empty';
+
+      // get the buildtools from the server
+      $http.get('buildtools.json').then(function (res) {
+        if (res.status != 200) {
+          ga('send', 'exception', {
+            'exDescription': res.statusText,
+            'exFatal': true
+          });
+          alert('Cannot download list of build tools!');
+          return;
+        }
+
+        $scope.metadata.buildtools = res.data;
+        // extract keys in order to make iteration a simple step
+        $scope.buildtools = Object.keys($scope.metadata.buildtools || {});
+        // reset
+        $scope.reset($scope.buildtools[0]);
+      });
     });
+  });
 
-  $scope.selectBuildTool = function (idx) {
-    var i;
-
-    $scope.selected = {};
-    $scope.tool = $scope.buildtools[idx].name;
-    $scope.fields = $scope.buildtools[idx].fields;
-    $scope.title = $scope.buildtools[idx].metadata;
-    $scope.templates = $scope.buildtools[idx].templates;
-    $scope.fqcnTemplate = $scope.buildtools[idx].fqcnTemplate;
-
-    // highlight choice
-    $scope.selected[$scope.buildtools[idx].name] = 'background: rgb(202, 60, 60)';
+  $scope.reset = function (buildtool) {
+    // reset
+    $scope.buildtool = buildtool;
+    // regenerate language list
+    $scope.languages = Object.keys($scope.metadata.buildtools[$scope.buildtool].languages || {});
+    $scope.language = $scope.languages[0];
     // reset dependencies
     while ($scope.dependencies.length) {
       $scope.components.push($scope.dependencies[0]);
       $scope.dependencies.splice(0, 1)
     }
     // add the defaults
-    for (i = 0; i < $scope.components.length; i++) {
+    for (var i = 0; i < $scope.components.length; i++) {
       var ref = $scope.components[i];
-      if ($scope.buildtools[idx].defaults.indexOf(ref.groupId + ':' + ref.artifactId) != -1) {
+      if ($scope.metadata.buildtools[$scope.buildtool].defaults.indexOf(ref.groupId + ':' + ref.artifactId) != -1) {
         $scope.dependencies.push(ref);
         $scope.components.splice(i, 1);
         i--;
       }
     }
+  }
+
+  $scope.filterPreset = function () {
+    return function (item) {
+      var p = $scope.metadata.presets[item];
+      if (p) {
+        return p.buildtool == $scope.buildtool && p.language == $scope.language;
+      }
+
+      return false;
+    };
   };
 
   $scope.selectPreset = function () {
-    for (var i = 0; i < $scope.presets.length; i++) {
-      if ($scope.presets[i].name == $scope.preset) {
-        var p = $scope.presets[i];
-        // add the defaults
-        for (var j = 0; j < $scope.components.length; j++) {
-          var ref = $scope.components[j];
-          if (p.dependencies.indexOf(ref.groupId + ':' + ref.artifactId) != -1) {
-            $scope.dependencies.push(ref);
-            $scope.components.splice(j, 1)
-            j--;
-          }
+    var p = $scope.metadata.presets[$scope.preset];
+    if (p) {
+      // add the defaults
+      for (var i = 0; i < $scope.components.length; i++) {
+        var ref = $scope.components[i];
+        if (p.dependencies.indexOf(ref.groupId + ':' + ref.artifactId) != -1) {
+          $scope.dependencies.push(ref);
+          $scope.components.splice(i, 1)
+          i--;
         }
-        $scope.clearPresetSelection = true;
-        $scope.preset = null;
-        break;
       }
     }
+  };
+
+  $scope.generateFile = function (file, fqcn, zip) {
+    var fn, slash;
+    // locate handlebars template
+    fn = Handlebars.templates[file];
+    // first path element is always ignored
+    slash = file.indexOf('/');
+    if (slash > 0) {
+      file = file.substr(slash + 1);
+    }
+    // need to process the fqcn
+    if (fqcn) {
+      var dot = file.indexOf('.');
+      file = file.substr(0, dot) + $scope.main.replace(/\./g, '/') + file.substr(dot);
+      $scope.packageName = $scope.main.substr(0, $scope.main.lastIndexOf('.'));
+      $scope.className = $scope.main.substr($scope.main.lastIndexOf('.') + 1);
+    }
+    // add to zip
+    zip.file(file, fn($scope));
   };
 
   $scope.generate = function () {
@@ -105,8 +129,8 @@ app.controller('MainCtrl', function ($scope, $http) {
     // track what project type is being generated
     ga('send', {
       hitType: 'event',
-      eventCategory: 'project',
-      eventAction: $scope.tool
+      eventCategory: $scope.buildtool + ':project',
+      eventAction: 'project'
     });
 
     for (i = 0; i < $scope.dependencies.length; i++) {
@@ -131,39 +155,30 @@ app.controller('MainCtrl', function ($scope, $http) {
     $scope.stack = $scope.dependencies.concat($scope.components);
 
     // get all data from the form
-    for (i = 0; i < $scope.fields.length; i++) {
-      $scope[$scope.fields[i].key] = document.getElementById($scope.fields[i].key).value;
+    for (i = 0; i < $scope.metadata.buildtools[$scope.buildtool].fields.length; i++) {
+      var field = $scope.metadata.buildtools[$scope.buildtool].fields[i];
+      $scope[field.key] = document.getElementById(field.key).value;
     }
 
     // create a new zip file
     var zip = new JSZip();
 
-    // for each template run
-    var file, fn, slash;
+    var p = $scope.metadata.presets[$scope.preset];
+    var templates = [].concat($scope.metadata.buildtools[$scope.buildtool].templates);
 
-    for (var i = 0; i < $scope.templates.length; i++) {
-      file = $scope.templates[i];
-      fn = Handlebars.templates[file];
-      slash = file.indexOf('/');
-      if (slash > 0) {
-        file = file.substr(slash + 1);
-      }
-      zip.file(file, fn($scope));
+    if (p) {
+      templates = templates.concat(p.templates);
+      // use the preset main template for the language
+      $scope.generateFile(p.main, p.fqcn, zip);
+    } else {
+      // use the default main template for the language
+      var lang = $scope.metadata.buildtools[$scope.buildtool].languages[$scope.language];
+      $scope.generateFile(lang.main, lang.fqcn, zip);
     }
 
-    if ($scope.fqcnTemplate) {
-      // generate the main verticle if supported
-      fn = Handlebars.templates[$scope.fqcnTemplate];
-      var dot = $scope.fqcnTemplate.indexOf('.');
-      file = $scope.fqcnTemplate.substr(0, dot) + $scope.main.replace(/\./g, '/') + $scope.fqcnTemplate.substr(dot);
-      slash = file.indexOf('/');
-      if (slash > 0) {
-        file = file.substr(slash + 1);
-      }
-      zip.file(file, fn({
-        packageName: $scope.main.substr(0, $scope.main.lastIndexOf('.')),
-        className: $scope.main.substr($scope.main.lastIndexOf('.') + 1)
-      }));
+    // build tool specific templates
+    for (var i = 0; i < templates.length; i++) {
+      $scope.generateFile(templates[i], false, zip);
     }
 
     if (JSZip.support.blob) {
@@ -188,5 +203,5 @@ app.controller('MainCtrl', function ($scope, $http) {
         alert(err);
       });
     }
-  }
+  };
 });

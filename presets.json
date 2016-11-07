@@ -1,19 +1,26 @@
-[
-  {
-    "name": "webapp + mongo",
+{
+  "webapp + mongo": {
+    "description": "A bare bones webapp backed by mongoDB",
     "dependencies": [
       "io.vertx:vertx-core",
       "io.vertx:vertx-web",
       "io.vertx:vertx-mongo-client"
-    ]
+    ],
+    "buildtool": "maven",
+    "language": "java",
+    "main":  "npm/src/main.js",
+    "fqcn": false,
+    "templates": []
   },
-  {
-    "name": "webapp + mongo + security",
+  "webapp + mongo + security": {
     "dependencies": [
       "io.vertx:vertx-core",
       "io.vertx:vertx-web",
       "io.vertx:vertx-mongo-client",
       "io.vertx:vertx-auth-oauth2"
-    ]
+    ],
+    "buildtool": "maven",
+    "language": "java",
+    "templates": []
   }
-]
+}

@@ -1,6 +1,5 @@
-[
-  {
-    "name": "maven",
+{
+  "maven": {
     "metadata": "pom.xml",
     "fields" :[
       { "key": "name", "value": "Project Name", "required": true },
@@ -10,7 +9,15 @@
       { "key": "version", "value": "Project Version", "prefill": "0.0.1-SNAPSHOT" },
       { "key": "main", "value": "Main Verticle", "prefill": "com.example.demo.MainVerticle" }
     ],
-    "fqcnTemplate": "maven/src/main/java/.java",
+    "languages": {
+      "java": {
+        "main": "maven/src/main/java/.java",
+        "fqcn": true
+      },
+      "javascript": {
+        "main":  "npm/src/main.js"
+      }
+    },
     "templates": [
       "maven/.gitignore",
       "maven/pom.xml"
@@ -20,8 +27,7 @@
     ]
   },
 
-  {
-    "name": "gradle",
+  "gradle": {
     "metadata": "build.gradle",
     "fields" :[
       { "key": "name", "value": "Project Name", "required": true },
@@ -29,7 +35,12 @@
       { "key": "version", "value": "Project Version", "prefill": "0.0.1-SNAPSHOT" },
       { "key": "main", "value": "Main Verticle", "prefill": "com.example.demo.MainVerticle" }
     ],
-    "fqcnTemplate": "maven/src/main/java/.java",
+    "languages": {
+      "java": {
+        "main": "maven/src/main/java/.java",
+        "fqcn": true
+      }
+    },
     "templates": [
       "gradle/.gitignore",
       "gradle/build.gradle"
@@ -39,8 +50,7 @@
     ]
   },
 
-  {
-    "name": "npm",
+  "npm": {
     "metadata": "package.json",
     "fields": [
       { "key": "name", "value": "Project Name", "required": true },
@@ -48,11 +58,15 @@
       { "key": "version", "value": "Project Version", "prefill": "0.0.1" },
       { "key": "main", "value": "Main Verticle", "prefill": "server.js" }
     ],
+    "languages": {
+      "javascript": {
+        "main":  "npm/src/main.js"
+      }
+    },
     "templates": [
       "npm/.gitignore",
       "npm/webpack.config.js",
-      "npm/package.json",
-      "npm/src/main.js"
+      "npm/package.json"
     ],
     "defaults": [
       "io.vertx:vertx-core",
@@ -60,8 +74,7 @@
     ]
   },
 
-  {
-    "name": "stack",
+  "stack": {
     "metadata": "vertx-stack.json",
     "fields": [
       { "key": "name", "value": "Project Name", "required": true }
@@ -74,4 +87,4 @@
       "io.vertx:vertx-core"
     ]
   }
-]
+}
