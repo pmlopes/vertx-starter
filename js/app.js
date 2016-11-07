@@ -91,7 +91,7 @@ app.controller('MainCtrl', function ($scope, $http) {
     };
   };
 
-  $scope.selectPreset = function () {
+  $scope.changePreset = function () {
     var p = $scope.metadata.presets[$scope.preset];
     if (p) {
       // add the defaults
@@ -156,6 +156,7 @@ app.controller('MainCtrl', function ($scope, $http) {
 
     // put all into a single array
     $scope.stack = $scope.dependencies.concat($scope.components);
+    $scope.language = document.getElementById('language').value;
 
     // get all data from the form
     for (i = 0; i < $scope.metadata.buildtools[$scope.buildtool].fields.length; i++) {

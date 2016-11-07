@@ -82,7 +82,7 @@
               </div>
               <div class="pure-control-group">
                 <label for="preset">Application type</label>
-                <select id="preset" ng-model="preset" ng-change="selectPreset()">
+                <select id="preset" ng-model="preset" ng-change="changePreset()">
                   <option>empty</option>
                   <option ng-repeat="p in presets | filter:filterPreset()">{{ p }}</option>
                 </select>

@@ -14,8 +14,13 @@
         "main": "maven/src/main/java/.java",
         "fqcn": true
       },
-      "javascript": {
-        "main":  "npm/src/main.js"
+      "groovy": {
+        "main":  "maven/src/main/resources/.groovy",
+        "fqcn": true
+      },
+      "ruby": {
+        "main":  "maven/src/main/resources/.rb",
+        "fqcn": true
       }
     },
     "templates": [
