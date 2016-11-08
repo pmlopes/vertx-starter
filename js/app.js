@@ -56,29 +56,44 @@ app.controller('MainCtrl', function ($scope, $http) {
     });
   });
 
-  $scope.reset = function (buildtool) {
+  $scope.reset = function (id) {
     // reset
-    $scope.buildtool = buildtool;
+    $scope.buildtool = id;
     // regenerate language list
-    $scope.languages = Object.keys($scope.metadata.buildtools[$scope.buildtool].languages || {});
-    $scope.language = $scope.languages[0];
+    this.languages = Object.keys(this.metadata.buildtools[id].languages || {});
+    this.language = this.languages[0];
     // reset dependencies
-    while ($scope.dependencies.length) {
-      $scope.components.push($scope.dependencies[0]);
-      $scope.dependencies.splice(0, 1)
+    while (this.dependencies.length) {
+      this.components.push(this.dependencies[0]);
+      this.dependencies.splice(0, 1)
     }
     // reset preset
-    $scope.preset = 'empty';
+    this.preset = 'empty';
     // add the defaults
-    for (var i = 0; i < $scope.components.length; i++) {
-      var ref = $scope.components[i];
-      if ($scope.metadata.buildtools[$scope.buildtool].defaults.indexOf(ref.groupId + ':' + ref.artifactId) != -1) {
-        $scope.dependencies.push(ref);
-        $scope.components.splice(i, 1);
+    for (var i = 0; i < this.components.length; i++) {
+      var ref = this.components[i];
+      if (this.metadata.buildtools[id].defaults.indexOf(ref.groupId + ':' + ref.artifactId) != -1) {
+        this.dependencies.push(ref);
+        this.components.splice(i, 1);
         i--;
       }
     }
   }
+
+  $scope.changeLanguage = function () {
+    $scope.language = this.language;
+    // add the defaults
+    for (var i = 0; i < this.components.length; i++) {
+      var ref = this.components[i];
+      if (ref.groupId == 'io.vertx' && ref.artifactId == ('vertx-lang-' + this.language)) {
+        this.dependencies.push(ref);
+        this.components.splice(i, 1);
+        i--;
+      }
+    }
+    // reset the preset
+    $scope.preset = 'empty';
+  };
 
   $scope.filterPreset = function () {
     return function (item) {
@@ -92,14 +107,16 @@ app.controller('MainCtrl', function ($scope, $http) {
   };
 
   $scope.changePreset = function () {
-    var p = $scope.metadata.presets[$scope.preset];
+    $scope.preset = this.preset;
+
+    var p = this.metadata.presets[this.preset];
     if (p) {
       // add the defaults
-      for (var i = 0; i < $scope.components.length; i++) {
-        var ref = $scope.components[i];
+      for (var i = 0; i < this.components.length; i++) {
+        var ref = this.components[i];
         if (p.dependencies.indexOf(ref.groupId + ':' + ref.artifactId) != -1) {
-          $scope.dependencies.push(ref);
-          $scope.components.splice(i, 1)
+          this.dependencies.push(ref);
+          this.components.splice(i, 1)
           i--;
         }
       }
@@ -119,9 +136,9 @@ app.controller('MainCtrl', function ($scope, $http) {
     if (fqcn) {
       var dot = file.indexOf('.');
       var lslash = file.lastIndexOf('/');
-      file = file.substr(0, Math.max(0, Math.min(dot, lslash + 1))) + $scope.main.replace(/\./g, '/') + file.substr(dot);
-      $scope.packageName = $scope.main.substr(0, $scope.main.lastIndexOf('.'));
-      $scope.className = $scope.main.substr($scope.main.lastIndexOf('.') + 1);
+      file = file.substr(0, Math.max(0, Math.min(dot, lslash + 1))) + this.main.replace(/\./g, '/') + file.substr(dot);
+      $scope.packageName = this.main.substr(0, this.main.lastIndexOf('.'));
+      $scope.className = this.main.substr(this.main.lastIndexOf('.') + 1);
     }
     // add to zip
     zip.file(file, fn($scope));
@@ -136,8 +153,8 @@ app.controller('MainCtrl', function ($scope, $http) {
       eventAction: 'project'
     });
 
-    for (i = 0; i < $scope.dependencies.length; i++) {
-      var dep = $scope.dependencies[i];
+    for (i = 0; i < this.dependencies.length; i++) {
+      var dep = this.dependencies[i];
       // add stack meta-data
       dep.included = true;
       // track what dependencies are being selected
@@ -148,41 +165,41 @@ app.controller('MainCtrl', function ($scope, $http) {
       });
     }
 
-    for (i = 0; i < $scope.components.length; i++) {
-      var dep = $scope.components[i];
+    for (i = 0; i < this.components.length; i++) {
+      var dep = this.components[i];
       // add stack meta-data
       dep.included = false;
     }
 
     // put all into a single array
-    $scope.stack = $scope.dependencies.concat($scope.components);
-    $scope.language = document.getElementById('language').value;
+    $scope.stack = this.dependencies.concat(this.components);
+    $scope.language = this.language;
 
     // get all data from the form
-    for (i = 0; i < $scope.metadata.buildtools[$scope.buildtool].fields.length; i++) {
-      var field = $scope.metadata.buildtools[$scope.buildtool].fields[i];
+    for (i = 0; i < this.metadata.buildtools[this.buildtool].fields.length; i++) {
+      var field = this.metadata.buildtools[this.buildtool].fields[i];
       $scope[field.key] = document.getElementById(field.key).value;
     }
 
     // create a new zip file
     var zip = new JSZip();
 
-    var p = $scope.metadata.presets[$scope.preset];
-    var templates = [].concat($scope.metadata.buildtools[$scope.buildtool].templates);
+    var p = this.metadata.presets[this.preset];
+    var templates = [].concat(this.metadata.buildtools[this.buildtool].templates);
 
     if (p) {
       templates = templates.concat(p.templates);
       // use the preset main template for the language
-      $scope.generateFile(p.main, p.fqcn, zip);
+      this.generateFile(p.main, p.fqcn, zip);
     } else {
       // use the default main template for the language
-      var lang = $scope.metadata.buildtools[$scope.buildtool].languages[$scope.language];
-      $scope.generateFile(lang.main, lang.fqcn, zip);
+      var lang = this.metadata.buildtools[this.buildtool].languages[this.language];
+      this.generateFile(lang.main, lang.fqcn, zip);
     }
 
     // build tool specific templates
     for (var i = 0; i < templates.length; i++) {
-      $scope.generateFile(templates[i], false, zip);
+      this.generateFile(templates[i], false, zip);
     }
 
     if (JSZip.support.blob) {

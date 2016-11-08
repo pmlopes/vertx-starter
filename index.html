@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Quickly start your Vert.x Project">
-  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.png" />
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico" />
 
   <title>Vert.x Starter</title>
 
@@ -76,7 +76,7 @@
               </div>
               <div class="pure-control-group" ng-if="languages.length > 1">
                 <label for="language">Language</label>
-                <select id="language" ng-model="language">
+                <select id="language" ng-model="language" ng-change="changeLanguage()">
                   <option ng-repeat="l in languages">{{ l }}</option>
                 </select>
               </div>
