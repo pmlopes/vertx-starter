@@ -54,8 +54,8 @@
 
         <nav class="nav">
           <ul class="nav-list">
-            <li class="nav-item" ng-repeat="t in buildtools">
-              &nbsp;<a class="pure-button" style="{{ t == buildtool ? 'background: rgb(202, 60, 60)' : ''}}" href="#" ng-click="reset(t)">{{ t }}</a>
+            <li class="nav-item" ng-repeat="bt in metadata.buildtools">
+              &nbsp;<a class="pure-button" style="{{ bt.id == buildtool.id ? 'background: rgb(202, 60, 60)' : ''}}" href="#" ng-click="reset($index)">{{ bt.id }}</a>
             </li>
           </ul>
         </nav>
@@ -68,23 +68,20 @@
 
           <!-- A wrapper for all the project metadata -->
           <div class="posts">
-            <h1 class="content-subhead">{{ metadata.buildtools[buildtool].file }}</h1>
+            <h1 class="content-subhead">{{ buildtool.file }}</h1>
             <div class="pure-u-1">
-              <div class="pure-control-group" ng-repeat="f in metadata.buildtools[buildtool].fields">
+              <div class="pure-control-group" ng-repeat="f in buildtool.fields">
                 <label for="{{ f.key }}">{{ f.value }}</label>
                 <input id="{{ f.key }}" type="text" value="{{ f.prefill }}" ng-required="f.required" >
               </div>
-              <div class="pure-control-group" ng-if="languages.length > 1">
+              <div class="pure-control-group" ng-if="buildtool.languages.length > 1">
                 <label for="language">Language</label>
-                <select id="language" ng-model="language" ng-change="changeLanguage()">
-                  <option ng-repeat="l in languages">{{ l }}</option>
-                </select>
+                <select id="language" ng-model="language" ng-change="changeLanguage()" ng-options="l.id for l in buildtool.languages"></select>
               </div>
               <div class="pure-control-group">
                 <label for="preset">Application type</label>
-                <select id="preset" ng-model="preset" ng-change="changePreset()">
-                  <option>empty</option>
-                  <option ng-repeat="p in presets | filter:filterPreset()">{{ p }}</option>
+                <select id="preset" ng-model="preset" ng-change="changePreset()" ng-options="p.id for p in metadata.presets | filter:filterPreset()">
+                  <option value="">empty</option>
                 </select>
               </div>
             </div>

@@ -1,5 +1,6 @@
-{
-  "webapp + mongo": {
+[
+  {
+    "id": "webapp + mongo",
     "description": "A simple webapp backed by mongoDB",
     "dependencies": [
       "io.vertx:vertx-core",
@@ -9,7 +10,7 @@
     ],
     "buildtool": "maven",
     "language": "java",
-    "main":  "web+mongo/src/main/java/web+mongo.java",
+    "main":  "web+mongo/src/main/java/MainVerticle.java",
     "fqcn": true,
     "templates": [
       "web+mongo/src/main/resources/templates/index.jade",
@@ -18,4 +19,4 @@
       "web+mongo/src/main/resources/webroot/js/app.js"
     ]
   }
-}
+]

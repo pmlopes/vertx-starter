@@ -1,28 +1,29 @@
-{
-  "maven": {
+[
+  {
+    "id": "maven",
     "file": "pom.xml",
     "fields" :[
       { "key": "name", "value": "Project Name", "required": true },
       { "key": "description", "value": "Project Description" },
-      { "key": "groupId", "value": "Maven Group Id", "prefill": "com.example" },
-      { "key": "artifactId", "value": "Maven Artifact Id", "prefill": "demo" },
-      { "key": "version", "value": "Project Version", "prefill": "0.0.1-SNAPSHOT" },
-      { "key": "main", "value": "Main Verticle", "prefill": "com.example.demo.MainVerticle" }
+      { "key": "groupId", "value": "Maven Group Id", "required": true, "prefill": "com.example" },
+      { "key": "artifactId", "value": "Maven Artifact Id", "required": true, "prefill": "demo" },
+      { "key": "version", "value": "Project Version", "required": true, "prefill": "0.0.1-SNAPSHOT" }
     ],
-    "languages": {
-      "java": {
-        "main": "maven/src/main/java/.java",
+    "languages": [
+      {
+        "id": "java",
+        "main": "maven/src/main/java/MainVerticle.java",
         "fqcn": true
       },
-      "groovy": {
-        "main":  "maven/src/main/resources/.groovy",
-        "fqcn": true
+      {
+        "id": "groovy",
+        "main":  "maven/src/main/resources/main.groovy"
       },
-      "ruby": {
-        "main":  "maven/src/main/resources/.rb",
-        "fqcn": true
+      {
+        "id": "ruby",
+        "main":  "maven/src/main/resources/main.rb"
       }
-    },
+    ],
     "templates": [
       "maven/.gitignore",
       "maven/pom.xml"
@@ -32,20 +33,14 @@
     ]
   },
 
-  "gradle": {
+  {
+    "id": "gradle",
     "file": "build.gradle",
     "fields" :[
       { "key": "name", "value": "Project Name", "required": true },
       { "key": "description", "value": "Project Description" },
-      { "key": "version", "value": "Project Version", "prefill": "0.0.1-SNAPSHOT" },
-      { "key": "main", "value": "Main Verticle", "prefill": "com.example.demo.MainVerticle" }
+      { "key": "version", "value": "Project Version", "prefill": "0.0.1-SNAPSHOT" }
     ],
-    "languages": {
-      "java": {
-        "main": "maven/src/main/java/.java",
-        "fqcn": true
-      }
-    },
     "templates": [
       "gradle/.gitignore",
       "gradle/build.gradle"
@@ -55,19 +50,20 @@
     ]
   },
 
-  "npm": {
+  {
+    "id": "npm",
     "file": "package.json",
     "fields": [
       { "key": "name", "value": "Project Name", "required": true },
       { "key": "description", "value": "Project Description" },
-      { "key": "version", "value": "Project Version", "prefill": "0.0.1" },
-      { "key": "main", "value": "Main Verticle", "prefill": "server.js" }
+      { "key": "version", "value": "Project Version", "prefill": "0.0.1" }
     ],
-    "languages": {
-      "javascript": {
+    "languages": [
+      {
+        "id": "javascript",
         "main":  "npm/src/main.js"
       }
-    },
+    ],
     "templates": [
       "npm/.gitignore",
       "npm/webpack.config.js",
@@ -79,7 +75,8 @@
     ]
   },
 
-  "stack": {
+  {
+    "id": "stack",
     "file": "vertx-stack.json",
     "fields": [
       { "key": "name", "value": "Project Name", "required": true }
@@ -92,4 +89,4 @@
       "io.vertx:vertx-core"
     ]
   }
-}
+]

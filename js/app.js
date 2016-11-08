@@ -1,11 +1,9 @@
 var app = angular.module('starter', []);
 
 app.controller('MainCtrl', function ($scope, $http) {
-
   // where all data driven data is stored:
   $scope.metadata = {};
-
-  // this will hold all selected dependencies
+  // generator state
   $scope.dependencies = [];
 
   // get the components from the server
@@ -31,10 +29,6 @@ app.controller('MainCtrl', function ($scope, $http) {
       }
 
       $scope.metadata.presets = res.data;
-      // extract keys in order to make iteration a simple step
-      $scope.presets = Object.keys($scope.metadata.presets || {});
-      // reset
-      $scope.preset = 'empty';
 
       // get the buildtools from the server
       $http.get('buildtools.json').then(function (res) {
@@ -48,31 +42,28 @@ app.controller('MainCtrl', function ($scope, $http) {
         }
 
         $scope.metadata.buildtools = res.data;
-        // extract keys in order to make iteration a simple step
-        $scope.buildtools = Object.keys($scope.metadata.buildtools || {});
         // reset
-        $scope.reset($scope.buildtools[0]);
+        $scope.reset(0);
       });
     });
   });
 
   $scope.reset = function (id) {
     // reset
-    $scope.buildtool = id;
-    // regenerate language list
-    this.languages = Object.keys(this.metadata.buildtools[id].languages || {});
-    this.language = this.languages[0];
+    $scope.buildtool = this.metadata.buildtools[id];
+    $scope.language = ($scope.buildtool.languages || [])[0];
     // reset dependencies
     while (this.dependencies.length) {
       this.components.push(this.dependencies[0]);
       this.dependencies.splice(0, 1)
     }
     // reset preset
-    this.preset = 'empty';
+    $scope.preset = null;
+
     // add the defaults
     for (var i = 0; i < this.components.length; i++) {
       var ref = this.components[i];
-      if (this.metadata.buildtools[id].defaults.indexOf(ref.groupId + ':' + ref.artifactId) != -1) {
+      if ($scope.buildtool.defaults.indexOf(ref.groupId + ':' + ref.artifactId) != -1) {
         this.dependencies.push(ref);
         this.components.splice(i, 1);
         i--;
@@ -85,40 +76,31 @@ app.controller('MainCtrl', function ($scope, $http) {
     // add the defaults
     for (var i = 0; i < this.components.length; i++) {
       var ref = this.components[i];
-      if (ref.groupId == 'io.vertx' && ref.artifactId == ('vertx-lang-' + this.language)) {
+      if (ref.groupId == 'io.vertx' && ref.artifactId == ('vertx-lang-' + this.language.id)) {
         this.dependencies.push(ref);
         this.components.splice(i, 1);
         i--;
       }
     }
     // reset the preset
-    $scope.preset = 'empty';
+    $scope.preset = null;
   };
 
   $scope.filterPreset = function () {
     return function (item) {
-      var p = $scope.metadata.presets[item];
-      if (p) {
-        return p.buildtool == $scope.buildtool && p.language == $scope.language;
-      }
-
-      return false;
+      return $scope.buildtool && $scope.language && item.buildtool == $scope.buildtool.id && item.language == $scope.language.id;
     };
   };
 
   $scope.changePreset = function () {
     $scope.preset = this.preset;
-
-    var p = this.metadata.presets[this.preset];
-    if (p) {
-      // add the defaults
-      for (var i = 0; i < this.components.length; i++) {
-        var ref = this.components[i];
-        if (p.dependencies.indexOf(ref.groupId + ':' + ref.artifactId) != -1) {
-          this.dependencies.push(ref);
-          this.components.splice(i, 1)
-          i--;
-        }
+    // add the defaults
+    for (var i = 0; i < this.components.length; i++) {
+      var ref = this.components[i];
+      if (this.preset.dependencies.indexOf(ref.groupId + ':' + ref.artifactId) != -1) {
+        this.dependencies.push(ref);
+        this.components.splice(i, 1)
+        i--;
       }
     }
   };
@@ -128,17 +110,14 @@ app.controller('MainCtrl', function ($scope, $http) {
     // locate handlebars template
     fn = Handlebars.templates[file];
     // first path element is always ignored
-    slash = file.indexOf('/');
-    if (slash > 0) {
-      file = file.substr(slash + 1);
-    }
+    file = file.substr(file.indexOf('/') + 1);
     // need to process the fqcn
     if (fqcn) {
       var dot = file.indexOf('.');
       var lslash = file.lastIndexOf('/');
-      file = file.substr(0, Math.max(0, Math.min(dot, lslash + 1))) + this.main.replace(/\./g, '/') + file.substr(dot);
-      $scope.packageName = this.main.substr(0, this.main.lastIndexOf('.'));
-      $scope.className = this.main.substr(this.main.lastIndexOf('.') + 1);
+      $scope.packageName = $scope.groupId + '.' + $scope.artifactId;
+      $scope.className = file.substring(lslash + 1, dot);
+      file = file.substr(0, Math.max(0, Math.min(dot, lslash + 1))) + $scope.packageName.replace(/\./g, '/') + '/' + $scope.className + file.substr(dot);
     }
     // add to zip
     zip.file(file, fn($scope));
@@ -149,8 +128,9 @@ app.controller('MainCtrl', function ($scope, $http) {
     // track what project type is being generated
     ga('send', {
       hitType: 'event',
-      eventCategory: $scope.buildtool + ':project',
-      eventAction: 'project'
+      eventCategory: $scope.buildtool.id + ':project',
+      eventAction: $scope.buildtool.id + '/new',
+      eventLabel: 'project'
     });
 
     for (i = 0; i < this.dependencies.length; i++) {
@@ -160,8 +140,9 @@ app.controller('MainCtrl', function ($scope, $http) {
       // track what dependencies are being selected
       ga('send', {
         hitType: 'event',
-        eventCategory: $scope.tool + ':dependency',
-        eventAction: dep.groupId + ':' + dep.artifactId + ':' + dep.version
+        eventCategory: $scope.buildtool.id + ':dependency',
+        eventAction: $scope.buildtool.id + '/' + dep.groupId + ':' + dep.artifactId + ':' + dep.version,
+        eventLabel: 'dependency'
       });
     }
 
@@ -173,28 +154,25 @@ app.controller('MainCtrl', function ($scope, $http) {
 
     // put all into a single array
     $scope.stack = this.dependencies.concat(this.components);
-    $scope.language = this.language;
 
     // get all data from the form
-    for (i = 0; i < this.metadata.buildtools[this.buildtool].fields.length; i++) {
-      var field = this.metadata.buildtools[this.buildtool].fields[i];
+    for (i = 0; i < this.buildtool.fields.length; i++) {
+      var field = this.buildtool.fields[i];
       $scope[field.key] = document.getElementById(field.key).value;
     }
 
     // create a new zip file
     var zip = new JSZip();
 
-    var p = this.metadata.presets[this.preset];
-    var templates = [].concat(this.metadata.buildtools[this.buildtool].templates);
+    var templates = [].concat(this.buildtool.templates);
 
-    if (p) {
-      templates = templates.concat(p.templates);
+    if (this.preset) {
+      templates = templates.concat(this.preset.templates);
       // use the preset main template for the language
-      this.generateFile(p.main, p.fqcn, zip);
+      this.generateFile(this.preset.main, this.preset.fqcn, zip);
     } else {
       // use the default main template for the language
-      var lang = this.metadata.buildtools[this.buildtool].languages[this.language];
-      this.generateFile(lang.main, lang.fqcn, zip);
+      this.generateFile(this.language.main, this.language.fqcn, zip);
     }
 
     // build tool specific templates
