@@ -113,8 +113,8 @@ app.controller('MainCtrl', function ($scope, $http) {
     file = file.substr(file.indexOf('/') + 1);
     // need to process the fqcn
     if (fqcn) {
-      var dot = file.indexOf('.');
-      var lslash = file.lastIndexOf('/');
+    var dot = file.indexOf('.');
+    var lslash = file.lastIndexOf('/');
       $scope.packageName = $scope.groupId + '.' + $scope.artifactId;
       $scope.className = file.substring(lslash + 1, dot);
       file = file.substr(0, Math.max(0, Math.min(dot, lslash + 1))) + $scope.packageName.replace(/\./g, '/') + '/' + $scope.className + file.substr(dot);
@@ -166,13 +166,27 @@ app.controller('MainCtrl', function ($scope, $http) {
 
     var templates = [].concat(this.buildtool.templates);
 
+    var main, fqcn;
+
     if (this.preset) {
       templates = templates.concat(this.preset.templates);
       // use the preset main template for the language
       this.generateFile(this.preset.main, this.preset.fqcn, zip);
+      main = this.preset.main;
+      fqcn = this.preset.fqcn;
     } else {
       // use the default main template for the language
       this.generateFile(this.language.main, this.language.fqcn, zip);
+      main = this.language.main;
+      fqcn = this.language.fqcn;
+    }
+
+    // derive main verticle
+    if (fqcn) {
+      $scope.main = $scope.packageName + '.' + $scope.className;
+    } else {
+      var lslash = main.lastIndexOf('/');
+      $scope.main = main.substr(lslash + 1);
     }
 
     // build tool specific templates
