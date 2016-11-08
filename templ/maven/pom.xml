@@ -10,7 +10,9 @@
   <version>{{version}}</version>
 
   <name>{{name}}</name>
+  {{#if description}}
   <description>{{description}}</description>
+  {{/if}}
 
   <properties>
     <main.verticle>{{main}}</main.verticle>

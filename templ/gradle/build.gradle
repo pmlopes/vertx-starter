@@ -9,7 +9,9 @@ repositories {
 }
 
 version = '{{version}}'
+{{#if description}}
 description = '{{description}}'
+{{/if}}
 sourceCompatibility = '1.8'
 mainClassName = 'io.vertx.core.Launcher'
 

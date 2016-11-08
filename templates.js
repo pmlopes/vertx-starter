@@ -16,7 +16,7 @@ templates['maven/src/main/java/MainVerticle.java'] = template({"compiler":[7,">=
     + alias4(((helper = (helper = helpers.packageName || (depth0 != null ? depth0.packageName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"packageName","hash":{},"data":data}) : helper)))
     + ";\n\nimport io.vertx.core.AbstractVerticle;\n\npublic class "
     + alias4(((helper = (helper = helpers.className || (depth0 != null ? depth0.className : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"className","hash":{},"data":data}) : helper)))
-    + " extends AbstractVerticle {\n\n  @Override\n  public void start() {\n    // TODO: your code goes here...\n  }\n}\n";
+    + " extends AbstractVerticle {\n\n  @Override\n  public void start() {\n    // your code goes here...\n    vertx.createHttpServer().requestHandler(req -> {\n      req.response()\n        .putHeader(\"content-type\", \"text/plain\")\n        .end(\"Hello from Vert.x!\");\n    }).listen(8080);\n  }\n}\n";
 },"useData":true});
 templates['maven/pom.xml'] = template({"1":function(container,depth0,helpers,partials,data) {
     var helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;

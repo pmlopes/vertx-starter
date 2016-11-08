@@ -41,6 +41,21 @@
       { "key": "description", "value": "Project Description" },
       { "key": "version", "value": "Project Version", "prefill": "0.0.1-SNAPSHOT" }
     ],
+    "languages": [
+      {
+        "id": "java",
+        "main": "gradle/src/main/java/MainVerticle.java",
+        "fqcn": true
+      },
+      {
+        "id": "groovy",
+        "main":  "gradle/src/main/resources/main.groovy"
+      },
+      {
+        "id": "ruby",
+        "main":  "gradle/src/main/resources/main.rb"
+      }
+    ],
     "templates": [
       "gradle/.gitignore",
       "gradle/build.gradle"
