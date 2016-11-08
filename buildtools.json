@@ -39,6 +39,7 @@
     "fields" :[
       { "key": "name", "value": "Project Name", "required": true },
       { "key": "description", "value": "Project Description" },
+      { "key": "groupId", "value": "Project Group", "required": true, "prefill": "com.example" },
       { "key": "version", "value": "Project Version", "prefill": "0.0.1-SNAPSHOT" }
     ],
     "languages": [

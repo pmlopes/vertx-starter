@@ -115,7 +115,7 @@ app.controller('MainCtrl', function ($scope, $http) {
     if (fqcn) {
     var dot = file.indexOf('.');
     var lslash = file.lastIndexOf('/');
-      $scope.packageName = $scope.groupId + '.' + $scope.artifactId;
+      $scope.packageName = $scope.groupId + '.' + ($scope.artifactId || $scope.name);
       $scope.className = file.substring(lslash + 1, dot);
       file = file.substr(0, Math.max(0, Math.min(dot, lslash + 1))) + $scope.packageName.replace(/\./g, '/') + '/' + $scope.className + file.substr(dot);
     }
@@ -175,18 +175,22 @@ app.controller('MainCtrl', function ($scope, $http) {
       main = this.preset.main;
       fqcn = this.preset.fqcn;
     } else {
-      // use the default main template for the language
-      this.generateFile(this.language.main, this.language.fqcn, zip);
-      main = this.language.main;
-      fqcn = this.language.fqcn;
+      if (this.language) {
+        // use the default main template for the language
+        this.generateFile(this.language.main, this.language.fqcn, zip);
+        main = this.language.main;
+        fqcn = this.language.fqcn;
+      }
     }
 
     // derive main verticle
     if (fqcn) {
       $scope.main = $scope.packageName + '.' + $scope.className;
     } else {
-      var lslash = main.lastIndexOf('/');
-      $scope.main = main.substr(lslash + 1);
+      if (main) {
+        var lslash = main.lastIndexOf('/');
+        $scope.main = main.substr(lslash + 1);
+      }
     }
 
     // build tool specific templates

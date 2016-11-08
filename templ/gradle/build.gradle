@@ -9,6 +9,7 @@ repositories {
 }
 
 version = '{{version}}'
+group = '{{groupId}}'
 {{#if description}}
 description = '{{description}}'
 {{/if}}
