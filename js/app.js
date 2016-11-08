@@ -55,7 +55,7 @@ app.controller('MainCtrl', function ($scope, $http) {
     // reset dependencies
     while (this.dependencies.length) {
       this.components.push(this.dependencies[0]);
-      this.dependencies.splice(0, 1)
+      this.dependencies.splice(0, 1);
     }
     // reset preset
     $scope.preset = null;
@@ -69,7 +69,7 @@ app.controller('MainCtrl', function ($scope, $http) {
         i--;
       }
     }
-  }
+  };
 
   $scope.changeLanguage = function () {
     $scope.language = this.language;
@@ -99,14 +99,14 @@ app.controller('MainCtrl', function ($scope, $http) {
       var ref = this.components[i];
       if (this.preset.dependencies.indexOf(ref.groupId + ':' + ref.artifactId) != -1) {
         this.dependencies.push(ref);
-        this.components.splice(i, 1)
+        this.components.splice(i, 1);
         i--;
       }
     }
   };
 
   $scope.generateFile = function (file, fqcn, zip) {
-    var fn, slash;
+    var fn;
     // locate handlebars template
     fn = Handlebars.templates[file];
     // first path element is always ignored
@@ -124,7 +124,8 @@ app.controller('MainCtrl', function ($scope, $http) {
   };
 
   $scope.generate = function () {
-    var i;
+    var i, dep;
+
     // track what project type is being generated
     ga('send', {
       hitType: 'event',
@@ -134,7 +135,7 @@ app.controller('MainCtrl', function ($scope, $http) {
     });
 
     for (i = 0; i < this.dependencies.length; i++) {
-      var dep = this.dependencies[i];
+      dep = this.dependencies[i];
       // add stack meta-data
       dep.included = true;
       // track what dependencies are being selected
@@ -147,7 +148,7 @@ app.controller('MainCtrl', function ($scope, $http) {
     }
 
     for (i = 0; i < this.components.length; i++) {
-      var dep = this.components[i];
+      dep = this.components[i];
       // add stack meta-data
       dep.included = false;
     }
@@ -194,7 +195,7 @@ app.controller('MainCtrl', function ($scope, $http) {
     }
 
     // build tool specific templates
-    for (var i = 0; i < templates.length; i++) {
+    for (i = 0; i < templates.length; i++) {
       this.generateFile(templates[i], false, zip);
     }
 
