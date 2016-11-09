@@ -113,8 +113,8 @@ app.controller('MainCtrl', function ($scope, $http) {
     file = file.substr(file.indexOf('/') + 1);
     // need to process the fqcn
     if (fqcn) {
-      var dot = file.indexOf('.');
-      var lslash = file.lastIndexOf('/');
+    var dot = file.indexOf('.');
+    var lslash = file.lastIndexOf('/');
       $scope.packageName = $scope.groupId + '.' + ($scope.artifactId || $scope.name);
       $scope.className = file.substring(lslash + 1, dot);
       file = file.substr(0, Math.max(0, Math.min(dot, lslash + 1))) + $scope.packageName.replace(/\./g, '/') + '/' + $scope.className + file.substr(dot);
@@ -201,16 +201,7 @@ app.controller('MainCtrl', function ($scope, $http) {
 
     if (JSZip.support.blob) {
       zip.generateAsync({ type: 'blob' }).then(function (blob) {
-        // save file to disk
-        var a = document.getElementById('downloadLink');
-        a.download = $scope.name + '.zip';
-        a.href = (window.webkitURL || window.URL).createObjectURL(blob);
-        a.dataset.downloadurl = ['application/zip', a.download, a.href].join(':');
-        a.click();
-        // clean up (needs to wait a bit)
-        setTimeout(function () {
-          (window.webkitURL || window.URL).revokeObjectURL(a.href);
-        }, 1500);
+        saveAs(blob, $scope.name + '.zip');
       }, function (err) {
         ga('send', 'exception', {
           'exDescription': err.message,
