@@ -113,8 +113,8 @@ app.controller('MainCtrl', function ($scope, $http) {
     file = file.substr(file.indexOf('/') + 1);
     // need to process the fqcn
     if (fqcn) {
-    var dot = file.indexOf('.');
-    var lslash = file.lastIndexOf('/');
+      var dot = file.indexOf('.');
+      var lslash = file.lastIndexOf('/');
       $scope.packageName = $scope.groupId + '.' + ($scope.artifactId || $scope.name);
       $scope.className = file.substring(lslash + 1, dot);
       file = file.substr(0, Math.max(0, Math.min(dot, lslash + 1))) + $scope.packageName.replace(/\./g, '/') + '/' + $scope.className + file.substr(dot);
@@ -201,7 +201,25 @@ app.controller('MainCtrl', function ($scope, $http) {
 
     if (JSZip.support.blob) {
       zip.generateAsync({ type: 'blob' }).then(function (blob) {
-        saveAs(blob, $scope.name + '.zip');
+        try {
+          saveAs(blob, $scope.name + '.zip');
+        } catch (e) {
+          ga('send', 'exception', {
+            'exDescription': e.message,
+            'exFatal': true
+          });
+
+          // try fallback
+          var a = document.getElementById('downloadLink');
+          alert(a.download);
+          a.href = (window.webkitURL || window.URL).createObjectURL(blob);
+          a.click();
+          // clean up (needs to wait a bit)
+          setTimeout(function () {
+            (window.webkitURL || window.URL).revokeObjectURL(a.href);
+          }, 1500);
+
+        }
       }, function (err) {
         ga('send', 'exception', {
           'exDescription': err.message,
