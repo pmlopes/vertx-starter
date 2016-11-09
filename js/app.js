@@ -211,7 +211,6 @@ app.controller('MainCtrl', function ($scope, $http) {
 
           // try fallback
           var a = document.getElementById('downloadLink');
-          alert(a.download);
           a.href = (window.webkitURL || window.URL).createObjectURL(blob);
           a.click();
           // clean up (needs to wait a bit)
