@@ -16,6 +16,7 @@ The whole SPA is data driven, build tools can be added to the file [buildtools.j
 * `languages` supported languages
 * `templates` simple templates that apply to all languages
 * `defaults` default dependencies that are automatically selected for this tool
+* `executables` list of template elements that should be marked as executable (required for unix OSes)
 
 #### fields
 
@@ -62,6 +63,7 @@ A preset has the following properties:
 * `main` the main verticle (will override the build tool one)
 * `fqcn` is the main template a FQCN? (will override the build tool one)
 * `templates` a list of extra templates that are required for this preset (no file name translation will occurr)
+* `executables` a list of extra executable templates that are required for this preset
 
 ## Templates
 

@@ -131,7 +131,15 @@ app.controller('MainCtrl', function ($scope, $http) {
 
   $scope.generate = function () {
     var i, dep;
-    var platform = this.buildtool.executables ? 'UNIX' : 'DOS';
+
+    // merge executables from buildtool and preset
+    var executables = this.buildtool.executables || [];
+    if (this.preset) {
+      executables = executables.concat(this.preset.executables || []);
+    }
+
+    // if there are executables we need to generate the zip file for UNIX
+    var platform = executables.length > 0 ? 'UNIX' : 'DOS';
 
     // track what project type is being generated
     ga('send', {
@@ -203,7 +211,7 @@ app.controller('MainCtrl', function ($scope, $http) {
 
     // build tool specific templates
     for (i = 0; i < templates.length; i++) {
-      this.generateFile(templates[i], (this.buildtool.executables || []).indexOf(templates[i]) != -1, false, zip);
+      this.generateFile(templates[i], (executables || []).indexOf(templates[i]) != -1, false, zip);
     }
 
     if (JSZip.support.blob) {
