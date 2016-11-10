@@ -105,7 +105,7 @@ app.controller('MainCtrl', function ($scope, $http) {
     }
   };
 
-  $scope.generateFile = function (file, exec, fqcn, zip) {
+  $scope.compile = function (file, exec, fqcn, zip) {
     var fn;
     // locate handlebars template
     fn = Handlebars.templates[file];
@@ -129,6 +129,48 @@ app.controller('MainCtrl', function ($scope, $http) {
     }
   };
 
+  $scope.download = function (zip) {
+    if (JSZip.support.blob) {
+      zip.generateAsync({ type: 'blob', platform: 'UNIX' }).then(function (blob) {
+        try {
+          saveAs(blob, $scope.name + '.zip');
+        } catch (e) {
+          ga('send', 'exception', {
+            'exDescription': e.message,
+            'exFatal': true
+          });
+
+          // try fallback
+          var a = document.getElementById('downloadLink');
+          a.href = (window.webkitURL || window.URL).createObjectURL(blob);
+          a.click();
+          // clean up (needs to wait a bit)
+          setTimeout(function () {
+            (window.webkitURL || window.URL).revokeObjectURL(a.href);
+          }, 1500);
+
+        }
+      }, function (err) {
+        ga('send', 'exception', {
+          'exDescription': err.message,
+          'exFatal': true
+        });
+        alert(err);
+      });
+    } else {
+      // blob is not supported on this browser fall back to data uri...
+      zip.generateAsync({ type: 'base64', platform: 'UNIX' }).then(function (base64) {
+        window.location = 'data:application/zip;base64,' + base64;
+      }, function (err) {
+        ga('send', 'exception', {
+          'exDescription': err.message,
+          'exFatal': true
+        });
+        alert(err);
+      });
+    }
+  };
+
   $scope.generate = function () {
     var i, dep;
 
@@ -137,9 +179,6 @@ app.controller('MainCtrl', function ($scope, $http) {
     if (this.preset) {
       executables = executables.concat(this.preset.executables || []);
     }
-
-    // if there are executables we need to generate the zip file for UNIX
-    var platform = executables.length > 0 ? 'UNIX' : 'DOS';
 
     // track what project type is being generated
     ga('send', {
@@ -187,13 +226,13 @@ app.controller('MainCtrl', function ($scope, $http) {
     if (this.preset) {
       templates = templates.concat(this.preset.templates);
       // use the preset main template for the language
-      this.generateFile(this.preset.main, false, this.preset.fqcn, zip);
+      this.compile(this.preset.main, false, this.preset.fqcn, zip);
       main = this.preset.main;
       fqcn = this.preset.fqcn;
     } else {
       if (this.language) {
         // use the default main template for the language
-        this.generateFile(this.language.main, false, this.language.fqcn, zip);
+        this.compile(this.language.main, false, this.language.fqcn, zip);
         main = this.language.main;
         fqcn = this.language.fqcn;
       }
@@ -211,47 +250,41 @@ app.controller('MainCtrl', function ($scope, $http) {
 
     // build tool specific templates
     for (i = 0; i < templates.length; i++) {
-      this.generateFile(templates[i], (executables || []).indexOf(templates[i]) != -1, false, zip);
+      this.compile(templates[i], (executables || []).indexOf(templates[i]) != -1, false, zip);
     }
 
-    if (JSZip.support.blob) {
-      zip.generateAsync({ type: 'blob', platform: platform }).then(function (blob) {
-        try {
-          saveAs(blob, $scope.name + '.zip');
-        } catch (e) {
+    // blobs
+    var blob = this.buildtool.blob;
+    if (this.preset) {
+      blob = this.preset.blob || blob;
+    }
+
+    if (blob) {
+      // get the buildtools from the server
+      JSZipUtils.getBinaryContent(blob, function (err, data) {
+        if (err) {
           ga('send', 'exception', {
-            'exDescription': e.message,
+            'exDescription': err,
             'exFatal': true
           });
-
-          // try fallback
-          var a = document.getElementById('downloadLink');
-          a.href = (window.webkitURL || window.URL).createObjectURL(blob);
-          a.click();
-          // clean up (needs to wait a bit)
-          setTimeout(function () {
-            (window.webkitURL || window.URL).revokeObjectURL(a.href);
-          }, 1500);
-
+          console.log(err);
+          return;
         }
-      }, function (err) {
-        ga('send', 'exception', {
-          'exDescription': err.message,
-          'exFatal': true
-        });
-        alert(err);
+
+        zip.loadAsync(data)
+          .then(function (val) {
+            $scope.download(val);
+          })
+          .catch(function (ex) {
+            ga('send', 'exception', {
+              'exDescription': ex.message,
+              'exFatal': true
+            });
+            alert(ex.message);
+          });
       });
     } else {
-      // blob is not supported on this browser fall back to data uri...
-      zip.generateAsync({ type: 'base64', platform: platform }).then(function (base64) {
-        window.location = 'data:application/zip;base64,' + base64;
-      }, function (err) {
-        ga('send', 'exception', {
-          'exDescription': err.message,
-          'exFatal': true
-        });
-        alert(err);
-      });
+      $scope.download(zip);
     }
   };
 });

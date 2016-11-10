@@ -98,17 +98,9 @@
       { "key": "name", "value": "Project Name", "required": true }
     ],
     "templates": [
-      "stack/bin/vertx",
-      "stack/bin/vertx.bat",
-      "stack/conf/default-cluster.xml",
-      "stack/conf/logging.properties",
-      "stack/pom.xml",
-      "stack/vertx-stack.json",
-      "stack/README.md"
+      "stack/vertx-stack.json"
     ],
-    "executables": [
-      "stack/bin/vertx"
-    ],
+    "blob": "blobs/stack.zip",
     "defaults": [
       "io.vertx:vertx-core"
     ]
