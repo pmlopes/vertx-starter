@@ -105,7 +105,7 @@ app.controller('MainCtrl', function ($scope, $http) {
     }
   };
 
-  $scope.generateFile = function (file, fqcn, zip) {
+  $scope.generateFile = function (file, exec, fqcn, zip) {
     var fn;
     // locate handlebars template
     fn = Handlebars.templates[file];
@@ -120,11 +120,18 @@ app.controller('MainCtrl', function ($scope, $http) {
       file = file.substr(0, Math.max(0, Math.min(dot, lslash + 1))) + $scope.packageName.replace(/\./g, '/') + '/' + $scope.className + file.substr(dot);
     }
     // add to zip
-    zip.file(file, fn($scope));
+    if (exec) {
+      zip.file(file, fn($scope), {
+        unixPermissions: '755'
+      });
+    } else {
+      zip.file(file, fn($scope));
+    }
   };
 
   $scope.generate = function () {
     var i, dep;
+    var platform = this.buildtool.executables ? 'UNIX' : 'DOS';
 
     // track what project type is being generated
     ga('send', {
@@ -172,13 +179,13 @@ app.controller('MainCtrl', function ($scope, $http) {
     if (this.preset) {
       templates = templates.concat(this.preset.templates);
       // use the preset main template for the language
-      this.generateFile(this.preset.main, this.preset.fqcn, zip);
+      this.generateFile(this.preset.main, false, this.preset.fqcn, zip);
       main = this.preset.main;
       fqcn = this.preset.fqcn;
     } else {
       if (this.language) {
         // use the default main template for the language
-        this.generateFile(this.language.main, this.language.fqcn, zip);
+        this.generateFile(this.language.main, false, this.language.fqcn, zip);
         main = this.language.main;
         fqcn = this.language.fqcn;
       }
@@ -196,11 +203,11 @@ app.controller('MainCtrl', function ($scope, $http) {
 
     // build tool specific templates
     for (i = 0; i < templates.length; i++) {
-      this.generateFile(templates[i], false, zip);
+      this.generateFile(templates[i], (this.buildtool.executables || []).indexOf(templates[i]) != -1, false, zip);
     }
 
     if (JSZip.support.blob) {
-      zip.generateAsync({ type: 'blob' }).then(function (blob) {
+      zip.generateAsync({ type: 'blob', platform: platform }).then(function (blob) {
         try {
           saveAs(blob, $scope.name + '.zip');
         } catch (e) {
@@ -228,8 +235,8 @@ app.controller('MainCtrl', function ($scope, $http) {
       });
     } else {
       // blob is not supported on this browser fall back to data uri...
-      zip.generateAsync({ type: "base64" }).then(function (base64) {
-        window.location = "data:application/zip;base64," + base64;
+      zip.generateAsync({ type: 'base64', platform: platform }).then(function (base64) {
+        window.location = 'data:application/zip;base64,' + base64;
       }, function (err) {
         ga('send', 'exception', {
           'exDescription': err.message,
