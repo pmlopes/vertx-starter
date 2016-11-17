@@ -100,7 +100,7 @@
     "templates": [
       "stack/vertx-stack.json"
     ],
-    "blob": "blobs/stack.zip",
+    "blob": "blobs/stack-min.zip",
     "defaults": [
       "io.vertx:vertx-core"
     ]
