@@ -4,7 +4,7 @@
     <h2 class="text-center">Quickly bootstrap your vert.x project</h2>
 
     <div class="row">
-      <h3>Get Starter</h3>
+      <h3>Get Started</h3>
 
       <div>
         <strong>Prepare your environment</strong>
@@ -20,6 +20,7 @@
         <p>It is expected that the build tool is already present in your environment. A special case should be handled with
            <code>npm</code> which will require that <code>maven</code> is also present in the environment.</p>
         <p>To choose the tool, use the hamburger menu.</p>
+      </div>
     </div>
 
     <div class="row">
@@ -34,6 +35,7 @@
         <strong>Good to know</strong>
         <p>If you're planning to use <code>vert.x</code> to build distributed applications with the event bus you must
            select a cluster manager such as <code>hazelcast</code>, <code>ignite</code>, <code>zookeeper</code>.</p>
+      </div>
     </div>
 
     <div class="row">
@@ -46,7 +48,7 @@
       </div>
     </div>
 
-    <div>
+    <div class="row">
       <h3>Improve this tool</h3>
 
       <div>
@@ -55,11 +57,11 @@
            help adding more starters or more tools. See the documentation on how to do it. No code required!</p>
       </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="col-4 center"><a href="http://vertx.io/" class="pure-menu-link">About</a></div>
-    <div class="col-4 center"><a href="http://twitter.com/vertx_project/" class="pure-menu-link">Twitter</a></div>
-    <div class="col-4 center"><a href="http://github.com/eclipse/vert.x/" class="pure-menu-link">GitHub</a></div>
+    <div class="row">
+      <div class="col-4 center"><a href="http://vertx.io/" class="pure-menu-link">About</a></div>
+      <div class="col-4 center"><a href="http://twitter.com/vertx_project/" class="pure-menu-link">Twitter</a></div>
+      <div class="col-4 center"><a href="http://github.com/eclipse/vert.x/" class="pure-menu-link">GitHub</a></div>
+    </div>
   </div>
 </home>
