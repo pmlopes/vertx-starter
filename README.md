@@ -26,7 +26,7 @@ A `field` can be seen as a variable that can be used later on the code generatio
 It allows the following properties:
 
 * `key` unique id
-* `value` the label for the key
+* `label` the label for the key
 * `required` boolean
 * `prefill` a default value for the key
 
