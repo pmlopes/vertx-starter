@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" ng-app="starter" ng-cloak>
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
@@ -9,29 +9,30 @@
 
   <title>Vert.x Starter</title>
 
-  <link rel="stylesheet" href="css/pure-min.css">
-  <link rel="stylesheet" href="css/grids-responsive-min.css">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/wing.min.css">
+  <link rel="stylesheet" href="css/hamburger.css">
+  <link rel="stylesheet" href="css/spinner.css">
 
   <style>
-    /* Customization to limit height of the menu */
-    .custom-restricted {
-      height: 320px;
-      border: 1px solid gray;
-      border-radius: 4px;
+    .dependency {
+      background: #EEE;
+      border-radius: 5px;
     }
   </style>
 
-  <script src="js/menus.js"></script>
-  <script src="js/angular.min.js"></script>
+  <!-- include riot.js -->
+  <script src="js/riot.min.js"></script>
+  <script src="js/route.min.js"></script>
+  <!-- zip support -->
   <script src="js/jszip.min.js"></script>
   <script src="js/jszip-utils.min.js"></script>
-  <script src="js/FileSaver.min.js"></script>
-
-  <script src="js/app.js"></script>
-
+  <!-- handlebars runtime -->
   <script src="js/handlebars.runtime.min.js"></script>
+  <!-- code generation -->
   <script src="templates.js"></script>
+  <!-- the app -->
+  <script src="tags.js"></script>
+  <script src="js/app.js"></script>
 
   <!-- Google Analytics -->
   <script>
@@ -45,92 +46,37 @@
   </script>
 </head>
 
-<body ng-controller="MainCtrl">
+<body>
+  <ul class="navigation" data-is="navigation"></ul>
+  <input type="checkbox" id="nav-trigger" class="nav-trigger">
+  <label for="nav-trigger"></label>
 
-  <div id="layout" class="pure-g">
-    <div class="sidebar pure-u-1 pure-u-md-1-4">
-      <div class="header">
-        <h1 class="brand-title">Vert.x Starter</h1>
-        <h2 class="brand-tagline">Create a Vert.x project with</h2>
+  <div class="site-wrap" data-is="main"></div>
 
-        <nav class="nav">
-          <ul class="nav-list">
-            <li class="nav-item" ng-repeat="bt in metadata.buildtools">
-              &nbsp;<a class="pure-button" style="{{ bt.id == buildtool.id ? 'background: rgb(202, 60, 60)' : ''}}" href="#" ng-click="reset($index)">{{ bt.id }}</a>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </div>
+  <script type="text/javascript">
 
-    <div class="content pure-u-1 pure-u-md-3-4">
-      <form class="pure-form pure-form-aligned" ng-submit="generate()">
-        <fieldset>
+    var metadata = {};
 
-          <!-- A wrapper for all the project metadata -->
-          <div class="posts">
-            <h1 class="content-subhead">{{ buildtool.file }}</h1>
-            <div class="pure-u-1">
-              <div class="pure-control-group" ng-repeat="f in buildtool.fields">
-                <label for="{{ f.key }}">{{ f.value }}</label>
-                <input id="{{ f.key }}" type="text" value="{{ f.prefill }}" ng-required="f.required" >
-              </div>
-              <div class="pure-control-group" ng-if="buildtool.languages.length > 1">
-                <label for="language">Language</label>
-                <select id="language" ng-model="language" ng-change="changeLanguage()" ng-options="l.id for l in buildtool.languages"></select>
-              </div>
-              <div class="pure-control-group">
-                <label for="preset">Application type</label>
-                <select id="preset" ng-model="preset" ng-change="changePreset()" ng-options="p.id for p in metadata.presets | filter:filterPreset()">
-                  <option value="">empty</option>
-                </select>
-              </div>
-            </div>
-          </div>
+    loadJSON('buildtools.json', function(response) {
+      metadata.buildtools = JSON.parse(response);
+      riot.mount('app-navi', metadata);
+    });
 
-          <!-- A wrapper for all the project metadata -->
-          <div class="posts">
-            <h1 class="content-subhead">Select dependencies</h1>
-            <div class="pure-u-5-12">
-              <div class="pure-menu pure-menu-scrollable custom-restricted">
-                <ul class="pure-menu-list">
-                  <li class="pure-menu-item" ng-repeat="d in components">
-                    <a href="#" ng-click="dependencies.push(d); components.splice($index, 1)" class="pure-menu-link">{{ d.artifactId }} <small ng-if="d.description">({{ d.description }})</small> <img ng-src="img/stack.svg" width="16px" ng-if="d.stack" /></a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="pure-u-5-12">
-              <div class="pure-menu pure-menu-scrollable custom-restricted">
-                <ul class="pure-menu-list">
-                  <li class="pure-menu-item" ng-repeat="d in dependencies">
-                    <a href="#" ng-click="components.push(d); dependencies.splice($index, 1)" class="pure-menu-link">{{ d.artifactId }} <small ng-if="d.description">({{ d.description }})</small> <img ng-src="img/stack.svg" width="16px" ng-if="d.stack" /></a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
+    loadJSON('components.json', function(response) {
+      metadata.components = JSON.parse(response);
+      if (Object.keys(metadata).length === 3) {
+        riot.mount('*', metadata);
+      }
+    });
 
-          <!-- A wrapper for all the project metadata -->
-          <div class="posts">
-            <p>
-              <button type="submit" class="pure-button pure-button-primary">Generate</button>
-              <a id="downloadLink" href="#" download="{{ name }}.zip" style="visibility: hidden"><small>(click here if your download didn't start)</small></a>
-            </p>
-          </div>
-        </fieldset>
-      </form>
-    </div>
-  </div>
-  <div class="footer">
-    <div class="pure-menu pure-menu-horizontal">
-      <ul>
-        <li class="pure-menu-item"><a href="http://vertx.io/" class="pure-menu-link">About</a></li>
-        <li class="pure-menu-item"><a href="http://twitter.com/vertx_project/" class="pure-menu-link">Twitter</a></li>
-        <li class="pure-menu-item"><a href="http://github.com/eclipse/vert.x/" class="pure-menu-link">GitHub</a></li>
-      </ul>
-    </div>
-  </div>
+    loadJSON('presets.json', function(response) {
+      metadata.presets = JSON.parse(response);
+      if (Object.keys(metadata).length === 3) {
+        riot.mount('*', metadata);
+      }
+    });
+    route.start(true);
+  </script>
 </body>
 
 </html>

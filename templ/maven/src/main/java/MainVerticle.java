@@ -1,8 +1,8 @@
-package {{ packageName }};
+package {{ metadata.packageName }};
 
 import io.vertx.core.AbstractVerticle;
 
-public class {{ className }} extends AbstractVerticle {
+public class {{ metadata.className }} extends AbstractVerticle {
 
   @Override
   public void start() {

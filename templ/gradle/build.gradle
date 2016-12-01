@@ -8,16 +8,16 @@ repositories {
   mavenCentral()
 }
 
-version = '{{version}}'
-group = '{{groupId}}'
-{{#if description}}
-description = '{{description}}'
+version = '{{metadata.version}}'
+group = '{{metadata.groupId}}'
+{{#if metadata.description}}
+description = '{{metadata.description}}'
 {{/if}}
 sourceCompatibility = '1.8'
 mainClassName = 'io.vertx.core.Launcher'
 
 dependencies {
-{{#each dependencies}}
+{{#each selectedDependencies}}
   compile '{{groupId}}:{{artifactId}}:{{version}}'
 {{/each}}
 }
@@ -25,7 +25,7 @@ dependencies {
 shadowJar {
   classifier = 'fat'
   manifest {
-    attributes 'Main-Verticle': '{{main}}'
+    attributes 'Main-Verticle': '{{metadata.main}}'
   }
   mergeServiceFiles {
     include 'META-INF/services/io.vertx.core.spi.VerticleFactory'
