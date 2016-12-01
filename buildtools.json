@@ -3,11 +3,11 @@
     "id": "maven",
     "file": "pom.xml",
     "fields" :[
-      { "key": "name", "value": "Project Name", "required": true },
-      { "key": "description", "value": "Project Description" },
-      { "key": "groupId", "value": "Maven Group Id", "required": true, "prefill": "com.example" },
-      { "key": "artifactId", "value": "Maven Artifact Id", "required": true, "prefill": "demo" },
-      { "key": "version", "value": "Project Version", "required": true, "prefill": "0.0.1-SNAPSHOT" }
+      { "key": "name", "label": "Project Name", "required": true },
+      { "key": "description", "label": "Project Description" },
+      { "key": "groupId", "label": "Maven Group Id", "required": true, "prefill": "com.example" },
+      { "key": "artifactId", "label": "Maven Artifact Id", "required": true, "prefill": "demo" },
+      { "key": "version", "label": "Project Version", "required": true, "prefill": "0.0.1-SNAPSHOT" }
     ],
     "languages": [
       {
@@ -37,10 +37,10 @@
     "id": "gradle",
     "file": "build.gradle",
     "fields" :[
-      { "key": "name", "value": "Project Name", "required": true },
-      { "key": "description", "value": "Project Description" },
-      { "key": "groupId", "value": "Project Group", "required": true, "prefill": "com.example" },
-      { "key": "version", "value": "Project Version", "prefill": "0.0.1-SNAPSHOT" }
+      { "key": "name", "label": "Project Name", "required": true },
+      { "key": "description", "label": "Project Description" },
+      { "key": "groupId", "label": "Project Group", "required": true, "prefill": "com.example" },
+      { "key": "version", "label": "Project Version", "prefill": "0.0.1-SNAPSHOT" }
     ],
     "languages": [
       {
@@ -70,9 +70,9 @@
     "id": "npm",
     "file": "package.json",
     "fields": [
-      { "key": "name", "value": "Project Name", "required": true },
-      { "key": "description", "value": "Project Description" },
-      { "key": "version", "value": "Project Version", "prefill": "0.0.1" }
+      { "key": "name", "label": "Project Name", "required": true },
+      { "key": "description", "label": "Project Description" },
+      { "key": "version", "label": "Project Version", "prefill": "0.0.1" }
     ],
     "languages": [
       {
@@ -95,7 +95,7 @@
     "id": "stack",
     "file": "vertx-stack.json",
     "fields": [
-      { "key": "name", "value": "Project Name", "required": true }
+      { "key": "name", "label": "Project Name", "required": true }
     ],
     "templates": [
       "stack/vertx-stack.json"

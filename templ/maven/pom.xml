@@ -5,21 +5,21 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>{{groupId}}</groupId>
-  <artifactId>{{artifactId}}</artifactId>
-  <version>{{version}}</version>
+  <groupId>{{metadata.groupId}}</groupId>
+  <artifactId>{{metadata.artifactId}}</artifactId>
+  <version>{{metadata.version}}</version>
 
-  <name>{{name}}</name>
-  {{#if description}}
-  <description>{{description}}</description>
+  <name>{{metadata.name}}</name>
+  {{#if metadata.description}}
+  <description>{{metadata.description}}</description>
   {{/if}}
 
   <properties>
-    <main.verticle>{{main}}</main.verticle>
+    <main.verticle>{{metadata.main}}</main.verticle>
   </properties>
 
   <dependencies>
-    {{#each dependencies}}
+    {{#each selectedDependencies}}
     <dependency>
       <groupId>{{groupId}}</groupId>
       <artifactId>{{artifactId}}</artifactId>

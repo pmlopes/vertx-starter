@@ -23,8 +23,7 @@ if ('install' === process.env.npm_lifecycle_event) {
     '\n' +
     '  <dependencies>\n';
 
-
-  for (dep in javaDependencies) {
+  for (var dep in javaDependencies) {
     if (javaDependencies.hasOwnProperty(dep)) {
       pom +=
         '    <dependency>\n' +
@@ -53,7 +52,7 @@ if ('install' === process.env.npm_lifecycle_event) {
     '            </goals>\n' +
     '            <configuration>\n' +
     '              <includes>**/*.js</includes>\n' +
-    '              <outputDirectory>${project.basedir}/node_modules</outputDirectory>\n' +
+    '              <outputDirectory>${project.basedir}/../node_modules</outputDirectory>\n' +
     '              <overWriteReleases>false</overWriteReleases>\n' +
     '              <overWriteSnapshots>true</overWriteSnapshots>\n' +
     '            </configuration>\n' +
@@ -82,7 +81,7 @@ if ('install' === process.env.npm_lifecycle_event) {
     '                  <resource>META-INF/services/io.vertx.core.spi.VerticleFactory</resource>\n' +
     '                </transformer>\n' +
     '              </transformers>\n' +
-    '              <outputFile>${project.basedir}/run.jar</outputFile>\n' +
+    '              <outputFile>${project.basedir}/../run.jar</outputFile>\n' +
     '            </configuration>\n' +
     '          </execution>\n' +
     '        </executions>\n' +
@@ -91,11 +90,21 @@ if ('install' === process.env.npm_lifecycle_event) {
     '  </build>\n' +
     '</project>\n';
 
-  // generate pom.xml
-  fs.writeFile(path.resolve(__dirname, 'pom.xml'), pom, function (err) {
-    if (err) {
-      console.error(err);
-      process.exit(1);
+  // mkdir -p .vertx
+  fs.mkdir(path.resolve(__dirname, '.vertx'),function(err){
+    if (!err || (err && err.code === 'EEXIST')) {
+      // generate pom.xml
+      fs.writeFile(path.resolve(__dirname, '.vertx/pom.xml'), pom, function (err) {
+        if (err) {
+          console.error(err);
+          process.exit(1);
+        }
+      });
+    } else {
+      if (err) {
+        console.error(err);
+        process.exit(1);
+      }
     }
   });
 }

@@ -1,13 +1,15 @@
 {
-  "name": "{{ name }}",
-  "version": "{{ version }}",
-  "description": "{{ description }}",
+  "name": "{{ metadata.name }}",
+  "version": "{{ metadata.version }}",
+  {{#if metadata.description}}
+  "description": "{{ metadata.description }}",
+  {{/if}}
 
-  "mainVerticle": "{{ main }}",
+  "mainVerticle": "{{ metadata.main }}",
 
   "scripts": {
     "install": "node ./webpack.config.js",
-    "postinstall": "mvn clean package",
+    "postinstall": "mvn -f .vertx/pom.xml clean package",
 
     "build": "./node_modules/.bin/webpack",
     "build:release": "./node_modules/.bin/webpack -p",
@@ -29,7 +31,7 @@
   },
 
   "javaDependencies": {
-  {{#each dependencies}}
+  {{#each selectedDependencies}}
     "{{ groupId }}:{{ artifactId }}": "{{ version }}"{{#unless @last}},{{/unless}}
   {{/each}}
   }

@@ -1,4 +1,4 @@
-package {{ packageName }};
+package {{ metadata.packageName }};
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.http.HttpHeaders;
@@ -22,7 +22,7 @@ import io.vertx.ext.web.templ.JadeTemplateEngine;
  * The application allows to list, create and delete mongo documents using a simple web interface.
  *
  */
-public class {{ className }} extends AbstractVerticle {
+public class {{ metadata.className }} extends AbstractVerticle {
 
   @Override
   public void start() throws Exception {
