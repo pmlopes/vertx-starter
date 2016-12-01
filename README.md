@@ -84,5 +84,5 @@ npm install
 And then compile the templates:
 
 ```
-npm run templates
+npm run build
 ```

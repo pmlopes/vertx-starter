@@ -32,30 +32,37 @@
         </div>
       </div>
 
-      <h1>Dependencies</h1>
+      <div class="row">
+        <div class="col-6">
+          <h1>Dependencies</h1>
+        </div>
+        <div class="col-6">
+          <input type="text" class="pull-right" placeholder="Search dependency..." onkeyup={search}>
+        </div>
+      </div>
 
-      <div each={c, i in components} class="row">
+      <div each={c, i in idx} class="row">
         <!-- iterate 2 at a time -->
         <virtual if={i % 2===0 }>
-          <div class="col-6 {components[i].checked?'dependency':''}">
-            <input name="dependencies" type="checkbox" value="{i}" checked={components[i].checked} onclick={toggleDependency}>
+          <div class="col-6 {components[idx[i]].checked?'dependency':''}">
+            <input name="dependencies" type="checkbox" value="{idx[i]}" checked={components[idx[i]].checked} onclick={toggleDependency}>
             <div>
-              <span if={components[i].stack} class="pull-right"><img src="img/stack.svg" width="16px" /></span>
-              <strong>{components[i].artifactId}</strong>
-              <p if={components[i].description}>{components[i].description}</p>
+              <span if={components[idx[i]].stack} class="pull-right"><img src="img/stack.svg" width="16px" /></span>
+              <strong>{components[idx[i]].artifactId}</strong>
+              <hr/>
+              <p if={components[idx[i]].description}>{components[idx[i]].description}</p>
             </div>
-            <hr/>
             <br/>
           </div>
           <!-- if there is a next one -->
-          <div if={components[i+1]} class="col-6 {components[i+1].checked?'dependency':''}">
-            <input name="dependencies" type="checkbox" value="{i+1}" checked={components[i+1].checked} onclick={toggleDependency}>
+          <div if={components[idx[i+1]]} class="col-6 {components[idx[i+1]].checked?'dependency':''}">
+            <input name="dependencies" type="checkbox" value="{idx[i+1]}" checked={components[idx[i+1]].checked} onclick={toggleDependency}>
             <div>
-              <span if={components[i+1].stack} class="pull-right"><img src="img/stack.svg" width="16px" /></span>
-              <strong>{components[i+1].artifactId}</strong>
-              <p if={components[i+1].description}>{components[i+1].description}</p>
+              <span if={components[idx[i+1]].stack} class="pull-right"><img src="img/stack.svg" width="16px" /></span>
+              <strong>{components[idx[i+1]].artifactId}</strong>
+              <hr/>
+              <p if={components[idx[i+1]].description}>{components[idx[i+1]].description}</p>
             </div>
-            <hr/>
             <br/>
           </div>
         </virtual>
@@ -86,6 +93,11 @@
     var self = this;
     // immutable data
     self.components = opts.components;
+
+    // create a filter index
+    self.idx = self.components.map(function (el, index) {
+      return index;
+    });
 
     var r = route.create()
     // bind to the right route
@@ -255,6 +267,19 @@
         self.downloading = false;
         self.update();
       }, 500);
+    }
+
+    search (e) {
+      // create a filter index
+      var found = [];
+
+      self.components.forEach(function (el, index) {
+        if (el.artifactId.indexOf(e.target.value) !== -1 || (el.description && el.description.indexOf(e.target.value) !== -1)) {
+          found.push(index);
+        }
+      });
+
+      self.update({idx : found});
     }
   </script>
 </main>
