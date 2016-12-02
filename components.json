@@ -4,55 +4,63 @@
     "artifactId": "vertx-core",
     "version": "3.3.3",
     "stack": true,
-    "description": "Vert.x Core"
+    "description": "Vert.x is a tool-kit for building reactive applications on the JVM."
   },
   {
     "groupId": "io.netty",
     "artifactId": "netty-tcnative-boringssl-static",
     "version": "1.1.33.Fork21",
-    "included": true
+    "included": true,
+    "description": "netty-tcnative is a multi-module project and builds a few artifacts, allowing it to be used in a variety of environments."
   },
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-lang-js",
     "version": "3.3.3",
-    "stack": true
+    "stack": true,
+    "description": "Nashorn JavaScript implementation for Vert.x."
   },
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-lang-ruby",
     "version": "3.3.3",
-    "stack": true
+    "stack": true,
+    "description": "Vert.x Ruby support."
   },
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-lang-groovy",
     "version": "3.3.3",
-    "stack": true
+    "stack": true,
+    "description": "Vert.x Groovy support."
   },
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-lang-ceylon",
     "version": "3.3.3",
-    "stack": true
+    "stack": true,
+    "description": "Vert.x 3 code generator for Ceylon."
   },
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-service-proxy",
     "version": "3.3.3",
-    "stack": true
+    "stack": true,
+    "description": "EventBus Proxy generation."
   },
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-service-factory",
     "version": "3.3.3",
-    "stack": true
+    "stack": true,
+    "description": "Service Factory implementation."
   },
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-maven-service-factory",
     "version": "3.3.3",
-    "stack": true
+    "stack": true,
+    "description": "Verticle factory for resolving verticles from Maven at run-time."
   },
   {
     "groupId": "io.vertx",
@@ -64,13 +72,15 @@
     "groupId": "io.vertx",
     "artifactId": "vertx-hazelcast",
     "version": "3.3.3",
-    "stack": true
+    "stack": true,
+    "description": "Hazelcast Cluster Manager for Vert.x."
   },
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-dropwizard-metrics",
     "version": "3.3.3",
-    "stack": true
+    "stack": true,
+    "description": "Metrics Service Provider implementations for Vert.x using Dropwizard metrics library."
   },
   {
     "groupId": "io.vertx",
@@ -88,25 +98,29 @@
     "groupId": "io.vertx",
     "artifactId": "vertx-rx-java",
     "version": "3.3.3",
-    "stack": true
+    "stack": true,
+    "description": "Reactive Extensions for Vert.x."
   },
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-rx-js",
     "version": "3.3.3",
-    "stack": true
+    "stack": true,
+    "description": "Reactive Extensions for Vert.x."
   },
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-rx-groovy",
     "version": "3.3.3",
-    "stack": true
+    "stack": true,
+    "description": "Reactive Extensions for Vert.x."
   },
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-mongo-client",
     "version": "3.3.3",
-    "stack": true
+    "stack": true,
+    "description": "An asynchronous client for interacting with a MongoDB database."
   },
   {
     "groupId": "io.vertx",
@@ -124,7 +138,8 @@
     "groupId": "io.vertx",
     "artifactId": "vertx-jdbc-client",
     "version": "3.3.3",
-    "stack": true
+    "stack": true,
+    "description": "JDBC support for Vert.x."
   },
   {
     "groupId": "io.vertx",
@@ -166,7 +181,8 @@
     "groupId": "io.vertx",
     "artifactId": "vertx-web",
     "version": "3.3.3",
-    "stack": true
+    "stack": true,
+    "description": "Vert.x-Web is a set of building blocks for building web applications with Vert.x. Think of it as a Swiss Army Knife for building modern, scalable, web apps."
   },
   {
     "groupId": "io.vertx",
@@ -222,13 +238,15 @@
     "groupId": "io.vertx",
     "artifactId": "vertx-unit",
     "version": "3.3.3",
-    "stack": true
+    "stack": true,
+    "description": "Async polyglot unit testing for Vert.x."
   },
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-mail-client",
     "version": "3.3.3",
-    "stack": true
+    "stack": true,
+    "description": "A simple asynchronous SMTP client for Vert.x."
   },
   {
     "groupId": "io.vertx",
@@ -240,13 +258,15 @@
     "groupId": "io.vertx",
     "artifactId": "vertx-redis-client",
     "version": "3.3.3",
-    "stack": true
+    "stack": true,
+    "description": "The Vert.x Redis client provides an asynchronous API to interact with a redis data-structure server."
   },
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-shell",
     "version": "3.3.3",
-    "stack": true
+    "stack": true,
+    "description": "Shell for Vert.x."
   },
   {
     "groupId": "io.vertx",

@@ -5,9 +5,9 @@
     "fields" :[
       { "key": "name", "label": "Project Name", "required": true },
       { "key": "description", "label": "Project Description" },
-      { "key": "groupId", "label": "Maven Group Id", "required": true, "prefill": "com.example" },
-      { "key": "artifactId", "label": "Maven Artifact Id", "required": true, "prefill": "demo" },
-      { "key": "version", "label": "Project Version", "required": true, "prefill": "0.0.1-SNAPSHOT" }
+      { "key": "groupId", "label": "Maven Group Id", "prefill": "com.example" },
+      { "key": "artifactId", "label": "Maven Artifact Id", "prefill": "demo" },
+      { "key": "version", "label": "Project Version", "prefill": "0.0.1-SNAPSHOT" }
     ],
     "languages": [
       {
@@ -39,7 +39,7 @@
     "fields" :[
       { "key": "name", "label": "Project Name", "required": true },
       { "key": "description", "label": "Project Description" },
-      { "key": "groupId", "label": "Project Group", "required": true, "prefill": "com.example" },
+      { "key": "groupId", "label": "Project Group", "prefill": "com.example" },
       { "key": "version", "label": "Project Version", "prefill": "0.0.1-SNAPSHOT" }
     ],
     "languages": [
