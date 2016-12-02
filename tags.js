@@ -190,5 +190,8 @@ riot.tag2('main', '<home if="{!tool}"></home><div if="{tool}" class="container">
     }.bind(this)
 });
 
-riot.tag2('navigation', '<li each="{opts.buildtools}" class="nav-item"><a href="#{id}">{id}</a></li>', '', '', function(opts) {
+riot.tag2('navigation', '<li each="{opts.buildtools}" class="nav-item"><a href="#{id}" onclick="{closeMenu}">{id}</a></li>', '', '', function(opts) {
+  this.closeMenu = function(e) {
+    document.getElementById('nav-trigger').checked = false;
+  }.bind(this)
 });
