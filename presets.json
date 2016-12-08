@@ -10,13 +10,30 @@
     ],
     "buildtool": "maven",
     "language": "java",
-    "main":  "web+mongo/src/main/java/MainVerticle.java",
-    "fqcn": true,
     "templates": [
+      "web+mongo/src/main/java/{package}/MainVerticle.java",
       "web+mongo/src/main/resources/templates/index.jade",
       "web+mongo/src/main/resources/templates/layout.jade",
       "web+mongo/src/main/resources/webroot/css/style.css",
       "web+mongo/src/main/resources/webroot/js/app.js"
+    ]
+  },
+  {
+    "id": "service proxy application",
+    "description": "A bare bones service proxy application",
+    "dependencies": [
+      "io.vertx:vertx-core",
+      "io.vertx:vertx-codegen",
+      "io.vertx:vertx-service-proxy"
+    ],
+    "buildtool": "maven",
+    "language": "java",
+    "templates": [
+      "maven+service-proxy/pom.xml",
+      "maven+service-proxy/src/main/java/{package}/Service.java",
+      "maven+service-proxy/src/main/java/{package}/MainVerticle.java",
+      "maven+service-proxy/src/main/java/{package}/package-info.java",
+      "maven+service-proxy/src/main/java/{package}/impl/ServiceImpl.java"
     ]
   }
 ]

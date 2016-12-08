@@ -35,8 +35,7 @@ It allows the following properties:
 A language represents a programming language and has the following properties:
 
 * `id` an unique id (should match the `vertx-lang-xxx`)
-* `main` the main template
-* `fqcn` boolean if true then the name of the package will be derived from the fields (`groupId` and `artifactId`)
+* `templates` a extra list of templates for this language
 
 ### components.json
 
@@ -61,8 +60,6 @@ A preset has the following properties:
 * `dependencies` a list of dependencies to be added by default
 * `buildtool` the tool that this preset expect to be present
 * `language` the language this preset requires
-* `main` the main verticle (will override the build tool one)
-* `fqcn` is the main template a FQCN? (will override the build tool one)
 * `templates` a list of extra templates that are required for this preset (no file name translation will occurr)
 * `executables` a list of extra executable templates that are required for this preset
 * `blob` a existing zip file that will be merged to the final zip (will override build tool one)
@@ -70,6 +67,13 @@ A preset has the following properties:
 ## Templates
 
 The generated project comes from the handlebars templates under `templ` for each build tools there should be a folder. In this folder all files will be handled as handlebars templates.
+
+When dealing with templates that need to live in a specific package name the following rules apply:
+
+1. The metadata should refer to the file using the following pattern: `some-dir/{packageName}/File.extension`
+2. The file should be saved excluding any package e.g.: `some-dir/File.extension`
+
+Important to note that extra packages after the `{packageName}` are allowed e.g.: `some-dir/{packageName}/impl/File.extension`.
 
 ## Build process
 

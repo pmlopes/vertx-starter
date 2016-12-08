@@ -5,7 +5,7 @@
   "description": "{{ metadata.description }}",
   {{/if}}
 
-  "mainVerticle": "{{ metadata.main }}",
+  "mainVerticle": "main.js",
 
   "scripts": {
     "install": "node ./webpack.config.js",

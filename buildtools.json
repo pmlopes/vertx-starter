@@ -12,16 +12,21 @@
     "languages": [
       {
         "id": "java",
-        "main": "maven/src/main/java/MainVerticle.java",
-        "fqcn": true
+        "templates": [
+          "maven/src/main/java/{package}/MainVerticle.java"
+        ]
       },
       {
         "id": "groovy",
-        "main":  "maven/src/main/resources/main.groovy"
+        "templates": [
+          "maven/src/main/resources/main.groovy"
+        ]
       },
       {
         "id": "ruby",
-        "main":  "maven/src/main/resources/main.rb"
+        "templates": [
+          "maven/src/main/resources/main.rb"
+        ]
       }
     ],
     "templates": [
@@ -45,16 +50,21 @@
     "languages": [
       {
         "id": "java",
-        "main": "gradle/src/main/java/MainVerticle.java",
-        "fqcn": true
+        "templates": [
+          "maven/src/main/java/{package}/MainVerticle.java"
+        ]
       },
       {
         "id": "groovy",
-        "main":  "gradle/src/main/resources/main.groovy"
+        "templates": [
+          "maven/src/main/resources/main.groovy"
+        ]
       },
       {
         "id": "ruby",
-        "main":  "gradle/src/main/resources/main.rb"
+        "templates": [
+          "maven/src/main/resources/main.rb"
+        ]
       }
     ],
     "templates": [
@@ -77,7 +87,9 @@
     "languages": [
       {
         "id": "javascript",
-        "main":  "npm/src/main.js"
+        "templates": [
+          "npm/src/main.js"
+        ]
       }
     ],
     "templates": [

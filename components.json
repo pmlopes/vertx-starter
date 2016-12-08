@@ -375,5 +375,12 @@
     "artifactId": "vertx-proton",
     "version": "3.3.3",
     "stack": true
+  },
+    {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-codegen",
+    "version": "3.3.3",
+    "stack": true,
+    "description": "Vert.x code generation."
   }
 ]

@@ -2,7 +2,7 @@ package {{ metadata.packageName }};
 
 import io.vertx.core.AbstractVerticle;
 
-public class {{ metadata.className }} extends AbstractVerticle {
+public class MainVerticle extends AbstractVerticle {
 
   @Override
   public void start() {

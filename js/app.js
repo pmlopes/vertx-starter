@@ -49,46 +49,34 @@ function compileProject(project, callback) {
   });
 
   project.metadata = {};
+
   // convert the fields to a form structure
   project.buildtool.fields.forEach(function (el) {
     project.metadata[el.key] = el.value ? el.value : el.prefill;
   });
 
+  if (project.metadata.groupId) {
+    project.metadata.packageName = project.metadata.groupId + '.' + (project.metadata.artifactId || project.metadata.name.replace(/\s*/g, '_'))
+  }
+
   // create a new zip file
   var zip = new JSZip();
 
-  var templates = [].concat(project.buildtool.templates);
+  var templates = [];
 
-  var main, fqcn;
+  // marge all templates to be processed
+  templates = templates.concat(project.buildtool.templates);
 
-  if (project.preset) {
-    templates = templates.concat(project.preset.templates);
-    // use the preset main template for the language
-    compile(project, project.preset.main, false, project.preset.fqcn, zip);
-    main = project.preset.main;
-    fqcn = project.preset.fqcn;
-  } else {
-    if (project.language) {
-      // use the default main template for the language
-      compile(project, project.language.main, false, project.language.fqcn, zip);
-      main = project.language.main;
-      fqcn = project.language.fqcn;
-    }
+  if (project.language.templates) {
+    templates = templates.concat(project.language.templates);
   }
-
-  // derive main verticle
-  if (fqcn) {
-    project.metadata.main = project.metadata.packageName + '.' + project.metadata.className;
-  } else {
-    if (main) {
-      var lslash = main.lastIndexOf('/');
-      project.metadata.main = main.substr(lslash + 1);
-    }
+  if (project.preset) {
+    templates = templates.concat(project.preset.templates || []);
   }
 
   // build tool specific templates
   for (i = 0; i < templates.length; i++) {
-    compile(project, templates[i], (executables || []).indexOf(templates[i]) != -1, false, zip);
+    compile(project, templates[i], (executables || []).indexOf(templates[i]) != -1, zip);
   }
 
   // blobs
@@ -126,25 +114,37 @@ function compileProject(project, callback) {
   }
 }
 
-function compile(project, file, exec, fqcn, zip) {
-  var fn;
-  // locate handlebars template
-  fn = Handlebars.templates[file];
-  // first path element is always ignored
-  file = file.substr(file.indexOf('/') + 1);
-  // need to process the fqcn
-  if (fqcn) {
-    var dot = file.indexOf('.');
-    var lslash = file.lastIndexOf('/');
-    project.metadata.packageName = project.metadata.groupId + '.' + (project.metadata.artifactId || project.metadata.name);
-    project.metadata.className = file.substring(lslash + 1, dot);
-    file = file.substr(0, Math.max(0, Math.min(dot, lslash + 1))) + project.metadata.packageName.replace(/\./g, '/') + '/' + project.metadata.className + file.substr(dot);
+function compile(project, file, exec, zip) {
+  var hbfile, zfile, fn;
+
+  // extract filename
+  var dot = file.indexOf('.');
+  var lslash = file.lastIndexOf('/');
+
+  // extra metdata
+  if (project.metadata.packageName) {
+    project.metadata.dirName = project.metadata.packageName.replace(/\./g, '/');
   }
+  project.metadata.fileName = file.substring(lslash + 1, dot);
+
+  // process file name (replace package placeholder with real package for zip, ignore placeholder for handlebars)
+  zfile = file.replace('{package}', project.metadata.dirName || '');
+  // first path element is always ignored
+  zfile = zfile.substr(zfile.indexOf('/') + 1);
+  hbfile = file.replace('{package}/', '');
+
+  console.log(project.metadata);
+  console.log(hbfile);
+  console.log(zfile);
+
+  // locate handlebars template
+  fn = Handlebars.templates[hbfile];
+  // add to zip
   if (exec) {
-    zip.file(file, fn(project), {
+    zip.file(zfile, fn(project), {
       unixPermissions: '755'
     });
   } else {
-    zip.file(file, fn(project));
+    zip.file(zfile, fn(project));
   }
 }
