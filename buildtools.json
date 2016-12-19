@@ -116,5 +116,46 @@
     "defaults": [
       "io.vertx:vertx-core"
     ]
+  },
+
+    {
+    "id": "sbt",
+    "file": "build.sbt",
+    "fields" :[
+      { "key": "name", "label": "Project Name", "required": true },
+      { "key": "description", "label": "Project Description" },
+      { "key": "groupId", "label": "Maven Group Id", "prefill": "com.example" },
+      { "key": "artifactId", "label": "Maven Artifact Id", "prefill": "demo" },
+      { "key": "version", "label": "Project Version", "prefill": "0.0.1-SNAPSHOT" }
+    ],
+    "languages": [
+      {
+        "id": "scala",
+        "templates": [
+          "maven/src/main/scala/{package}/MainVerticle.scala",
+          "maven/src/test/scala/{package}/MainVerticleTest.scala",
+          "maven/src/test/scala/{package}/TestVerticle.scala",
+          "maven/src/test/scala/{package}/TestVerticleTest.scala"
+        ]
+      }
+    ],
+    "templates": [
+      "project/Build.scala",
+      "project/plugins.sbt",
+      "project/build.properties",
+      "project/Dependencies.scala",
+      ".scalafmt",
+      ".gitignore",
+      "README.md",
+      "src/test/resources/.gitkeep",
+      "src/main/resources/vertx-default-jul-logging.properties",
+      "build.sbt"
+    ],
+    "defaults": [
+      "io.vertx:vertx-core",
+      "io.vertx:vertx-codegen",
+      "io.vertx:vertx-lang-scala",
+      "io.vertx:vertx-web-scala"
+    ]
   }
 ]
