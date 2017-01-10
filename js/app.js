@@ -1,11 +1,34 @@
 function loadJSON(file, callback) {
+  if (localStorage) {
+    var json = localStorage.getItem(file);
+
+    if (json) {
+      json = JSON.parse(json);
+      if (json.ttl && json.ttl < Date.now()) {
+        localStorage.removeItem(file);
+      } else {
+        callback(json.text);
+        return;
+      }
+    }
+  }
 
   var xobj = new XMLHttpRequest();
   xobj.overrideMimeType("application/json");
   xobj.open('GET', file, true);
   xobj.onreadystatechange = function () {
     if (xobj.readyState == 4 && xobj.status == "200") {
-      callback(xobj.responseText);
+      var json = {
+        ttl: 86400000 + Date.now(),
+        text: xobj.responseText
+      };
+
+      if (localStorage) {
+        localStorage.setItem(file, JSON.stringify(json));
+      }
+
+      console.log(json);
+      callback(json.text);
     }
   };
   xobj.send(null);
