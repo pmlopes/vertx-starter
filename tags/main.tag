@@ -102,19 +102,30 @@
     var r = route.create()
     // bind to the right route
     opts.buildtools.forEach(function (el) {
-      r(el.id, show.bind(self, el));
+      r(el.id + '..', show.bind(self, el));
     });
 
     // show default route
     r(show);
 
     function show(tool) {
+      var q = route.query();
+      // parse initial values
+      var setup = {
+        dependencies: (q.dependencies || '').split(','),
+        language: q.language
+      };
+
       if (tool) {
         if (tool.languages) {
           // reset the dependencies
           self.components.forEach(function (el) {
             // default not selected
             el.checked = false;
+            // check if initial setup requested this dependency
+            if (setup.dependencies.indexOf(el.groupId + ':' + el.artifactId) != -1) {
+              el.checked = true;
+            }
             // unless it is a default for the tool
             if (tool.defaults.indexOf(el.groupId + ':' + el.artifactId) != -1) {
               el.checked = true;
@@ -130,6 +141,8 @@
         } else {
           self.update({ tool: tool });
         }
+      } else {
+        self.update({ tool: tool});
       }
     }
 

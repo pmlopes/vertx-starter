@@ -13,9 +13,9 @@
       <div>
         <strong>Choose your build tool</strong>
         <ul>
-          <li><a href="#maven">maven</a></li>
-          <li><a href="#gradle">gradle</a></li>
-          <li><a href="#npm">npm</a></li>
+          <li><img src="img/maven.ico" with="16" height="16"> &nbsp;<a href="#maven">maven</a></li>
+          <li><img src="img/gradle.ico" with="16" height="16"> &nbsp;<a href="#gradle">gradle</a></li>
+          <li><img src="img/npmjs.ico" with="16" height="16"> &nbsp;<a href="#npm">npm</a></li>
         </ul>
         <p>It is expected that the build tool is already present in your environment. A special case should be handled with
            <code>npm</code> which will require that <code>maven</code> is also present in the environment.</p>
