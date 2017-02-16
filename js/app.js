@@ -27,7 +27,6 @@ function loadJSON(file, callback) {
         localStorage.setItem(file, JSON.stringify(json));
       }
 
-      console.log(json);
       callback(json.text);
     }
   };
@@ -35,7 +34,7 @@ function loadJSON(file, callback) {
 }
 
 function compileProject(project, callback) {
-  var i, dep;
+  var i;
 
   // merge executables from buildtool and preset
   var executables = project.buildtool.executables || [];
@@ -155,10 +154,6 @@ function compile(project, file, exec, zip) {
   // first path element is always ignored
   zfile = zfile.substr(zfile.indexOf('/') + 1);
   hbfile = file.replace('{package}/', '');
-
-  console.log(project.metadata);
-  console.log(hbfile);
-  console.log(zfile);
 
   // locate handlebars template
   fn = Handlebars.templates[hbfile];

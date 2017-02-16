@@ -99,7 +99,7 @@
       return index;
     });
 
-    var r = route.create()
+    var r = route.create();
     // bind to the right route
     opts.buildtools.forEach(function (el) {
       r(el.id + '..', show.bind(self, el));

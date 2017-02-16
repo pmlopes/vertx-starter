@@ -2,12 +2,11 @@
   "name": "vertx-generator",
   "version": "0.0.1",
   "scripts": {
-    "deploy-gh-pages": "./deploy-gh-pages.sh",
-    "build": "./node_modules/.bin/riot --compact tags tags.js && ./node_modules/.bin/handlebars -r templ `find templ` > templates.js",
+    "build": "./node_modules/.bin/riot --compact tags tags.js && ./node_modules/.bin/handlebars -r templ --knownOnly `find templ` > templates.js",
     "start": "python3 -m http.server 8000"
   },
   "devDependencies": {
-    "handlebars": "4.0.5",
+    "handlebars": "4.0.6",
     "jshint": "2.9.4",
     "riot-cli": "3.0.0"
   }

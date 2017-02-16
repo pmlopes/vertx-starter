@@ -24,6 +24,13 @@
     </div>
 
     <div class="row">
+      <h3>Here is how...</h3>
+      <div class="center">
+        <iframe width="854" height="480" src="https://www.youtube.com/embed/-gcyr-LV664" frameborder="0"></iframe>
+      </div>
+    </div>
+
+    <div class="row">
       <h3>Choose your dependencies</h3>
 
       <div>
@@ -59,9 +66,10 @@
     </div>
 
     <div class="row">
-      <div class="col-4 center"><a href="http://vertx.io/" class="pure-menu-link">About</a></div>
-      <div class="col-4 center"><a href="http://twitter.com/vertx_project/" class="pure-menu-link">Twitter</a></div>
-      <div class="col-4 center"><a href="http://github.com/eclipse/vert.x/" class="pure-menu-link">GitHub</a></div>
+      <div class="pull-right">
+        <iframe src="https://ghbtns.com/github-btn.html?user=pmlopes&repo=vertx-starter&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
+        <iframe src="https://ghbtns.com/github-btn.html?user=pmlopes&repo=vertx-starter&type=fork&count=true&size=large" frameborder="0" scrolling="0" width="158px" height="30px"></iframe>
+      </div>
     </div>
   </div>
 </home>
