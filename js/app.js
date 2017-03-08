@@ -19,7 +19,8 @@ function loadJSON(file, callback) {
   xobj.onreadystatechange = function () {
     if (xobj.readyState == 4 && xobj.status == "200") {
       var json = {
-        ttl: 86400000 + Date.now(),
+        // only cache for 30min
+        ttl: 1800000 + Date.now(),
         text: xobj.responseText
       };
 
@@ -71,6 +72,11 @@ function compileProject(project, callback) {
   });
 
   project.metadata = {};
+
+  // make a boolean value for the languageId
+  project.metadata[project.language.id] = !!project.metadata;
+
+  console.log(project.metadata);
 
   // convert the fields to a form structure
   project.buildtool.fields.forEach(function (el) {

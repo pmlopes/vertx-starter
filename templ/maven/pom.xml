@@ -39,10 +39,45 @@
             <target>1.8</target>
           </configuration>
         </plugin>
+        {{#if metadata.kotlin}}
+        <plugin>
+          <artifactId>kotlin-maven-plugin</artifactId>
+          <groupId>org.jetbrains.kotlin</groupId>
+          <version>1.1.0</version>
+          <executions>
+            <execution>
+              <id>compile</id>
+              <goals> <goal>compile</goal> </goals>
+              <configuration>
+                <sourceDirs>
+                  <sourceDir>${project.basedir}/src/main/kotlin</sourceDir>
+                  <sourceDir>${project.basedir}/src/main/java</sourceDir>
+                </sourceDirs>
+              </configuration>
+            </execution>
+            <execution>
+              <id>test-compile</id>
+              <goals> <goal>test-compile</goal> </goals>
+              <configuration>
+                <sourceDirs>
+                  <sourceDir>${project.basedir}/src/test/kotlin</sourceDir>
+                  <sourceDir>${project.basedir}/src/test/java</sourceDir>
+                </sourceDirs>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+        {{/if}}
       </plugins>
     </pluginManagement>
 
     <plugins>
+    {{#if metadata.kotlin}}
+      <plugin>
+        <artifactId>kotlin-maven-plugin</artifactId>
+        <groupId>org.jetbrains.kotlin</groupId>
+      </plugin>
+      {{/if}}
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>
