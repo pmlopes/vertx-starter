@@ -27,6 +27,12 @@
         "templates": [
           "maven/src/main/resources/main.rb"
         ]
+      },
+      {
+        "id": "kotlin",
+        "templates": [
+          "maven/src/main/kotlin/{package}/MainVerticle.kt"
+        ]
       }
     ],
     "templates": [
