@@ -215,6 +215,98 @@ templates['maven/src/main/resources/main.groovy'] = template({"compiler":[7,">= 
 templates['maven/src/main/resources/main.rb'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "$vertx.create_http_server().request_handler() { |req|\n  req.response().put_header(\"content-type\", \"text/html\").end(\"<html><body><h1>Hello from vert.x!</h1></body></html>\")\n}.listen(8080)\n";
 },"useData":true});
+templates['sbt/project/Build.scala'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "//import org.scalafmt.sbt.ScalaFmtPlugin\nimport sbt.Keys._\nimport sbt._\nimport sbtassembly.AssemblyPlugin.autoImport._\nimport sbtassembly.PathList\n\nobject Build extends AutoPlugin {\n\n  override def trigger = allRequirements\n\n  override def projectSettings =\n    Vector(\n      resolvers ++= Seq {\n        \"Sonatype SNAPSHOTS\" at \"https://oss.sonatype.org/content/repositories/snapshots/\"\n      },\n      scalaVersion := Version.Scala,\n      scalacOptions ++= Vector(\n        \"-unchecked\",\n        \"-deprecation\",\n        \"-language:_\",\n        \"-target:jvm-1.8\",\n        \"-encoding\", \"UTF-8\"\n      ),\n      mainClass := Some(\"io.vertx.core.Launcher\"),\n      unmanagedSourceDirectories in Compile := Vector(scalaSource.in(Compile).value),\n      unmanagedSourceDirectories in Test := Vector(scalaSource.in(Test).value),\n      assemblyMergeStrategy in assembly := {\n        case PathList(\"META-INF\", \"MANIFEST.MF\") => MergeStrategy.discard\n        case PathList(\"META-INF\", xs @ _*) => MergeStrategy.last\n        case PathList(\"META-INF\", \"io.netty.versions.properties\") => MergeStrategy.last\n        case PathList(\"codegen.json\") => MergeStrategy.discard\n        case x =>\n          val oldStrategy = (assemblyMergeStrategy in assembly).value\n          oldStrategy(x)\n      }\n    )\n}\n";
+},"useData":true});
+templates['sbt/project/plugins.sbt'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "addSbtPlugin(\"com.eed3si9n\"      % \"sbt-assembly\"        % \"0.14.3\")\naddSbtPlugin(\"org.scoverage\"     % \"sbt-scoverage\"       % \"1.5.0\")\naddSbtPlugin(\"net.virtual-void\"  % \"sbt-dependency-graph\"% \"0.8.2\")";
+},"useData":true});
+templates['sbt/project/build.properties'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "sbt.version = 0.13.13\n";
+},"useData":true});
+templates['sbt/project/Dependencies.scala'] = template({"1":function(container,depth0,helpers,partials,data) {
+    var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+
+  return "  val "
+    + alias4(((helper = (helper = helpers.artifactId || (depth0 != null ? depth0.artifactId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"artifactId","hash":{},"data":data}) : helper)))
+    + "   = \""
+    + alias4(((helper = (helper = helpers.groupId || (depth0 != null ? depth0.groupId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"groupId","hash":{},"data":data}) : helper)))
+    + "\"  %  \""
+    + alias4(((helper = (helper = helpers.artifactId || (depth0 != null ? depth0.artifactId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"artifactId","hash":{},"data":data}) : helper)))
+    + "\"  %  \""
+    + alias4(((helper = (helper = helpers.version || (depth0 != null ? depth0.version : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"version","hash":{},"data":data}) : helper)))
+    + "\" "
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.provided : depth0),{"name":"if","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "  changing()\n";
+},"2":function(container,depth0,helpers,partials,data) {
+    var helper;
+
+  return " % \""
+    + container.escapeExpression(((helper = (helper = helpers.provided || (depth0 != null ? depth0.provided : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"provided","hash":{},"data":data}) : helper)))
+    + "\" ";
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "import sbt._\n\nobject Version {\n  final val Scala       = \"2.12.0\"\n  final val ScalaTest   = \"3.0.0\"\n}\n\nobject Library {\n"
+    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.selectedDependencies : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "  val scalaTest      = \"org.scalatest\"  %% \"scalatest\"        % Version.ScalaTest              changing()\n}\n";
+},"useData":true});
+templates['sbt/.scalafmt'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "--style defaultWithAlign\n--spacesInImportCurlyBraces true\n--danglingParentheses true\n";
+},"useData":true});
+templates['sbt/.gitignore'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "# sbt\nlib_managed\nproject/project\ntarget\n\n# Worksheets (Eclipse or IntelliJ)\n*.sc\n\n# Eclipse\n.cache*\n.classpath\n.project\n.scala_dependencies\n.settings\n.target\n.worksheet\n\n# IntelliJ\n.idea\n\n# ENSIME\n.ensime\n.ensime_lucene\n.ensime_cache\n\n# Mac\n.DS_Store\n\n# Akka Persistence\njournal\nsnapshots\n\n# Log files\n*.log\n";
+},"useData":true});
+templates['sbt/README.md'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "#Getting vertx-lang-scala\n\nThe current version in master is deployed as SNAPSHOTS in a sonatype repo (which is the default one configured fir this build)\n\n#Work with this project\n\nCreate a runnable fat-jar\n```\nsbt assembly\n```\n\nplay around in sbt\n```\nsbt\n> console\nscala> vertx.deployVerticle(s\"scala:${classOf[DemoVerticle].getName}\")\nscala> vertx.deploymentIDs\n```\n\nFrom here you can freely interact with the Vertx-API inside the sbt-scala-shell.";
+},"useData":true});
+templates['sbt/src/test/resources/.gitkeep'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "";
+},"useData":true});
+templates['sbt/src/test/scala/MainVerticleTest.scala'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "package "
+    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.packageName : stack1), depth0))
+    + "\n\nimport io.vertx.lang.scala.VertxExecutionContext\nimport io.vertx.scala.core.Vertx\nimport org.scalatest._\n\nimport scala.concurrent.{Await, Promise}\nimport scala.concurrent.duration._\nimport scala.util.{Failure, Success}\n\nclass MainVerticleTest extends FunSuite {\n  val vertx = Vertx.vertx\n  implicit val vertxExecutionContext = VertxExecutionContext(\n    vertx.getOrCreateContext()\n  )\n\n  Await.result(\n    vertx\n      .deployVerticleFuture(\"scala:\" + classOf[DemoVerticle].getName)\n      .andThen {\n        case Success(d) => d\n        case Failure(t) => throw new RuntimeException(t)\n      },\n    1000 millis\n  )\n\n  test(\"DemoVerticle should bind to 8666 and answer with 'world'\") {\n    val promise = Promise[String]\n    vertx.createHttpClient()\n        .getNow(8666, \"127.0.0.1\", \"/hello\", r => r.bodyHandler(body => promise.complete(Success(body.toString()))))\n    promise.future.map(res => assert(res == \"hello\"))\n  }\n\n}\n";
+},"useData":true});
+templates['sbt/src/test/scala/TestVerticle.scala'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "package "
+    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.packageName : stack1), depth0))
+    + "\n\nimport io.vertx.lang.scala.ScalaVerticle\n\nimport scala.concurrent.Promise\nimport scala.util.{ Failure, Success }\n\nclass TestVerticle extends ScalaVerticle {\n  override def start(startPromise: Promise[Unit]): Unit = {\n    vertx\n      .eventBus()\n      .consumer[String](\"testAddress\")\n      .handler(_.reply(\"Hello World!\"))\n      .completionFuture()\n      .andThen {\n        case Success(_) => startPromise.success(())\n        case Failure(t) => startPromise.failure(t)\n      }\n  }\n}\n";
+},"useData":true});
+templates['sbt/src/test/scala/TestVerticleTest.scala'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "package "
+    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.packageName : stack1), depth0))
+    + "\n\nimport io.vertx.lang.scala.VertxExecutionContext\nimport io.vertx.scala.core.Vertx\nimport org.scalatest._\n\nimport scala.concurrent.Await\nimport scala.concurrent.duration._\nimport scala.util.{Failure, Success}\n\nclass TestVerticleTest extends AsyncFunSuite {\n  val vertx = Vertx.vertx\n  implicit val vertxExecutionContext = VertxExecutionContext(\n    vertx.getOrCreateContext()\n  )\n\n  Await.result(\n    vertx\n      .deployVerticleFuture(\"scala:\" + classOf[TestVerticle].getName)\n      .andThen {\n        case Success(d) => d\n        case Failure(t) => throw new RuntimeException(t)\n      },\n    10 millis\n  )\n\n  test(\"TestVerticle should reply to a message\") {\n    vertx\n      .eventBus()\n      .sendFuture[String](\"testAddress\", \"msg\")\n      .map(res => assert(res.body() == \"Hello World!\"))\n  }\n\n}\n";
+},"useData":true});
+templates['sbt/src/main/resources/vertx-default-jul-logging.properties'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "#\n# Copyright 2014 Red Hat, Inc.\n#\n#  All rights reserved. This program and the accompanying materials\n#  are made available under the terms of the Eclipse Public License v1.0\n#  and Apache License v2.0 which accompanies this distribution.\n#\n#  The Eclipse Public License is available at\n#  http://www.eclipse.org/legal/epl-v10.html\n#\n#  The Apache License v2.0 is available at\n#  http://www.opensource.org/licenses/apache2.0.php\n#\n#  You may elect to redistribute this code under either of these licenses.\n#\nhandlers=java.util.logging.ConsoleHandler,java.util.logging.FileHandler\njava.util.logging.SimpleFormatter.format=%5$s %6$s\\n\njava.util.logging.ConsoleHandler.formatter=java.util.logging.SimpleFormatter\njava.util.logging.ConsoleHandler.level=FINEST\njava.util.logging.FileHandler.level=INFO\njava.util.logging.FileHandler.formatter=io.vertx.core.logging.impl.VertxLoggerFormatter\n\n# Put the log in the system temporary directory\njava.util.logging.FileHandler.pattern=%t/vertx.log\n\n.level=INFO\nio.vertx.level=INFO\ncom.hazelcast.level=INFO\nio.netty.util.internal.PlatformDependent.level=SEVERE";
+},"useData":true});
+templates['sbt/src/main/scala/MainVerticle.scala'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "package "
+    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.packageName : stack1), depth0))
+    + "\n\nimport io.vertx.lang.scala.ScalaVerticle\nimport io.vertx.scala.ext.web.Router\nimport io.vertx.scala.ext.web.handler.StaticHandler\n\nimport scala.concurrent.Promise\nimport scala.util.{Failure, Success}\n\nclass MainVerticle extends ScalaVerticle {\n\n\n  override def start(startPromise: Promise[Unit]): Unit = {\n\n    val router = Router.router(vertx)\n    router.route(\"/static/*\").handler(StaticHandler.create())\n    router.get(\"/hello\").handler(_.response().end(\"world\"))\n\n    vertx\n      .createHttpServer()\n      .requestHandler(router.accept _)\n      .listenFuture(8666)\n      .andThen{\n        case Success(_) => startPromise.success()\n        case Failure(t) => startPromise.failure(t)\n      }\n\n  }\n}\n";
+},"useData":true});
+templates['sbt/build.sbt'] = template({"1":function(container,depth0,helpers,partials,data) {
+    var helper;
+
+  return "  Library."
+    + container.escapeExpression(((helper = (helper = helpers.artifactId || (depth0 != null ? depth0.artifactId : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"artifactId","hash":{},"data":data}) : helper)))
+    + ",\n";
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "import sbt.Package._\n\nlazy val `vertx-scala-sbt` = project\n  .in(file(\".\"))\n\nversion := \"0.1-SNAPSHOT\"\nname := \"vertx-scala-sbt\"\norganization := \"io.vertx\"\nscalaVersion := \"2.12.0\"\n\nlibraryDependencies ++= Vector (\n"
+    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : {},(depth0 != null ? depth0.selectedDependencies : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "  Library.scalaTest       % \"test\"\n)\n\npackageOptions += ManifestAttributes(\n  (\"Main-Verticle\", \"scala:io.vertx.scala.sbt.DemoVerticle\"))\n\ninitialCommands := \"\"\"|import io.vertx.lang.scala._\n                     |import io.vertx.scala.core._\n                     |import io.vertx.scala.sbt._\n                     |import scala.concurrent.Future\n                     |import scala.concurrent.Promise\n                     |import scala.util.Success\n                     |import scala.util.Failure\n                     |val vertx = Vertx.vertx\n                     |implicit val executionContext = io.vertx.lang.scala.VertxExecutionContext(vertx.getOrCreateContext)\n                     |\"\"\".stripMargin\n";
+},"useData":true});
 templates['web+mongo/src/main/java/MainVerticle.java'] = template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=container.lambda, alias2=container.escapeExpression;
 
