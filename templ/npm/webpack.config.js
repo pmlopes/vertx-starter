@@ -109,17 +109,68 @@ if ('install' === process.env.npm_lifecycle_event) {
   });
 }
 
-module.exports = {
+// exclude vert.x modules
+var vertxModules = [
+  function (context, request, callback) {
+    if (/^vertx-js\//.test(request)) {
+      return callback(null, 'commonjs ' + request);
+    }
+    callback();
+  }
+];
 
+for (dep in javaDependencies) {
+  if (javaDependencies.hasOwnProperty(dep)) {
+    var mavenDep = dep.split(':');
+    // exclude the meta-package
+    if (mavenDep[1] !== 'vertx-lang-js') {
+      vertxModules.push(function (context, request, callback) {
+        if (new RegExp('^' + mavenDep[1] + '-js/').test(request)) {
+          return callback(null, 'commonjs ' + request);
+        }
+        callback();
+      });
+    }
+  }
+}
+
+// here be the webpack configuations...
+module.exports = [];
+
+module.exports.push({
   entry: path.resolve(__dirname, 'src/main.js'),
 
   output: {
     filename: _package.mainVerticle
   },
 
+  externals: vertxModules,
+
   module: {
     loaders: [
-      {test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader?presets[]=es2015'}
+      { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' }
     ]
-  }
-};
+  },
+
+  plugins: []
+});
+
+// // if you're doing both server and web then enable the
+// // following config for building the web side
+//
+// module.exports.push({
+//   entry: path.resolve(__dirname, 'src/client/index.js'),
+//   devtool: 'source-map',
+//
+//   output: {
+//     filename: 'webroot/bundle.js'
+//   },
+//
+//   module: {
+//     loaders: [
+//       { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' }
+//     ]
+//   },
+//
+//   plugins: []
+// });
