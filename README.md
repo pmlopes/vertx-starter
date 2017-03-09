@@ -48,6 +48,7 @@ Components have the following properties:
 * `version`
 * `stack` is the component part of the official stack
 * `description`
+* `core` is a special marker for languages like scala. If true it means that there is no prefixed artifacts
 
 ### presets.json
 
@@ -90,3 +91,7 @@ And then compile the templates:
 ```
 npm run build
 ```
+
+## Release
+
+When releasing if the json files have been touched, the version should be bumped in the index.html, to invalidate caches.
