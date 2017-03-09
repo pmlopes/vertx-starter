@@ -110,6 +110,38 @@
   },
 
   {
+    "id": "SBT",
+    "non-core-suffix": "-scala_2.12",
+    "file": "build.sbt",
+    "fields" :[
+      { "key": "name", "label": "Project Name", "required": true },
+      { "key": "description", "label": "Project Description" },
+      { "key": "groupId", "label": "Project Group", "prefill": "com.example" },
+      { "key": "version", "label": "Project Version", "prefill": "0.0.1-SNAPSHOT" }
+    ],
+    "languages": [
+      {
+        "id": "scala",
+        "templates": [
+          "sbt/src/main/scala/{package}/MainVerticle.scala"
+        ]
+      }
+    ],
+    "templates": [
+      "sbt/.gitignore",
+      "sbt/.scalafmt",
+      "sbt/build.sbt",
+      "sbt/project/build.properties",
+      "sbt/project/Build.scala",
+      "sbt/project/plugins.sbt"
+    ],
+    "defaults": [
+      "io.vertx:vertx-core",
+      "io.vertx:vertx-lang-scala_2.12"
+    ]
+  },
+
+  {
     "id": "stack",
     "file": "vertx-stack.json",
     "fields": [

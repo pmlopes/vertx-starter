@@ -4,7 +4,8 @@
     "artifactId": "vertx-core",
     "version": "3.4.0",
     "stack": true,
-    "description": "Vert.x is a tool-kit for building reactive applications on the JVM."
+    "description": "Vert.x is a tool-kit for building reactive applications on the JVM.",
+    "core": true
   },
   {
     "groupId": "io.netty",
@@ -494,5 +495,13 @@
     "version": "3.4.0",
     "stack": true,
     "description": "Vert.x MQTT server."
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-lang-scala_2.12",
+    "version": "3.4.0",
+    "stack": true,
+    "description": "Vert.x Scala support.",
+    "core": true
   }
 ]
