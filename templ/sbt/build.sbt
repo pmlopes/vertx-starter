@@ -1,19 +1,20 @@
 import sbt.Package._
 import sbt._
 
-enablePlugins(DockerPlugin)
-
 scalaVersion := "2.12.1"
 
-libraryDependencies ++= Vector (
-  Library.vertxLangScala,
-  Library.vertxCodegen,
-  Library.vertxWeb,
-  Library.scalaTest       % "test"
+libraryDependencies ++= Seq(
+  {{#each selectedDependencies}}
+  {{#if core}}
+  "{{groupId}}" % "{{artifactId}}" % "{{version}}"{{#unless @last}},{{/unless}}
+  {{else}}
+  "{{groupId}}" % "{{artifactId}}{{../metadata.artifactSuffix}}" % "{{version}}"{{#unless @last}},{{/unless}}
+  {{/if}}
+  {{/each}}
 )
 
 packageOptions += ManifestAttributes(
-  ("Main-Verticle", "scala:io.vertx.scala.sbt.HttpVerticle"))
+  ("Main-Verticle", "scala:{{metadata.packageName}}.MainVerticle"))
 
 assemblyMergeStrategy in assembly := {
   case PathList("META-INF", "MANIFEST.MF") => MergeStrategy.discard

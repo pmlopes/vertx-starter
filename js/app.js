@@ -74,9 +74,8 @@ function compileProject(project, callback) {
   project.metadata = {};
 
   // make a boolean value for the languageId
-  project.metadata[project.language.id] = !!project.metadata;
-
-  console.log(project.metadata);
+  project.metadata[project.language.id] = true;
+  project.metadata.artifactSuffix = project.buildtool['non-core-suffix'] || '';
 
   // convert the fields to a form structure
   project.buildtool.fields.forEach(function (el) {
@@ -84,7 +83,7 @@ function compileProject(project, callback) {
   });
 
   if (project.metadata.groupId) {
-    project.metadata.packageName = project.metadata.groupId + '.' + (project.metadata.artifactId || project.metadata.name.replace(/\s*/g, '_'))
+    project.metadata.packageName = project.metadata.groupId + '.' + (project.metadata.artifactId || project.metadata.name.replace(/[ -]/g, '_'))
   }
 
   // create a new zip file

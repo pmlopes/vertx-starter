@@ -7,10 +7,7 @@ object Build extends AutoPlugin {
 
   override def projectSettings =
     Vector(
-      resolvers ++= Vector(
-        "Sonatype SNAPSHOTS" at "https://oss.sonatype.org/content/repositories/snapshots/"
-      ),
-      scalaVersion := Version.Scala,
+      scalaVersion := "2.12.1",
       scalacOptions ++= Vector(
         "-unchecked",
         "-deprecation",
