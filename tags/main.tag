@@ -68,9 +68,9 @@
         </virtual>
       </div>
 
-      <div class="row">
+      <div class="row" id="interaction">
         <div class="col-4">
-          <button name="submit" type="submit" onclick={toggleGenerate}>Generate</button>
+          <button name="submit" type="submit">Generate</button>
         </div>
         <div class="col-4">
           <div if={generating} class="spinner">
@@ -82,7 +82,7 @@
           </div>
         </div>
         <div class="col-4">
-          <a onclick={clean} href="#" show={downloading} ref="download" download="{name}.zip" class="btn pull-right">Download</a>
+          <a onclick={clean} href="#" show={downloading} ref="download" download="{name}.zip" class="btn pull-right" style="background: #782b90">Download</a>
         </div>
       </div>
     </form>
@@ -152,6 +152,17 @@
       });
     }
 
+    //Finds y value of given object
+    function findPos(obj) {
+      var curtop = 0;
+      if (obj.offsetParent) {
+        do {
+          curtop += obj.offsetTop;
+        } while (obj = obj.offsetParent);
+        return [curtop];
+      }
+    }
+
     changeLanguage(e) {
       e.preventDefault();
       var oldLang = self.language;
@@ -210,6 +221,9 @@
 
     generate(e) {
       e.preventDefault();
+
+      // animate to avoid the perception of slowness
+      window.scroll(0, findPos(document.getElementById("interaction")));
 
       var submit = e.target.submit;
       var a = self.refs.download;

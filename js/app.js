@@ -4,7 +4,9 @@ function loadJSON(file, callback) {
 
     if (json) {
       json = JSON.parse(json);
-      if (json.ttl && json.ttl < Date.now()) {
+      if (json.version !== window.starterVersion) {
+        localStorage.removeItem(file);
+      } else if (json.ttl && json.ttl < Date.now()) {
         localStorage.removeItem(file);
       } else {
         callback(json.text);
@@ -19,6 +21,7 @@ function loadJSON(file, callback) {
   xobj.onreadystatechange = function () {
     if (xobj.readyState == 4 && xobj.status == "200") {
       var json = {
+        version: window.starterVersion,
         // only cache for 30min
         ttl: 1800000 + Date.now(),
         text: xobj.responseText
