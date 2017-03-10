@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "scripts": {
     "build": "./node_modules/.bin/riot --compact tags tags.js && ./node_modules/.bin/handlebars -r templ --knownOnly `find templ` > templates.js",
-    "start": "python3 -m http.server 8000"
+    "start": "python3 -m http.server 8000",
+    "sync-ga": "wget -N https://www.google-analytics.com/analytics.js -O js/analytics.js"
   },
   "devDependencies": {
     "handlebars": "4.0.6",
