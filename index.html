@@ -55,28 +55,33 @@
 
   <script type="text/javascript">
     // sane way to invalidate json caches
-    window.starterVersion = '3.4.0-1';
+    window.starterVersion = '3.4.1-1';
 
     var metadata = {};
 
-    loadJSON('buildtools.json', function(response) {
+    loadJSON('buildtools.json', function(err, response) {
+      if (err) {
+        return alert('Error: ' + err);
+      }
       metadata.buildtools = JSON.parse(response);
       riot.mount('app-navi', metadata);
+
+      loadJSON('components.json', function(err, response) {
+        if (err) {
+          return alert('Error: ' + err);
+        }
+        metadata.components = JSON.parse(response);
+
+        loadJSON('presets.json', function(err, response) {
+          if (err) {
+            return alert('Error: ' + err);
+          }
+          metadata.presets = JSON.parse(response);
+          riot.mount('*', metadata);
+        });
+      });
     });
 
-    loadJSON('components.json', function(response) {
-      metadata.components = JSON.parse(response);
-      if (Object.keys(metadata).length === 3) {
-        riot.mount('*', metadata);
-      }
-    });
-
-    loadJSON('presets.json', function(response) {
-      metadata.presets = JSON.parse(response);
-      if (Object.keys(metadata).length === 3) {
-        riot.mount('*', metadata);
-      }
-    });
     route.start(true);
   </script>
 </body>

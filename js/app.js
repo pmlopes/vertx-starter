@@ -9,7 +9,7 @@ function loadJSON(file, callback) {
       } else if (json.ttl && json.ttl < Date.now()) {
         localStorage.removeItem(file);
       } else {
-        callback(json.text);
+        callback(null, json.text);
         return;
       }
     }
@@ -19,7 +19,10 @@ function loadJSON(file, callback) {
   xobj.overrideMimeType("application/json");
   xobj.open('GET', file, true);
   xobj.onreadystatechange = function () {
-    if (xobj.readyState == 4 && xobj.status == "200") {
+    if (xobj.readyState == 4) {
+      if (xobj.status != "200" && xobj.status != "304") {
+        return callback("Failed to load the metadata!");
+      }
       var json = {
         version: window.starterVersion,
         // only cache for 30min
@@ -31,7 +34,7 @@ function loadJSON(file, callback) {
         localStorage.setItem(file, JSON.stringify(json));
       }
 
-      callback(json.text);
+      callback(null, json.text);
     }
   };
   xobj.send(null);
