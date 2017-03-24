@@ -77,6 +77,25 @@ function compileProject(project, callback) {
     return el.checked;
   });
 
+  project.transformedSelectedDependencies = project.selectedDependencies.map(function (el) {
+    if (el.groupId == 'io.vertx' || el.groupId == 'junit') {
+      var clone = JSON.parse(JSON.stringify(el));
+      delete clone['version'];
+      return clone;
+    }
+    return el;
+  });
+
+  project.coreVersion = project.dependencies.filter(function (el) {
+    return el.groupId == 'io.vertx' && el.artifactId == 'vertx-core';
+  }).map(function (el) {
+    return el.version;
+  });
+
+  project.hasUnit = project.selectedDependencies.filter(function (el) {
+    return el.groupId == 'io.vertx' && el.artifactId == 'vertx-unit';
+  }).length > 0;
+
   project.metadata = {};
 
   // make a boolean value for the languageId
