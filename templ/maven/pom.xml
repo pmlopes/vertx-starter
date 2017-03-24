@@ -15,17 +15,61 @@
   {{/if}}
 
   <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+
     <main.verticle>{{metadata.packageName}}.MainVerticle</main.verticle>
   </properties>
 
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>io.vertx</groupId>
+        <artifactId>vertx-dependencies</artifactId>
+        <version>{{coreVersion}}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      {{#if hasUnit}}
+
+      <dependency>
+        <groupId>io.vertx</groupId>
+        <artifactId>vertx-unit</artifactId>
+        <version>{{coreVersion}}</version>
+        <scope>test</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.12</version>
+        <scope>test</scope>
+      </dependency>
+      {{/if}}
+    </dependencies>
+  </dependencyManagement>
+
   <dependencies>
-    {{#each selectedDependencies}}
+    {{#each transformedSelectedDependencies}}
     <dependency>
       <groupId>{{groupId}}</groupId>
       <artifactId>{{artifactId}}</artifactId>
+      {{#if version}}
       <version>{{version}}</version>
+      {{/if}}
+      {{#if scope}}
+      <scope>{{scope}}</scope>
+      {{/if}}
     </dependency>
     {{/each}}
+    {{#if hasUnit}}
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+    </dependency>
+    {{/if}}
   </dependencies>
 
   <build>
@@ -34,10 +78,6 @@
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.1</version>
-          <configuration>
-            <source>1.8</source>
-            <target>1.8</target>
-          </configuration>
         </plugin>
         {{#if metadata.kotlin}}
         <plugin>
