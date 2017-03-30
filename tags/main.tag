@@ -82,7 +82,7 @@
           </div>
         </div>
         <div class="col-4">
-          <a onclick={clean} href="#" show={downloading} ref="download" download="{name}.zip" class="btn pull-right" style="background: #782b90">Download</a>
+          <a id="download-btn" onclick={clean} href="#" show={downloading} ref="download" download="{name}.zip" class="btn pull-right" style="background: #782b90">Download</a>
         </div>
       </div>
     </form>
@@ -115,6 +115,10 @@
         dependencies: (q.dependencies || '').split(','),
         language: q.language
       };
+
+      // state change, disable old download
+      self.downloading = false;
+      // carry on with the task...
 
       if (tool) {
         if (tool.languages) {
@@ -164,6 +168,9 @@
     }
 
     changeLanguage(e) {
+      // state change, disable old download
+      self.downloading = false;
+      // carry on with the task...
       e.preventDefault();
       var oldLang = self.language;
       var newLang = self.tool.languages.filter(function (el) {
@@ -190,6 +197,9 @@
     }
 
     changePreset(e) {
+      // state change, disable old download
+      self.downloading = false;
+      // carry on with the task...
       e.preventDefault();
       var oldPreset = self.preset;
       var newPreset = self.presets.filter(function (el) {
@@ -215,6 +225,9 @@
     }
 
     toggleDependency(e) {
+      // state change, disable old download
+      self.downloading = false;
+      // carry on with the task...
       self.components[e.target.value].checked = !self.components[e.target.value].checked;
       self.update();
     }
@@ -258,7 +271,12 @@
             self.generating = false;
             self.downloading = true;
             self.update();
-
+            // at this moment the button should be visible
+            try {
+              document.getElementById('download-btn').focus();
+            } catch (e) {
+              // nevermind...
+            }
           }, function (err) {
             ga('send', 'exception', {
               'exDescription': err.message,

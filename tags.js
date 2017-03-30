@@ -1,7 +1,7 @@
 riot.tag2('home', '<div class="container"><h1 class="text-center">Vert.x Starter</h1><h2 class="text-center">Quickly bootstrap your vert.x project</h2><div class="row"><h3>Get Started</h3><div><strong>Prepare your environment</strong><p>No mater what language you prefer to use you must have a valid <code>JDK8</code> installed in your environment.</p></div><div><strong>Choose your build tool</strong><ul><li><img src="img/maven.ico" with="16" height="16"> &nbsp;<a href="#maven">maven</a></li><li><img src="img/gradle.ico" with="16" height="16"> &nbsp;<a href="#gradle">gradle</a></li><li><img src="img/npmjs.ico" with="16" height="16"> &nbsp;<a href="#npm">npm</a></li></ul><p>It is expected that the build tool is already present in your environment. A special case should be handled with <code>npm</code> which will require that <code>maven</code> is also present in the environment.</p><p>To choose the tool, use the hamburger menu.</p></div></div><div class="row"><h3>Here is how...</h3><div class="center"><iframe width="854" height="480" src="https://www.youtube.com/embed/-gcyr-LV664" frameborder="0"></iframe></div></div><div class="row"><h3>Choose your dependencies</h3><div><strong>Defaults</strong><p>When selecting a programming language the default language specific module will be selected for you. This is optional and you can unselect at any moment.</p></div><div><strong>Good to know</strong><p>If you\'re planning to use <code>vert.x</code> to build distributed applications with the event bus you must select a cluster manager such as <code>hazelcast</code>, <code>ignite</code>, <code>zookeeper</code>.</p></div></div><div class="row"><h3>Starter applications</h3><div><strong>Don\'t start from scratch</strong><p>Some tools have already some template applications you can use. These templates will select a set of dependencies for you as well provide a base foundation for your application.</p></div></div><div class="row"><h3>Improve this tool</h3><div><strong>Want to help?</strong><p>This tool is open source and you can see it <a href="https://github.com/pmlopes/vertx-starter">here</a>. You can help adding more starters or more tools. See the documentation on how to do it. No code required!</p></div></div><div class="row"><div class="pull-right"><iframe src="https://ghbtns.com/github-btn.html?user=pmlopes&repo=vertx-starter&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe><iframe src="https://ghbtns.com/github-btn.html?user=pmlopes&repo=vertx-starter&type=fork&count=true&size=large" frameborder="0" scrolling="0" width="158px" height="30px"></iframe></div></div></div>', '', '', function(opts) {
 });
 
-riot.tag2('main', '<home if="{!tool}"></home><div if="{tool}" class="container"><h1>{tool.id}: {tool.file}</h1><form onsubmit="{generate}"><div each="{f, i in tool.fields}" class="row"><virtual if="{i % 2===0}"><div class="col-6"><input name="{tool.fields[i].key}" type="text" placeholder="{tool.fields[i].label + (tool.fields[i].prefill ? \' e.g.: \' + tool.fields[i].prefill : \'\')}" required="{tool.fields[i].required}"></div><div if="{tool.fields[i+1]}" class="col-6"><input name="{tool.fields[i+1].key}" type="text" placeholder="{tool.fields[i+1].label + (tool.fields[i+1].prefill ? \' e.g.: \' + tool.fields[i+1].prefill : \'\')}" required="{tool.fields[i+1].required}"></div></virtual></div><div if="{tool.languages || (presets && presets.length)}" class="row"><div if="{tool.languages}" class="col-6"><select id="language" onchange="{changeLanguage}"><option each="{tool.languages}" riot-value="{id}">{id}</option></select></div><div if="{presets && presets.length}" class="col-6"><select id="preset" onchange="{changePreset}"><option value="">Empty Project</option><option each="{presets}" riot-value="{id}">{id}</option></select></div></div><div class="row"><div class="col-6"><h1>Dependencies</h1></div><div class="col-6"><input type="text" class="pull-right" placeholder="Search dependency..." onkeyup="{search}"></div></div><div each="{c, i in idx}" class="row"><virtual if="{i % 2===0}"><div class="col-6 {components[idx[i]].checked?\'dependency\':\'\'}"><input name="dependencies" type="checkbox" riot-value="{idx[i]}" checked="{components[idx[i]].checked}" onclick="{toggleDependency}"><div><span if="{components[idx[i]].stack}" class="pull-right"><img src="img/stack.svg" width="16px"></span><strong>{components[idx[i]].artifactId}</strong><hr><p if="{components[idx[i]].description}">{components[idx[i]].description}</p></div><br></div><div if="{components[idx[i+1]]}" class="col-6 {components[idx[i+1]].checked?\'dependency\':\'\'}"><input name="dependencies" type="checkbox" riot-value="{idx[i+1]}" checked="{components[idx[i+1]].checked}" onclick="{toggleDependency}"><div><span if="{components[idx[i+1]].stack}" class="pull-right"><img src="img/stack.svg" width="16px"></span><strong>{components[idx[i+1]].artifactId}</strong><hr><p if="{components[idx[i+1]].description}">{components[idx[i+1]].description}</p></div><br></div></virtual></div><div class="row" id="interaction"><div class="col-4"><button name="submit" type="submit">Generate</button></div><div class="col-4"><div if="{generating}" class="spinner"><div class="rect1"></div><div class="rect2"></div><div class="rect3"></div><div class="rect4"></div><div class="rect5"></div></div></div><div class="col-4"><a onclick="{clean}" href="#" show="{downloading}" ref="download" download="{name}.zip" class="btn pull-right" style="background: #782b90">Download</a></div></div></form></div>', '', '', function(opts) {
+riot.tag2('main', '<home if="{!tool}"></home><div if="{tool}" class="container"><h1>{tool.id}: {tool.file}</h1><form onsubmit="{generate}"><div each="{f, i in tool.fields}" class="row"><virtual if="{i % 2===0}"><div class="col-6"><input name="{tool.fields[i].key}" type="text" placeholder="{tool.fields[i].label + (tool.fields[i].prefill ? \' e.g.: \' + tool.fields[i].prefill : \'\')}" required="{tool.fields[i].required}"></div><div if="{tool.fields[i+1]}" class="col-6"><input name="{tool.fields[i+1].key}" type="text" placeholder="{tool.fields[i+1].label + (tool.fields[i+1].prefill ? \' e.g.: \' + tool.fields[i+1].prefill : \'\')}" required="{tool.fields[i+1].required}"></div></virtual></div><div if="{tool.languages || (presets && presets.length)}" class="row"><div if="{tool.languages}" class="col-6"><select id="language" onchange="{changeLanguage}"><option each="{tool.languages}" riot-value="{id}">{id}</option></select></div><div if="{presets && presets.length}" class="col-6"><select id="preset" onchange="{changePreset}"><option value="">Empty Project</option><option each="{presets}" riot-value="{id}">{id}</option></select></div></div><div class="row"><div class="col-6"><h1>Dependencies</h1></div><div class="col-6"><input type="text" class="pull-right" placeholder="Search dependency..." onkeyup="{search}"></div></div><div each="{c, i in idx}" class="row"><virtual if="{i % 2===0}"><div class="col-6 {components[idx[i]].checked?\'dependency\':\'\'}"><input name="dependencies" type="checkbox" riot-value="{idx[i]}" checked="{components[idx[i]].checked}" onclick="{toggleDependency}"><div><span if="{components[idx[i]].stack}" class="pull-right"><img src="img/stack.svg" width="16px"></span><strong>{components[idx[i]].artifactId}</strong><hr><p if="{components[idx[i]].description}">{components[idx[i]].description}</p></div><br></div><div if="{components[idx[i+1]]}" class="col-6 {components[idx[i+1]].checked?\'dependency\':\'\'}"><input name="dependencies" type="checkbox" riot-value="{idx[i+1]}" checked="{components[idx[i+1]].checked}" onclick="{toggleDependency}"><div><span if="{components[idx[i+1]].stack}" class="pull-right"><img src="img/stack.svg" width="16px"></span><strong>{components[idx[i+1]].artifactId}</strong><hr><p if="{components[idx[i+1]].description}">{components[idx[i+1]].description}</p></div><br></div></virtual></div><div class="row" id="interaction"><div class="col-4"><button name="submit" type="submit">Generate</button></div><div class="col-4"><div if="{generating}" class="spinner"><div class="rect1"></div><div class="rect2"></div><div class="rect3"></div><div class="rect4"></div><div class="rect5"></div></div></div><div class="col-4"><a id="download-btn" onclick="{clean}" href="#" show="{downloading}" ref="download" download="{name}.zip" class="btn pull-right" style="background: #782b90">Download</a></div></div></form></div>', '', '', function(opts) {
     var self = this;
 
     self.components = opts.components;
@@ -25,6 +25,8 @@ riot.tag2('main', '<home if="{!tool}"></home><div if="{tool}" class="container">
         dependencies: (q.dependencies || '').split(','),
         language: q.language
       };
+
+      self.downloading = false;
 
       if (tool) {
         if (tool.languages) {
@@ -73,6 +75,9 @@ riot.tag2('main', '<home if="{!tool}"></home><div if="{tool}" class="container">
     }
 
     this.changeLanguage = function(e) {
+
+      self.downloading = false;
+
       e.preventDefault();
       var oldLang = self.language;
       var newLang = self.tool.languages.filter(function (el) {
@@ -98,6 +103,9 @@ riot.tag2('main', '<home if="{!tool}"></home><div if="{tool}" class="container">
     }.bind(this)
 
     this.changePreset = function(e) {
+
+      self.downloading = false;
+
       e.preventDefault();
       var oldPreset = self.preset;
       var newPreset = self.presets.filter(function (el) {
@@ -122,6 +130,9 @@ riot.tag2('main', '<home if="{!tool}"></home><div if="{tool}" class="container">
     }.bind(this)
 
     this.toggleDependency = function(e) {
+
+      self.downloading = false;
+
       self.components[e.target.value].checked = !self.components[e.target.value].checked;
       self.update();
     }.bind(this)
@@ -164,6 +175,11 @@ riot.tag2('main', '<home if="{!tool}"></home><div if="{tool}" class="container">
             self.downloading = true;
             self.update();
 
+            try {
+              document.getElementById('download-btn').focus();
+            } catch (e) {
+
+            }
           }, function (err) {
             ga('send', 'exception', {
               'exDescription': err.message,
