@@ -102,6 +102,13 @@
         "templates": [
           "npm/src/main.js"
         ]
+      },
+      {
+        "id": "typescript",
+        "templates": [
+          "npm/tsconfig.json",
+          "npm/src/main.ts"
+        ]
       }
     ],
     "templates": [
