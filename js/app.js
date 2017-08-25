@@ -89,7 +89,7 @@ function compileProject(project, callback) {
   });
 
   if (project.metadata.groupId) {
-    project.metadata.packageName = project.metadata.groupId + '.' + (project.metadata.artifactId || project.metadata.name.replace(/[ -]/g, '_'))
+    project.metadata.packageName = project.metadata.groupId + '.' + (project.metadata.artifactId || project.metadata.name.replace(/[ -]/g, '_'));
   }
 
   // create a new zip file
