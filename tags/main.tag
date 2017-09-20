@@ -67,8 +67,10 @@
       </div>
 
       <div class="row" id="interaction">
-        <div class="col-4">
+        <div class="col-8">
           <button name="submit" type="submit">Generate</button>
+          &nbsp;
+          <a id="download-btn" onclick={clean} href="#" show={downloading} ref="download" download="{name}.zip" style="padding: 1.1rem 3.5rem; margin: 1rem 0; background: #782b90; color: #f5f5f5; border-radius: 2px; border: none; font-size: 1.3rem; transition: all .2s ease">Download</a>
         </div>
         <div class="col-4">
           <div if={generating} class="spinner">
@@ -79,15 +81,12 @@
             <div class="rect5"></div>
           </div>
         </div>
-        <div class="col-4">
-          <a id="download-btn" onclick={clean} href="#" show={downloading} ref="download" download="{name}.zip" class="btn pull-right" style="background: #782b90">Download</a>
-        </div>
       </div>
     </form>
 
     <div class="row">
       <div class="center">
-        powered with &lt;3 by <a href="https://github.com/pmlopes/vertx-starter/tree/gh-pages">github.com</a>
+        <span>powered with &lt;3 by <a href="https://github.com/pmlopes/vertx-starter/tree/gh-pages">github.com</a></span>
       </div>
     </div>
   </div>
