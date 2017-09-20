@@ -512,5 +512,11 @@
     "stack": true,
     "description": "Vert.x Scala support.",
     "core": true
+  },
+  {
+    "groupId": "xyz.jetdrone",
+    "artifactId": "hot-reload",
+    "version": "0.0.3",
+    "description": "Hot Reload Development Handler"
   }
 ]

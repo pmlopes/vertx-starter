@@ -170,10 +170,10 @@ function compile(project, file, exec, zip) {
   fn = Handlebars.templates[hbfile];
   // add to zip
   if (exec) {
-    zip.file(zfile, fn(project), {
+    zip.file(project.metadata.name.replace(/[ -]/g, '_') + '/' + zfile, fn(project), {
       unixPermissions: '755'
     });
   } else {
-    zip.file(zfile, fn(project));
+    zip.file(project.metadata.name.replace(/[ -]/g, '_') + '/' + zfile, fn(project));
   }
 }

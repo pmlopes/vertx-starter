@@ -35,5 +35,45 @@
       "maven+service-proxy/src/main/java/{package}/package-info.java",
       "maven+service-proxy/src/main/java/{package}/impl/ServiceImpl.java"
     ]
+  },
+  {
+    "id": "webapp + angular4",
+    "description": "A simple webapp with a Angular4 frontend",
+    "dependencies": [
+      "io.vertx:vertx-core",
+      "io.vertx:vertx-web",
+      "io.vertx:vertx-web-templ-handlebars",
+      "xyz.jetdrone:hot-reload"
+    ],
+    "buildtool": "maven",
+    "language": "java",
+    "templates": [
+      "web+angular4/src/main/java/{package}/MainVerticle.java",
+      "web+angular4/src/main/java/{package}/api/WeatherForecastAPI.java",
+      "web+angular4/src/main/resources/templates/index.hbs",
+      "web+angular4/src/main/ts/app/app.module.server.ts",
+      "web+angular4/src/main/ts/app/app.module.browser.ts",
+      "web+angular4/src/main/ts/app/app.module.shared.ts",
+      "web+angular4/src/main/ts/app/components/app/app.component.ts",
+      "web+angular4/src/main/ts/app/components/app/app.component.css",
+      "web+angular4/src/main/ts/app/components/app/app.component.html",
+      "web+angular4/src/main/ts/app/components/counter/counter.component.spec.ts",
+      "web+angular4/src/main/ts/app/components/counter/counter.component.ts",
+      "web+angular4/src/main/ts/app/components/counter/counter.component.html",
+      "web+angular4/src/main/ts/app/components/navmenu/navmenu.component.css",
+      "web+angular4/src/main/ts/app/components/navmenu/navmenu.component.ts",
+      "web+angular4/src/main/ts/app/components/navmenu/navmenu.component.html",
+      "web+angular4/src/main/ts/app/components/fetchdata/fetchdata.component.ts",
+      "web+angular4/src/main/ts/app/components/fetchdata/fetchdata.component.html",
+      "web+angular4/src/main/ts/app/components/home/home.component.ts",
+      "web+angular4/src/main/ts/app/components/home/home.component.html",
+      "web+angular4/src/main/ts/boot.browser.ts",
+      "web+angular4/package.json",
+      "web+angular4/tsconfig.json",
+      "web+angular4/webpack.config.js",
+      "web+angular4/webpack.config.vendor.js",
+      "web+angular4/src/test/ts/boot-tests.ts",
+      "web+angular4/src/test/ts/karma.conf.js"
+    ]
   }
 ]
