@@ -75,5 +75,65 @@
       "web+angular4/src/test/ts/boot-tests.ts",
       "web+angular4/src/test/ts/karma.conf.js"
     ]
+  },
+  {
+    "id": "webapp + react.js",
+    "description": "A simple webapp with a react.js frontend",
+    "dependencies": [
+      "io.vertx:vertx-core",
+      "io.vertx:vertx-web",
+      "io.vertx:vertx-web-templ-handlebars",
+      "xyz.jetdrone:hot-reload"
+    ],
+    "buildtool": "maven",
+    "language": "java",
+    "templates": [
+      "web+react/src/main/java/{package}/MainVerticle.java",
+      "web+react/src/main/java/{package}/api/WeatherForecastAPI.java",
+      "web+react/src/main/resources/templates/index.hbs",
+      "web+react/.babelrc",
+      "web+react/.editorconfig",
+      "web+react/src/main/js/routes.jsx",
+      "web+react/src/main/js/css/site.css",
+      "web+react/src/main/js/components/Layout.jsx",
+      "web+react/src/main/js/components/NavMenu.jsx",
+      "web+react/src/main/js/components/Home.jsx",
+      "web+react/src/main/js/components/Counter.jsx",
+      "web+react/src/main/js/components/FetchData.jsx",
+      "web+react/src/main/js/boot.jsx",
+      "web+react/package.json",
+      "web+react/webpack.config.vendor.js",
+      "web+react/webpack.config.js"
+    ]
+  },
+  {
+    "id": "webapp + react.js in TypeScript",
+    "description": "A simple webapp with a react.js frontend using TypeScript",
+    "dependencies": [
+      "io.vertx:vertx-core",
+      "io.vertx:vertx-web",
+      "io.vertx:vertx-web-templ-handlebars",
+      "xyz.jetdrone:hot-reload"
+    ],
+    "buildtool": "maven",
+    "language": "java",
+    "templates": [
+      "web+react+typescript/src/main/java/{package}/MainVerticle.java",
+      "web+react+typescript/src/main/java/{package}/api/WeatherForecastAPI.java",
+      "web+react+typescript/src/main/resources/templates/index.hbs",
+      "web+react+typescript/tsconfig.json",
+      "web+react+typescript/.editorconfig",
+      "web+react+typescript/src/main/ts/boot.tsx",
+      "web+react+typescript/src/main/ts/css/site.css",
+      "web+react+typescript/src/main/ts/components/Counter.tsx",
+      "web+react+typescript/src/main/ts/components/Layout.tsx",
+      "web+react+typescript/src/main/ts/components/NavMenu.tsx",
+      "web+react+typescript/src/main/ts/components/FetchData.tsx",
+      "web+react+typescript/src/main/ts/components/Home.tsx",
+      "web+react+typescript/src/main/ts/routes.tsx",
+      "web+react+typescript/package.json",
+      "web+react+typescript/webpack.config.vendor.js",
+      "web+react+typescript/webpack.config.js"
+    ]
   }
 ]

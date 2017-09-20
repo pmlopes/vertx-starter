@@ -1,6 +1,4 @@
 <main>
-  <home if={!tool}></home>
-
   <div if={tool} class="container">
     <h1>{tool.id}: {tool.file}</h1>
     <form onsubmit={generate}>
@@ -87,6 +85,11 @@
       </div>
     </form>
 
+    <div class="row">
+      <div class="col pull-right">
+        powered with <3 by <a href="https://github.com/pmlopes/vertx-starter/tree/gh-pages">github.com</a>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -116,37 +119,37 @@
         language: q.language
       };
 
+      if (!tool) {
+        tool = opts.buildtools[0];
+      }
+
       // state change, disable old download
       self.downloading = false;
       // carry on with the task...
 
-      if (tool) {
-        if (tool.languages) {
-          // reset the dependencies
-          self.components.forEach(function (el) {
-            // default not selected
-            el.checked = false;
-            // check if initial setup requested this dependency
-            if (setup.dependencies.indexOf(el.groupId + ':' + el.artifactId) != -1) {
-              el.checked = true;
-            }
-            // unless it is a default for the tool
-            if (tool.defaults.indexOf(el.groupId + ':' + el.artifactId) != -1) {
-              el.checked = true;
-            }
-          });
+      if (tool.languages) {
+        // reset the dependencies
+        self.components.forEach(function (el) {
+          // default not selected
+          el.checked = false;
+          // check if initial setup requested this dependency
+          if (setup.dependencies.indexOf(el.groupId + ':' + el.artifactId) != -1) {
+            el.checked = true;
+          }
+          // unless it is a default for the tool
+          if (tool.defaults.indexOf(el.groupId + ':' + el.artifactId) != -1) {
+            el.checked = true;
+          }
+        });
 
-          self.update({
-            tool: tool,
-            // defaults to the first language of the list
-            presets: filterPresets(tool.id, tool.languages[0].id),
-            language: tool.languages[0]
-          });
-        } else {
-          self.update({ tool: tool });
-        }
+        self.update({
+          tool: tool,
+          // defaults to the first language of the list
+          presets: filterPresets(tool.id, tool.languages[0].id),
+          language: tool.languages[0]
+        });
       } else {
-        self.update({ tool: tool});
+        self.update({ tool: tool });
       }
     }
 
