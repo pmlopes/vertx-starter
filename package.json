@@ -1,14 +1,13 @@
 {
-  "name": "vertx-generator",
+  "name": "vertx-starter",
   "version": "0.0.1",
   "scripts": {
-    "build": "./node_modules/.bin/riot --compact tags tags.js && ./node_modules/.bin/handlebars -r templ --knownOnly `find templ` > templates.js",
+    "build": "./node_modules/.bin/riot --compact tags js/tags.js && ./node_modules/.bin/handlebars -r templ --knownOnly `find templ` > js/templates.js",
     "start": "python3 -m http.server 8000",
     "sync-ga": "wget -N https://www.google-analytics.com/analytics.js -O js/analytics.js"
   },
   "devDependencies": {
-    "handlebars": "4.0.6",
-    "jshint": "2.9.4",
-    "riot-cli": "3.0.0"
+    "handlebars": "4.0.10",
+    "riot-cli": "3.0.3"
   }
 }

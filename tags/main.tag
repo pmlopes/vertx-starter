@@ -86,8 +86,8 @@
     </form>
 
     <div class="row">
-      <div class="col pull-right">
-        powered with <3 by <a href="https://github.com/pmlopes/vertx-starter/tree/gh-pages">github.com</a>
+      <div class="center">
+        powered with &lt;3 by <a href="https://github.com/pmlopes/vertx-starter/tree/gh-pages">github.com</a>
       </div>
     </div>
   </div>
@@ -104,12 +104,12 @@
 
     var r = route.create();
     // bind to the right route
-    opts.buildtools.forEach(function (el) {
+    self.opts.buildtools.forEach(function (el) {
       r(el.id + '..', show.bind(self, el));
     });
 
     // show default route
-    r(show);
+    r(show.bind(self, self.opts.buildtools[0]));
 
     function show(tool) {
       var q = route.query();
@@ -118,10 +118,6 @@
         dependencies: (q.dependencies || '').split(','),
         language: q.language
       };
-
-      if (!tool) {
-        tool = opts.buildtools[0];
-      }
 
       // state change, disable old download
       self.downloading = false;
