@@ -2,15 +2,21 @@
   <div if={tool} class="container">
     <h1>{tool.id}: {tool.file}</h1>
     <form onsubmit={generate}>
+  <div class="row">
+  <input type="checkbox" id="subscribeNews" name="subscribe" value="newsletter">
+  <label for="subscribeNews">Subscribe to newsletter?</label>
+  </div>
       <!-- Basic fields -->
       <div each={f, i in tool.fields} class="row">
         <!-- iterate 2 at a time -->
-        <virtual if={i % 2===0 }>
+        <virtual if={i % 2 == 0}>
           <div class="col-6"><input name="{tool.fields[i].key}" type="text" placeholder="{tool.fields[i].label + (tool.fields[i].prefill ? ' e.g.: ' + tool.fields[i].prefill : '')}"
               required="{tool.fields[i].required}"></div>
           <!-- if there is a next one -->
           <div if={tool.fields[i+1]} class="col-6"><input name="{tool.fields[i+1].key}" type="text" placeholder="{tool.fields[i+1].label + (tool.fields[i+1].prefill ? ' e.g.: ' + tool.fields[i+1].prefill : '')}"
               required="{tool.fields[i+1].required}"></div>
+          <!-- if there is a next one -->
+          <div if={!tool.fields[i+1]} class="col-6"></div>
         </virtual>
       </div>
 
@@ -41,7 +47,7 @@
 
       <div each={c, i in idx} class="row">
         <!-- iterate 2 at a time -->
-        <virtual if={i % 2===0 }>
+        <virtual if={i % 2 == 0 }>
           <div class="col-6 {components[idx[i]].checked?'dependency':''}">
             <input name="dependencies" type="checkbox" value="{idx[i]}" checked={components[idx[i]].checked} onclick={toggleDependency}>
             <div>
@@ -63,6 +69,8 @@
             </div>
             <br/>
           </div>
+          <!-- if there isn't a next one -->
+          <div if={!components[idx[i+1]]} class="col-6"></div>
         </virtual>
       </div>
 
@@ -86,7 +94,7 @@
 
     <div class="row">
       <div class="center">
-        <span>powered with &lt;3 by <a href="https://github.com/pmlopes/vertx-starter/tree/gh-pages">github.com</a></span>
+        <span>powered with <span style="color:#f00000">&lt;3</span> by <a href="https://github.com/pmlopes/vertx-starter/tree/gh-pages">github.com</a></span>
       </div>
     </div>
   </div>
@@ -97,9 +105,7 @@
     self.components = opts.components;
 
     // create a filter index
-    self.idx = self.components.map(function (el, index) {
-      return index;
-    });
+    self.idx = [];
 
     var r = route.create();
     // bind to the right route
@@ -123,8 +129,10 @@
       // carry on with the task...
 
       if (tool.languages) {
+        // reset
+        self.idx.length = 0;
         // reset the dependencies
-        self.components.forEach(function (el) {
+        self.components.forEach(function (el, index) {
           // default not selected
           el.checked = false;
           // check if initial setup requested this dependency
@@ -135,22 +143,34 @@
           if (tool.defaults.indexOf(el.groupId + ':' + el.artifactId) != -1) {
             el.checked = true;
           }
+
+          if (el.checked) {
+            self.idx.push(index);
+          }
         });
 
         self.update({
           tool: tool,
           // defaults to the first language of the list
           presets: filterPresets(tool.id, tool.languages[0].id),
-          language: tool.languages[0]
+          language: tool.languages[0],
+          idx: self.idx
         });
       } else {
-        self.update({ tool: tool });
+        self.update({
+          tool: tool,
+          idx: self.idx
+        });
       }
     }
 
     function filterPresets(tool, lang) {
       return opts.presets.filter(function (el) {
-        return el.buildtool == tool && el.language == lang;
+        if (el.language) {
+          return el.buildtool == tool && el.language == lang;
+        } else {
+          return el.buildtool == tool;
+        }
       });
     }
 
@@ -175,8 +195,11 @@
         return el.id === e.target.value;
       })[0];
 
+      // reset
+      self.idx.length = 0;
+
       // check the default language dependency
-      self.components.forEach(function (el) {
+      self.components.forEach(function (el, index) {
         if (oldLang) {
           if (el.groupId == 'io.vertx' && el.artifactId == ('vertx-lang-' + oldLang.id)) {
             el.checked = false;
@@ -186,11 +209,16 @@
         if (el.groupId == 'io.vertx' && el.artifactId == ('vertx-lang-' + newLang.id)) {
           el.checked = true;
         }
+
+        if (el.checked) {
+          self.idx.push(index);
+        }
       });
 
       self.update({
         presets: filterPresets(self.tool.id, e.target.value),
-        language: newLang
+        language: newLang,
+        idx: self.idx
       });
     }
 
@@ -204,8 +232,11 @@
         return el.id === e.target.value;
       })[0];
 
+      // reset
+      self.idx.length = 0;
+
       // check the default language dependency
-      self.components.forEach(function (el) {
+      self.components.forEach(function (el, index) {
         if (oldPreset) {
           if (oldPreset.dependencies.indexOf(el.groupId + ':' + el.artifactId) != -1) {
             el.checked = false;
@@ -215,10 +246,15 @@
         if (newPreset.dependencies.indexOf(el.groupId + ':' + el.artifactId) != -1) {
           el.checked = true;
         }
+
+        if (el.checked) {
+          self.idx.push(index);
+        }
       });
 
       self.update({
-        preset: newPreset
+        preset: newPreset,
+        idx: self.idx
       });
     }
 
@@ -317,8 +353,15 @@
       var found = [];
 
       self.components.forEach(function (el, index) {
-        if (el.artifactId.indexOf(e.target.value) !== -1 || (el.description && el.description.indexOf(e.target.value) !== -1)) {
+        if (el.checked) {
           found.push(index);
+        } else {
+          var needle = e.target.value;
+          if (needle.length > 0) {
+            if (el.artifactId.indexOf(needle) !== -1 || (el.description && el.description.indexOf(needle) !== -1)) {
+              found.push(index);
+            }
+          }
         }
       });
 

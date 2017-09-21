@@ -1,11 +1,9 @@
-riot.tag2('main', '<div if="{tool}" class="container"><h1>{tool.id}: {tool.file}</h1><form onsubmit="{generate}"><div each="{f, i in tool.fields}" class="row"><virtual if="{i % 2===0}"><div class="col-6"><input name="{tool.fields[i].key}" type="text" placeholder="{tool.fields[i].label + (tool.fields[i].prefill ? \' e.g.: \' + tool.fields[i].prefill : \'\')}" required="{tool.fields[i].required}"></div><div if="{tool.fields[i+1]}" class="col-6"><input name="{tool.fields[i+1].key}" type="text" placeholder="{tool.fields[i+1].label + (tool.fields[i+1].prefill ? \' e.g.: \' + tool.fields[i+1].prefill : \'\')}" required="{tool.fields[i+1].required}"></div></virtual></div><div if="{tool.languages || (presets && presets.length)}" class="row"><div if="{tool.languages}" class="col-6"><select id="language" onchange="{changeLanguage}"><option each="{tool.languages}" riot-value="{id}">{id}</option></select></div><div if="{presets && presets.length}" class="col-6"><select id="preset" onchange="{changePreset}"><option value="">Empty Project</option><option each="{presets}" riot-value="{id}">{id}</option></select></div></div><div class="row"><div class="col-6"><h1>Dependencies</h1></div><div class="col-6"><input type="text" class="pull-right" placeholder="Search dependency..." onkeyup="{search}"></div></div><div each="{c, i in idx}" class="row"><virtual if="{i % 2===0}"><div class="col-6 {components[idx[i]].checked?\'dependency\':\'\'}"><input name="dependencies" type="checkbox" riot-value="{idx[i]}" checked="{components[idx[i]].checked}" onclick="{toggleDependency}"><div><span if="{components[idx[i]].stack}" class="pull-right"><img src="img/stack.svg" width="16px"></span><strong>{components[idx[i]].artifactId}</strong><hr><p if="{components[idx[i]].description}">{components[idx[i]].description}</p></div><br></div><div if="{components[idx[i+1]]}" class="col-6 {components[idx[i+1]].checked?\'dependency\':\'\'}"><input name="dependencies" type="checkbox" riot-value="{idx[i+1]}" checked="{components[idx[i+1]].checked}" onclick="{toggleDependency}"><div><span if="{components[idx[i+1]].stack}" class="pull-right"><img src="img/stack.svg" width="16px"></span><strong>{components[idx[i+1]].artifactId}</strong><hr><p if="{components[idx[i+1]].description}">{components[idx[i+1]].description}</p></div><br></div></virtual></div><div class="row" id="interaction"><div class="col-8"><button name="submit" type="submit">Generate</button> &nbsp; <a id="download-btn" onclick="{clean}" href="#" show="{downloading}" ref="download" download="{name}.zip" style="padding: 1.1rem 3.5rem; margin: 1rem 0; background: #782b90; color: #f5f5f5; border-radius: 2px; border: none; font-size: 1.3rem; transition: all .2s ease">Download</a></div><div class="col-4"><div if="{generating}" class="spinner"><div class="rect1"></div><div class="rect2"></div><div class="rect3"></div><div class="rect4"></div><div class="rect5"></div></div></div></div></form><div class="row"><div class="center"><span>powered with &lt;3 by <a href="https://github.com/pmlopes/vertx-starter/tree/gh-pages">github.com</a></span></div></div></div>', '', '', function(opts) {
+riot.tag2('main', '<div if="{tool}" class="container"><h1>{tool.id}: {tool.file}</h1><form onsubmit="{generate}"><div class="row"><input type="checkbox" id="subscribeNews" name="subscribe" value="newsletter"><label for="subscribeNews">Subscribe to newsletter?</label></div><div each="{f, i in tool.fields}" class="row"><virtual if="{i % 2 == 0}"><div class="col-6"><input name="{tool.fields[i].key}" type="text" placeholder="{tool.fields[i].label + (tool.fields[i].prefill ? \' e.g.: \' + tool.fields[i].prefill : \'\')}" required="{tool.fields[i].required}"></div><div if="{tool.fields[i+1]}" class="col-6"><input name="{tool.fields[i+1].key}" type="text" placeholder="{tool.fields[i+1].label + (tool.fields[i+1].prefill ? \' e.g.: \' + tool.fields[i+1].prefill : \'\')}" required="{tool.fields[i+1].required}"></div><div if="{!tool.fields[i+1]}" class="col-6"></div></virtual></div><div if="{tool.languages || (presets && presets.length)}" class="row"><div if="{tool.languages}" class="col-6"><select id="language" onchange="{changeLanguage}"><option each="{tool.languages}" riot-value="{id}">{id}</option></select></div><div if="{presets && presets.length}" class="col-6"><select id="preset" onchange="{changePreset}"><option value="">Empty Project</option><option each="{presets}" riot-value="{id}">{id}</option></select></div></div><div class="row"><div class="col-6"><h1>Dependencies</h1></div><div class="col-6"><input type="text" class="pull-right" placeholder="Search dependency..." onkeyup="{search}"></div></div><div each="{c, i in idx}" class="row"><virtual if="{i % 2 == 0}"><div class="col-6 {components[idx[i]].checked?\'dependency\':\'\'}"><input name="dependencies" type="checkbox" riot-value="{idx[i]}" checked="{components[idx[i]].checked}" onclick="{toggleDependency}"><div><span if="{components[idx[i]].stack}" class="pull-right"><img src="img/stack.svg" width="16px"></span><strong>{components[idx[i]].artifactId}</strong><hr><p if="{components[idx[i]].description}">{components[idx[i]].description}</p></div><br></div><div if="{components[idx[i+1]]}" class="col-6 {components[idx[i+1]].checked?\'dependency\':\'\'}"><input name="dependencies" type="checkbox" riot-value="{idx[i+1]}" checked="{components[idx[i+1]].checked}" onclick="{toggleDependency}"><div><span if="{components[idx[i+1]].stack}" class="pull-right"><img src="img/stack.svg" width="16px"></span><strong>{components[idx[i+1]].artifactId}</strong><hr><p if="{components[idx[i+1]].description}">{components[idx[i+1]].description}</p></div><br></div><div if="{!components[idx[i+1]]}" class="col-6"></div></virtual></div><div class="row" id="interaction"><div class="col-8"><button name="submit" type="submit">Generate</button> &nbsp; <a id="download-btn" onclick="{clean}" href="#" show="{downloading}" ref="download" download="{name}.zip" style="padding: 1.1rem 3.5rem; margin: 1rem 0; background: #782b90; color: #f5f5f5; border-radius: 2px; border: none; font-size: 1.3rem; transition: all .2s ease">Download</a></div><div class="col-4"><div if="{generating}" class="spinner"><div class="rect1"></div><div class="rect2"></div><div class="rect3"></div><div class="rect4"></div><div class="rect5"></div></div></div></div></form><div class="row"><div class="center"><span>powered with <span style="color:#f00000">&lt;3</span> by <a href="https://github.com/pmlopes/vertx-starter/tree/gh-pages">github.com</a></span></div></div></div>', '', '', function(opts) {
     var self = this;
 
     self.components = opts.components;
 
-    self.idx = self.components.map(function (el, index) {
-      return index;
-    });
+    self.idx = [];
 
     var r = route.create();
 
@@ -27,7 +25,9 @@ riot.tag2('main', '<div if="{tool}" class="container"><h1>{tool.id}: {tool.file}
 
       if (tool.languages) {
 
-        self.components.forEach(function (el) {
+        self.idx.length = 0;
+
+        self.components.forEach(function (el, index) {
 
           el.checked = false;
 
@@ -38,22 +38,34 @@ riot.tag2('main', '<div if="{tool}" class="container"><h1>{tool.id}: {tool.file}
           if (tool.defaults.indexOf(el.groupId + ':' + el.artifactId) != -1) {
             el.checked = true;
           }
+
+          if (el.checked) {
+            self.idx.push(index);
+          }
         });
 
         self.update({
           tool: tool,
 
           presets: filterPresets(tool.id, tool.languages[0].id),
-          language: tool.languages[0]
+          language: tool.languages[0],
+          idx: self.idx
         });
       } else {
-        self.update({ tool: tool });
+        self.update({
+          tool: tool,
+          idx: self.idx
+        });
       }
     }
 
     function filterPresets(tool, lang) {
       return opts.presets.filter(function (el) {
-        return el.buildtool == tool && el.language == lang;
+        if (el.language) {
+          return el.buildtool == tool && el.language == lang;
+        } else {
+          return el.buildtool == tool;
+        }
       });
     }
 
@@ -77,7 +89,9 @@ riot.tag2('main', '<div if="{tool}" class="container"><h1>{tool.id}: {tool.file}
         return el.id === e.target.value;
       })[0];
 
-      self.components.forEach(function (el) {
+      self.idx.length = 0;
+
+      self.components.forEach(function (el, index) {
         if (oldLang) {
           if (el.groupId == 'io.vertx' && el.artifactId == ('vertx-lang-' + oldLang.id)) {
             el.checked = false;
@@ -87,11 +101,16 @@ riot.tag2('main', '<div if="{tool}" class="container"><h1>{tool.id}: {tool.file}
         if (el.groupId == 'io.vertx' && el.artifactId == ('vertx-lang-' + newLang.id)) {
           el.checked = true;
         }
+
+        if (el.checked) {
+          self.idx.push(index);
+        }
       });
 
       self.update({
         presets: filterPresets(self.tool.id, e.target.value),
-        language: newLang
+        language: newLang,
+        idx: self.idx
       });
     }.bind(this)
 
@@ -105,7 +124,9 @@ riot.tag2('main', '<div if="{tool}" class="container"><h1>{tool.id}: {tool.file}
         return el.id === e.target.value;
       })[0];
 
-      self.components.forEach(function (el) {
+      self.idx.length = 0;
+
+      self.components.forEach(function (el, index) {
         if (oldPreset) {
           if (oldPreset.dependencies.indexOf(el.groupId + ':' + el.artifactId) != -1) {
             el.checked = false;
@@ -115,10 +136,15 @@ riot.tag2('main', '<div if="{tool}" class="container"><h1>{tool.id}: {tool.file}
         if (newPreset.dependencies.indexOf(el.groupId + ':' + el.artifactId) != -1) {
           el.checked = true;
         }
+
+        if (el.checked) {
+          self.idx.push(index);
+        }
       });
 
       self.update({
-        preset: newPreset
+        preset: newPreset,
+        idx: self.idx
       });
     }.bind(this)
 
@@ -215,8 +241,15 @@ riot.tag2('main', '<div if="{tool}" class="container"><h1>{tool.id}: {tool.file}
       var found = [];
 
       self.components.forEach(function (el, index) {
-        if (el.artifactId.indexOf(e.target.value) !== -1 || (el.description && el.description.indexOf(e.target.value) !== -1)) {
+        if (el.checked) {
           found.push(index);
+        } else {
+          var needle = e.target.value;
+          if (needle.length > 0) {
+            if (el.artifactId.indexOf(needle) !== -1 || (el.description && el.description.indexOf(needle) !== -1)) {
+              found.push(index);
+            }
+          }
         }
       });
 
