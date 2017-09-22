@@ -12,31 +12,36 @@
     "languages": [
       {
         "id": "java",
+        "main": "{package}.MainVerticle",
         "templates": [
           "maven/src/main/java/{package}/MainVerticle.java"
         ]
       },
       {
         "id": "groovy",
+        "main": "main.groovy",
         "templates": [
           "maven/src/main/resources/main.groovy"
         ]
       },
       {
         "id": "ruby",
+        "main": "main.rb",
         "templates": [
           "maven/src/main/resources/main.rb"
         ]
       },
       {
         "id": "kotlin",
+        "main": "{package}.MainVerticle",
         "templates": [
           "maven/src/main/kotlin/{package}/MainVerticle.kt"
         ]
       }
     ],
     "templates": [
-      "maven/.gitignore",
+      "git/.gitignore",
+      "editorconfig/.editorconfig",
       "maven/pom.xml"
     ],
     "defaults": [
@@ -56,31 +61,36 @@
     "languages": [
       {
         "id": "java",
+        "main": "{package}.MainVerticle",
         "templates": [
           "maven/src/main/java/{package}/MainVerticle.java"
         ]
       },
       {
         "id": "groovy",
+        "main": "main.groovy",
         "templates": [
           "maven/src/main/resources/main.groovy"
         ]
       },
       {
         "id": "ruby",
+        "main": "main.rb",
         "templates": [
           "maven/src/main/resources/main.rb"
         ]
       },
       {
         "id": "kotlin",
+        "main": "{package}.MainVerticle",
         "templates": [
           "maven/src/main/kotlin/{package}/MainVerticle.kt"
         ]
       }
     ],
     "templates": [
-      "gradle/.gitignore",
+      "git/.gitignore",
+      "editorconfig/.editorconfig",
       "gradle/build.gradle"
     ],
     "defaults": [
@@ -94,27 +104,34 @@
     "fields": [
       { "key": "name", "label": "Project Name", "required": true },
       { "key": "description", "label": "Project Description" },
+      { "key": "groupId", "label": "Maven Group Id", "prefill": "com.example" },
+      { "key": "artifactId", "label": "Maven Artifact Id", "prefill": "demo" },
       { "key": "version", "label": "Project Version", "prefill": "0.0.1" }
     ],
     "languages": [
       {
         "id": "javascript",
+        "main": "main-server.js",
         "templates": [
-          "npm/src/main.js"
+          "npm/.babelrc",
+          "npm/src/main/js/index.js"
         ]
       },
       {
         "id": "typescript",
+        "main": "main-server.js",
         "templates": [
           "npm/tsconfig.json",
-          "npm/src/main.ts"
+          "npm/src/main/ts/index.ts"
         ]
       }
     ],
     "templates": [
-      "npm/.gitignore",
-      "npm/webpack.config.js",
-      "npm/package.json"
+      "git/.gitignore",
+      "editorconfig/.editorconfig",
+      "maven/pom.xml",
+      "npm/package.json",
+      "npm/webpack.config.js"
     ],
     "defaults": [
       "io.vertx:vertx-core",
@@ -135,13 +152,15 @@
     "languages": [
       {
         "id": "scala",
+        "main": "{package}.MainVerticle",
         "templates": [
           "sbt/src/main/scala/{package}/MainVerticle.scala"
         ]
       }
     ],
     "templates": [
-      "sbt/.gitignore",
+      "git/.gitignore",
+      "editorconfig/.editorconfig",
       "sbt/.scalafmt",
       "sbt/build.sbt",
       "sbt/project/build.properties",
@@ -161,6 +180,8 @@
       { "key": "name", "label": "Project Name", "required": true }
     ],
     "templates": [
+      "git/.gitignore",
+      "editorconfig/.editorconfig",
       "stack/vertx-stack.json"
     ],
     "blob": "blobs/stack-min.zip",

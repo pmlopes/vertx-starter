@@ -15,7 +15,7 @@
   {{/if}}
 
   <properties>
-    <main.verticle>{{metadata.packageName}}.MainVerticle</main.verticle>
+    <main.verticle>{{metadata.main}}</main.verticle>
   </properties>
 
   <dependencies>
@@ -28,6 +28,9 @@
       {{/if}}
       {{#if scope}}
       <scope>{{scope}}</scope>
+      {{/if}}
+      {{#if classifier}}
+      <classifier>{{classifier}}</classifier>
       {{/if}}
     </dependency>
     {{/each}}

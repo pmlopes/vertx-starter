@@ -33,7 +33,7 @@ mainClassName = 'io.vertx.core.Launcher'
 
 dependencies {
 {{#each selectedDependencies}}
-  compile '{{groupId}}:{{artifactId}}:{{version}}'
+  compile '{{groupId}}:{{artifactId}}:{{version}}{{#if classifier}}:{{classifier}}{{/if}}'
 {{/each}}
 }
 

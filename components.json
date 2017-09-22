@@ -514,9 +514,18 @@
     "core": true
   },
   {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-service-proxy",
+    "version": "3.4.2",
+    "stack": true,
+    "scope": "provided",
+    "classifier": "processor",
+    "description": "Vert.x Service Proxy processor generates the required stubs at build time."
+  },
+  {
     "groupId": "xyz.jetdrone",
     "artifactId": "hot-reload",
     "version": "0.0.3",
-    "description": "Hot Reload Development Handler"
+    "description": "Hot Reload Development Handler."
   }
 ]

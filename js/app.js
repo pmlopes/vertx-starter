@@ -1,6 +1,6 @@
 function loadJSON(file, callback) {
   if (localStorage) {
-    var json = localStorage.getItem(file);
+    var json = null; //localStorage.getItem(file);
 
     if (json) {
       json = JSON.parse(json);
@@ -77,10 +77,21 @@ function compileProject(project, callback) {
     return el.checked;
   });
 
+  // transform checked dependencies to a object
+  project.selectedDependenciesGa = {};
+  project.selectedDependencies.forEach(function (el) {
+    project.selectedDependenciesGa[el.groupId + ':' + el.artifactId] = el.version;
+  });
+
   project.metadata = {};
 
   // make a boolean value for the languageId
-  project.metadata[project.language.id] = true;
+  var language = project.language.id;
+  if (language.indexOf(' ') !== -1) {
+    language = language.substring(0, language.indexOf(' '));
+  }
+  // the id is excluding the extras
+  project.metadata[language] = true;
   project.metadata.artifactSuffix = project.buildtool['non-core-suffix'] || '';
 
   // convert the fields to a form structure
@@ -91,6 +102,9 @@ function compileProject(project, callback) {
   if (project.metadata.groupId) {
     project.metadata.packageName = project.metadata.groupId + '.' + (project.metadata.artifactId || project.metadata.name.replace(/[ -]/g, '_'));
   }
+
+  // complete the main
+  project.metadata.main = project.language.main.replace('{package}', project.metadata.packageName || '');
 
   // create a new zip file
   var zip = new JSZip();
@@ -109,7 +123,7 @@ function compileProject(project, callback) {
 
   // build tool specific templates
   for (i = 0; i < templates.length; i++) {
-    compile(project, templates[i], (executables || []).indexOf(templates[i]) != -1, zip);
+    compile(project, templates[i], (executables || []).indexOf(templates[i]) !== -1, zip);
   }
 
   // blobs

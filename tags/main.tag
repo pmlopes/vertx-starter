@@ -2,10 +2,6 @@
   <div if={tool} class="container">
     <h1>{tool.id}: {tool.file}</h1>
     <form onsubmit={generate}>
-  <div class="row">
-  <input type="checkbox" id="subscribeNews" name="subscribe" value="newsletter">
-  <label for="subscribeNews">Subscribe to newsletter?</label>
-  </div>
       <!-- Basic fields -->
       <div each={f, i in tool.fields} class="row">
         <!-- iterate 2 at a time -->
@@ -120,8 +116,7 @@
       var q = route.query();
       // parse initial values
       var setup = {
-        dependencies: (q.dependencies || '').split(','),
-        language: q.language
+        dependencies: (decodeURIComponent(q.dependencies) || '').split(',')
       };
 
       // state change, disable old download
@@ -136,11 +131,11 @@
           // default not selected
           el.checked = false;
           // check if initial setup requested this dependency
-          if (setup.dependencies.indexOf(el.groupId + ':' + el.artifactId) != -1) {
+          if (setup.dependencies.indexOf(el.groupId + ':' + el.artifactId + (el.classifier ? ':' + el.classifier : '')) !== -1) {
             el.checked = true;
           }
           // unless it is a default for the tool
-          if (tool.defaults.indexOf(el.groupId + ':' + el.artifactId) != -1) {
+          if (tool.defaults.indexOf(el.groupId + ':' + el.artifactId + (el.classifier ? ':' + el.classifier : '')) !== -1) {
             el.checked = true;
           }
 
@@ -167,9 +162,17 @@
     function filterPresets(tool, lang) {
       return opts.presets.filter(function (el) {
         if (el.language) {
-          return el.buildtool == tool && el.language == lang;
+          if (el.buildtool) {
+            return el.buildtool === tool && el.language === lang;
+          } else {
+            return el.language === lang;
+          }
         } else {
-          return el.buildtool == tool;
+          if (el.buildtool) {
+            return el.buildtool === tool;
+          } else {
+            return false;
+          }
         }
       });
     }
@@ -185,7 +188,7 @@
       }
     }
 
-    changeLanguage(e) {
+    this.changeLanguage = function (e) {
       // state change, disable old download
       self.downloading = false;
       // carry on with the task...
@@ -201,12 +204,12 @@
       // check the default language dependency
       self.components.forEach(function (el, index) {
         if (oldLang) {
-          if (el.groupId == 'io.vertx' && el.artifactId == ('vertx-lang-' + oldLang.id)) {
+          if (el.groupId === 'io.vertx' && el.artifactId === ('vertx-lang-' + oldLang.id)) {
             el.checked = false;
           }
         }
 
-        if (el.groupId == 'io.vertx' && el.artifactId == ('vertx-lang-' + newLang.id)) {
+        if (el.groupId === 'io.vertx' && el.artifactId === ('vertx-lang-' + newLang.id)) {
           el.checked = true;
         }
 
@@ -220,9 +223,9 @@
         language: newLang,
         idx: self.idx
       });
-    }
+    }.bind(this);
 
-    changePreset(e) {
+    this.changePreset = function (e) {
       // state change, disable old download
       self.downloading = false;
       // carry on with the task...
@@ -232,18 +235,20 @@
         return el.id === e.target.value;
       })[0];
 
+      console.log(newPreset);
+
       // reset
       self.idx.length = 0;
 
       // check the default language dependency
       self.components.forEach(function (el, index) {
         if (oldPreset) {
-          if (oldPreset.dependencies.indexOf(el.groupId + ':' + el.artifactId) != -1) {
+          if (oldPreset.dependencies.indexOf(el.groupId + ':' + el.artifactId + (el.classifier ? ':' + el.classifier : '')) !== -1) {
             el.checked = false;
           }
         }
 
-        if (newPreset.dependencies.indexOf(el.groupId + ':' + el.artifactId) != -1) {
+        if (newPreset.dependencies.indexOf(el.groupId + ':' + el.artifactId + (el.classifier ? ':' + el.classifier : '')) !== -1) {
           el.checked = true;
         }
 
@@ -256,17 +261,17 @@
         preset: newPreset,
         idx: self.idx
       });
-    }
+    }.bind(this);
 
-    toggleDependency(e) {
+    this.toggleDependency = function (e) {
       // state change, disable old download
       self.downloading = false;
       // carry on with the task...
       self.components[e.target.value].checked = !self.components[e.target.value].checked;
       self.update();
-    }
+    }.bind(this);
 
-    generate(e) {
+    this.generate = function (e) {
       e.preventDefault();
 
       // animate to avoid the perception of slowness
@@ -296,7 +301,7 @@
 
         if (JSZip.support.blob) {
           zip.generateAsync({ type: 'blob', platform: 'UNIX' }).then(function (blob) {
-            if (a.href != '#') {
+            if (a.href !== '#') {
               (window.webkitURL || window.URL).revokeObjectURL(a.href);
             }
             a.href = (window.webkitURL || window.URL).createObjectURL(blob);
@@ -338,17 +343,17 @@
       });
 
       self.update();
-    }
+    }.bind(this);
 
-    clean (e) {
+    this.clean = function (e) {
       // disable the link after click
       setTimeout(function () {
         self.downloading = false;
         self.update();
       }, 500);
-    }
+    }.bind(this);
 
-    search (e) {
+    this.search = function (e) {
       // create a filter index
       var found = [];
 
@@ -366,6 +371,6 @@
       });
 
       self.update({idx : found});
-    }
+    }.bind(this);
   </script>
 </main>
