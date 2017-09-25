@@ -24,16 +24,14 @@
     "dependencies": [
       "io.vertx:vertx-core",
       "io.vertx:vertx-codegen",
-      "io.vertx:vertx-service-proxy"
+      "io.vertx:vertx-service-proxy",
+      "io.vertx:vertx-service-proxy:processor"
     ],
-    "buildtool": "maven",
     "language": "java",
     "templates": [
-      "maven+service-proxy/pom.xml",
-      "maven+service-proxy/src/main/java/{package}/Service.java",
-      "maven+service-proxy/src/main/java/{package}/MainVerticle.java",
-      "maven+service-proxy/src/main/java/{package}/package-info.java",
-      "maven+service-proxy/src/main/java/{package}/impl/ServiceImpl.java"
+      "service-proxy/src/main/java/{package}/Service.java",
+      "service-proxy/src/main/java/{package}/MainVerticle.java",
+      "service-proxy/src/main/java/{package}/impl/ServiceImpl.java"
     ]
   },
   {
@@ -92,7 +90,6 @@
       "web+react/src/main/java/{package}/api/WeatherForecastAPI.java",
       "web+react/src/main/resources/templates/index.hbs",
       "web+react/.babelrc",
-      "web+react/.editorconfig",
       "web+react/src/main/js/routes.jsx",
       "web+react/src/main/js/css/site.css",
       "web+react/src/main/js/components/Layout.jsx",
@@ -122,7 +119,6 @@
       "web+react+typescript/src/main/java/{package}/api/WeatherForecastAPI.java",
       "web+react+typescript/src/main/resources/templates/index.hbs",
       "web+react+typescript/tsconfig.json",
-      "web+react+typescript/.editorconfig",
       "web+react+typescript/src/main/ts/boot.tsx",
       "web+react+typescript/src/main/ts/css/site.css",
       "web+react+typescript/src/main/ts/components/Counter.tsx",
@@ -152,7 +148,6 @@
       "web+vue/src/main/java/{package}/api/WeatherForecastAPI.java",
       "web+vue/src/main/resources/templates/index.hbs",
       "web+vue/.babelrc",
-      "web+vue/.editorconfig",
       "web+vue/src/main/js/css/site.css",
       "web+vue/src/main/js/components/app/app.js",
       "web+vue/src/main/js/components/app/app.vue.html",
@@ -185,7 +180,6 @@
       "web+aurelia/src/main/java/{package}/api/WeatherForecastAPI.java",
       "web+aurelia/src/main/resources/templates/index.hbs",
       "web+aurelia/.babelrc",
-      "web+aurelia/.editorconfig",
       "web+aurelia/src/main/js/app/components/app/app.js",
       "web+aurelia/src/main/js/app/components/app/app.css",
       "web+aurelia/src/main/js/app/components/app/app.html",
@@ -219,7 +213,6 @@
       "web+knockout/src/main/java/{package}/api/WeatherForecastAPI.java",
       "web+knockout/src/main/resources/templates/index.hbs",
       "web+knockout/.babelrc",
-      "web+knockout/.editorconfig",
       "web+knockout/src/main/js/router.js",
       "web+knockout/src/main/js/css/site.css",
       "web+knockout/src/main/js/components/home-page/home-page.js",
@@ -255,7 +248,6 @@
       "web+react-redux/src/main/java/{package}/api/WeatherForecastAPI.java",
       "web+react-redux/src/main/resources/templates/index.hbs",
       "web+react-redux/.babelrc",
-      "web+react-redux/.editorconfig",
       "web+react-redux/src/main/js/configureStore.js",
       "web+react-redux/src/main/js/routes.jsx",
       "web+react-redux/src/main/js/store/WeatherForecasts.js",
