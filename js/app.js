@@ -120,8 +120,11 @@ function compileProject(project, callback) {
   if (project.preset) {
     templates = templates.concat(project.preset.templates || []);
   }
+  project.selectedDependencies.forEach(function (el) {
+    templates = templates.concat(el.templates || []);
+  });
 
-  // build tool specific templates
+    // build tool specific templates
   for (i = 0; i < templates.length; i++) {
     compile(project, templates[i], (executables || []).indexOf(templates[i]) !== -1, zip);
   }

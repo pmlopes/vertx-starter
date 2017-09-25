@@ -31,7 +31,6 @@
     "templates": [
       "service-proxy/src/main/java/{package}/Service.java",
       "service-proxy/src/main/java/{package}/MainVerticle.java",
-      "service-proxy/src/main/java/{package}/package-info.java",
       "service-proxy/src/main/java/{package}/impl/ServiceImpl.java"
     ]
   },

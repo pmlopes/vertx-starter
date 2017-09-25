@@ -520,7 +520,10 @@
     "stack": true,
     "scope": "provided",
     "classifier": "processor",
-    "description": "Vert.x Service Proxy processor generates the required stubs at build time."
+    "description": "Vert.x Service Proxy processor generates the required stubs at build time.",
+    "templates": [
+      "service-proxy/src/main/java/{package}/package-info.java"
+    ]
   },
   {
     "groupId": "xyz.jetdrone",
