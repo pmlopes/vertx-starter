@@ -4,9 +4,5 @@
 # build dependencies
 node_modules
 # build artifacts
-js/*.min.js
 js/analytics.js
-js/tags.js
-js/templates.js
-js/vendor.js
-
+dist/js
