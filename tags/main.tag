@@ -11,7 +11,7 @@
           <!-- if there is a next one -->
           <div if={tool.fields[i+1]} class="col-6"><input name="{tool.fields[i+1].key}" type="text" placeholder="{tool.fields[i+1].label + (tool.fields[i+1].prefill ? ' e.g.: ' + tool.fields[i+1].prefill : '')}"
               required="{tool.fields[i+1].required}"></div>
-          <!-- if there is a next one -->
+          <!-- if there isn't a next one -->
           <div if={!tool.fields[i+1]} class="col-6"></div>
         </virtual>
       </div>
@@ -24,8 +24,8 @@
             </select>
         </div>
         <!-- preset selection -->
-        <div if={presets && presets.length} class="col-6">
-          <select id="preset" onchange={changePreset}>
+        <div class="col-6">
+          <select if={presets && presets.length} id="preset" onchange={changePreset}>
               <option value="">Empty Project</option>
               <option each={presets} value="{id}">{id}</option>
             </select>

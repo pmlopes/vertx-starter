@@ -107,6 +107,7 @@ gulp.task('lint', ['riot'], function () {
 // Minify JS
 gulp.task('minify', ['riot'], function () {
   return gulp.src('js/app.js')
+    .pipe(gulp.dest('dist/js'))
     .pipe(rename('app.min.js'))
     .pipe(uglify())
     .pipe(gulp.dest('dist/js'));

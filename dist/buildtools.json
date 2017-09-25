@@ -44,6 +44,10 @@
       "editorconfig/.editorconfig",
       "maven/pom.xml"
     ],
+    "blob": "blobs/mvnw.zip",
+    "executables": [
+      "mvnw"
+    ],
     "defaults": [
       "io.vertx:vertx-core"
     ]
@@ -92,6 +96,10 @@
       "git/.gitignore",
       "editorconfig/.editorconfig",
       "gradle/build.gradle"
+    ],
+    "blob": "blobs/gradlew.zip",
+    "executables": [
+      "gradlew"
     ],
     "defaults": [
       "io.vertx:vertx-core"

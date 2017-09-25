@@ -1,7 +1,7 @@
 (function (self) {
   self.loadJSON = function (file, callback) {
     if (localStorage) {
-      var json = null; //localStorage.getItem(file);
+      var json = localStorage.getItem(file);
 
       if (json) {
         json = JSON.parse(json);
@@ -20,8 +20,8 @@
     xobj.overrideMimeType("application/json");
     xobj.open('GET', file, true);
     xobj.onreadystatechange = function () {
-      if (xobj.readyState == 4) {
-        if (xobj.status != "200" && xobj.status != "304") {
+      if (xobj.readyState === XMLHttpRequest.DONE) {
+        if (xobj.status !== 200 && xobj.status !== 304) {
           return callback("Failed to load the metadata!");
         }
         var json = {
@@ -148,8 +148,14 @@
           return;
         }
 
-        zip.loadAsync(data)
-          .then(function (val) {
+        zip.loadAsync(data, {
+          /**
+           * Abuse the decode file name to do move the blog into the project path
+           */
+          decodeFileName: function (path) {
+            return project.metadata.name.replace(/[ -]/g, '_') + '/' + String.fromCharCode.apply(null, path);
+          }
+        }).then(function (val) {
             callback(null, val);
           })
           .catch(function (ex) {
@@ -172,7 +178,7 @@
     var dot = file.indexOf('.');
     var lslash = file.lastIndexOf('/');
 
-    // extra metdata
+    // extra metadata
     if (project.metadata.packageName) {
       project.metadata.dirName = project.metadata.packageName.replace(/\./g, '/');
     }
