@@ -1,0 +1,33 @@
+{
+  "name": "{{ metadata.name }}",
+  "version": "{{ metadata.version }}",
+  "description": "{{ metadata.description }}",
+  "private": true,
+
+  "mainVerticle": "main.js",
+
+  "scripts": {
+    "build": "./node_modules/.bin/webpack",
+    "build:release": "npm run build -- -p",
+
+    "prestart": "npm run build",
+    "start": "java -jar target/{{metadata.artifactId}}-{{metadata.version}}-fat.jar"
+  },
+
+  "dependencies": {
+  },
+
+  "devDependencies": {
+    "webpack": "^2.2.0",
+    {{#if metadata.javascript}}
+    "babel-core": "^6.22.1",
+    "babel-loader": "^6.2.10",
+    "babel-preset-env": "^1.6.0",
+    {{/if}}
+    {{#if metadata.typescript}}
+    "typescript": "^2.3.2",
+    "ts-loader":"^2.0.3",
+    {{/if}}
+    "webpack-vertx-plugin": "^0.0.4"
+  }
+}

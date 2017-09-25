@@ -1,2 +1,8 @@
-node_modules
+# IDE
+.idea
 .vscode
+# build dependencies
+node_modules
+# build artifacts
+js/analytics.js
+dist/js

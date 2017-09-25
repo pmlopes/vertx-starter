@@ -1,0 +1,7 @@
+# build files
+target
+build
+lib_managed
+# runtime files
+node_modules
+.vertx

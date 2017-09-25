@@ -1,0 +1,534 @@
+[
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-core",
+    "version": "3.4.2",
+    "stack": true,
+    "description": "Vert.x is a tool-kit for building reactive applications on the JVM.",
+    "core": true
+  },
+  {
+    "groupId": "io.netty",
+    "artifactId": "netty-tcnative-boringssl-static",
+    "version": "1.1.33.Fork26",
+    "scope": "runtime",
+    "included": true,
+    "description": "netty-tcnative is a multi-module project and builds a few artifacts, allowing it to be used in a variety of environments."
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-lang-js",
+    "version": "3.4.2",
+    "stack": true,
+    "description": "Nashorn JavaScript implementation for Vert.x."
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-lang-kotlin",
+    "version": "3.4.2",
+    "stack": true,
+    "description": "Vert.x Kotlin support."
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-lang-kotlin-compiler",
+    "version": "3.4.2",
+    "stack": true,
+    "description": "Vert.x Kotlin compiler support."
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-lang-ruby",
+    "version": "3.4.2",
+    "stack": true,
+    "description": "Vert.x Ruby support."
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-lang-groovy",
+    "version": "3.4.2",
+    "stack": true,
+    "description": "Vert.x Groovy support."
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-lang-ceylon",
+    "version": "3.4.2",
+    "stack": true,
+    "description": "Vert.x 3 code generator for Ceylon."
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-service-proxy",
+    "version": "3.4.2",
+    "stack": true,
+    "description": "EventBus Proxy generation."
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-service-factory",
+    "version": "3.4.2",
+    "stack": true,
+    "description": "Service Factory implementation."
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-maven-service-factory",
+    "version": "3.4.2",
+    "stack": true,
+    "description": "Verticle factory for resolving verticles from Maven at run-time."
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-http-service-factory",
+    "version": "3.4.2",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-hazelcast",
+    "version": "3.4.2",
+    "stack": true,
+    "description": "Hazelcast Cluster Manager for Vert.x."
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-dropwizard-metrics",
+    "version": "3.4.2",
+    "stack": true,
+    "description": "Metrics Service Provider implementations for Vert.x using Dropwizard metrics library."
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-hawkular-metrics",
+    "version": "3.4.2",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-reactive-streams",
+    "version": "3.4.2",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-rx-java",
+    "version": "3.4.2",
+    "stack": true,
+    "description": "Reactive Extensions for Vert.x."
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-rx-js",
+    "version": "3.4.2",
+    "stack": true,
+    "description": "Reactive Extensions for Vert.x."
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-rx-groovy",
+    "version": "3.4.2",
+    "stack": true,
+    "description": "Reactive Extensions for Vert.x."
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-mongo-client",
+    "version": "3.4.2",
+    "stack": true,
+    "description": "An asynchronous client for interacting with a MongoDB database."
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-mongo-service",
+    "version": "3.4.2",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-mongo-embedded-db",
+    "version": "3.4.2",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-jdbc-client",
+    "version": "3.4.2",
+    "stack": true,
+    "description": "JDBC support for Vert.x."
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-auth-common",
+    "version": "3.4.2",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-auth-jwt",
+    "version": "3.4.2",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-auth-jdbc",
+    "version": "3.4.2",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-auth-shiro",
+    "version": "3.4.2",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-auth-oauth2",
+    "version": "3.4.2",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-auth-mongo",
+    "version": "3.4.2",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-web",
+    "version": "3.4.2",
+    "stack": true,
+    "description": "Vert.x-Web is a set of building blocks for building web applications with Vert.x. Think of it as a Swiss Army Knife for building modern, scalable, web apps."
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-web-templ-thymeleaf",
+    "version": "3.4.2",
+    "classifier": "shaded",
+    "transitive": "false",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-web-templ-handlebars",
+    "version": "3.4.2",
+    "classifier": "shaded",
+    "transitive": "false",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-web-templ-jade",
+    "version": "3.4.2",
+    "classifier": "shaded",
+    "transitive": "false",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-web-templ-mvel",
+    "version": "3.4.2",
+    "classifier": "shaded",
+    "transitive": "false",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-web-templ-pebble",
+    "version": "3.4.2",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-web-templ-freemarker",
+    "version": "3.4.2",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-sockjs-service-proxy",
+    "version": "3.4.2",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-unit",
+    "version": "3.4.2",
+    "scope": "test",
+    "stack": true,
+    "description": "Async polyglot unit testing for Vert.x."
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-mail-client",
+    "version": "3.4.2",
+    "stack": true,
+    "description": "A simple asynchronous SMTP client for Vert.x."
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-mail-service",
+    "version": "3.4.2",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-redis-client",
+    "version": "3.4.2",
+    "stack": true,
+    "description": "The Vert.x Redis client provides an asynchronous API to interact with a redis data-structure server."
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-shell",
+    "version": "3.4.2",
+    "stack": true,
+    "description": "Shell for Vert.x."
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-sync",
+    "version": "3.4.2",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-stomp",
+    "version": "3.4.2",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-jgroups",
+    "version": "3.4.2",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-bridge-common",
+    "version": "3.4.2",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-tcp-eventbus-bridge",
+    "version": "3.4.2",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-mysql-postgresql-client",
+    "version": "3.4.2",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-camel-bridge",
+    "version": "3.4.2",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-ignite",
+    "version": "3.4.2",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-rabbitmq-client",
+    "version": "3.4.2",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-service-discovery",
+    "version": "3.4.2",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-circuit-breaker",
+    "version": "3.4.2",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-service-discovery-bridge-kubernetes",
+    "version": "3.4.2",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-service-discovery-bridge-docker-links",
+    "version": "3.4.2",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-service-discovery-bridge-docker",
+    "version": "3.4.2",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-service-discovery-backend-redis",
+    "version": "3.4.2",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-service-discovery-bridge-consul",
+    "version": "3.4.2",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-amqp-bridge",
+    "version": "3.4.2",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-proton",
+    "version": "3.4.2",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-codegen",
+    "version": "3.4.2",
+    "stack": true,
+    "description": "Vert.x code generation."
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-consul-client",
+    "version": "3.4.2",
+    "stack": true,
+    "description": "Vert.x Consul client."
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-consul-service",
+    "version": "3.4.2",
+    "stack": true,
+    "description": "Vert.x Consul service."
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-web-client",
+    "version": "3.4.2",
+    "stack": true,
+    "description": "Vert.x WebClient."
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-infinispan",
+    "version": "3.4.2",
+    "stack": true,
+    "description": "Vert.x Infinispan cluster manager."
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-config",
+    "version": "3.4.2",
+    "stack": true,
+    "description": "Vert.x Configuration service."
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-config-git",
+    "version": "3.4.2",
+    "stack": true,
+    "description": "Vert.x Configuration service."
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-config-hocon",
+    "version": "3.4.2",
+    "stack": true,
+    "description": "Vert.x Configuration service."
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-config-kubernetes-configmap",
+    "version": "3.4.2",
+    "stack": true,
+    "description": "Vert.x Configuration service."
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-config-redis",
+    "version": "3.4.2",
+    "stack": true,
+    "description": "Vert.x Configuration service."
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-config-spring-config-server",
+    "version": "3.4.2",
+    "stack": true,
+    "description": "Vert.x Configuration service."
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-config-yaml",
+    "version": "3.4.2",
+    "stack": true,
+    "description": "Vert.x Configuration service."
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-config-zookeeper",
+    "version": "3.4.2",
+    "stack": true,
+    "description": "Vert.x Configuration service."
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-kafka-client",
+    "version": "3.4.2",
+    "stack": true,
+    "description": "Vert.x Kafka client."
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-mqtt-server",
+    "version": "3.4.2",
+    "stack": true,
+    "description": "Vert.x MQTT server."
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-health-check",
+    "version": "3.4.2",
+    "stack": true,
+    "description": "Vert.x Health Check."
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-lang-scala_2.12",
+    "version": "3.4.2",
+    "stack": true,
+    "description": "Vert.x Scala support.",
+    "core": true
+  },
+  {
+    "groupId": "io.vertx",
+    "artifactId": "vertx-service-proxy",
+    "version": "3.4.2",
+    "stack": true,
+    "scope": "provided",
+    "classifier": "processor",
+    "description": "Vert.x Service Proxy processor generates the required stubs at build time.",
+    "templates": [
+      "service-proxy/src/main/java/{package}/package-info.java"
+    ]
+  },
+  {
+    "groupId": "xyz.jetdrone",
+    "artifactId": "hot-reload",
+    "version": "0.0.3",
+    "description": "Hot Reload Development Handler."
+  }
+]
