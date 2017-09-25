@@ -25,7 +25,7 @@
         </div>
         <!-- preset selection -->
         <div class="col-6">
-          <select if={presets && presets.length} id="preset" onchange={changePreset}>
+          <select id="preset" disabled={presets.length == 0} onchange={changePreset}>
               <option value="">Empty Project</option>
               <option each={presets} value="{id}">{id}</option>
             </select>
@@ -134,8 +134,14 @@
           if (setup.dependencies.indexOf(el.groupId + ':' + el.artifactId + (el.classifier ? ':' + el.classifier : '')) !== -1) {
             el.checked = true;
           }
+          if (setup.dependencies.indexOf(el.groupId + ':' + el.artifactId) !== -1) {
+            el.checked = true;
+          }
           // unless it is a default for the tool
           if (tool.defaults.indexOf(el.groupId + ':' + el.artifactId + (el.classifier ? ':' + el.classifier : '')) !== -1) {
+            el.checked = true;
+          }
+          if (tool.defaults.indexOf(el.groupId + ':' + el.artifactId) !== -1) {
             el.checked = true;
           }
 
@@ -235,20 +241,26 @@
         return el.id === e.target.value;
       })[0];
 
-      console.log(newPreset);
-
       // reset
       self.idx.length = 0;
 
       // check the default language dependency
       self.components.forEach(function (el, index) {
         if (oldPreset) {
+          // test with classifier
           if (oldPreset.dependencies.indexOf(el.groupId + ':' + el.artifactId + (el.classifier ? ':' + el.classifier : '')) !== -1) {
+            el.checked = false;
+          }
+          // test without classifier
+          if (oldPreset.dependencies.indexOf(el.groupId + ':' + el.artifactId) !== -1) {
             el.checked = false;
           }
         }
 
         if (newPreset.dependencies.indexOf(el.groupId + ':' + el.artifactId + (el.classifier ? ':' + el.classifier : '')) !== -1) {
+          el.checked = true;
+        }
+        if (newPreset.dependencies.indexOf(el.groupId + ':' + el.artifactId) !== -1) {
           el.checked = true;
         }
 
