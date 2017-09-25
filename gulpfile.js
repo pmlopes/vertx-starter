@@ -114,7 +114,7 @@ gulp.task('minify', ['riot'], function () {
 
 // Minify handlebars
 gulp.task('handlebars', function () {
-  return gulp.src(['templ/**/*.*', 'templ/**/.*'])
+  return gulp.src(['templates/**/*.*', 'templates/**/.*'])
     .pipe(handlebars())
     .pipe(wrap('  Handlebars.templates[\'<%= file.templatePath %>\'] = Handlebars.template(<%= contents %>);\n'))
     .pipe(concat('templates.js'))
