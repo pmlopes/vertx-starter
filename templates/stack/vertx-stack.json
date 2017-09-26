@@ -1,6 +1,6 @@
 {
   "dependencies": [
-  {{#each dependencies}}
+  {{#each bom}}
     {
       "groupId": "{{ groupId }}",
       "artifactId": "{{ artifactId }}",
@@ -11,7 +11,7 @@
       {{#if transitive }}
       "transitive": {{ transitive }},
       {{/if}}
-      "included": {{ checked }}
+      "included": {{ included }}
     }{{#unless @last}},{{/unless}}
   {{/each}}
   ]

@@ -133,12 +133,12 @@ gulp.task('watch', function () {
 });
 
 // Default Task
-gulp.task('default', ['vendor', 'handlebars', 'lint', 'minify', 'watch']);
+gulp.task('default', ['vendor', 'handlebars', 'lint', 'minify']);
 
 // Deploy to gh-pages
 gulp.task('deploy', ['vendor', 'handlebars', 'minify'], function () {
   return gulp.src('dist/**/*')
     .pipe(ghPages({
-      push: false
+      push: true
     }));
 });

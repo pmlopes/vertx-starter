@@ -4,7 +4,7 @@ import sbt._
 scalaVersion := "2.12.1"
 
 libraryDependencies ++= Seq(
-  {{#each selectedDependencies}}
+  {{#each dependencies}}
   {{#if core}}
   "{{groupId}}" % "{{artifactId}}" % "{{version}}"{{#unless @last}},{{/unless}}
   {{else}}
