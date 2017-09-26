@@ -184,11 +184,16 @@
 
     function filterPresets(tool, lang) {
       return opts.presets.filter(function (el) {
-        if (el.language) {
+        if (el.languages) {
+          var l = el.languages.filter(function (e) {
+            return e.id === lang;
+          });
+
+          if (l.length === 0) {
+            return false;
+          }
           if (el.buildtool) {
-            return el.buildtool === tool && el.language === lang;
-          } else {
-            return el.language === lang;
+            return el.buildtool === tool;
           }
         } else {
           if (el.buildtool) {
@@ -231,19 +236,22 @@
 
       // exclude old lang support
       if (oldLang) {
-        selection.forEach(function (el, index) {
+        for (var index = 0; index < selection.length; index++) {
+          var el = selection[index];
           if (el.groupId === 'io.vertx' && el.artifactId === ('vertx-lang-' + oldLang.id)) {
-            selection.splice(index, 1);
+            selection.splice(index--, 1);
           }
-        });
+        }
       }
       // add the default language dependency
       opts.components.forEach(function (el, index) {
         if (el.groupId === 'io.vertx' && el.artifactId === ('vertx-lang-' + newLang.id)) {
-          var c = clone(el);
-          c.checked = true;
-          c.id = index;
-          selection.push(c);
+          if (selection.filter(function (el2) { return el2.id === index; }).length === 0) {
+            var c = clone(el);
+            c.checked = true;
+            c.id = index;
+            selection.push(c);
+          }
         }
       });
 
@@ -274,36 +282,41 @@
       // reset
       var selection = [].concat(self.dependencies);
       if (oldPreset) {
-        selection.forEach(function (el, index) {
+        for (var index = 0; index < selection.length; index++) {
+          var el = selection[index];
           // test with classifier
           if (oldPreset.dependencies.indexOf(el.groupId + ':' + el.artifactId + (el.classifier ? ':' + el.classifier : '')) !== -1) {
-            selection.splice(index, 1);
-            return;
+            selection.splice(index--, 1);
+            continue;
           }
           // test without classifier
           if (oldPreset.dependencies.indexOf(el.groupId + ':' + el.artifactId) !== -1) {
-            selection.splice(index, 1);
-            return;
+            selection.splice(index--, 1);
+            continue;
           }
-        });
+        }
       }
 
       // check the default language dependency
       opts.components.forEach(function (el, index) {
         var c;
         if (newPreset.dependencies.indexOf(el.groupId + ':' + el.artifactId + (el.classifier ? ':' + el.classifier : '')) !== -1) {
-          c = clone(el);
-          c.checked = true;
-          c.id = index;
-          selection.push(c);
-          return;
+          if (selection.filter(function (el2) { return el2.id === index; }).length === 0) {
+            c = clone(el);
+            c.checked = true;
+            c.id = index;
+            selection.push(c);
+            return;
+          }
         }
         if (newPreset.dependencies.indexOf(el.groupId + ':' + el.artifactId) !== -1) {
-          c = clone(el);
-          c.checked = true;
-          c.id = index;
-          selection.push(c);
-          return;
+          if (selection.filter(function (el2) { return el2.id === index; }).length === 0) {
+            c = clone(el);
+            c.checked = true;
+            c.id = index;
+            selection.push(c);
+            return;
+          }
         }
       });
 
@@ -365,6 +378,8 @@
             // at this moment the button should be visible
             try {
               document.getElementById('download-btn').focus();
+              // attempt to click, will fail on safari and IE
+              document.getElementById('download-btn').click();
             } catch (e) {
               // nevermind...
             }

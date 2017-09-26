@@ -9,13 +9,17 @@
       "io.vertx:vertx-mongo-client"
     ],
     "buildtool": "maven",
-    "language": "java",
-    "templates": [
-      "web+mongo/src/main/java/{package}/MainVerticle.java",
-      "web+mongo/src/main/resources/templates/index.jade",
-      "web+mongo/src/main/resources/templates/layout.jade",
-      "web+mongo/src/main/resources/webroot/css/style.css",
-      "web+mongo/src/main/resources/webroot/js/app.js"
+    "languages": [
+      {
+        "id": "java",
+        "templates": [
+          "web+mongo/src/main/java/{package}/MainVerticle.java",
+          "web+mongo/src/main/resources/templates/index.jade",
+          "web+mongo/src/main/resources/templates/layout.jade",
+          "web+mongo/src/main/resources/webroot/css/style.css",
+          "web+mongo/src/main/resources/webroot/js/app.js"
+        ]
+      }
     ]
   },
   {
@@ -27,11 +31,15 @@
       "io.vertx:vertx-service-proxy",
       "io.vertx:vertx-service-proxy:processor"
     ],
-    "language": "java",
-    "templates": [
-      "service-proxy/src/main/java/{package}/Service.java",
-      "service-proxy/src/main/java/{package}/MainVerticle.java",
-      "service-proxy/src/main/java/{package}/impl/ServiceImpl.java"
+    "languages": [
+      {
+        "id": "java",
+        "templates": [
+          "service-proxy/src/main/java/{package}/Service.java",
+          "service-proxy/src/main/java/{package}/MainVerticle.java",
+          "service-proxy/src/main/java/{package}/impl/ServiceImpl.java"
+        ]
+      }
     ]
   },
   {
@@ -44,10 +52,16 @@
       "xyz.jetdrone:hot-reload"
     ],
     "buildtool": "maven",
-    "language": "java",
+    "languages": [
+      {
+        "id": "java",
+        "templates": [
+          "web+angular4/src/main/java/{package}/MainVerticle.java",
+          "web+angular4/src/main/java/{package}/api/WeatherForecastAPI.java"
+        ]
+      }
+    ],
     "templates": [
-      "web+angular4/src/main/java/{package}/MainVerticle.java",
-      "web+angular4/src/main/java/{package}/api/WeatherForecastAPI.java",
       "web+angular4/src/main/resources/templates/index.hbs",
       "web+angular4/src/main/ts/app/app.module.server.ts",
       "web+angular4/src/main/ts/app/app.module.browser.ts",
@@ -84,10 +98,16 @@
       "xyz.jetdrone:hot-reload"
     ],
     "buildtool": "maven",
-    "language": "java",
+    "languages": [
+      {
+        "id": "java",
+        "templates": [
+          "web+react/src/main/java/{package}/MainVerticle.java",
+          "web+react/src/main/java/{package}/api/WeatherForecastAPI.java"
+        ]
+      }
+    ],
     "templates": [
-      "web+react/src/main/java/{package}/MainVerticle.java",
-      "web+react/src/main/java/{package}/api/WeatherForecastAPI.java",
       "web+react/src/main/resources/templates/index.hbs",
       "web+react/.babelrc",
       "web+react/src/main/js/routes.jsx",
@@ -113,10 +133,16 @@
       "xyz.jetdrone:hot-reload"
     ],
     "buildtool": "maven",
-    "language": "java",
+    "languages": [
+      {
+        "id": "java",
+        "templates": [
+          "web+react+typescript/src/main/java/{package}/MainVerticle.java",
+          "web+react+typescript/src/main/java/{package}/api/WeatherForecastAPI.java"
+        ]
+      }
+    ],
     "templates": [
-      "web+react+typescript/src/main/java/{package}/MainVerticle.java",
-      "web+react+typescript/src/main/java/{package}/api/WeatherForecastAPI.java",
       "web+react+typescript/src/main/resources/templates/index.hbs",
       "web+react+typescript/tsconfig.json",
       "web+react+typescript/src/main/ts/boot.tsx",
@@ -142,10 +168,16 @@
       "xyz.jetdrone:hot-reload"
     ],
     "buildtool": "maven",
-    "language": "java",
+    "languages": [
+      {
+        "id": "java",
+        "templates": [
+          "web+vue/src/main/java/{package}/MainVerticle.java",
+          "web+vue/src/main/java/{package}/api/WeatherForecastAPI.java"
+        ]
+      }
+    ],
     "templates": [
-      "web+vue/src/main/java/{package}/MainVerticle.java",
-      "web+vue/src/main/java/{package}/api/WeatherForecastAPI.java",
       "web+vue/src/main/resources/templates/index.hbs",
       "web+vue/.babelrc",
       "web+vue/src/main/js/css/site.css",
@@ -174,10 +206,16 @@
       "xyz.jetdrone:hot-reload"
     ],
     "buildtool": "maven",
-    "language": "java",
+    "languages": [
+      {
+        "id": "java",
+        "templates": [
+          "web+aurelia/src/main/java/{package}/MainVerticle.java",
+          "web+aurelia/src/main/java/{package}/api/WeatherForecastAPI.java"
+        ]
+      }
+    ],
     "templates": [
-      "web+aurelia/src/main/java/{package}/MainVerticle.java",
-      "web+aurelia/src/main/java/{package}/api/WeatherForecastAPI.java",
       "web+aurelia/src/main/resources/templates/index.hbs",
       "web+aurelia/.babelrc",
       "web+aurelia/src/main/js/app/components/app/app.js",
@@ -207,10 +245,16 @@
       "xyz.jetdrone:hot-reload"
     ],
     "buildtool": "maven",
-    "language": "java",
+    "languages": [
+      {
+        "id": "java",
+        "templates": [
+          "web+knockout/src/main/java/{package}/MainVerticle.java",
+          "web+knockout/src/main/java/{package}/api/WeatherForecastAPI.java"
+        ]
+      }
+    ],
     "templates": [
-      "web+knockout/src/main/java/{package}/MainVerticle.java",
-      "web+knockout/src/main/java/{package}/api/WeatherForecastAPI.java",
       "web+knockout/src/main/resources/templates/index.hbs",
       "web+knockout/.babelrc",
       "web+knockout/src/main/js/router.js",
@@ -242,10 +286,16 @@
       "xyz.jetdrone:hot-reload"
     ],
     "buildtool": "maven",
-    "language": "java",
+    "languages": [
+      {
+        "id": "java",
+        "templates": [
+          "web+react-redux/src/main/java/{package}/MainVerticle.java",
+          "web+react-redux/src/main/java/{package}/api/WeatherForecastAPI.java"
+        ]
+      }
+    ],
     "templates": [
-      "web+react-redux/src/main/java/{package}/MainVerticle.java",
-      "web+react-redux/src/main/java/{package}/api/WeatherForecastAPI.java",
       "web+react-redux/src/main/resources/templates/index.hbs",
       "web+react-redux/.babelrc",
       "web+react-redux/src/main/js/configureStore.js",
