@@ -1,4 +1,12 @@
 (function (self) {
+  function Clone() {
+  }
+
+  self.clone = function (obj) {
+    Clone.prototype = obj;
+    return new Clone();
+  };
+
   self.loadJSON = function (file, callback) {
     if (localStorage) {
       var json = localStorage.getItem(file);
@@ -58,32 +66,38 @@
       eventLabel: 'project'
     });
 
-    // track what dependencies are being selected
+    // alias for selected dependencies
+    project.dependenciesGAV = {};
+
     project.dependencies.forEach(function (el) {
-      // force boolean
-      el.checked = !!el.checked;
-
-      if (el.checked) {
-        ga('send', {
-          hitType: 'event',
-          eventCategory: project.buildtool.id + ':dependency',
-          eventAction: project.buildtool.id + '/' + el.groupId + ':' + el.artifactId + ':' + el.version,
-          eventLabel: 'dependency'
-        });
+      project.dependenciesGAV[el.groupId + ':' + el.artifactId] = el.version;
+      if (el.classifier) {
+        project.dependenciesGAV[el.groupId + ':' + el.artifactId + ':' + el.classifier] = el.version;
       }
+
+      // track what dependencies are being selected
+      ga('send', {
+        hitType: 'event',
+        eventCategory: project.buildtool.id + ':dependency',
+        eventAction: project.buildtool.id + '/' + el.groupId + ':' + el.artifactId + ':' + el.version,
+        eventLabel: 'dependency'
+      });
     });
 
-    // filter checked dependencies
-    project.selectedDependencies = project.dependencies.filter(function (el) {
-      return el.checked;
+    // bom generation
+    project.bom = [];
+
+    project.components.forEach(function (el) {
+      var c = clone(el);
+      c.included = false;
+      project.bom.push(c);
+    });
+    // now apply the include rules from the dependencies
+    project.dependencies.forEach(function (el) {
+      project.bom[el.id].included = true;
     });
 
-    // transform checked dependencies to a object
-    project.selectedDependenciesGa = {};
-    project.selectedDependencies.forEach(function (el) {
-      project.selectedDependenciesGa[el.groupId + ':' + el.artifactId] = el.version;
-    });
-
+    // collect metadata
     project.metadata = {};
 
     // make a boolean value for the languageId
@@ -112,16 +126,22 @@
 
     var templates = [];
 
-    // marge all templates to be processed
+    // merge all templates to be processed
     templates = templates.concat(project.buildtool.templates);
-
+    // merge language specific templates
     if (project.language.templates) {
       templates = templates.concat(project.language.templates);
     }
+    // merge preset templates
     if (project.preset) {
       templates = templates.concat(project.preset.templates || []);
+      // merge preset language specific templates
+      if (project.preset.languages && project.preset.languages[project.language.id]) {
+        templates = templates.concat(project.preset.languages[project.language.id].templates);
+      }
     }
-    project.selectedDependencies.forEach(function (el) {
+    // merge dependency specific templates
+    project.dependencies.forEach(function (el) {
       templates = templates.concat(el.templates || []);
     });
 
@@ -156,8 +176,8 @@
             return project.metadata.name.replace(/[ -]/g, '_') + '/' + String.fromCharCode.apply(null, path);
           }
         }).then(function (val) {
-            callback(null, val);
-          })
+          callback(null, val);
+        })
           .catch(function (ex) {
             ga('send', 'exception', {
               'exDescription': ex.message,

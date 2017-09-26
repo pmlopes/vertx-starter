@@ -40,7 +40,7 @@
     + "'\n"
     + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.description : stack1),{"name":"if","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "sourceCompatibility = '1.8'\nmainClassName = 'io.vertx.core.Launcher'\n\ndependencies {\n"
-    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.selectedDependencies : depth0),{"name":"each","hash":{},"fn":container.program(7, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.dependencies : depth0),{"name":"each","hash":{},"fn":container.program(7, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "}\n\nshadowJar {\n  classifier = 'fat'\n  manifest {\n    attributes 'Main-Verticle': '"
     + alias3(alias2(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.packageName : stack1), depth0))
     + ".MainVerticle'\n  }\n  mergeServiceFiles {\n    include 'META-INF/services/io.vertx.core.spi.VerticleFactory'\n  }\n}\n\ntask wrapper(type: Wrapper) {\n  gradleVersion = '2.13'\n}\n";
@@ -101,7 +101,7 @@
     + "\n  <properties>\n    <main.verticle>"
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.main : stack1), depth0))
     + "</main.verticle>\n  </properties>\n\n  <dependencies>\n"
-    + ((stack1 = helpers.each.call(alias3,(depth0 != null ? depth0.selectedDependencies : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers.each.call(alias3,(depth0 != null ? depth0.dependencies : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "  </dependencies>\n\n  <build>\n    <pluginManagement>\n      <plugins>\n        <plugin>\n          <artifactId>maven-compiler-plugin</artifactId>\n          <version>3.1</version>\n          <configuration>\n            <source>1.8</source>\n            <target>1.8</target>\n          </configuration>\n        </plugin>\n"
     + ((stack1 = helpers["if"].call(alias3,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.kotlin : stack1),{"name":"if","hash":{},"fn":container.program(10, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "      </plugins>\n    </pluginManagement>\n\n    <plugins>\n"
@@ -187,7 +187,7 @@
     var stack1;
 
   return "import sbt.Package._\nimport sbt._\n\nscalaVersion := \"2.12.1\"\n\nlibraryDependencies ++= Seq(\n"
-    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.selectedDependencies : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.dependencies : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + ")\n\npackageOptions += ManifestAttributes(\n  (\"Main-Verticle\", \"scala:"
     + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.packageName : stack1), depth0))
     + ".MainVerticle\"))\n\nassemblyMergeStrategy in assembly := {\n  case PathList(\"META-INF\", \"MANIFEST.MF\") => MergeStrategy.discard\n  case PathList(\"META-INF\", xs @ _*) => MergeStrategy.last\n  case PathList(\"META-INF\", \"io.netty.versions.properties\") => MergeStrategy.last\n  case PathList(\"codegen.json\") => MergeStrategy.discard\n  case x =>\n    val oldStrategy = (assemblyMergeStrategy in assembly).value\n    oldStrategy(x)\n}\n";
@@ -205,7 +205,7 @@
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.classifier : depth0),{"name":"if","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.transitive : depth0),{"name":"if","hash":{},"fn":container.program(4, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "      \"included\": "
-    + alias4(((helper = (helper = helpers.checked || (depth0 != null ? depth0.checked : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"checked","hash":{},"data":data}) : helper)))
+    + alias4(((helper = (helper = helpers.included || (depth0 != null ? depth0.included : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"included","hash":{},"data":data}) : helper)))
     + "\n    }"
     + ((stack1 = helpers.unless.call(alias1,(data && data.last),{"name":"unless","hash":{},"fn":container.program(6, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "\n";
@@ -227,7 +227,7 @@
     var stack1;
 
   return "{\n  \"dependencies\": [\n"
-    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.dependencies : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.bom : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "  ]\n}\n";
 },"useData":true});
   Handlebars.templates['web+angular4/package.json'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
@@ -525,6 +525,12 @@
     + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.packageName : stack1), depth0))
     + "\n\nimport io.vertx.core.AbstractVerticle\n\nclass MainVerticle : AbstractVerticle() {\n\n  override fun start() {\n    // your code goes here...\n    vertx.createHttpServer().requestHandler({ req ->\n      req.response()\n        .putHeader(\"content-type\", \"text/plain\")\n        .end(\"Hello from Vert.x!\")\n    }).listen(8080)\n  }\n}\n";
 },"useData":true});
+  Handlebars.templates['verticle/src/main/resources/main.groovy'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "vertx.createHttpServer().requestHandler({ req ->\n  req.response().putHeader(\"content-type\", \"text/html\").end(\"<html><body><h1>Hello from vert.x!</h1></body></html>\")\n}).listen(8080)\n";
+},"useData":true});
+  Handlebars.templates['verticle/src/main/resources/main.rb'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "$vertx.create_http_server().request_handler() { |req|\n  req.response().put_header(\"content-type\", \"text/html\").end(\"<html><body><h1>Hello from vert.x!</h1></body></html>\")\n}.listen(8080)\n";
+},"useData":true});
   Handlebars.templates['web+angular4/src/main/java/MainVerticle.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=container.lambda, alias2=container.escapeExpression;
 
@@ -533,12 +539,6 @@
     + ";\n\nimport "
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.packageName : stack1), depth0))
     + ".api.WeatherForecastAPI;\nimport io.vertx.core.AbstractVerticle;\nimport io.vertx.ext.web.Router;\nimport io.vertx.ext.web.handler.StaticHandler;\n\nimport io.vertx.ext.web.templ.HandlebarsTemplateEngine;\n\nimport xyz.jetdrone.vertx.hot.reload.HotReload;\n\npublic class MainVerticle extends AbstractVerticle {\n\n  // this should be a build configuration\n  private static final boolean DEBUG = true;\n\n  @Override\n  public void start() throws Exception {\n\n    final HandlebarsTemplateEngine engine = HandlebarsTemplateEngine.create();\n    final Router router = Router.router(vertx);\n\n    if (DEBUG) {\n      // development hot reload\n      router.get().handler(HotReload.create());\n    }\n\n    router.get(\"/\").handler(ctx -> {\n      // we define a hardcoded title for our application\n      ctx.put(\"title\", \"Home Page\");\n\n      engine.render(ctx, \"templates\", \"/index.hbs\", res -> {\n        if (res.succeeded()) {\n          ctx.response().end(res.result());\n        } else {\n          ctx.fail(res.cause());\n        }\n      });\n    });\n\n    // the example weather API\n    router.get(\"/api/weather-forecasts\").handler(new WeatherForecastAPI());\n\n    // Serve the static resources\n    router.route().handler(DEBUG ? HotReload.createStaticHandler() : StaticHandler.create());\n\n    vertx.createHttpServer().requestHandler(router::accept).listen(8080);\n  }\n}\n";
-},"useData":true});
-  Handlebars.templates['verticle/src/main/resources/main.groovy'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "vertx.createHttpServer().requestHandler({ req ->\n  req.response().putHeader(\"content-type\", \"text/html\").end(\"<html><body><h1>Hello from vert.x!</h1></body></html>\")\n}).listen(8080)\n";
-},"useData":true});
-  Handlebars.templates['verticle/src/main/resources/main.rb'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "$vertx.create_http_server().request_handler() { |req|\n  req.response().put_header(\"content-type\", \"text/html\").end(\"<html><body><h1>Hello from vert.x!</h1></body></html>\")\n}.listen(8080)\n";
 },"useData":true});
   Handlebars.templates['web+angular4/src/main/ts/boot.browser.ts'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "import 'reflect-metadata';\nimport 'zone.js';\nimport 'bootstrap';\nimport { enableProdMode } from '@angular/core';\nimport { platformBrowserDynamic } from '@angular/platform-browser-dynamic';\nimport { AppModule } from './app/app.module.browser';\n\nif (module.hot) {\n    module.hot.accept();\n    module.hot.dispose(() => {\n        // Before restarting the app, we create a new root element and dispose the old one\n        const oldRootElem = document.querySelector('app');\n        const newRootElem = document.createElement('app');\n        oldRootElem!.parentNode!.insertBefore(newRootElem, oldRootElem);\n        modulePromise.then(appModule => appModule.destroy());\n    });\n} else {\n    enableProdMode();\n}\n\n// Note: @ng-tools/webpack looks for the following expression when performing production\n// builds. Don't change how this line looks, otherwise you may break tree-shaking.\nconst modulePromise = platformBrowserDynamic().bootstrapModule(AppModule);\n";
@@ -880,6 +880,12 @@
   Handlebars.templates['web+angular4/src/main/ts/app/components/app/app.component.ts'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "import { Component } from '@angular/core';\n\n@Component({\n    selector: 'app',\n    templateUrl: './app.component.html',\n    styleUrls: ['./app.component.css']\n})\nexport class AppComponent {\n}\n";
 },"useData":true});
+  Handlebars.templates['web+angular4/src/main/ts/app/components/fetchdata/fetchdata.component.html'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<h1>Weather forecast</h1>\n\n<p>This component demonstrates fetching data from the server.</p>\n\n<p *ngIf=\"!forecasts\"><em>Loading...</em></p>\n\n<table class='table' *ngIf=\"forecasts\">\n    <thead>\n        <tr>\n            <th>Date</th>\n            <th>Temp. (C)</th>\n            <th>Temp. (F)</th>\n            <th>Summary</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr *ngFor=\"let forecast of forecasts\">\n            <td>{{ forecast.dateFormatted }}</td>\n            <td>{{ forecast.temperatureC }}</td>\n            <td>{{ forecast.temperatureF }}</td>\n            <td>{{ forecast.summary }}</td>\n        </tr>\n    </tbody>\n</table>\n";
+},"useData":true});
+  Handlebars.templates['web+angular4/src/main/ts/app/components/fetchdata/fetchdata.component.ts'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "import { Component, Inject } from '@angular/core';\nimport { Http } from '@angular/http';\n\n@Component({\n    selector: 'fetchdata',\n    templateUrl: './fetchdata.component.html'\n})\nexport class FetchDataComponent {\n    public forecasts: WeatherForecast[];\n\n    constructor(http: Http, @Inject('BASE_URL') baseUrl: string) {\n        http.get(baseUrl + 'api/weather-forecasts').subscribe(result => {\n            this.forecasts = result.json() as WeatherForecast[];\n        }, error => console.error(error));\n    }\n}\n\ninterface WeatherForecast {\n    dateFormatted: string;\n    temperatureC: number;\n    temperatureF: number;\n    summary: string;\n}\n";
+},"useData":true});
   Handlebars.templates['web+angular4/src/main/ts/app/components/counter/counter.component.html'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "<h1>Counter</h1>\n\n<p>This is a simple example of an Angular component.</p>\n\n<p>Current count: <strong>{{ currentCount }}</strong></p>\n\n<button (click)=\"incrementCounter()\">Increment</button>\n";
 },"useData":true});
@@ -888,12 +894,6 @@
 },"useData":true});
   Handlebars.templates['web+angular4/src/main/ts/app/components/counter/counter.component.ts'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "import { Component } from '@angular/core';\n\n@Component({\n    selector: 'counter',\n    templateUrl: './counter.component.html'\n})\nexport class CounterComponent {\n    public currentCount = 0;\n\n    public incrementCounter() {\n        this.currentCount++;\n    }\n}\n";
-},"useData":true});
-  Handlebars.templates['web+angular4/src/main/ts/app/components/fetchdata/fetchdata.component.html'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<h1>Weather forecast</h1>\n\n<p>This component demonstrates fetching data from the server.</p>\n\n<p *ngIf=\"!forecasts\"><em>Loading...</em></p>\n\n<table class='table' *ngIf=\"forecasts\">\n    <thead>\n        <tr>\n            <th>Date</th>\n            <th>Temp. (C)</th>\n            <th>Temp. (F)</th>\n            <th>Summary</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr *ngFor=\"let forecast of forecasts\">\n            <td>{{ forecast.dateFormatted }}</td>\n            <td>{{ forecast.temperatureC }}</td>\n            <td>{{ forecast.temperatureF }}</td>\n            <td>{{ forecast.summary }}</td>\n        </tr>\n    </tbody>\n</table>\n";
-},"useData":true});
-  Handlebars.templates['web+angular4/src/main/ts/app/components/fetchdata/fetchdata.component.ts'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "import { Component, Inject } from '@angular/core';\nimport { Http } from '@angular/http';\n\n@Component({\n    selector: 'fetchdata',\n    templateUrl: './fetchdata.component.html'\n})\nexport class FetchDataComponent {\n    public forecasts: WeatherForecast[];\n\n    constructor(http: Http, @Inject('BASE_URL') baseUrl: string) {\n        http.get(baseUrl + 'api/weather-forecasts').subscribe(result => {\n            this.forecasts = result.json() as WeatherForecast[];\n        }, error => console.error(error));\n    }\n}\n\ninterface WeatherForecast {\n    dateFormatted: string;\n    temperatureC: number;\n    temperatureF: number;\n    summary: string;\n}\n";
 },"useData":true});
   Handlebars.templates['web+angular4/src/main/ts/app/components/home/home.component.html'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "<h1>Hello, world!</h1>\n<p>Welcome to your new single-page application, built with:</p>\n<ul>\n  <li><a href='http://vertx.io/'>Vert.x</a> for polyglot server-side code</li>\n  <li><a href='https://angular.io/'>Angular</a> and <a href='http://www.typescriptlang.org/'>TypeScript</a> for\n    client-side code\n  </li>\n  <li><a href='https://webpack.github.io/'>Webpack</a> for building and bundling client-side resources</li>\n  <li><a href='http://getbootstrap.com/'>Bootstrap</a> for layout and styling</li>\n</ul>\n<p>To help you get started, we've also set up:</p>\n<ul>\n  <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.\n  </li>\n  <li><strong>TODO: Server-side prerendering</strong>. For faster initial loading and improved SEO, your Angular app is\n    prerendered on the server. The resulting HTML is then transferred to the browser where a client-side copy of the app\n    takes over.\n  </li>\n  <li><strong>Webpack dev middleware</strong>. In development mode, there's no need to run the <code>webpack</code>\n    build tool. Your client-side resources are dynamically built on demand. Updates are available as soon as you modify\n    any file.\n  </li>\n  <li><strong>Hot module replacement</strong>. In development mode, you don't even need to reload the page after making\n    most changes. Within seconds of saving changes to files, your Angular app will be rebuilt and a new instance\n    injected is into the page.\n  </li>\n  <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and the\n    <code>webpack</code> build tool produces minified static CSS and JavaScript files.\n  </li>\n</ul>\n";
