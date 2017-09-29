@@ -1,5 +1,11 @@
 <main>
   <div if={ tool } class="container">
+    <div class="help-tip">
+      <p>
+        The build tool can be changed using the hamburger menu on the left. For more information about this tool please visit <a href="{ tool.url }">{ tool.id }</a> website.<br><br>
+        This is a progressive webapp, meaning that you can add it to your desktop and it can even run offline. You can boostrap your project even on the go without internet!
+      </p>
+    </div>
     <h1>{ tool.id }: { tool.file }</h1>
     <form onsubmit={ generate }>
       <!-- Basic fields -->
@@ -20,15 +26,15 @@
         <!-- language selection -->
         <div class="col-6">
           <select id="language" disabled="{ !tool.languages || tool.languages.length == 0 }" onchange={changeLanguage}>
-              <option each={tool.languages} value="{id}">{id}</option>
-            </select>
+            <option each={tool.languages} value="{id}">{id}</option>
+          </select>
         </div>
         <!-- preset selection -->
         <div class="col-6">
           <select id="preset" disabled="{ !presets || presets.length == 0 }" onchange={changePreset}>
-              <option value="">Empty Project</option>
-              <option each={ presets } value="{ id }">{ id }</option>
-            </select>
+            <option value="">Empty Project</option>
+            <option each={ presets } value="{ id }">{ id }</option>
+          </select>
         </div>
       </div>
 
@@ -37,6 +43,9 @@
           <h1>Dependencies</h1>
         </div>
         <div class="col-6">
+          <div class="help-tip">
+            <p>Use this box to search for dependencies to add to your application, if a dependency is not present, please <a href="https://github.com/pmlopes/vertx-starter/issues/new">open an issue</a> so we can add the missing metadata!</p>
+          </div>
           <input type="text" class="pull-right" placeholder="Search dependency..." onkeyup={search}>
         </div>
       </div>

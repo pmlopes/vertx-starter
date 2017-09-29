@@ -2,6 +2,7 @@
   {
     "id": "maven",
     "file": "pom.xml",
+    "url": "https://maven.apache.org",
     "fields" :[
       { "key": "name", "label": "Project Name", "required": true },
       { "key": "description", "label": "Project Description" },
@@ -55,6 +56,7 @@
 
   {
     "id": "gradle",
+    "url": "https://gradle.org",
     "file": "build.gradle",
     "fields" :[
       { "key": "name", "label": "Project Name", "required": true },
@@ -108,6 +110,7 @@
 
   {
     "id": "npm",
+    "url": "https://npmjs.com",
     "file": "package.json",
     "fields": [
       { "key": "name", "label": "Project Name", "required": true },
@@ -146,9 +149,9 @@
       "io.vertx:vertx-lang-js"
     ]
   },
-
   {
     "id": "SBT",
+    "url": "http://www.scala-sbt.org",
     "non-core-suffix": "-scala_2.12",
     "file": "build.sbt",
     "fields" :[
@@ -183,6 +186,7 @@
 
   {
     "id": "stack",
+    "url": "http://vertx.io/docs/#advanced",
     "file": "vertx-stack.json",
     "fields": [
       { "key": "name", "label": "Project Name", "required": true }
