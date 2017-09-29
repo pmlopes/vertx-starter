@@ -27,7 +27,7 @@
         <div class="col-6">
           <select id="preset" disabled="{ !presets || presets.length == 0 }" onchange={changePreset}>
               <option value="">Empty Project</option>
-              <option each={presets} value="{id}">{id}</option>
+              <option each={ presets } value="{ id }">{ id }</option>
             </select>
         </div>
       </div>

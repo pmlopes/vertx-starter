@@ -10,8 +10,11 @@ var riot = require('gulp-riot');
 var download = require('gulp-downloader');
 var wrap = require('gulp-wrap');
 var ghPages = require('gulp-gh-pages');
+var jsoncombine = require("gulp-jsoncombine");
+var minify = require('gulp-minify-css');
+
 // Custom Plugin
-var handlebars = function(opts) {
+var handlebars = function (opts) {
   'use strict';
 
   opts = opts || {};
@@ -20,7 +23,7 @@ var handlebars = function(opts) {
   var through2 = require('through2');
   var gutil = require('gulp-util');
 
-  return through2.obj(function(file, enc, callback) {
+  return through2.obj(function (file, enc, callback) {
     if (file.isNull()) {
       return callback(null, file);
     }
@@ -84,16 +87,22 @@ gulp.task('vendor', ['ga'], function () {
     .pipe(gulp.dest('dist/js'));
 });
 
+gulp.task('css', function () {
+  gulp.src(['css/tooltip.css', 'css/hamburger.css', 'css/spinner.css', 'node_modules/wingcss/dist/wing.css'])
+    .pipe(concat('bundle.css'))
+    .pipe(gulp.dest('dist/css'))
+    .pipe(rename('bundle.min.css'))
+    .pipe(minify({keepBreaks: true}))
+    .pipe(gulp.dest('dist/css'));
+});
+
 // Riot Task
-gulp.task('riot', function () {
+gulp.task('riot', ['css'], function () {
   gulp.src('tags/*.tag')
     .pipe(riot({
       compact: true
     }))
     .pipe(concat('tags.js'))
-    .pipe(gulp.dest('dist/js'))
-    .pipe(rename('tags.min.js'))
-    .pipe(uglify())
     .pipe(gulp.dest('dist/js'));
 });
 
@@ -106,7 +115,8 @@ gulp.task('lint', ['riot'], function () {
 
 // Minify JS
 gulp.task('minify', ['riot'], function () {
-  return gulp.src('js/app.js')
+  return gulp.src(['dist/js/tags.js', 'js/app.js'])
+    .pipe(concat('app.js'))
     .pipe(gulp.dest('dist/js'))
     .pipe(rename('app.min.js'))
     .pipe(uglify())
@@ -114,7 +124,7 @@ gulp.task('minify', ['riot'], function () {
 });
 
 // Minify handlebars
-gulp.task('handlebars', function () {
+gulp.task('handlebars', ['metadata'], function () {
   return gulp.src(['templates/**/*.*', 'templates/**/.*'])
     .pipe(handlebars())
     .pipe(wrap('  Handlebars.templates[\'<%= file.templatePath %>\'] = Handlebars.template(<%= contents %>);\n'))
@@ -125,6 +135,15 @@ gulp.task('handlebars', function () {
     .pipe(uglify())
     .pipe(gulp.dest('dist/js'));
 
+});
+
+// Assemble the metadata for the templates
+gulp.task('metadata', function () {
+  gulp.src("metadata/*.json")
+    .pipe(jsoncombine("metadata.json", function (data) {
+      return new Buffer(JSON.stringify(data));
+    }))
+    .pipe(gulp.dest("dist"));
 });
 
 // Watch Files For Changes

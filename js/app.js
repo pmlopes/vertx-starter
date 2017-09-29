@@ -1,4 +1,5 @@
 (function (self) {
+  'use strict';
   function Clone() {
   }
 
