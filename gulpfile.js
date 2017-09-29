@@ -78,7 +78,7 @@ gulp.task('ga', function () {
 
 // Vendor Task
 gulp.task('vendor', ['ga'], function () {
-  gulp
+  return gulp
     .src(['node_modules/riot/riot.js', 'node_modules/riot-route/dist/route.js', 'node_modules/handlebars/dist/handlebars.runtime.js', 'node_modules/jszip/dist/jszip.js', 'node_modules/jszip-utils/dist/jszip-utils.js', 'js/analytics.js'])
     .pipe(concat('vendor.js'))
     .pipe(gulp.dest('dist/js'))
@@ -88,7 +88,7 @@ gulp.task('vendor', ['ga'], function () {
 });
 
 gulp.task('css', function () {
-  gulp.src(['css/tooltip.css', 'css/hamburger.css', 'css/spinner.css', 'node_modules/wingcss/dist/wing.css'])
+  return gulp.src(['css/tooltip.css', 'css/hamburger.css', 'css/spinner.css', 'node_modules/wingcss/dist/wing.css'])
     .pipe(concat('bundle.css'))
     .pipe(gulp.dest('dist/css'))
     .pipe(rename('bundle.min.css'))
@@ -98,7 +98,7 @@ gulp.task('css', function () {
 
 // Riot Task
 gulp.task('riot', ['css'], function () {
-  gulp.src('tags/*.tag')
+  return gulp.src('tags/*.tag')
     .pipe(riot({
       compact: true
     }))
@@ -139,7 +139,7 @@ gulp.task('handlebars', ['metadata'], function () {
 
 // Assemble the metadata for the templates
 gulp.task('metadata', function () {
-  gulp.src("metadata/*.json")
+  return gulp.src("metadata/*.json")
     .pipe(jsoncombine("metadata.json", function (data) {
       return new Buffer(JSON.stringify(data));
     }))

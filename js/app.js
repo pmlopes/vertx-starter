@@ -9,22 +9,6 @@
   };
 
   self.loadJSON = function (file, callback) {
-    if (localStorage) {
-      var json = localStorage.getItem(file);
-
-      if (json) {
-        json = JSON.parse(json);
-        if (json.version !== window.starterVersion) {
-          localStorage.removeItem(file);
-        } else if (json.ttl && json.ttl < Date.now()) {
-          localStorage.removeItem(file);
-        } else {
-          callback(null, json.text);
-          return;
-        }
-      }
-    }
-
     var xobj = new XMLHttpRequest();
     xobj.overrideMimeType("application/json");
     xobj.open('GET', file, true);
@@ -33,18 +17,7 @@
         if (xobj.status !== 200 && xobj.status !== 304) {
           return callback("Failed to load the metadata!");
         }
-        var json = {
-          version: window.starterVersion,
-          // only cache for 30min
-          ttl: 1800000 + Date.now(),
-          text: xobj.responseText
-        };
-
-        if (localStorage) {
-          localStorage.setItem(file, JSON.stringify(json));
-        }
-
-        callback(null, json.text);
+        callback(null, xobj.responseText);
       }
     };
     xobj.send(null);

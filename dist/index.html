@@ -32,8 +32,9 @@
   <div class="site-wrap" data-is="main"></div>
 
   <script type="text/javascript">
-    // sane way to invalidate json caches
-    window.starterVersion = '3.4.2';
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js');
+    }
     loadJSON('metadata.json', function(err, response) {
       if (err) {
         return alert('Error: ' + err);
