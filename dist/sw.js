@@ -2,7 +2,7 @@
 
 // Incrementing CACHE_VERSION will kick off the install event and force previously cached
 // resources to be cached again.
-var CACHE_VERSION = 'v3.4.2a';
+var CACHE_VERSION = 'v3.4.2b';
 
 self.addEventListener('install', function (event) {
   event.waitUntil(
@@ -16,7 +16,8 @@ self.addEventListener('install', function (event) {
         'js/app.min.js',
         'js/templates.min.js',
         'img/stack.svg',
-        'img/favicon.ico',
+        'favicon.ico',
+        'apple-touch-icon.png',
         'blobs/stack.zip',
         'blobs/mvnw.zip',
         'blobs/gradlew.zip',
@@ -40,11 +41,20 @@ self.addEventListener('activate', function (event) {
 self.addEventListener('fetch', function (event) {
   event.respondWith(
     caches.match(event.request).then(function (resp) {
-      return resp || fetch(event.request).then(function (response) {
-        return caches.open(CACHE_VERSION).then(function (cache) {
-          cache.put(event.request, response.clone());
-          return response;
+      // always attempt to fetch first
+      return fetch(event.request)
+        .then(function (response) {
+          if (response.ok) {
+            return caches.open(CACHE_VERSION).then(function (cache) {
+              cache.put(event.request, response.clone());
+              return response;
+            });
+          }
+          throw new Error('Failed to fetch resource.');
+        })
+        .catch(function(err) {
+          // return cached value
+          return resp;
         });
-      });
     }));
 });

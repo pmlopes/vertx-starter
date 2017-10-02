@@ -1,6 +1,6 @@
 <main>
   <div if={ tool } class="container">
-    <div class="help-tip">
+    <div class="help-tip hide-phone">
       <p>
         The build tool can be changed using the hamburger menu on the left. For more information about this tool please visit <a href="{ tool.url }">{ tool.id }</a> website.<br><br>
         This is a progressive webapp, meaning that you can add it to your desktop and it can even run offline. You can boostrap your project even on the go without internet!
@@ -43,7 +43,7 @@
           <h1>Dependencies</h1>
         </div>
         <div class="col-6">
-          <div class="help-tip">
+          <div class="help-tip hide-phone">
             <p>Use this box to search for dependencies to add to your application, if a dependency is not present, please <a href="https://github.com/pmlopes/vertx-starter/issues/new">open an issue</a> so we can add the missing metadata!</p>
           </div>
           <input type="text" class="pull-right" placeholder="Search dependency..." onkeyup={search}>
