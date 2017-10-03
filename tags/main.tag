@@ -26,14 +26,16 @@
         <!-- language selection -->
         <div class="col-6">
           <select id="language" disabled="{ !tool.languages || tool.languages.length == 0 }" onchange={changeLanguage}>
-            <option each={tool.languages} value="{id}">{id}</option>
+            <option each={ tool.languages } value="{ id }">{ id }</option>
           </select>
         </div>
         <!-- preset selection -->
         <div class="col-6">
-          <select id="preset" disabled="{ !presets || presets.length == 0 }" onchange={changePreset}>
+          <select id="preset" disabled="{ !presetGroups || presetGroups.length == 0 }" onchange={changePreset}>
             <option value="">Empty Project</option>
-            <option each={ presets } value="{ id }">{ id }</option>
+            <optgroup each={ g, i in presetGroups } label="{ i }">
+              <option each={ g } value="{ id }">{ id }</option>
+            </optgroup>
           </select>
         </div>
       </div>
@@ -122,7 +124,7 @@
       var q = route.query();
       // parse initial values
       var setup = {
-        dependencies: (decodeURIComponent(q.dependencies) || '').split(',')
+        dependencies: decodeURIComponent(q.dependencies || '').split(',')
       };
 
       if (tool.languages) {
@@ -172,12 +174,22 @@
           }
         });
 
+        var filteredPresets = filterPresets(tool.id, tool.languages[0].id);
+        var filteredPresetsGroups = {};
+        filteredPresets.forEach(function (el) {
+          if (!filteredPresetsGroups[el.group]) {
+            filteredPresetsGroups[el.group] = [];
+          }
+          filteredPresetsGroups[el.group].push(el);
+        });
+
         self.update({
           // state change, disable old download
           downloading: false,
           tool: tool,
           // defaults to the first language of the list
-          presets: filterPresets(tool.id, tool.languages[0].id),
+          presets: filteredPresets,
+          presetGroups: filteredPresetsGroups,
           language: tool.languages[0],
           dependencies: selection
         });
@@ -207,10 +219,9 @@
         } else {
           if (el.buildtool) {
             return el.buildtool === tool;
-          } else {
-            return false;
           }
         }
+        return true;
       });
     }
 
@@ -264,10 +275,20 @@
         }
       });
 
+      var filteredPresets = filterPresets(self.tool.id, e.target.value);
+      var filteredPresetsGroups = {};
+      filteredPresets.forEach(function (el) {
+        if (!filteredPresetsGroups[el.group]) {
+          filteredPresetsGroups[el.group] = [];
+        }
+        filteredPresetsGroups[el.group].push(el);
+      });
+
       self.update({
         // state change, disable old download
         downloading: false,
-        presets: filterPresets(self.tool.id, e.target.value),
+        presets: filteredPresets,
+        presetGroups: filteredPresetsGroups,
         language: newLang,
         dependencies: selection
       });
@@ -390,7 +411,7 @@
               // attempt to click, will fail on safari and IE
               document.getElementById('download-btn').click();
             } catch (e) {
-              // nevermind...
+              // never mind...
             }
           }, function (err) {
             ga('send', 'exception', {

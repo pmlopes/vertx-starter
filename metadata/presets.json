@@ -1,6 +1,7 @@
 [
   {
-    "id": "webapp + mongo",
+    "id": "MongoDB backend",
+    "group": "webapp",
     "description": "A simple webapp backed by mongoDB",
     "dependencies": [
       "io.vertx:vertx-core",
@@ -23,7 +24,8 @@
     ]
   },
   {
-    "id": "service proxy application",
+    "id": "Hello World",
+    "group": "service proxy",
     "description": "A bare bones service proxy application",
     "dependencies": [
       "io.vertx:vertx-core",
@@ -43,7 +45,8 @@
     ]
   },
   {
-    "id": "webapp + angular4",
+    "id": "Angular4 frontend",
+    "group": "webapp",
     "description": "A simple webapp with a Angular4 frontend",
     "dependencies": [
       "io.vertx:vertx-core",
@@ -89,7 +92,8 @@
     ]
   },
   {
-    "id": "webapp + react.js",
+    "id": "React.js Frontend",
+    "group": "webapp",
     "description": "A simple webapp with a react.js frontend",
     "dependencies": [
       "io.vertx:vertx-core",
@@ -124,7 +128,8 @@
     ]
   },
   {
-    "id": "webapp + react.js in TypeScript",
+    "id": "React.js Frontend in TypeScript",
+    "group": "webapp",
     "description": "A simple webapp with a react.js frontend using TypeScript",
     "dependencies": [
       "io.vertx:vertx-core",
@@ -159,7 +164,8 @@
     ]
   },
   {
-    "id": "webapp + vue.js",
+    "id": "Vue.js Frontend",
+    "group": "webapp",
     "description": "A simple webapp with a vue.js frontend",
     "dependencies": [
       "io.vertx:vertx-core",
@@ -197,7 +203,8 @@
     ]
   },
   {
-    "id": "webapp + aurelia.js",
+    "id": "Aurelia.js Frontend",
+    "group": "webapp",
     "description": "A simple webapp with a aurelia.js frontend",
     "dependencies": [
       "io.vertx:vertx-core",
@@ -236,7 +243,8 @@
     ]
   },
   {
-    "id": "webapp + knockout.js",
+    "id": "Knockout.js Frontend",
+    "group": "webapp",
     "description": "A simple webapp with a knockout.js frontend",
     "dependencies": [
       "io.vertx:vertx-core",
@@ -277,7 +285,8 @@
     ]
   },
   {
-    "id": "webapp + react redux",
+    "id": "React-Redux Frontend",
+    "group": "webapp",
     "description": "A simple webapp with a react redux frontend",
     "dependencies": [
       "io.vertx:vertx-core",
