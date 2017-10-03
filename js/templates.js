@@ -1,6 +1,51 @@
 (function () {
   Handlebars.templates = Handlebars.templates || {};
-    Handlebars.templates['maven/pom.xml'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
+    Handlebars.templates['gradle/build.gradle'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
+    return "    classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.1.0'\n";
+},"3":function(container,depth0,helpers,partials,data) {
+    return "apply plugin: 'kotlin'\n";
+},"5":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "description = '"
+    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.description : stack1), depth0))
+    + "'\n";
+},"7":function(container,depth0,helpers,partials,data) {
+    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+
+  return "  compile '"
+    + alias4(((helper = (helper = helpers.groupId || (depth0 != null ? depth0.groupId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"groupId","hash":{},"data":data}) : helper)))
+    + ":"
+    + alias4(((helper = (helper = helpers.artifactId || (depth0 != null ? depth0.artifactId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"artifactId","hash":{},"data":data}) : helper)))
+    + ":"
+    + alias4(((helper = (helper = helpers.version || (depth0 != null ? depth0.version : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"version","hash":{},"data":data}) : helper)))
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.classifier : depth0),{"name":"if","hash":{},"fn":container.program(8, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "'\n";
+},"8":function(container,depth0,helpers,partials,data) {
+    var helper;
+
+  return ":"
+    + container.escapeExpression(((helper = (helper = helpers.classifier || (depth0 != null ? depth0.classifier : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"classifier","hash":{},"data":data}) : helper)));
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=container.lambda, alias3=container.escapeExpression;
+
+  return "buildscript {\n  repositories {\n    mavenCentral()\n    jcenter()\n  }\n\n  dependencies {\n"
+    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.kotlin : stack1),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "    classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.4'\n  }\n}\n\n"
+    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.kotlin : stack1),{"name":"if","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "apply plugin: 'java'\napply plugin: 'application'\napply plugin: 'com.github.johnrengelman.shadow'\n\nrepositories {\n  mavenCentral()\n}\n\nversion = '"
+    + alias3(alias2(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.version : stack1), depth0))
+    + "'\ngroup = '"
+    + alias3(alias2(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.groupId : stack1), depth0))
+    + "'\n"
+    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.description : stack1),{"name":"if","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "sourceCompatibility = '1.8'\nmainClassName = 'io.vertx.core.Launcher'\n\ndependencies {\n"
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.dependencies : depth0),{"name":"each","hash":{},"fn":container.program(7, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "}\n\nshadowJar {\n  classifier = 'fat'\n  manifest {\n    attributes 'Main-Verticle': '"
+    + alias3(alias2(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.packageName : stack1), depth0))
+    + ".MainVerticle'\n  }\n  mergeServiceFiles {\n    include 'META-INF/services/io.vertx.core.spi.VerticleFactory'\n  }\n}\n\ntask wrapper(type: Wrapper) {\n  gradleVersion = '2.13'\n}\n";
+},"useData":true});
+  Handlebars.templates['maven/pom.xml'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     var stack1;
 
   return "  <description>"
@@ -62,51 +107,6 @@
     + "      </plugins>\n    </pluginManagement>\n\n    <plugins>\n"
     + ((stack1 = helpers["if"].call(alias3,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.kotlin : stack1),{"name":"if","hash":{},"fn":container.program(12, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "      <plugin>\n        <groupId>org.apache.maven.plugins</groupId>\n        <artifactId>maven-shade-plugin</artifactId>\n        <version>2.3</version>\n        <executions>\n          <execution>\n            <phase>package</phase>\n            <goals>\n              <goal>shade</goal>\n            </goals>\n            <configuration>\n              <transformers>\n                <transformer implementation=\"org.apache.maven.plugins.shade.resource.ManifestResourceTransformer\">\n                  <manifestEntries>\n                    <Main-Class>io.vertx.core.Launcher</Main-Class>\n                    <Main-Verticle>${main.verticle}</Main-Verticle>\n                  </manifestEntries>\n                </transformer>\n                <transformer implementation=\"org.apache.maven.plugins.shade.resource.AppendingTransformer\">\n                  <resource>META-INF/services/io.vertx.core.spi.VerticleFactory</resource>\n                </transformer>\n              </transformers>\n              <artifactSet>\n              </artifactSet>\n              <outputFile>${project.build.directory}/${project.artifactId}-${project.version}-fat.jar</outputFile>\n            </configuration>\n          </execution>\n        </executions>\n      </plugin>\n    </plugins>\n  </build>\n</project>\n";
-},"useData":true});
-  Handlebars.templates['gradle/build.gradle'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
-    return "    classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.1.0'\n";
-},"3":function(container,depth0,helpers,partials,data) {
-    return "apply plugin: 'kotlin'\n";
-},"5":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return "description = '"
-    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.description : stack1), depth0))
-    + "'\n";
-},"7":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
-
-  return "  compile '"
-    + alias4(((helper = (helper = helpers.groupId || (depth0 != null ? depth0.groupId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"groupId","hash":{},"data":data}) : helper)))
-    + ":"
-    + alias4(((helper = (helper = helpers.artifactId || (depth0 != null ? depth0.artifactId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"artifactId","hash":{},"data":data}) : helper)))
-    + ":"
-    + alias4(((helper = (helper = helpers.version || (depth0 != null ? depth0.version : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"version","hash":{},"data":data}) : helper)))
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.classifier : depth0),{"name":"if","hash":{},"fn":container.program(8, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "'\n";
-},"8":function(container,depth0,helpers,partials,data) {
-    var helper;
-
-  return ":"
-    + container.escapeExpression(((helper = (helper = helpers.classifier || (depth0 != null ? depth0.classifier : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"classifier","hash":{},"data":data}) : helper)));
-},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=container.lambda, alias3=container.escapeExpression;
-
-  return "buildscript {\n  repositories {\n    mavenCentral()\n    jcenter()\n  }\n\n  dependencies {\n"
-    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.kotlin : stack1),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "    classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.4'\n  }\n}\n\n"
-    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.kotlin : stack1),{"name":"if","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "apply plugin: 'java'\napply plugin: 'application'\napply plugin: 'com.github.johnrengelman.shadow'\n\nrepositories {\n  mavenCentral()\n}\n\nversion = '"
-    + alias3(alias2(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.version : stack1), depth0))
-    + "'\ngroup = '"
-    + alias3(alias2(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.groupId : stack1), depth0))
-    + "'\n"
-    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.description : stack1),{"name":"if","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "sourceCompatibility = '1.8'\nmainClassName = 'io.vertx.core.Launcher'\n\ndependencies {\n"
-    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.dependencies : depth0),{"name":"each","hash":{},"fn":container.program(7, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "}\n\nshadowJar {\n  classifier = 'fat'\n  manifest {\n    attributes 'Main-Verticle': '"
-    + alias3(alias2(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.packageName : stack1), depth0))
-    + ".MainVerticle'\n  }\n  mergeServiceFiles {\n    include 'META-INF/services/io.vertx.core.spi.VerticleFactory'\n  }\n}\n\ntask wrapper(type: Wrapper) {\n  gradleVersion = '2.13'\n}\n";
 },"useData":true});
   Handlebars.templates['npm/package.json'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     return "    \"babel-core\": \"^6.22.1\",\n    \"babel-loader\": \"^6.2.10\",\n    \"babel-preset-env\": \"^1.6.0\",\n";
@@ -378,26 +378,6 @@
   Handlebars.templates['sbt/project/plugins.sbt'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "addSbtPlugin(\"com.eed3si9n\"      % \"sbt-assembly\"        % \"0.14.3\")\naddSbtPlugin(\"com.geirsson\"      % \"sbt-scalafmt\"        % \"0.5.5\")\naddSbtPlugin(\"org.scoverage\"     % \"sbt-scoverage\"       % \"1.5.0\")\naddSbtPlugin(\"net.virtual-void\"  % \"sbt-dependency-graph\"% \"0.8.2\")\n";
 },"useData":true});
-  Handlebars.templates['maven/src/main/java/MainVerticle.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return "package "
-    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.packageName : stack1), depth0))
-    + ";\n\nimport io.vertx.core.AbstractVerticle;\n\npublic class MainVerticle extends AbstractVerticle {\n\n  @Override\n  public void start() {\n    // your code goes here...\n    vertx.createHttpServer().requestHandler(req -> {\n      req.response()\n        .putHeader(\"content-type\", \"text/plain\")\n        .end(\"Hello from Vert.x!\");\n    }).listen(8080);\n  }\n}\n";
-},"useData":true});
-  Handlebars.templates['maven/src/main/resources/main.groovy'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "vertx.createHttpServer().requestHandler({ req ->\n  req.response().putHeader(\"content-type\", \"text/html\").end(\"<html><body><h1>Hello from vert.x!</h1></body></html>\")\n}).listen(8080)\n";
-},"useData":true});
-  Handlebars.templates['maven/src/main/resources/main.rb'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "$vertx.create_http_server().request_handler() { |req|\n  req.response().put_header(\"content-type\", \"text/html\").end(\"<html><body><h1>Hello from vert.x!</h1></body></html>\")\n}.listen(8080)\n";
-},"useData":true});
-  Handlebars.templates['maven/src/main/kotlin/MainVerticle.kt'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return "package "
-    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.packageName : stack1), depth0))
-    + "\n\nimport io.vertx.core.AbstractVerticle\n\nclass MainVerticle : AbstractVerticle() {\n\n  override fun start() {\n    // your code goes here...\n    vertx.createHttpServer().requestHandler({ req ->\n      req.response()\n        .putHeader(\"content-type\", \"text/plain\")\n        .end(\"Hello from Vert.x!\")\n    }).listen(8080)\n  }\n}\n";
-},"useData":true});
   Handlebars.templates['gradle/src/main/java/MainVerticle.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
@@ -417,6 +397,26 @@
 },"useData":true});
   Handlebars.templates['gradle/src/main/resources/main.rb'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "# your code goes here...\n$vertx.create_http_server().request_handler() { |req|\n  req.response().put_header(\"content-type\", \"text/html\").end(\"<html><body><h1>Hello from vert.x!</h1></body></html>\")\n}.listen(8080)\n";
+},"useData":true});
+  Handlebars.templates['maven/src/main/java/MainVerticle.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "package "
+    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.packageName : stack1), depth0))
+    + ";\n\nimport io.vertx.core.AbstractVerticle;\n\npublic class MainVerticle extends AbstractVerticle {\n\n  @Override\n  public void start() {\n    // your code goes here...\n    vertx.createHttpServer().requestHandler(req -> {\n      req.response()\n        .putHeader(\"content-type\", \"text/plain\")\n        .end(\"Hello from Vert.x!\");\n    }).listen(8080);\n  }\n}\n";
+},"useData":true});
+  Handlebars.templates['maven/src/main/kotlin/MainVerticle.kt'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "package "
+    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.packageName : stack1), depth0))
+    + "\n\nimport io.vertx.core.AbstractVerticle\n\nclass MainVerticle : AbstractVerticle() {\n\n  override fun start() {\n    // your code goes here...\n    vertx.createHttpServer().requestHandler({ req ->\n      req.response()\n        .putHeader(\"content-type\", \"text/plain\")\n        .end(\"Hello from Vert.x!\")\n    }).listen(8080)\n  }\n}\n";
+},"useData":true});
+  Handlebars.templates['maven/src/main/resources/main.groovy'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "vertx.createHttpServer().requestHandler({ req ->\n  req.response().putHeader(\"content-type\", \"text/html\").end(\"<html><body><h1>Hello from vert.x!</h1></body></html>\")\n}).listen(8080)\n";
+},"useData":true});
+  Handlebars.templates['maven/src/main/resources/main.rb'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "$vertx.create_http_server().request_handler() { |req|\n  req.response().put_header(\"content-type\", \"text/html\").end(\"<html><body><h1>Hello from vert.x!</h1></body></html>\")\n}.listen(8080)\n";
 },"useData":true});
   Handlebars.templates['npm/src/main/js/index.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "// your code goes here...\nvertx.createHttpServer()\n  .requestHandler(function (req) {\n    req.response()\n      .putHeader(\"content-type\", \"text/plain\")\n      .end(\"Hello from Vert.x!\");\n}).listen(8080);\n\nconsole.log('Listening at http://127.0.0.1:8080');\n";

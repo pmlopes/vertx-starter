@@ -8,8 +8,18 @@
   "lang": "en-US",
   "icons": [
     {
+      "src": "favicon.ico",
+      "sizes": "32x32"
+    },
+    {
       "src": "img/stack.svg",
+      "sizes": "48x48 72x72 96x96 128x128 196x196",
       "type": "image/svg"
+    },
+    {
+      "src": "apple-touch-icon.png",
+      "sizes": "256x256",
+      "type": "image/png"
     }
   ]
 }
