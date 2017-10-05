@@ -424,12 +424,6 @@
   Handlebars.templates['maven/src/main/resources/main.rb'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "$vertx.create_http_server().request_handler() { |req|\n  req.response().put_header(\"content-type\", \"text/html\").end(\"<html><body><h1>Hello from vert.x!</h1></body></html>\")\n}.listen(8080)\n";
 },"useData":true});
-  Handlebars.templates['npm/src/main/js/index.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "// your code goes here...\nvertx.createHttpServer()\n  .requestHandler(function (req) {\n    req.response()\n      .putHeader(\"content-type\", \"text/plain\")\n      .end(\"Hello from Vert.x!\");\n}).listen(8080);\n\nconsole.log('Listening at http://127.0.0.1:8080');\n";
-},"useData":true});
-  Handlebars.templates['npm/src/main/ts/index.ts'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "// your code goes here...\ndeclare var vertx: any;\n\nvertx.createHttpServer()\n  .requestHandler(function (req: any) {\n    req.response()\n      .putHeader(\"content-type\", \"text/plain\")\n      .end(\"Hello from Vert.x!\");\n}).listen(8080);\n\nconsole.log('Listening at http://127.0.0.1:8080');\n";
-},"useData":true});
   Handlebars.templates['package-info/src/main/java/package-info.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=container.lambda, alias2=container.escapeExpression;
 
@@ -440,6 +434,12 @@
     + "\")\npackage "
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.packageName : stack1), depth0))
     + ";\n\nimport io.vertx.codegen.annotations.ModuleGen;\n";
+},"useData":true});
+  Handlebars.templates['npm/src/main/js/index.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "// your code goes here...\nvertx.createHttpServer()\n  .requestHandler(function (req) {\n    req.response()\n      .putHeader(\"content-type\", \"text/plain\")\n      .end(\"Hello from Vert.x!\");\n}).listen(8080);\n\nconsole.log('Listening at http://127.0.0.1:8080');\n";
+},"useData":true});
+  Handlebars.templates['npm/src/main/ts/index.ts'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "// your code goes here...\ndeclare var vertx: any;\n\nvertx.createHttpServer()\n  .requestHandler(function (req: any) {\n    req.response()\n      .putHeader(\"content-type\", \"text/plain\")\n      .end(\"Hello from Vert.x!\");\n}).listen(8080);\n\nconsole.log('Listening at http://127.0.0.1:8080');\n";
 },"useData":true});
   Handlebars.templates['sbt/src/main/scala/MainVerticle.scala'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
@@ -757,7 +757,7 @@
     + ".api;\n\nimport io.vertx.core.Handler;\nimport io.vertx.core.json.JsonArray;\nimport io.vertx.core.json.JsonObject;\nimport io.vertx.ext.web.RoutingContext;\n\nimport java.time.Instant;\nimport java.util.Arrays;\nimport java.util.List;\nimport java.util.Random;\n\nimport static java.time.temporal.ChronoUnit.DAYS;\n\npublic class WeatherForecastAPI implements Handler<RoutingContext> {\n\n    private static final List<String> SUMMARIES = Arrays.asList(\"Freezing\", \"Bracing\", \"Chilly\", \"Cool\", \"Mild\", \"Warm\", \"Balmy\", \"Hot\", \"Sweltering\", \"Scorching\");\n    private Random rnd = new Random();\n\n    @Override\n    public void handle(RoutingContext ctx) {\n\n        final JsonArray response = new JsonArray();\n\n        for (int i = 1; i <= 5; i++) {\n            JsonObject forecast = new JsonObject()\n                    .put(\"dateFormatted\", Instant.now().plus(i, DAYS))\n                    .put(\"temperatureC\", -20 + rnd.nextInt(35))\n                    .put(\"summary\", SUMMARIES.get(rnd.nextInt(SUMMARIES.size())));\n\n            forecast.put(\"temperatureF\", 32 + (int) (forecast.getInteger(\"temperatureC\") / 0.5556));\n\n            response.add(forecast);\n        }\n\n        ctx.response()\n                .putHeader(\"Content-Type\", \"application/json\")\n                .end(response.encode());\n    }\n}\n";
 },"useData":true});
   Handlebars.templates['web+react+typescript/src/main/resources/templates/index.hbs'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<!DOCTYPE html>\n<html>\n<head>\n  <meta charset=\"utf-8\"/>\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"/>\n  <title>{{ title }}</title>\n  <base href=\"/\"/>\n\n  <link rel=\"stylesheet\" href=\"/dist/vendor.css\"/>\n</head>\n<body>\n  <div id=\"react-app\">Loading...</div>\n\n  <script src=\"/dist/vendor.js\"></script>\n  <script src=\"/dist/main.js\"></script>\n</body>\n</html>\n";
+    return "<!DOCTYPE html>\n<html>\n<head>\n  <meta charset=\"utf-8\"/>\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"/>\n  <title>{{ title }}</title>\n  <base href=\"/\"/>\n\n  <link rel=\"stylesheet\" href=\"/dist/vendor.css\"/>\n</head>\n<body>\n  <div id=\"react-app\">Loading...</div>\n\n  <script src=\"/dist/vendor.js\"></script>\n  <script src=\"/dist/main.js\"></script>\n  <script src=\"/hot-reload/script\"></script>\n</body>\n</html>\n";
 },"useData":true});
   Handlebars.templates['web+react+typescript/src/main/ts/components/Counter.tsx'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "import * as React from 'react';\nimport { RouteComponentProps } from 'react-router';\n\ninterface CounterState {\n    currentCount: number;\n}\n\nexport class Counter extends React.Component<RouteComponentProps<{}>, CounterState> {\n    constructor() {\n        super();\n        this.state = { currentCount: 0 };\n    }\n\n    public render() {\n        return <div>\n            <h1>Counter</h1>\n\n            <p>This is a simple example of a React component.</p>\n\n            <p>Current count: <strong>{ this.state.currentCount }</strong></p>\n\n            <button onClick={ () => { this.incrementCounter() } }>Increment</button>\n        </div>;\n    }\n\n    incrementCounter() {\n        this.setState({\n            currentCount: this.state.currentCount + 1\n        });\n    }\n}\n";
