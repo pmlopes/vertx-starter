@@ -491,8 +491,14 @@ riot.tag2('navigation', '<li each="{opts.buildtools}" class="nav-item"><a href="
     if (project.preset) {
       templates = templates.concat(project.preset.templates || []);
       // merge preset language specific templates
-      if (project.preset.languages && project.preset.languages[project.language.id]) {
-        templates = templates.concat(project.preset.languages[project.language.id].templates);
+      if (project.preset.languages) {
+        var presetLanguages = project.preset.languages.filter(function (el) {
+          return el.id === project.language.id;
+        });
+
+        if (presetLanguages.length === 1) {
+          templates = templates.concat(presetLanguages[0].templates);
+        }
       }
     }
     // merge dependency specific templates
