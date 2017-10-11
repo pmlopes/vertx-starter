@@ -44,7 +44,9 @@ module.exports = (env) => {
         filename: '[file].map', // Remove this line if you prefer inline source maps
         moduleFilenameTemplate: path.relative(bundleOutputDir, '[resourcePath]') // Point sourcemap entries to the original file locations on disk
       }),
-      new VertxPlugin()
+      new VertxPlugin({
+        fatJar: 'target/{{metadata.artifactId}}-{{metadata.version}}-fat.jar'
+      })
     ] : [
       // Plugins that apply in production builds only
       new webpack.optimize.UglifyJsPlugin(),

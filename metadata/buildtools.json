@@ -15,7 +15,7 @@
         "id": "java",
         "main": "{package}.MainVerticle",
         "templates": [
-          "maven/src/main/java/{package}/MainVerticle.java"
+          "verticle/src/main/java/{package}/MainVerticle.java"
         ]
       },
       {
@@ -36,7 +36,7 @@
         "id": "kotlin",
         "main": "{package}.MainVerticle",
         "templates": [
-          "maven/src/main/kotlin/{package}/MainVerticle.kt"
+          "verticle/src/main/kotlin/{package}/MainVerticle.kt"
         ]
       }
     ],
@@ -69,7 +69,7 @@
         "id": "java",
         "main": "{package}.MainVerticle",
         "templates": [
-          "maven/src/main/java/{package}/MainVerticle.java"
+          "verticle/src/main/java/{package}/MainVerticle.java"
         ]
       },
       {
@@ -90,7 +90,7 @@
         "id": "kotlin",
         "main": "{package}.MainVerticle",
         "templates": [
-          "maven/src/main/kotlin/{package}/MainVerticle.kt"
+          "verticle/src/main/kotlin/{package}/MainVerticle.kt"
         ]
       }
     ],

@@ -522,13 +522,13 @@
     "classifier": "processor",
     "description": "Vert.x Service Proxy processor generates the required stubs at build time.",
     "templates": [
-      "service-proxy/src/main/java/{package}/package-info.java"
+      "package-info/src/main/java/{package}/package-info.java"
     ]
   },
   {
     "groupId": "xyz.jetdrone",
     "artifactId": "hot-reload",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "description": "Hot Reload Development Handler."
   }
 ]

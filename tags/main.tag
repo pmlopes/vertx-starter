@@ -471,7 +471,7 @@
             c.checked = false;
             c.id = index;
             found.push(c);
-            ctx++;
+            cnt++;
           }
         });
 

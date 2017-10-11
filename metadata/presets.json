@@ -59,13 +59,20 @@
       {
         "id": "java",
         "templates": [
-          "web+angular4/src/main/java/{package}/MainVerticle.java",
-          "web+angular4/src/main/java/{package}/api/WeatherForecastAPI.java"
+          "verticle/src/main/java/{package}/MainVerticle.java",
+          "verticle/src/main/java/{package}/api/WeatherForecastAPI.java"
+        ]
+      },
+      {
+        "id": "kotlin",
+        "templates": [
+          "verticle/src/main/kotlin/{package}/MainVerticle.kt",
+          "verticle/src/main/java/{package}/api/WeatherForecastAPI.java"
         ]
       }
     ],
     "templates": [
-      "web+angular4/src/main/resources/templates/index.hbs",
+      "verticle/src/main/resources/templates/index.hbs",
       "web+angular4/src/main/ts/app/app.module.server.ts",
       "web+angular4/src/main/ts/app/app.module.browser.ts",
       "web+angular4/src/main/ts/app/app.module.shared.ts",
@@ -106,13 +113,20 @@
       {
         "id": "java",
         "templates": [
-          "web+react/src/main/java/{package}/MainVerticle.java",
-          "web+react/src/main/java/{package}/api/WeatherForecastAPI.java"
+          "verticle/src/main/java/{package}/MainVerticle.java",
+          "verticle/src/main/java/{package}/api/WeatherForecastAPI.java"
+        ]
+      },
+      {
+        "id": "kotlin",
+        "templates": [
+          "verticle/src/main/kotlin/{package}/MainVerticle.kt",
+          "verticle/src/main/java/{package}/api/WeatherForecastAPI.java"
         ]
       }
     ],
     "templates": [
-      "web+react/src/main/resources/templates/index.hbs",
+      "verticle/src/main/resources/templates/index.hbs",
       "web+react/.babelrc",
       "web+react/src/main/js/routes.jsx",
       "web+react/src/main/js/css/site.css",
@@ -142,13 +156,20 @@
       {
         "id": "java",
         "templates": [
-          "web+react+typescript/src/main/java/{package}/MainVerticle.java",
-          "web+react+typescript/src/main/java/{package}/api/WeatherForecastAPI.java"
+          "verticle/src/main/java/{package}/MainVerticle.java",
+          "verticle/src/main/java/{package}/api/WeatherForecastAPI.java"
+        ]
+      },
+      {
+        "id": "kotlin",
+        "templates": [
+          "verticle/src/main/kotlin/{package}/MainVerticle.kt",
+          "verticle/src/main/java/{package}/api/WeatherForecastAPI.java"
         ]
       }
     ],
     "templates": [
-      "web+react+typescript/src/main/resources/templates/index.hbs",
+      "verticle/src/main/resources/templates/index.hbs",
       "web+react+typescript/tsconfig.json",
       "web+react+typescript/src/main/ts/boot.tsx",
       "web+react+typescript/src/main/ts/css/site.css",
@@ -178,13 +199,20 @@
       {
         "id": "java",
         "templates": [
-          "web+vue/src/main/java/{package}/MainVerticle.java",
-          "web+vue/src/main/java/{package}/api/WeatherForecastAPI.java"
+          "verticle/src/main/java/{package}/MainVerticle.java",
+          "verticle/src/main/java/{package}/api/WeatherForecastAPI.java"
+        ]
+      },
+      {
+        "id": "kotlin",
+        "templates": [
+          "verticle/src/main/kotlin/{package}/MainVerticle.kt",
+          "verticle/src/main/java/{package}/api/WeatherForecastAPI.java"
         ]
       }
     ],
     "templates": [
-      "web+vue/src/main/resources/templates/index.hbs",
+      "verticle/src/main/resources/templates/index.hbs",
       "web+vue/.babelrc",
       "web+vue/src/main/js/css/site.css",
       "web+vue/src/main/js/components/app/app.js",
@@ -217,13 +245,20 @@
       {
         "id": "java",
         "templates": [
-          "web+aurelia/src/main/java/{package}/MainVerticle.java",
-          "web+aurelia/src/main/java/{package}/api/WeatherForecastAPI.java"
+          "verticle/src/main/java/{package}/MainVerticle.java",
+          "verticle/src/main/java/{package}/api/WeatherForecastAPI.java"
+        ]
+      },
+      {
+        "id": "kotlin",
+        "templates": [
+          "verticle/src/main/kotlin/{package}/MainVerticle.kt",
+          "verticle/src/main/java/{package}/api/WeatherForecastAPI.java"
         ]
       }
     ],
     "templates": [
-      "web+aurelia/src/main/resources/templates/index.hbs",
+      "verticle/src/main/resources/templates/index.hbs",
       "web+aurelia/.babelrc",
       "web+aurelia/src/main/js/app/components/app/app.js",
       "web+aurelia/src/main/js/app/components/app/app.css",
@@ -257,13 +292,20 @@
       {
         "id": "java",
         "templates": [
-          "web+knockout/src/main/java/{package}/MainVerticle.java",
-          "web+knockout/src/main/java/{package}/api/WeatherForecastAPI.java"
+          "verticle/src/main/java/{package}/MainVerticle.java",
+          "verticle/src/main/java/{package}/api/WeatherForecastAPI.java"
+        ]
+      },
+      {
+        "id": "kotlin",
+        "templates": [
+          "verticle/src/main/kotlin/{package}/MainVerticle.kt",
+          "verticle/src/main/java/{package}/api/WeatherForecastAPI.java"
         ]
       }
     ],
     "templates": [
-      "web+knockout/src/main/resources/templates/index.hbs",
+      "verticle/src/main/resources/templates/index.hbs",
       "web+knockout/.babelrc",
       "web+knockout/src/main/js/router.js",
       "web+knockout/src/main/js/css/site.css",
@@ -299,13 +341,20 @@
       {
         "id": "java",
         "templates": [
-          "web+react-redux/src/main/java/{package}/MainVerticle.java",
-          "web+react-redux/src/main/java/{package}/api/WeatherForecastAPI.java"
+          "verticle/src/main/java/{package}/MainVerticle.java",
+          "verticle/src/main/java/{package}/api/WeatherForecastAPI.java"
+        ]
+      },
+      {
+        "id": "kotlin",
+        "templates": [
+          "verticle/src/main/kotlin/{package}/MainVerticle.kt",
+          "verticle/src/main/java/{package}/api/WeatherForecastAPI.java"
         ]
       }
     ],
     "templates": [
-      "web+react-redux/src/main/resources/templates/index.hbs",
+      "verticle/src/main/resources/templates/index.hbs",
       "web+react-redux/.babelrc",
       "web+react-redux/src/main/js/configureStore.js",
       "web+react-redux/src/main/js/routes.jsx",

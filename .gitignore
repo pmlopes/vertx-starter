@@ -10,3 +10,5 @@ dist/css
 dist/metadata.json
 # deployment
 .publish
+# util
+codegen
