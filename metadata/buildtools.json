@@ -20,16 +20,16 @@
       },
       {
         "id": "groovy",
-        "main": "main.groovy",
+        "main": "main_verticle.groovy",
         "templates": [
-          "maven/src/main/resources/main.groovy"
+          "verticle/src/main/resources/main_verticle.groovy"
         ]
       },
       {
         "id": "ruby",
-        "main": "main.rb",
+        "main": "main_verticle.rb",
         "templates": [
-          "maven/src/main/resources/main.rb"
+          "verticle/src/main/resources/main_verticle.rb"
         ]
       },
       {
@@ -37,6 +37,13 @@
         "main": "{package}.MainVerticle",
         "templates": [
           "verticle/src/main/kotlin/{package}/MainVerticle.kt"
+        ]
+      },
+      {
+        "id": "javascript",
+        "main": "main_verticle.js",
+        "templates": [
+          "verticle/src/main/resources/main_verticle.js"
         ]
       }
     ],
@@ -74,16 +81,16 @@
       },
       {
         "id": "groovy",
-        "main": "main.groovy",
+        "main": "main_verticle.groovy",
         "templates": [
-          "maven/src/main/resources/main.groovy"
+          "verticle/src/main/resources/main_verticle.groovy"
         ]
       },
       {
         "id": "ruby",
-        "main": "main.rb",
+        "main": "main_verticle.rb",
         "templates": [
-          "maven/src/main/resources/main.rb"
+          "verticle/src/main/resources/main_verticle.rb"
         ]
       },
       {
@@ -91,6 +98,13 @@
         "main": "{package}.MainVerticle",
         "templates": [
           "verticle/src/main/kotlin/{package}/MainVerticle.kt"
+        ]
+      },
+      {
+        "id": "javascript",
+        "main": "main_verticle.js",
+        "templates": [
+          "verticle/src/main/resources/main_verticle.js"
         ]
       }
     ],

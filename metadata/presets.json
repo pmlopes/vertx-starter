@@ -45,9 +45,9 @@
     ]
   },
   {
-    "id": "Angular4 frontend",
+    "id": "AngularJS",
     "group": "webapp",
-    "description": "A simple webapp with a Angular4 frontend",
+    "description": "A simple webapp with a AngularJS",
     "dependencies": [
       "io.vertx:vertx-core",
       "io.vertx:vertx-web",
@@ -57,22 +57,26 @@
     "buildtool": "maven",
     "languages": [
       {
-        "id": "java",
-        "templates": [
-          "verticle/src/main/java/{package}/MainVerticle.java",
-          "verticle/src/main/java/{package}/api/WeatherForecastAPI.java"
-        ]
+        "id": "java"
       },
       {
-        "id": "kotlin",
-        "templates": [
-          "verticle/src/main/kotlin/{package}/MainVerticle.kt",
-          "verticle/src/main/java/{package}/api/WeatherForecastAPI.java"
-        ]
+        "id": "kotlin"
+      },
+      {
+        "id": "groovy"
+      },
+      {
+        "id": "ruby"
+      },
+      {
+        "id": "js"
       }
     ],
     "templates": [
+      "verticle/src/main/java/{package}/api/WeatherForecastAPI.java",
+
       "verticle/src/main/resources/templates/index.hbs",
+
       "web+angular4/src/main/ts/app/app.module.server.ts",
       "web+angular4/src/main/ts/app/app.module.browser.ts",
       "web+angular4/src/main/ts/app/app.module.shared.ts",
@@ -99,7 +103,7 @@
     ]
   },
   {
-    "id": "React.js Frontend",
+    "id": "ReactJS",
     "group": "webapp",
     "description": "A simple webapp with a react.js frontend",
     "dependencies": [
@@ -111,22 +115,26 @@
     "buildtool": "maven",
     "languages": [
       {
-        "id": "java",
-        "templates": [
-          "verticle/src/main/java/{package}/MainVerticle.java",
-          "verticle/src/main/java/{package}/api/WeatherForecastAPI.java"
-        ]
+        "id": "java"
       },
       {
-        "id": "kotlin",
-        "templates": [
-          "verticle/src/main/kotlin/{package}/MainVerticle.kt",
-          "verticle/src/main/java/{package}/api/WeatherForecastAPI.java"
-        ]
+        "id": "kotlin"
+      },
+      {
+        "id": "groovy"
+      },
+      {
+        "id": "ruby"
+      },
+      {
+        "id": "js"
       }
     ],
     "templates": [
+      "verticle/src/main/java/{package}/api/WeatherForecastAPI.java",
+
       "verticle/src/main/resources/templates/index.hbs",
+
       "web+react/.babelrc",
       "web+react/src/main/js/routes.jsx",
       "web+react/src/main/js/css/site.css",
@@ -142,7 +150,7 @@
     ]
   },
   {
-    "id": "React.js Frontend in TypeScript",
+    "id": "ReactJS in TypeScript",
     "group": "webapp",
     "description": "A simple webapp with a react.js frontend using TypeScript",
     "dependencies": [
@@ -154,22 +162,26 @@
     "buildtool": "maven",
     "languages": [
       {
-        "id": "java",
-        "templates": [
-          "verticle/src/main/java/{package}/MainVerticle.java",
-          "verticle/src/main/java/{package}/api/WeatherForecastAPI.java"
-        ]
+        "id": "java"
       },
       {
-        "id": "kotlin",
-        "templates": [
-          "verticle/src/main/kotlin/{package}/MainVerticle.kt",
-          "verticle/src/main/java/{package}/api/WeatherForecastAPI.java"
-        ]
+        "id": "kotlin"
+      },
+      {
+        "id": "groovy"
+      },
+      {
+        "id": "ruby"
+      },
+      {
+        "id": "js"
       }
     ],
     "templates": [
+      "verticle/src/main/java/{package}/api/WeatherForecastAPI.java",
+
       "verticle/src/main/resources/templates/index.hbs",
+
       "web+react+typescript/tsconfig.json",
       "web+react+typescript/src/main/ts/boot.tsx",
       "web+react+typescript/src/main/ts/css/site.css",
@@ -185,7 +197,7 @@
     ]
   },
   {
-    "id": "Vue.js Frontend",
+    "id": "VueJS",
     "group": "webapp",
     "description": "A simple webapp with a vue.js frontend",
     "dependencies": [
@@ -197,22 +209,26 @@
     "buildtool": "maven",
     "languages": [
       {
-        "id": "java",
-        "templates": [
-          "verticle/src/main/java/{package}/MainVerticle.java",
-          "verticle/src/main/java/{package}/api/WeatherForecastAPI.java"
-        ]
+        "id": "java"
       },
       {
-        "id": "kotlin",
-        "templates": [
-          "verticle/src/main/kotlin/{package}/MainVerticle.kt",
-          "verticle/src/main/java/{package}/api/WeatherForecastAPI.java"
-        ]
+        "id": "kotlin"
+      },
+      {
+        "id": "groovy"
+      },
+      {
+        "id": "ruby"
+      },
+      {
+        "id": "js"
       }
     ],
     "templates": [
+      "verticle/src/main/java/{package}/api/WeatherForecastAPI.java",
+
       "verticle/src/main/resources/templates/index.hbs",
+
       "web+vue/.babelrc",
       "web+vue/src/main/js/css/site.css",
       "web+vue/src/main/js/components/app/app.js",
@@ -231,7 +247,7 @@
     ]
   },
   {
-    "id": "Aurelia.js Frontend",
+    "id": "AureliaJS",
     "group": "webapp",
     "description": "A simple webapp with a aurelia.js frontend",
     "dependencies": [
@@ -243,22 +259,26 @@
     "buildtool": "maven",
     "languages": [
       {
-        "id": "java",
-        "templates": [
-          "verticle/src/main/java/{package}/MainVerticle.java",
-          "verticle/src/main/java/{package}/api/WeatherForecastAPI.java"
-        ]
+        "id": "java"
       },
       {
-        "id": "kotlin",
-        "templates": [
-          "verticle/src/main/kotlin/{package}/MainVerticle.kt",
-          "verticle/src/main/java/{package}/api/WeatherForecastAPI.java"
-        ]
+        "id": "kotlin"
+      },
+      {
+        "id": "groovy"
+      },
+      {
+        "id": "ruby"
+      },
+      {
+        "id": "js"
       }
     ],
     "templates": [
+      "verticle/src/main/java/{package}/api/WeatherForecastAPI.java",
+
       "verticle/src/main/resources/templates/index.hbs",
+
       "web+aurelia/.babelrc",
       "web+aurelia/src/main/js/app/components/app/app.js",
       "web+aurelia/src/main/js/app/components/app/app.css",
@@ -278,7 +298,7 @@
     ]
   },
   {
-    "id": "Knockout.js Frontend",
+    "id": "KnockoutJS",
     "group": "webapp",
     "description": "A simple webapp with a knockout.js frontend",
     "dependencies": [
@@ -290,22 +310,26 @@
     "buildtool": "maven",
     "languages": [
       {
-        "id": "java",
-        "templates": [
-          "verticle/src/main/java/{package}/MainVerticle.java",
-          "verticle/src/main/java/{package}/api/WeatherForecastAPI.java"
-        ]
+        "id": "java"
       },
       {
-        "id": "kotlin",
-        "templates": [
-          "verticle/src/main/kotlin/{package}/MainVerticle.kt",
-          "verticle/src/main/java/{package}/api/WeatherForecastAPI.java"
-        ]
+        "id": "kotlin"
+      },
+      {
+        "id": "groovy"
+      },
+      {
+        "id": "ruby"
+      },
+      {
+        "id": "js"
       }
     ],
     "templates": [
+      "verticle/src/main/java/{package}/api/WeatherForecastAPI.java",
+
       "verticle/src/main/resources/templates/index.hbs",
+
       "web+knockout/.babelrc",
       "web+knockout/src/main/js/router.js",
       "web+knockout/src/main/js/css/site.css",
@@ -327,7 +351,7 @@
     ]
   },
   {
-    "id": "React-Redux Frontend",
+    "id": "React-Redux",
     "group": "webapp",
     "description": "A simple webapp with a react redux frontend",
     "dependencies": [
@@ -339,22 +363,26 @@
     "buildtool": "maven",
     "languages": [
       {
-        "id": "java",
-        "templates": [
-          "verticle/src/main/java/{package}/MainVerticle.java",
-          "verticle/src/main/java/{package}/api/WeatherForecastAPI.java"
-        ]
+        "id": "java"
       },
       {
-        "id": "kotlin",
-        "templates": [
-          "verticle/src/main/kotlin/{package}/MainVerticle.kt",
-          "verticle/src/main/java/{package}/api/WeatherForecastAPI.java"
-        ]
+        "id": "kotlin"
+      },
+      {
+        "id": "groovy"
+      },
+      {
+        "id": "ruby"
+      },
+      {
+        "id": "js"
       }
     ],
     "templates": [
+      "verticle/src/main/java/{package}/api/WeatherForecastAPI.java",
+
       "verticle/src/main/resources/templates/index.hbs",
+
       "web+react-redux/.babelrc",
       "web+react-redux/src/main/js/configureStore.js",
       "web+react-redux/src/main/js/routes.jsx",

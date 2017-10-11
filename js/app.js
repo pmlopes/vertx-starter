@@ -116,7 +116,7 @@
         });
 
         if (presetLanguages.length === 1) {
-          templates = templates.concat(presetLanguages[0].templates);
+          templates = templates.concat(presetLanguages[0].templates || []);
         }
       }
     }
@@ -192,6 +192,16 @@
 
     // locate handlebars template
     fn = Handlebars.templates[hbfile];
+
+    if (!fn) {
+      ga('send', 'exception', {
+        'exDescription': 'Template not found: ' + hbfile,
+        'exFatal': true
+      });
+
+      return;
+    }
+
     // add to zip
     if (exec) {
       zip.file(project.metadata.name.replace(/[ -]/g, '_') + '/' + zfile, fn(project), {
