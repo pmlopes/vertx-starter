@@ -73,8 +73,6 @@
       }
     ],
     "templates": [
-      "verticle/src/main/java/{package}/api/WeatherForecastAPI.java",
-
       "verticle/src/main/resources/templates/index.hbs",
 
       "web+angular4/src/main/ts/app/app.module.server.ts",
@@ -131,8 +129,6 @@
       }
     ],
     "templates": [
-      "verticle/src/main/java/{package}/api/WeatherForecastAPI.java",
-
       "verticle/src/main/resources/templates/index.hbs",
 
       "web+react/.babelrc",
@@ -178,8 +174,6 @@
       }
     ],
     "templates": [
-      "verticle/src/main/java/{package}/api/WeatherForecastAPI.java",
-
       "verticle/src/main/resources/templates/index.hbs",
 
       "web+react+typescript/tsconfig.json",
@@ -225,8 +219,6 @@
       }
     ],
     "templates": [
-      "verticle/src/main/java/{package}/api/WeatherForecastAPI.java",
-
       "verticle/src/main/resources/templates/index.hbs",
 
       "web+vue/.babelrc",
@@ -275,8 +267,6 @@
       }
     ],
     "templates": [
-      "verticle/src/main/java/{package}/api/WeatherForecastAPI.java",
-
       "verticle/src/main/resources/templates/index.hbs",
 
       "web+aurelia/.babelrc",
@@ -326,8 +316,6 @@
       }
     ],
     "templates": [
-      "verticle/src/main/java/{package}/api/WeatherForecastAPI.java",
-
       "verticle/src/main/resources/templates/index.hbs",
 
       "web+knockout/.babelrc",
@@ -379,8 +367,6 @@
       }
     ],
     "templates": [
-      "verticle/src/main/java/{package}/api/WeatherForecastAPI.java",
-
       "verticle/src/main/resources/templates/index.hbs",
 
       "web+react-redux/.babelrc",

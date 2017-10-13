@@ -40,7 +40,7 @@
         ]
       },
       {
-        "id": "javascript",
+        "id": "js",
         "main": "main_verticle.js",
         "templates": [
           "verticle/src/main/resources/main_verticle.js"
@@ -101,7 +101,7 @@
         ]
       },
       {
-        "id": "javascript",
+        "id": "js",
         "main": "main_verticle.js",
         "templates": [
           "verticle/src/main/resources/main_verticle.js"
@@ -135,7 +135,7 @@
     ],
     "languages": [
       {
-        "id": "javascript",
+        "id": "js",
         "main": "main-server.js",
         "templates": [
           "npm/.babelrc",

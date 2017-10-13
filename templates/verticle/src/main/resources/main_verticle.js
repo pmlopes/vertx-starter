@@ -43,7 +43,31 @@ router.get("/").handler(function (ctx) {
 });
 
 // the example weather API
-router.get("/api/weather-forecasts").handler(new (Java.type("template.api.WeatherForecastAPI"))());
+var SUMMARIES = ["Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"];
+var rnd = new (Java.type("java.util.Random"))();
+
+router.get("/api/weather-forecasts").handler(function (ctx) {
+  var response = [];
+
+  var now = new Date();
+
+  for (var i = 1; i <= 5; i++) {
+    now.setDate(now.getDate() + 1);
+    var forecast = {
+      "dateFormatted" : now.toISOString(),
+      "temperatureC" : -20 + Math.random() * 35,
+      "summary" : SUMMARIES[Math.random() * SUMMARIES.length]
+    };
+
+    forecast.temperatureF = 32 + (forecast.temperatureC / 0.5556);
+
+    response.push(forecast);
+  }
+
+  ctx.response()
+    .putHeader("Content-Type", "application/json")
+    .end(JSON.stringify(response));
+});
 
 // Serve the static resources
 router.route().handler({{#if dependenciesGAV.[xyz.jetdrone:hot-reload]}}HotReload.createStaticHandler().handle{{else}}StaticHandler.create().handle{{/if}});

@@ -1,4 +1,6 @@
 {{#if dependenciesGAV.[io.vertx:vertx-web]}}
+require 'date'
+
 require 'vertx-web/router'
 require 'vertx-web/static_handler'
 {{#if dependenciesGAV.[io.vertx:vertx-web-templ-handlebars]}}
@@ -43,14 +45,37 @@ router.get("/").handler() { |ctx|
 }
 
 # the example weather API
-router.get("/api/weather-forecasts").handler(&Java::TemplateApi::WeatherForecastAPI.new())
+SUMMARIES = ["Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"]
+
+router.get("/api/weather-forecasts").handler() { |ctx|
+  response = []
+  now = Date.today
+
+  i = 1
+  while (i <= 5)
+    now += 1
+    forecast = {
+      'dateFormatted' => now.strftime('%F'),
+      'temperatureC' => -20 + rand(35),
+      'summary' => SUMMARIES[rand(SUMMARIES.length)]
+    }
+
+    forecast['temperatureF'] = 32 + (forecast['temperatureC'] / 0.5556)
+
+    response.push(forecast)
+    i+=1
+  end
+
+  ctx.response().put_header("Content-Type", "application/json").end(JSON.generate(response))
+}
+
 # Serve the static resources
-router.route().handler({{#if dependenciesGAV.[xyz.jetdrone:hot-reload]}}&Hotreload::HotReload.create_static_handler().method(:handle){{else}}&StaticHandler::StaticHandler.create().method(:handle){{/if}})
+router.route().handler({{#if dependenciesGAV.[xyz.jetdrone:hot-reload]}}&Hotreload::HotReload.create_static_handler().method(:handle){{else}}&VertxWeb::StaticHandler.create().method(:handle){{/if}})
 {{/if}}
 
 http_server = $vertx.create_http_server()
 
-http_server.request_handler({{#if dependenciesGAV.[io.vertx:vertx-web]}}&router.method(:accept){{else}}) { |req|
+http_server.request_handler({{#if dependenciesGAV.[io.vertx:vertx-web]}}&router.method(:accept)){{else}}) { |req|
   req.response()
     .putHeader("content-type", "text/plain")
     .end("Hello from Vert.x!")

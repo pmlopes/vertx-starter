@@ -134,7 +134,6 @@ gulp.task('handlebars', ['metadata'], function () {
     .pipe(rename('templates.min.js'))
     .pipe(uglify())
     .pipe(gulp.dest('dist/js'));
-
 });
 
 // Assemble the metadata for the templates
