@@ -35,6 +35,7 @@
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('sw.js');
     }
+
     loadJSON('metadata.json', function(err, response) {
       if (err) {
         return alert('Error: ' + err);

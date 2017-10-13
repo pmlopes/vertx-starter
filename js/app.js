@@ -352,7 +352,7 @@ riot.tag2('main', '<div if="{tool}" class="container"><div class="help-tip hide-
             c.checked = false;
             c.id = index;
             found.push(c);
-            ctx++;
+            cnt++;
           }
         });
 
@@ -497,7 +497,7 @@ riot.tag2('navigation', '<li each="{opts.buildtools}" class="nav-item"><a href="
         });
 
         if (presetLanguages.length === 1) {
-          templates = templates.concat(presetLanguages[0].templates);
+          templates = templates.concat(presetLanguages[0].templates || []);
         }
       }
     }
@@ -573,6 +573,16 @@ riot.tag2('navigation', '<li each="{opts.buildtools}" class="nav-item"><a href="
 
     // locate handlebars template
     fn = Handlebars.templates[hbfile];
+
+    if (!fn) {
+      ga('send', 'exception', {
+        'exDescription': 'Template not found: ' + hbfile,
+        'exFatal': true
+      });
+
+      return;
+    }
+
     // add to zip
     if (exec) {
       zip.file(project.metadata.name.replace(/[ -]/g, '_') + '/' + zfile, fn(project), {

@@ -352,7 +352,7 @@ riot.tag2('main', '<div if="{tool}" class="container"><div class="help-tip hide-
             c.checked = false;
             c.id = index;
             found.push(c);
-            ctx++;
+            cnt++;
           }
         });
 
