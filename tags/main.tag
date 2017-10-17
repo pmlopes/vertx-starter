@@ -25,13 +25,13 @@
       <div if={ tool.languages || presets } class="row">
         <!-- language selection -->
         <div class="col-6">
-          <select id="language" disabled="{ !tool.languages || tool.languages.length == 0 }" onchange={changeLanguage}>
+          <select id="language" disabled="{ !tool.languages || tool.languages.length == 0 }" onchange={ changeLanguage }>
             <option each={ tool.languages } value="{ id }">{ id }</option>
           </select>
         </div>
         <!-- preset selection -->
         <div class="col-6">
-          <select id="preset" disabled="{ !presetGroups || presetGroups.length == 0 }" onchange={changePreset}>
+          <select id="preset" disabled="{ !presetGroups || presetGroups.length == 0 }" onchange={ changePreset}>
             <option value="">Empty Project</option>
             <optgroup each={ g, i in presetGroups } label="{ i }">
               <option each={ g } value="{ id }">{ id }</option>
@@ -45,10 +45,10 @@
           <h1>Dependencies</h1>
         </div>
         <div class="col-6">
-          <div class="help-tip hide-phone">
+          <div id="not-found-tip" class="help-tip hide-phone">
             <p>Use this box to search for dependencies to add to your application, if a dependency is not present, please <a href="https://github.com/pmlopes/vertx-starter/issues/new">open an issue</a> so we can add the missing metadata!</p>
           </div>
-          <input type="text" class="pull-right" placeholder="Search dependency..." onkeyup={search}>
+          <input type="text" class="pull-right" placeholder="Search dependency..." onkeyup={ search }>
         </div>
       </div>
 
@@ -57,7 +57,7 @@
         <virtual if={ i % 2 == 0 }>
           <div class="col-6">
             <div class={ dependency: dependencies[i].checked }>
-              <input name="dependencies" type="checkbox" value="{ i }" checked="{ dependencies[i].checked }" onclick={toggleDependency}>
+              <input name="dependencies" type="checkbox" value="{ i }" checked="{ dependencies[i].checked }" onclick={ toggleDependency }>
               <div>
                 <span if={ dependencies[i].stack } class="pull-right"><img src="img/stack.svg" width="16px" /></span>
                 <strong>{ dependencies[i].artifactId }</strong>
@@ -70,7 +70,7 @@
           <div class="col-6">
             <!-- if there is a next one -->
             <div if={ dependencies[i+1] } class={ dependency: dependencies[i+1].checked }>
-              <input name="dependencies" type="checkbox" value="{ i+1 }" checked="{ dependencies[i+1].checked }" onclick={toggleDependency}>
+              <input name="dependencies" type="checkbox" value="{ i+1 }" checked="{ dependencies[i+1].checked }" onclick={ toggleDependency }>
               <div>
                 <span if={ dependencies[i+1].stack } class="pull-right"><img src="img/stack.svg" width="16px" /></span>
                 <strong>{ dependencies[i+1].artifactId }</strong>
@@ -87,7 +87,7 @@
         <div class="col-8">
           <button name="submit" type="submit">Generate</button>
           &nbsp;
-          <a id="download-btn" onclick={clean} href="#" show={downloading} ref="download" download="{name}.zip" style="padding: 1.1rem 3.5rem; margin: 1rem 0; background: #782b90; color: #f5f5f5; border-radius: 2px; border: none; font-size: 1.3rem; transition: all .2s ease">Download</a>
+          <a id="download-btn" onclick={ clean } href="#" show={ downloading } ref="download" download="{ name }.zip" style="padding: 1.1rem 3.5rem; margin: 1rem 0; background: #782b90; color: #f5f5f5; border-radius: 2px; border: none; font-size: 1.3rem; transition: all .2s ease">Download</a>
         </div>
         <div class="col-4">
           <div if={generating} class="spinner">
@@ -289,6 +289,7 @@
         downloading: false,
         presets: filteredPresets,
         presetGroups: filteredPresetsGroups,
+        preset: filteredPresets.indexOf(self.preset) === -1 ? null : self.preset,
         language: newLang,
         dependencies: selection
       });
