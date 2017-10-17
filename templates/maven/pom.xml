@@ -55,7 +55,9 @@
           <executions>
             <execution>
               <id>compile</id>
-              <goals> <goal>compile</goal> </goals>
+              <goals>
+                <goal>compile</goal>
+              </goals>
               <configuration>
                 <sourceDirs>
                   <sourceDir>${project.basedir}/src/main/kotlin</sourceDir>
@@ -65,7 +67,9 @@
             </execution>
             <execution>
               <id>test-compile</id>
-              <goals> <goal>test-compile</goal> </goals>
+              <goals>
+                <goal>test-compile</goal>
+              </goals>
               <configuration>
                 <sourceDirs>
                   <sourceDir>${project.basedir}/src/test/kotlin</sourceDir>
@@ -80,10 +84,46 @@
     </pluginManagement>
 
     <plugins>
-    {{#if metadata.kotlin}}
+      {{#if metadata.kotlin}}
       <plugin>
         <artifactId>kotlin-maven-plugin</artifactId>
         <groupId>org.jetbrains.kotlin</groupId>
+      </plugin>
+      {{/if}}
+      {{#if dependenciesGAV.[io.vertx:vertx-service-proxy]}}
+      <plugin>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.4</version>
+        <executions>
+          <execution>
+            <id>service-api</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+            <phase>package</phase>
+            <configuration>
+              <classifier>api</classifier>
+              <includes>
+                <include>**/*Service*</include>
+              </includes>
+              <excludes>
+                <exclude>**/impl/**</exclude>
+              </excludes>
+            </configuration>
+          </execution>
+          <execution>
+            <id>jar</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+            <phase>package</phase>
+            <configuration>
+              <includes>
+                <include>**/*</include>
+              </includes>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
       {{/if}}
       <plugin>
