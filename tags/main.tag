@@ -402,7 +402,7 @@
         el.value = e.target[el.key].value;
       });
 
-      if (self.preset.fields) {
+      if (self.preset && self.preset.fields) {
         self.preset.fields.forEach(function (el) {
           el.value = e.target[el.key].value;
         });

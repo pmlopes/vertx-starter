@@ -2,7 +2,7 @@
 
 This is a simple online generator for vert.x projects
 
-The whole SPA is data driven, build tools can be added to the file [buildtools.json](buildtools.json).
+The whole SPA is data driven, build tools can be added to the file [metadata/buildtools.json](buildtools.json).
 
 # Data files
 
