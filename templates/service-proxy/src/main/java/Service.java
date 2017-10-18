@@ -6,19 +6,19 @@ import io.vertx.core.Vertx;
 import io.vertx.serviceproxy.ProxyHelper;
 
 /**
- * Service exposed on the event bus.
+ * {{ metadata.Service }} API.
  */
 @VertxGen
 @ProxyGen
-public interface Service {
+public interface {{ metadata.Service }} {
   /**
     * Method called to create a proxy (to consume the service).
     *
     * @param vertx   vert.x
-    * @param address the address on the vent bus where the service is served.
+    * @param address the address on the event bus where the service is served.
     * @return the proxy
     */
   static Service createProxy(Vertx vertx, String address) {
-    return ProxyHelper.createProxy(Service.class, vertx, address);
+    return ProxyHelper.createProxy({{ metadata.Service }}.class, vertx, address);
   }
 }

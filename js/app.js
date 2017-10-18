@@ -87,6 +87,12 @@
     project.buildtool.fields.forEach(function (el) {
       project.metadata[el.key] = el.value ? el.value : el.prefill;
     });
+    // convert the fields to a form structure
+    if (project.preset && project.preset.fields) {
+      project.preset.fields.forEach(function (el) {
+        project.metadata[el.key] = el.value ? el.value : el.prefill;
+      });
+    }
 
     if (project.metadata.groupId) {
       project.metadata.packageName = project.metadata.groupId + '.' + (project.metadata.artifactId || project.metadata.name.replace(/[ -]/g, '_'));
@@ -189,6 +195,15 @@
     // first path element is always ignored
     zfile = zfile.substr(zfile.indexOf('/') + 1);
     hbfile = file.replace('{package}/', '');
+
+    // replace placeholders with variables if present
+    zfile = zfile.replace(/{(.*?)}/g, function (match, group) {
+      return project.metadata[group] || '';
+    });
+    // on handle bars paths we always return the group
+    hbfile = hbfile.replace(/{(.*?)}/g, function (match, group) {
+      return group;
+    });
 
     // locate handlebars template
     fn = Handlebars.templates[hbfile];

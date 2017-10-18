@@ -24,7 +24,7 @@
     ]
   },
   {
-    "id": "Hello World",
+    "id": "Service Proxy Template",
     "group": "service proxy",
     "description": "A bare bones service proxy application",
     "dependencies": [
@@ -33,13 +33,16 @@
       "io.vertx:vertx-service-proxy",
       "io.vertx:vertx-service-proxy:processor"
     ],
+    "fields" :[
+      { "key": "Service", "label": "Service Name", "prefil": "Service", "required": true }
+    ],
     "languages": [
       {
         "id": "java",
         "templates": [
-          "service-proxy/src/main/java/{package}/Service.java",
+          "service-proxy/src/main/java/{package}/{Service}.java",
           "service-proxy/src/main/java/{package}/MainVerticle.java",
-          "service-proxy/src/main/java/{package}/impl/ServiceImpl.java"
+          "service-proxy/src/main/java/{package}/impl/{Service}Impl.java"
         ]
       }
     ]

@@ -40,6 +40,23 @@
         </div>
       </div>
 
+      <div if={ preset.fields } class="row">
+        <h5>Extra variables for { preset.id }:</h5>
+      </div>
+
+      <div each={ f, i in preset.fields } class="row">
+        <!-- iterate 2 at a time -->
+        <virtual if={ i % 2 === 0 }>
+          <div class="col-6">
+            <input name="{ preset.fields[i].key }" type="text" placeholder="{ preset.fields[i].label + (preset.fields[i].prefill ? ' e.g.: ' + preset.fields[i].prefill : '') }" required="{ preset.fields[i].required }">
+          </div>
+          <div class="col-6">
+            <!-- if there is a next one -->
+            <input if={ preset.fields[i+1] }  name="{ preset.fields[i+1].key }" type="text" placeholder="{ preset.fields[i+1].label + (preset.fields[i+1].prefill ? ' e.g.: ' + preset.fields[i+1].prefill : '') }" required="{ preset.fields[i+1].required }">
+          </div>
+        </virtual>
+      </div>
+
       <div class="row">
         <div class="col-6">
           <h1>Dependencies</h1>
@@ -384,6 +401,12 @@
       self.tool.fields.forEach(function (el) {
         el.value = e.target[el.key].value;
       });
+
+      if (self.preset.fields) {
+        self.preset.fields.forEach(function (el) {
+          el.value = e.target[el.key].value;
+        });
+      }
 
       compileProject({buildtool: self.tool, dependencies: self.dependencies, language: self.language, preset: self.preset, components: opts.components}, function (err, zip) {
         if (err) {

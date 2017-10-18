@@ -556,5 +556,29 @@
     "artifactId": "hot-reload",
     "version": "0.0.4",
     "description": "Hot Reload Development Handler."
+  },
+  {
+    "groupId": "org.postgresql",
+    "artifactId": "postgresql",
+    "version": "42.1.4",
+    "description": "PostgreSQL JDBC Driver."
+  },
+  {
+    "groupId": "mysql",
+    "artifactId": "mysql-connector-java",
+    "version": "5.1.44",
+    "description": "MySQL JDBC Driver."
+  },
+  {
+    "groupId": "com.h2database",
+    "artifactId": "h2",
+    "version": "1.4.196",
+    "description": "H2 JDBC Driver."
+  },
+  {
+    "groupId": "org.hsqldb",
+    "artifactId": "hsqldb",
+    "version": "2.4.0",
+    "description": "HypersonicDB JDBC Driver."
   }
 ]
