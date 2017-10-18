@@ -440,13 +440,6 @@
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.packageName : stack1), depth0))
     + ";\n\nimport io.vertx.codegen.annotations.ModuleGen;\n";
 },"useData":true});
-  Handlebars.templates['sbt/src/main/scala/MainVerticle.scala'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return "package "
-    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.packageName : stack1), depth0))
-    + "\n\nimport io.vertx.lang.scala.ScalaVerticle\n\nclass MainVerticle extends ScalaVerticle {\n\n  override def start(): Unit = {\n    // your code goes here...\n    vertx\n      .createHttpServer()\n      .requestHandler(_.response()\n        .putHeader(\"content-type\", \"text/plain\")\n        .end(\"Hello from Vert.x!\"))\n      .listenFuture(8080, \"0.0.0.0\")\n        .map(_ => ())\n  }\n}\n";
-},"useData":true});
   Handlebars.templates['service-proxy/src/main/java/MainVerticle.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=container.lambda, alias2=container.escapeExpression;
 
@@ -454,16 +447,35 @@
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.packageName : stack1), depth0))
     + ";\n\nimport "
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.packageName : stack1), depth0))
-    + ".impl.ServiceImpl;\n\nimport io.vertx.core.AbstractVerticle;\nimport io.vertx.serviceproxy.ProxyHelper;\n\npublic class MainVerticle extends AbstractVerticle {\n\n  private ServiceImpl service;\n\n  @Override\n  public void start() throws Exception {\n    service = new ServiceImpl(vertx, config());\n    ProxyHelper.registerService(Service.class, vertx, service, \""
+    + ".impl."
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0))
+    + "Impl;\n\nimport io.vertx.core.AbstractVerticle;\nimport io.vertx.serviceproxy.ProxyHelper;\n\npublic class MainVerticle extends AbstractVerticle {\n\n  private "
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0))
+    + "Impl service;\n\n  @Override\n  public void start() throws Exception {\n    service = new ServiceImpl(vertx, config());\n    ProxyHelper.registerService("
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0))
+    + ".class, vertx, service, \""
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.packageName : stack1), depth0))
     + ".service\");\n  }\n\n  @Override\n  public void stop() throws Exception {\n    service.close();\n  }\n}\n";
 },"useData":true});
   Handlebars.templates['service-proxy/src/main/java/Service.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=container.lambda, alias2=container.escapeExpression;
+
+  return "package "
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.packageName : stack1), depth0))
+    + ";\n\nimport io.vertx.codegen.annotations.ProxyGen;\nimport io.vertx.codegen.annotations.VertxGen;\nimport io.vertx.core.Vertx;\nimport io.vertx.serviceproxy.ProxyHelper;\n\n/**\n * "
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0))
+    + " API.\n */\n@VertxGen\n@ProxyGen\npublic interface "
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0))
+    + " {\n  /**\n    * Method called to create a proxy (to consume the service).\n    *\n    * @param vertx   vert.x\n    * @param address the address on the event bus where the service is served.\n    * @return the proxy\n    */\n  static Service createProxy(Vertx vertx, String address) {\n    return ProxyHelper.createProxy("
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0))
+    + ".class, vertx, address);\n  }\n}\n";
+},"useData":true});
+  Handlebars.templates['sbt/src/main/scala/MainVerticle.scala'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
   return "package "
     + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.packageName : stack1), depth0))
-    + ";\n\nimport io.vertx.codegen.annotations.ProxyGen;\nimport io.vertx.codegen.annotations.VertxGen;\nimport io.vertx.core.Vertx;\nimport io.vertx.serviceproxy.ProxyHelper;\n\n/**\n * Service exposed on the event bus.\n */\n@VertxGen\n@ProxyGen\npublic interface Service {\n  /**\n    * Method called to create a proxy (to consume the service).\n    *\n    * @param vertx   vert.x\n    * @param address the address on the vent bus where the service is served.\n    * @return the proxy\n    */\n  static Service createProxy(Vertx vertx, String address) {\n    return ProxyHelper.createProxy(Service.class, vertx, address);\n  }\n}\n";
+    + "\n\nimport io.vertx.lang.scala.ScalaVerticle\n\nclass MainVerticle extends ScalaVerticle {\n\n  override def start(): Unit = {\n    // your code goes here...\n    vertx\n      .createHttpServer()\n      .requestHandler(_.response()\n        .putHeader(\"content-type\", \"text/plain\")\n        .end(\"Hello from Vert.x!\"))\n      .listenFuture(8080, \"0.0.0.0\")\n        .map(_ => ())\n  }\n}\n";
 },"useData":true});
   Handlebars.templates['verticle/src/main/java/MainVerticle.java'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {});
@@ -772,7 +784,13 @@
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.packageName : stack1), depth0))
     + ".impl;\n\nimport "
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.packageName : stack1), depth0))
-    + ".Service;\n\nimport io.vertx.core.Vertx;\nimport io.vertx.core.json.JsonObject;\n\npublic class ServiceImpl implements Service {\n\n  public ServiceImpl(Vertx vertx, JsonObject config) {\n    // initialization...\n  }\n\n  // Implement your service here...\n\n  public void close() {\n    // clean up...\n  }\n}\n";
+    + "."
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0))
+    + ";\n\nimport io.vertx.core.Vertx;\nimport io.vertx.core.json.JsonObject;\n\npublic class "
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0))
+    + "Impl implements "
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0))
+    + " {\n\n  public ServiceImpl(Vertx vertx, JsonObject config) {\n    // initialization...\n  }\n\n  // Implement your service here...\n\n  public void close() {\n    // clean up...\n  }\n}\n";
 },"useData":true});
   Handlebars.templates['verticle/src/main/resources/templates/index.hbs'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "<!DOCTYPE html>\n<html>\n<head>\n  <meta charset=\"utf-8\"/>\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"/>\n  <title>{{ title }}</title>\n  <base href=\"/\"/>\n\n  <link rel=\"stylesheet\" href=\"/dist/vendor.css\"/>\n</head>\n<body>\n  <div id=\"app\">Loading...</div>\n\n  <script src=\"/dist/vendor.js\"></script>\n  <script src=\"/dist/main.js\"></script>\n  {{#if hotreload}}\n  <script src=\"/hot-reload/script\"></script>\n  {{/if}}\n</body>\n</html>\n";
@@ -876,17 +894,17 @@
   Handlebars.templates['web+knockout/src/main/js/components/counter-example/counter-example.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "import * as ko from 'knockout';\n\nclass CounterExampleViewModel {\n  constructor() {\n    this.currentCount = ko.observable(0);\n  }\n\n  incrementCounter() {\n    let prevCount = this.currentCount();\n    this.currentCount(prevCount + 1);\n  }\n}\n\nexport default {viewModel: CounterExampleViewModel, template: require('./counter-example.html')};\n";
 },"useData":true});
-  Handlebars.templates['web+knockout/src/main/js/components/fetch-data/fetch-data.html'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<h1>Weather forecast</h1>\n\n<p>This component demonstrates fetching data from the server.</p>\n\n<p data-bind='ifnot: forecasts'><em>Loading...</em></p>\n\n<table class='table' data-bind='if: forecasts'>\n    <thead>\n        <tr>\n            <th>Date</th>\n            <th>Temp. (C)</th>\n            <th>Temp. (F)</th>\n            <th>Summary</th>\n        </tr>\n    </thead>\n    <tbody data-bind='foreach: forecasts'>\n        <tr>\n            <td data-bind='text: dateFormatted'></td>\n            <td data-bind='text: temperatureC'></td>\n            <td data-bind='text: temperatureF'></td>\n            <td data-bind='text: summary'></td>\n        </tr>\n    </tbody>\n</table>\n";
-},"useData":true});
-  Handlebars.templates['web+knockout/src/main/js/components/fetch-data/fetch-data.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "import * as ko from 'knockout';\nimport 'isomorphic-fetch';\n\nclass FetchDataViewModel {\n  constructor() {\n    this.forecasts = ko.observableArray();\n\n    fetch('api/weather-forecasts')\n      .then(response => response.json())\n      .then(data => {\n        this.forecasts(data);\n      });\n  }\n}\n\nexport default {viewModel: FetchDataViewModel, template: require('./fetch-data.html')};\n";
-},"useData":true});
   Handlebars.templates['web+knockout/src/main/js/components/home-page/home-page.html'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "<h1>Hello, world!</h1>\n<p>Welcome to your new single-page application, built with:</p>\n<ul>\n    <li><a href='http://vertx.io/'>Vert.x</a> for polyglot server-side code</li>\n    <li><a href='http://knockoutjs.com/'>Knockout.js</a> and <a href='http://www.typescriptlang.org/'>TypeScript</a> for client-side code</li>\n    <li><a href='https://webpack.github.io/'>Webpack</a> for building and bundling client-side resources</li>\n    <li><a href='http://getbootstrap.com/'>Bootstrap</a> for layout and styling</li>\n</ul>\n<p>To help you get started, we've also set up:</p>\n<ul>\n    <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.</li>\n    <li><strong>Webpack dev middleware</strong>. In development mode, there's no need to run the <code>webpack</code> build tool. Your client-side resources are dynamically built on demand. Updates are available as soon as you modify any file.</li>\n    <li><strong>Hot module replacement</strong>. In development mode, you don't even need to reload the page after making most changes. Within seconds of saving changes to files, your Knockout app will be rebuilt and a new instance injected is into the page.</li>\n    <li><strong>Code splitting and lazy loading</strong>. KO components may optionally be bundled individually and loaded on demand. For example, the code and template for 'Counter' is not loaded until you navigate to it..</li>\n    <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and the <code>webpack</code> build tool produces minified static CSS and JavaScript files.</li>\n</ul>\n";
 },"useData":true});
   Handlebars.templates['web+knockout/src/main/js/components/home-page/home-page.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "import * as ko from 'knockout';\n\nclass HomePageViewModel {\n}\n\nexport default { viewModel: HomePageViewModel, template: require('./home-page.html') };\n";
+},"useData":true});
+  Handlebars.templates['web+knockout/src/main/js/components/fetch-data/fetch-data.html'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<h1>Weather forecast</h1>\n\n<p>This component demonstrates fetching data from the server.</p>\n\n<p data-bind='ifnot: forecasts'><em>Loading...</em></p>\n\n<table class='table' data-bind='if: forecasts'>\n    <thead>\n        <tr>\n            <th>Date</th>\n            <th>Temp. (C)</th>\n            <th>Temp. (F)</th>\n            <th>Summary</th>\n        </tr>\n    </thead>\n    <tbody data-bind='foreach: forecasts'>\n        <tr>\n            <td data-bind='text: dateFormatted'></td>\n            <td data-bind='text: temperatureC'></td>\n            <td data-bind='text: temperatureF'></td>\n            <td data-bind='text: summary'></td>\n        </tr>\n    </tbody>\n</table>\n";
+},"useData":true});
+  Handlebars.templates['web+knockout/src/main/js/components/fetch-data/fetch-data.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "import * as ko from 'knockout';\nimport 'isomorphic-fetch';\n\nclass FetchDataViewModel {\n  constructor() {\n    this.forecasts = ko.observableArray();\n\n    fetch('api/weather-forecasts')\n      .then(response => response.json())\n      .then(data => {\n        this.forecasts(data);\n      });\n  }\n}\n\nexport default {viewModel: FetchDataViewModel, template: require('./fetch-data.html')};\n";
 },"useData":true});
   Handlebars.templates['web+knockout/src/main/js/components/nav-menu/nav-menu.html'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "<div class='main-nav'>\n        <div class='navbar navbar-inverse'>\n        <div class='navbar-header'>\n            <button type='button' class='navbar-toggle' data-toggle='collapse' data-target='.navbar-collapse'>\n                <span class='sr-only'>Toggle navigation</span>\n                <span class='icon-bar'></span>\n                <span class='icon-bar'></span>\n                <span class='icon-bar'></span>\n            </button>\n            <a class='navbar-brand' href='/'>WebApplicationBasic</a>\n        </div>\n        <div class='clearfix'></div>\n        <div class='navbar-collapse collapse'>\n            <ul class='nav navbar-nav'>\n                <li>\n                    <a data-bind='attr: { href: router.link(\"/\") }, css: { active: route().page === \"home-page\" }'>\n                        <span class='glyphicon glyphicon-home'></span> Home\n                    </a>\n                </li>\n                <li>\n                    <a data-bind='attr: { href: router.link(\"/counter\") }, css: { active: route().page === \"counter-example\" }'>\n                        <span class='glyphicon glyphicon-education'></span> Counter\n                    </a>\n                </li>\n                <li>\n                    <a data-bind='attr: { href: router.link(\"/fetch-data\") }, css: { active: route().page === \"fetch-data\" }'>\n                        <span class='glyphicon glyphicon-th-list'></span> Fetch data\n                    </a>\n                </li>\n            </ul>\n        </div>\n    </div>\n</div>\n";
@@ -975,17 +993,17 @@
   Handlebars.templates['web+aurelia/src/main/js/app/components/app/app.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "import { PLATFORM } from 'aurelia-framework';\n\nexport class App {\n    configureRouter(config, router) {\n        config.title = 'Aurelia';\n        config.map([{\n            route: [ '', 'home' ],\n            name: 'home',\n            settings: { icon: 'home' },\n            moduleId: PLATFORM.moduleName('../home/home'),\n            nav: true,\n            title: 'Home'\n        }, {\n            route: 'counter',\n            name: 'counter',\n            settings: { icon: 'education' },\n            moduleId: PLATFORM.moduleName('../counter/counter'),\n            nav: true,\n            title: 'Counter'\n        }, {\n            route: 'fetch-data',\n            name: 'fetchdata',\n            settings: { icon: 'th-list' },\n            moduleId: PLATFORM.moduleName('../fetchdata/fetchdata'),\n            nav: true,\n            title: 'Fetch data'\n        }]);\n\n        this.router = router;\n    }\n}\n";
 },"useData":true});
-  Handlebars.templates['web+aurelia/src/main/js/app/components/fetchdata/fetchdata.html'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<template>\n    <h1>Weather forecast</h1>\n\n    <p>This component demonstrates fetching data from the server.</p>\n\n    <p if.bind=\"!forecasts\"><em>Loading...</em></p>\n\n    <table if.bind=\"forecasts\" class=\"table\">\n        <thead>\n            <tr>\n                <th>Date</th>\n                <th>Temp. (C)</th>\n                <th>Temp. (F)</th>\n                <th>Summary</th>\n            </tr>\n        </thead>\n        <tbody>\n            <tr repeat.for=\"forecast of forecasts\">\n                <td>${ forecast.dateFormatted }</td>\n                <td>${ forecast.temperatureC }</td>\n                <td>${ forecast.temperatureF }</td>\n                <td>${ forecast.summary }</td>\n            </tr>\n        </tbody>\n    </table>\n</template>\n";
-},"useData":true});
-  Handlebars.templates['web+aurelia/src/main/js/app/components/fetchdata/fetchdata.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "import { HttpClient } from 'aurelia-fetch-client';\nimport { inject } from 'aurelia-framework';\n\n@inject(HttpClient)\nexport class Fetchdata {\n    forecasts;\n\n    constructor(http) {\n        http.fetch('api/weather-forecasts')\n            .then(result => result.json())\n            .then(data => {\n                this.forecasts = data;\n            });\n    }\n}\n";
-},"useData":true});
   Handlebars.templates['web+aurelia/src/main/js/app/components/counter/counter.html'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "<template>\n    <h1>Counter</h1>\n\n    <p>This is a simple example of an Aurelia component.</p>\n\n    <p>Current count: <strong>${currentCount}</strong></p>\n\n    <button click.delegate=\"incrementCounter()\">Increment</button>\n</template>\n";
 },"useData":true});
   Handlebars.templates['web+aurelia/src/main/js/app/components/counter/counter.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "export class Counter {\n    currentCount = 0;\n\n    incrementCounter() {\n        this.currentCount++;\n    }\n}\n";
+},"useData":true});
+  Handlebars.templates['web+aurelia/src/main/js/app/components/fetchdata/fetchdata.html'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<template>\n    <h1>Weather forecast</h1>\n\n    <p>This component demonstrates fetching data from the server.</p>\n\n    <p if.bind=\"!forecasts\"><em>Loading...</em></p>\n\n    <table if.bind=\"forecasts\" class=\"table\">\n        <thead>\n            <tr>\n                <th>Date</th>\n                <th>Temp. (C)</th>\n                <th>Temp. (F)</th>\n                <th>Summary</th>\n            </tr>\n        </thead>\n        <tbody>\n            <tr repeat.for=\"forecast of forecasts\">\n                <td>${ forecast.dateFormatted }</td>\n                <td>${ forecast.temperatureC }</td>\n                <td>${ forecast.temperatureF }</td>\n                <td>${ forecast.summary }</td>\n            </tr>\n        </tbody>\n    </table>\n</template>\n";
+},"useData":true});
+  Handlebars.templates['web+aurelia/src/main/js/app/components/fetchdata/fetchdata.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "import { HttpClient } from 'aurelia-fetch-client';\nimport { inject } from 'aurelia-framework';\n\n@inject(HttpClient)\nexport class Fetchdata {\n    forecasts;\n\n    constructor(http) {\n        http.fetch('api/weather-forecasts')\n            .then(result => result.json())\n            .then(data => {\n                this.forecasts = data;\n            });\n    }\n}\n";
 },"useData":true});
   Handlebars.templates['web+aurelia/src/main/js/app/components/home/home.html'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "<template>\n    <h1>Hello, world!</h1>\n    <p>Welcome to your new single-page application, built with:</p>\n    <ul>\n        <li><a href=\"http://vertx.io/\">Vert.x</a> for polyglot server-side code</li>\n        <li><a href=\"http://aurelia.io/\">Aurelia</a> and <a href=\"http://www.typescriptlang.org/\">TypeScript</a> for client-side code</li>\n        <li><a href=\"https://webpack.github.io/\">Webpack</a> for building and bundling client-side resources</li>\n        <li><a href=\"http://getbootstrap.com/\">Bootstrap</a> for layout and styling</li>\n    </ul>\n    <p>To help you get started, we've also set up:</p>\n    <ul>\n        <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.</li>\n        <li><strong>Webpack dev middleware</strong>. In development mode, there's no need to run the <code>webpack</code> build tool. Your client-side resources are dynamically built on demand. Updates are available as soon as you modify any file.</li>\n        <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and the <code>webpack</code> build tool produces minified static CSS and JavaScript files.</li>\n    </ul>\n</template>\n";
