@@ -266,7 +266,7 @@ riot.tag2('main', '<div if="{tool}" class="container"><div class="help-tip hide-
         el.value = e.target[el.key].value;
       });
 
-      if (self.preset.fields) {
+      if (self.preset && self.preset.fields) {
         self.preset.fields.forEach(function (el) {
           el.value = e.target[el.key].value;
         });
