@@ -15,7 +15,7 @@
     xobj.onreadystatechange = function () {
       if (xobj.readyState === XMLHttpRequest.DONE) {
         if (xobj.status !== 200 && xobj.status !== 304) {
-          return callback("Failed to load the metadata!");
+          return callback('Failed to load: ' + file + '!');
         }
         callback(null, xobj.responseText);
       }
