@@ -456,26 +456,30 @@
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.packageName : stack1), depth0))
     + ".impl."
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0))
-    + "Impl;\n\nimport io.vertx.core.AbstractVerticle;\nimport io.vertx.serviceproxy.ProxyHelper;\n\npublic class MainVerticle extends AbstractVerticle {\n\n  private "
+    + "Impl;\n\nimport io.vertx.core.AbstractVerticle;\nimport io.vertx.serviceproxy.ServiceBinder;\n\npublic class MainVerticle extends AbstractVerticle {\n\n  private "
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0))
-    + "Impl service;\n\n  @Override\n  public void start() throws Exception {\n    service = new ServiceImpl(vertx, config());\n    ProxyHelper.registerService("
+    + "Impl service;\n\n  @Override\n  public void start() throws Exception {\n    service = new "
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0))
-    + ".class, vertx, service, \""
+    + "Impl(vertx, config());\n    new ServiceBinder(vertx)\n      .setAddress(\""
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.packageName : stack1), depth0))
-    + ".service\");\n  }\n\n  @Override\n  public void stop() throws Exception {\n    service.close();\n  }\n}\n";
+    + ".service\")\n      .register("
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0))
+    + ".class, service);\n  }\n\n  @Override\n  public void stop() throws Exception {\n    service.close();\n  }\n}\n";
 },"useData":true});
   Handlebars.templates['service-proxy/src/main/java/Service.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=container.lambda, alias2=container.escapeExpression;
 
   return "package "
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.packageName : stack1), depth0))
-    + ";\n\nimport io.vertx.codegen.annotations.ProxyGen;\nimport io.vertx.codegen.annotations.VertxGen;\nimport io.vertx.core.Vertx;\nimport io.vertx.serviceproxy.ProxyHelper;\n\n/**\n * "
+    + ";\n\nimport io.vertx.codegen.annotations.ProxyGen;\nimport io.vertx.codegen.annotations.VertxGen;\nimport io.vertx.core.Vertx;\nimport io.vertx.serviceproxy.ServiceProxyBuilder;\n\n/**\n * "
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0))
     + " API.\n */\n@VertxGen\n@ProxyGen\npublic interface "
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0))
-    + " {\n  /**\n    * Method called to create a proxy (to consume the service).\n    *\n    * @param vertx   vert.x\n    * @param address the address on the event bus where the service is served.\n    * @return the proxy\n    */\n  static Service createProxy(Vertx vertx, String address) {\n    return ProxyHelper.createProxy("
+    + " {\n  /**\n    * Method called to create a proxy (to consume the service).\n    *\n    * @param vertx   vert.x\n    * @param address the address on the event bus where the service is served.\n    * @return the proxy\n    */\n  static "
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0))
-    + ".class, vertx, address);\n  }\n}\n";
+    + " createProxy(Vertx vertx, String address) {\n    return new ServiceProxyBuilder(vertx)\n      .setAddress(address)\n      .build("
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0))
+    + ".class);\n  }\n}\n";
 },"useData":true});
   Handlebars.templates['verticle/src/main/java/MainVerticle.java'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {});
@@ -790,7 +794,9 @@
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0))
     + "Impl implements "
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0))
-    + " {\n\n  public ServiceImpl(Vertx vertx, JsonObject config) {\n    // initialization...\n  }\n\n  // Implement your service here...\n\n  public void close() {\n    // clean up...\n  }\n}\n";
+    + " {\n\n  public "
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0))
+    + "Impl(Vertx vertx, JsonObject config) {\n    // initialization...\n  }\n\n  // Implement your service here...\n\n  public void close() {\n    // clean up...\n  }\n}\n";
 },"useData":true});
   Handlebars.templates['verticle/src/main/resources/templates/index.hbs'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "<!DOCTYPE html>\n<html>\n<head>\n  <meta charset=\"utf-8\"/>\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"/>\n  <title>{{ title }}</title>\n  <base href=\"/\"/>\n\n  <link rel=\"stylesheet\" href=\"/dist/vendor.css\"/>\n</head>\n<body>\n  <div id=\"app\">Loading...</div>\n\n  <script src=\"/dist/vendor.js\"></script>\n  <script src=\"/dist/main.js\"></script>\n  {{#if hotreload}}\n  <script src=\"/hot-reload/script\"></script>\n  {{/if}}\n</body>\n</html>\n";
@@ -945,6 +951,15 @@
   Handlebars.templates['web+vue/src/main/js/components/navmenu/navmenu.vue.html'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "<template>\n    <div class=\"main-nav\">\n        <div class=\"navbar navbar-inverse\">\n            <div class=\"navbar-header\">\n                <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".navbar-collapse\">\n                    <span class=\"sr-only\">Toggle navigation</span>\n                    <span class=\"icon-bar\"></span>\n                    <span class=\"icon-bar\"></span>\n                    <span class=\"icon-bar\"></span>\n                </button>\n                <a class=\"navbar-brand\" href=\"/\">WebApplicationBasic</a>\n            </div>\n            <div class=\"clearfix\"></div>\n            <div class=\"navbar-collapse collapse\">\n                <ul class=\"nav navbar-nav\">\n                    <li>\n                        <router-link to=\"/\" :exact=\"true\">\n                            <span class=\"glyphicon glyphicon-home\"></span> Home\n                        </router-link>\n                    </li>\n                    <li>\n                        <router-link to=\"/counter\">\n                            <span class=\"glyphicon glyphicon-education\"></span> Counter\n                        </router-link>\n                    </li>\n                    <li>\n                        <router-link to=\"/fetchdata\">\n                            <span class=\"glyphicon glyphicon-th-list\"></span> Fetch data\n                        </router-link>\n                    </li>\n                </ul>\n            </div>\n        </div>\n    </div>\n</template>\n\n<style src=\"./navmenu.css\" />\n";
 },"useData":true});
+  Handlebars.templates['web+angular4/src/main/ts/app/components/app/app.component.css'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "@media (max-width: 767px) {\n    /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */\n    .body-content {\n        padding-top: 50px;\n    }\n}\n";
+},"useData":true});
+  Handlebars.templates['web+angular4/src/main/ts/app/components/app/app.component.html'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<div class='container-fluid'>\n    <div class='row'>\n        <div class='col-sm-3'>\n            <nav-menu></nav-menu>\n        </div>\n        <div class='col-sm-9 body-content'>\n            <router-outlet></router-outlet>\n        </div>\n    </div>\n</div>\n";
+},"useData":true});
+  Handlebars.templates['web+angular4/src/main/ts/app/components/app/app.component.ts'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "import { Component } from '@angular/core';\n\n@Component({\n    selector: 'app',\n    templateUrl: './app.component.html',\n    styleUrls: ['./app.component.css']\n})\nexport class AppComponent {\n}\n";
+},"useData":true});
   Handlebars.templates['web+angular4/src/main/ts/app/components/counter/counter.component.html'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "<h1>Counter</h1>\n\n<p>This is a simple example of an Angular component.</p>\n\n<p>Current count: <strong>{{ currentCount }}</strong></p>\n\n<button (click)=\"incrementCounter()\">Increment</button>\n";
 },"useData":true});
@@ -959,15 +974,6 @@
 },"useData":true});
   Handlebars.templates['web+angular4/src/main/ts/app/components/fetchdata/fetchdata.component.ts'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "import { Component, Inject } from '@angular/core';\nimport { Http } from '@angular/http';\n\n@Component({\n    selector: 'fetchdata',\n    templateUrl: './fetchdata.component.html'\n})\nexport class FetchDataComponent {\n    public forecasts: WeatherForecast[];\n\n    constructor(http: Http, @Inject('BASE_URL') baseUrl: string) {\n        http.get(baseUrl + 'api/weather-forecasts').subscribe(result => {\n            this.forecasts = result.json() as WeatherForecast[];\n        }, error => console.error(error));\n    }\n}\n\ninterface WeatherForecast {\n    dateFormatted: string;\n    temperatureC: number;\n    temperatureF: number;\n    summary: string;\n}\n";
-},"useData":true});
-  Handlebars.templates['web+angular4/src/main/ts/app/components/app/app.component.css'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "@media (max-width: 767px) {\n    /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */\n    .body-content {\n        padding-top: 50px;\n    }\n}\n";
-},"useData":true});
-  Handlebars.templates['web+angular4/src/main/ts/app/components/app/app.component.html'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<div class='container-fluid'>\n    <div class='row'>\n        <div class='col-sm-3'>\n            <nav-menu></nav-menu>\n        </div>\n        <div class='col-sm-9 body-content'>\n            <router-outlet></router-outlet>\n        </div>\n    </div>\n</div>\n";
-},"useData":true});
-  Handlebars.templates['web+angular4/src/main/ts/app/components/app/app.component.ts'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "import { Component } from '@angular/core';\n\n@Component({\n    selector: 'app',\n    templateUrl: './app.component.html',\n    styleUrls: ['./app.component.css']\n})\nexport class AppComponent {\n}\n";
 },"useData":true});
   Handlebars.templates['web+angular4/src/main/ts/app/components/home/home.component.html'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "<h1>Hello, world!</h1>\n<p>Welcome to your new single-page application, built with:</p>\n<ul>\n  <li><a href='http://vertx.io/'>Vert.x</a> for polyglot server-side code</li>\n  <li><a href='https://angular.io/'>Angular</a> and <a href='http://www.typescriptlang.org/'>TypeScript</a> for\n    client-side code\n  </li>\n  <li><a href='https://webpack.github.io/'>Webpack</a> for building and bundling client-side resources</li>\n  <li><a href='http://getbootstrap.com/'>Bootstrap</a> for layout and styling</li>\n</ul>\n<p>To help you get started, we've also set up:</p>\n<ul>\n  <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.\n  </li>\n  <li><strong>TODO: Server-side prerendering</strong>. For faster initial loading and improved SEO, your Angular app is\n    prerendered on the server. The resulting HTML is then transferred to the browser where a client-side copy of the app\n    takes over.\n  </li>\n  <li><strong>Webpack dev middleware</strong>. In development mode, there's no need to run the <code>webpack</code>\n    build tool. Your client-side resources are dynamically built on demand. Updates are available as soon as you modify\n    any file.\n  </li>\n  <li><strong>Hot module replacement</strong>. In development mode, you don't even need to reload the page after making\n    most changes. Within seconds of saving changes to files, your Angular app will be rebuilt and a new instance\n    injected is into the page.\n  </li>\n  <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and the\n    <code>webpack</code> build tool produces minified static CSS and JavaScript files.\n  </li>\n</ul>\n";
