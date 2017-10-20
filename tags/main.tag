@@ -316,16 +316,23 @@
       // carry on with the task...
       e.preventDefault();
       var oldPreset = self.preset;
-      var newPreset = self.presets.filter(function (el) {
-        return el.id === e.target.value;
-      })[0];
+      // virtual empty preset
+      var newPreset = { dependencies : [
+        "io.vertx:vertx-core"
+      ]};
 
-      ga('send', {
-        hitType: 'event',
-        eventCategory: newPreset.id + ':view',
-        eventAction: newPreset.id + '/view',
-        eventLabel: 'project'
-      });
+      if (e.target.value) {
+        newPreset = self.presets.filter(function (el) {
+          return el.id === e.target.value;
+        })[0];
+
+        ga('send', {
+          hitType: 'event',
+          eventCategory: newPreset.id + ':view',
+          eventAction: newPreset.id + '/view',
+          eventLabel: 'project'
+        });
+      }
 
       // reset
       var selection = [].concat(self.dependencies);
@@ -408,7 +415,12 @@
         });
       }
 
-      compileProject({buildtool: self.tool, dependencies: self.dependencies, language: self.language, preset: self.preset, components: opts.components}, function (err, zip) {
+      // we need to filter in case the user was looking for other dependencies
+      var dependencies = self.dependencies.filter(function (el) {
+        return el.checked;
+      });
+
+      compileProject({buildtool: self.tool, dependencies: dependencies, language: self.language, preset: self.preset, components: opts.components}, function (err, zip) {
         if (err) {
           submit.disabled = false;
           self.update({

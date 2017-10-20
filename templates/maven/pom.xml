@@ -103,11 +103,10 @@
             <phase>package</phase>
             <configuration>
               <classifier>api</classifier>
-              <includes>
-                <include>**/*Service*</include>
-              </includes>
               <excludes>
                 <exclude>**/impl/**</exclude>
+                <exclude>**/MainVerticle.class</exclude>
+                <exclude>**/package-info.class</exclude>
               </excludes>
             </configuration>
           </execution>
@@ -117,11 +116,6 @@
               <goal>jar</goal>
             </goals>
             <phase>package</phase>
-            <configuration>
-              <includes>
-                <include>**/*</include>
-              </includes>
-            </configuration>
           </execution>
         </executions>
       </plugin>

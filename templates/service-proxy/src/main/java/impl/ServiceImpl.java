@@ -7,11 +7,11 @@ import io.vertx.core.json.JsonObject;
 
 public class {{ metadata.Service }}Impl implements {{ metadata.Service }} {
 
-  public ServiceImpl(Vertx vertx, JsonObject config) {
+  public {{ metadata.Service }}Impl(Vertx vertx, JsonObject config) {
     // initialization...
   }
 
-  // Implement your service here...
+  // TODO: Implement your service here...
 
   public void close() {
     // clean up...

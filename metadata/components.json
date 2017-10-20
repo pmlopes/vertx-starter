@@ -580,5 +580,12 @@
     "artifactId": "hsqldb",
     "version": "2.4.0",
     "description": "HypersonicDB JDBC Driver."
+  },
+  {
+    "groupId": "junit",
+    "artifactId": "junit",
+    "version": "4.12",
+    "description": "Java Unit Testing."
   }
+
 ]

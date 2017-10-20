@@ -3,7 +3,7 @@ package {{ metadata.packageName }};
 import io.vertx.codegen.annotations.ProxyGen;
 import io.vertx.codegen.annotations.VertxGen;
 import io.vertx.core.Vertx;
-import io.vertx.serviceproxy.ProxyHelper;
+import io.vertx.serviceproxy.ServiceProxyBuilder;
 
 /**
  * {{ metadata.Service }} API.
@@ -11,6 +11,12 @@ import io.vertx.serviceproxy.ProxyHelper;
 @VertxGen
 @ProxyGen
 public interface {{ metadata.Service }} {
+
+  /**
+   * The default service address.
+   */
+  String DEFAULT_ADDRESS = "{{ metadata.packageName }}.service";
+
   /**
     * Method called to create a proxy (to consume the service).
     *
@@ -18,7 +24,9 @@ public interface {{ metadata.Service }} {
     * @param address the address on the event bus where the service is served.
     * @return the proxy
     */
-  static Service createProxy(Vertx vertx, String address) {
-    return ProxyHelper.createProxy({{ metadata.Service }}.class, vertx, address);
+  static {{ metadata.Service }} createProxy(Vertx vertx, String address) {
+    return new ServiceProxyBuilder(vertx)
+      .setAddress(address)
+      .build({{ metadata.Service }}.class);
   }
 }
