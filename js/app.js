@@ -183,16 +183,23 @@ riot.tag2('main', '<div if="{tool}" class="container"><div class="help-tip hide-
 
       e.preventDefault();
       var oldPreset = self.preset;
-      var newPreset = self.presets.filter(function (el) {
-        return el.id === e.target.value;
-      })[0];
 
-      ga('send', {
-        hitType: 'event',
-        eventCategory: newPreset.id + ':view',
-        eventAction: newPreset.id + '/view',
-        eventLabel: 'project'
-      });
+      var newPreset = { dependencies : [
+        "io.vertx:vertx-core"
+      ]};
+
+      if (e.target.value) {
+        newPreset = self.presets.filter(function (el) {
+          return el.id === e.target.value;
+        })[0];
+
+        ga('send', {
+          hitType: 'event',
+          eventCategory: newPreset.id + ':view',
+          eventAction: newPreset.id + '/view',
+          eventLabel: 'project'
+        });
+      }
 
       var selection = [].concat(self.dependencies);
       if (oldPreset) {
@@ -272,7 +279,11 @@ riot.tag2('main', '<div if="{tool}" class="container"><div class="help-tip hide-
         });
       }
 
-      compileProject({buildtool: self.tool, dependencies: self.dependencies, language: self.language, preset: self.preset, components: opts.components}, function (err, zip) {
+      var dependencies = self.dependencies.filter(function (el) {
+        return el.checked;
+      });
+
+      compileProject({buildtool: self.tool, dependencies: dependencies, language: self.language, preset: self.preset, components: opts.components}, function (err, zip) {
         if (err) {
           submit.disabled = false;
           self.update({
