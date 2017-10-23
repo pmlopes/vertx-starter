@@ -40,21 +40,26 @@ self.addEventListener('activate', function (event) {
 
 self.addEventListener('fetch', function (event) {
   event.respondWith(
-    caches.match(event.request).then(function (resp) {
-      // always attempt to fetch first
-      return fetch(event.request)
-        .then(function (response) {
-          if (response.ok) {
-            return caches.open(CACHE_VERSION).then(function (cache) {
-              cache.put(event.request, response.clone());
-              return response;
-            });
-          }
-          throw new Error('Failed to fetch resource.');
-        })
-        .catch(function(err) {
-          // return cached value
-          return resp;
-        });
+    caches.match(event.request).then(function (response) {
+      // caches.match() always resolves
+      // but in case of success response will have value
+      if (response !== undefined) {
+        return response;
+      } else {
+        // always attempt to fetch first
+        return fetch(event.request)
+          .then(function (response) {
+            if (response.ok) {
+              return caches.open(CACHE_VERSION).then(function (cache) {
+                cache.put(event.request, response.clone());
+                return response;
+              });
+            }
+            throw new Error('Failed to fetch resource.');
+          })
+          .catch(function (err) {
+            throw err;
+          });
+      }
     }));
 });
