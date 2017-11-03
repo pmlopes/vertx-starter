@@ -99,6 +99,9 @@
           </div>
         </virtual>
       </div>
+      <div if={ notfound } class="row center">
+        <i>Sorry! Cannot find what you're looking for, please &nbsp;<a href="https://github.com/pmlopes/vertx-starter/issues/new">open an issue</a>&nbsp; so we know about the missing metadata!</i>
+      </div>
 
       <div class="row" id="interaction">
         <div class="col-8">
@@ -107,7 +110,7 @@
           <a id="download-btn" onclick={ clean } href="#" show={ downloading } ref="download" download="{ name }.zip" style="padding: 1.1rem 3.5rem; margin: 1rem 0; background: #782b90; color: #f5f5f5; border-radius: 2px; border: none; font-size: 1.3rem; transition: all .2s ease">Download</a>
         </div>
         <div class="col-4">
-          <div if={generating} class="spinner">
+          <div if={ generating } class="spinner">
             <div class="rect1"></div>
             <div class="rect2"></div>
             <div class="rect3"></div>
@@ -499,8 +502,8 @@
       }));
 
       var needle = e.target.value;
+      var cnt = 0;
       if (needle.length > 0) {
-        var cnt = 0;
         opts.components.forEach(function (el, index) {
           if (el.artifactId.indexOf(needle) !== -1 || (el.description && el.description.indexOf(needle) !== -1)) {
             var c = clone(el);
@@ -523,6 +526,7 @@
       }
 
       self.update({
+        notfound: needle.length > 0 && cnt === 0,
         dependencies : found
       });
     }.bind(this);
