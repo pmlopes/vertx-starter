@@ -11,7 +11,7 @@ const routes = [
 ];
 
 new Vue({
-    el: '#app-root',
+    el: '#app',
     router: new VueRouter({ mode: 'history', routes: routes }),
     render: h => h(require('./components/app/app.vue.html'))
 });
