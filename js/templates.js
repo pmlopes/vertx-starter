@@ -56,6 +56,8 @@
     + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.description : stack1), depth0))
     + "</description>\n";
 },"3":function(container,depth0,helpers,partials,data) {
+    return "    <kotlin.compiler.jvmTarget>1.8</kotlin.compiler.jvmTarget>\n";
+},"5":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
 
   return "    <dependency>\n      <groupId>"
@@ -63,33 +65,33 @@
     + "</groupId>\n      <artifactId>"
     + alias4(((helper = (helper = helpers.artifactId || (depth0 != null ? depth0.artifactId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"artifactId","hash":{},"data":data}) : helper)))
     + "</artifactId>\n"
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.version : depth0),{"name":"if","hash":{},"fn":container.program(4, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.scope : depth0),{"name":"if","hash":{},"fn":container.program(6, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.classifier : depth0),{"name":"if","hash":{},"fn":container.program(8, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.version : depth0),{"name":"if","hash":{},"fn":container.program(6, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.scope : depth0),{"name":"if","hash":{},"fn":container.program(8, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.classifier : depth0),{"name":"if","hash":{},"fn":container.program(10, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "    </dependency>\n";
-},"4":function(container,depth0,helpers,partials,data) {
+},"6":function(container,depth0,helpers,partials,data) {
     var helper;
 
   return "      <version>"
     + container.escapeExpression(((helper = (helper = helpers.version || (depth0 != null ? depth0.version : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"version","hash":{},"data":data}) : helper)))
     + "</version>\n";
-},"6":function(container,depth0,helpers,partials,data) {
+},"8":function(container,depth0,helpers,partials,data) {
     var helper;
 
   return "      <scope>"
     + container.escapeExpression(((helper = (helper = helpers.scope || (depth0 != null ? depth0.scope : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"scope","hash":{},"data":data}) : helper)))
     + "</scope>\n";
-},"8":function(container,depth0,helpers,partials,data) {
+},"10":function(container,depth0,helpers,partials,data) {
     var helper;
 
   return "      <classifier>"
     + container.escapeExpression(((helper = (helper = helpers.classifier || (depth0 != null ? depth0.classifier : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"classifier","hash":{},"data":data}) : helper)))
     + "</classifier>\n";
-},"10":function(container,depth0,helpers,partials,data) {
-    return "        <plugin>\n          <artifactId>kotlin-maven-plugin</artifactId>\n          <groupId>org.jetbrains.kotlin</groupId>\n          <version>1.1.0</version>\n          <executions>\n            <execution>\n              <id>compile</id>\n              <goals>\n                <goal>compile</goal>\n              </goals>\n              <configuration>\n                <sourceDirs>\n                  <sourceDir>${project.basedir}/src/main/kotlin</sourceDir>\n                  <sourceDir>${project.basedir}/src/main/java</sourceDir>\n                </sourceDirs>\n              </configuration>\n            </execution>\n            <execution>\n              <id>test-compile</id>\n              <goals>\n                <goal>test-compile</goal>\n              </goals>\n              <configuration>\n                <sourceDirs>\n                  <sourceDir>${project.basedir}/src/test/kotlin</sourceDir>\n                  <sourceDir>${project.basedir}/src/test/java</sourceDir>\n                </sourceDirs>\n              </configuration>\n            </execution>\n          </executions>\n        </plugin>\n";
 },"12":function(container,depth0,helpers,partials,data) {
-    return "      <plugin>\n        <artifactId>kotlin-maven-plugin</artifactId>\n        <groupId>org.jetbrains.kotlin</groupId>\n      </plugin>\n";
+    return "        <plugin>\n          <artifactId>kotlin-maven-plugin</artifactId>\n          <groupId>org.jetbrains.kotlin</groupId>\n          <version>1.1.0</version>\n          <executions>\n            <execution>\n              <id>compile</id>\n              <goals>\n                <goal>compile</goal>\n              </goals>\n              <configuration>\n                <sourceDirs>\n                  <sourceDir>${project.basedir}/src/main/kotlin</sourceDir>\n                  <sourceDir>${project.basedir}/src/main/java</sourceDir>\n                </sourceDirs>\n              </configuration>\n            </execution>\n            <execution>\n              <id>test-compile</id>\n              <goals>\n                <goal>test-compile</goal>\n              </goals>\n              <configuration>\n                <sourceDirs>\n                  <sourceDir>${project.basedir}/src/test/kotlin</sourceDir>\n                  <sourceDir>${project.basedir}/src/test/java</sourceDir>\n                </sourceDirs>\n              </configuration>\n            </execution>\n          </executions>\n        </plugin>\n";
 },"14":function(container,depth0,helpers,partials,data) {
+    return "      <plugin>\n        <artifactId>kotlin-maven-plugin</artifactId>\n        <groupId>org.jetbrains.kotlin</groupId>\n      </plugin>\n";
+},"16":function(container,depth0,helpers,partials,data) {
     return "      <plugin>\n        <artifactId>maven-jar-plugin</artifactId>\n        <version>2.4</version>\n        <executions>\n          <execution>\n            <id>service-api</id>\n            <goals>\n              <goal>jar</goal>\n            </goals>\n            <phase>package</phase>\n            <configuration>\n              <classifier>api</classifier>\n              <excludes>\n                <exclude>**/impl/**</exclude>\n                <exclude>**/MainVerticle.class</exclude>\n                <exclude>**/package-info.class</exclude>\n              </excludes>\n            </configuration>\n          </execution>\n          <execution>\n            <id>jar</id>\n            <goals>\n              <goal>jar</goal>\n            </goals>\n            <phase>package</phase>\n          </execution>\n        </executions>\n      </plugin>\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=container.lambda, alias2=container.escapeExpression, alias3=depth0 != null ? depth0 : (container.nullContext || {});
@@ -106,13 +108,15 @@
     + ((stack1 = helpers["if"].call(alias3,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.description : stack1),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "\n  <properties>\n    <main.verticle>"
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.main : stack1), depth0))
-    + "</main.verticle>\n    <kotlin.compiler.jvmTarget>1.8</kotlin.compiler.jvmTarget>\n  </properties>\n\n  <dependencies>\n"
-    + ((stack1 = helpers.each.call(alias3,(depth0 != null ? depth0.dependencies : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "</main.verticle>\n"
+    + ((stack1 = helpers["if"].call(alias3,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.kotlin : stack1),{"name":"if","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "  </properties>\n\n  <dependencies>\n"
+    + ((stack1 = helpers.each.call(alias3,(depth0 != null ? depth0.dependencies : depth0),{"name":"each","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "  </dependencies>\n\n  <build>\n    <pluginManagement>\n      <plugins>\n        <plugin>\n          <artifactId>maven-compiler-plugin</artifactId>\n          <version>3.1</version>\n          <configuration>\n            <source>1.8</source>\n            <target>1.8</target>\n          </configuration>\n        </plugin>\n"
-    + ((stack1 = helpers["if"].call(alias3,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.kotlin : stack1),{"name":"if","hash":{},"fn":container.program(10, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "      </plugins>\n    </pluginManagement>\n\n    <plugins>\n"
     + ((stack1 = helpers["if"].call(alias3,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.kotlin : stack1),{"name":"if","hash":{},"fn":container.program(12, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ((stack1 = helpers["if"].call(alias3,((stack1 = (depth0 != null ? depth0.dependenciesGAV : depth0)) != null ? stack1["io.vertx:vertx-service-proxy"] : stack1),{"name":"if","hash":{},"fn":container.program(14, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "      </plugins>\n    </pluginManagement>\n\n    <plugins>\n"
+    + ((stack1 = helpers["if"].call(alias3,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.kotlin : stack1),{"name":"if","hash":{},"fn":container.program(14, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias3,((stack1 = (depth0 != null ? depth0.dependenciesGAV : depth0)) != null ? stack1["io.vertx:vertx-service-proxy"] : stack1),{"name":"if","hash":{},"fn":container.program(16, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "      <plugin>\n        <groupId>org.apache.maven.plugins</groupId>\n        <artifactId>maven-shade-plugin</artifactId>\n        <version>2.3</version>\n        <executions>\n          <execution>\n            <phase>package</phase>\n            <goals>\n              <goal>shade</goal>\n            </goals>\n            <configuration>\n              <transformers>\n                <transformer implementation=\"org.apache.maven.plugins.shade.resource.ManifestResourceTransformer\">\n                  <manifestEntries>\n                    <Main-Class>io.vertx.core.Launcher</Main-Class>\n                    <Main-Verticle>${main.verticle}</Main-Verticle>\n                  </manifestEntries>\n                </transformer>\n                <transformer implementation=\"org.apache.maven.plugins.shade.resource.AppendingTransformer\">\n                  <resource>META-INF/services/io.vertx.core.spi.VerticleFactory</resource>\n                </transformer>\n              </transformers>\n              <artifactSet>\n              </artifactSet>\n              <outputFile>${project.build.directory}/${project.artifactId}-${project.version}-fat.jar</outputFile>\n            </configuration>\n          </execution>\n        </executions>\n      </plugin>\n    </plugins>\n  </build>\n</project>\n";
 },"useData":true});
   Handlebars.templates['npm/package.json'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
@@ -427,17 +431,6 @@
   Handlebars.templates['sbt/project/plugins.sbt'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "addSbtPlugin(\"com.eed3si9n\"      % \"sbt-assembly\"        % \"0.14.3\")\naddSbtPlugin(\"com.geirsson\"      % \"sbt-scalafmt\"        % \"0.5.5\")\naddSbtPlugin(\"org.scoverage\"     % \"sbt-scoverage\"       % \"1.5.0\")\naddSbtPlugin(\"net.virtual-void\"  % \"sbt-dependency-graph\"% \"0.8.2\")\n";
 },"useData":true});
-  Handlebars.templates['package-info/src/main/java/package-info.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=container.lambda, alias2=container.escapeExpression;
-
-  return "@ModuleGen(name=\""
-    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.artifactId : stack1), depth0))
-    + "\", groupPackage = \""
-    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.packageName : stack1), depth0))
-    + "\")\npackage "
-    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.packageName : stack1), depth0))
-    + ";\n\nimport io.vertx.codegen.annotations.ModuleGen;\n";
-},"useData":true});
   Handlebars.templates['npm/src/main/js/index.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "// your code goes here...\nvertx.createHttpServer()\n  .requestHandler(function (req) {\n    req.response()\n      .putHeader(\"content-type\", \"text/plain\")\n      .end(\"Hello from Vert.x!\");\n}).listen(8080);\n\nconsole.log('Listening at http://127.0.0.1:8080');\n";
 },"useData":true});
@@ -450,6 +443,17 @@
   return "package "
     + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.packageName : stack1), depth0))
     + "\n\nimport io.vertx.lang.scala.ScalaVerticle\n\nclass MainVerticle extends ScalaVerticle {\n\n  override def start(): Unit = {\n    // your code goes here...\n    vertx\n      .createHttpServer()\n      .requestHandler(_.response()\n        .putHeader(\"content-type\", \"text/plain\")\n        .end(\"Hello from Vert.x!\"))\n      .listenFuture(8080, \"0.0.0.0\")\n        .map(_ => ())\n  }\n}\n";
+},"useData":true});
+  Handlebars.templates['package-info/src/main/java/package-info.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=container.lambda, alias2=container.escapeExpression;
+
+  return "@ModuleGen(name=\""
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.artifactId : stack1), depth0))
+    + "\", groupPackage = \""
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.packageName : stack1), depth0))
+    + "\")\npackage "
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.packageName : stack1), depth0))
+    + ";\n\nimport io.vertx.codegen.annotations.ModuleGen;\n";
 },"useData":true});
   Handlebars.templates['service-proxy/src/main/java/MainVerticle.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=container.lambda, alias2=container.escapeExpression;
@@ -975,17 +979,17 @@
   Handlebars.templates['web+angular4/src/main/ts/app/components/counter/counter.component.ts'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "import { Component } from '@angular/core';\n\n@Component({\n    selector: 'counter',\n    templateUrl: './counter.component.html'\n})\nexport class CounterComponent {\n    public currentCount = 0;\n\n    public incrementCounter() {\n        this.currentCount++;\n    }\n}\n";
 },"useData":true});
-  Handlebars.templates['web+angular4/src/main/ts/app/components/fetchdata/fetchdata.component.html'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<h1>Weather forecast</h1>\n\n<p>This component demonstrates fetching data from the server.</p>\n\n<p *ngIf=\"!forecasts\"><em>Loading...</em></p>\n\n<table class='table' *ngIf=\"forecasts\">\n    <thead>\n        <tr>\n            <th>Date</th>\n            <th>Temp. (C)</th>\n            <th>Temp. (F)</th>\n            <th>Summary</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr *ngFor=\"let forecast of forecasts\">\n            <td>{{ forecast.dateFormatted }}</td>\n            <td>{{ forecast.temperatureC }}</td>\n            <td>{{ forecast.temperatureF }}</td>\n            <td>{{ forecast.summary }}</td>\n        </tr>\n    </tbody>\n</table>\n";
-},"useData":true});
-  Handlebars.templates['web+angular4/src/main/ts/app/components/fetchdata/fetchdata.component.ts'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "import { Component, Inject } from '@angular/core';\nimport { Http } from '@angular/http';\n\n@Component({\n    selector: 'fetchdata',\n    templateUrl: './fetchdata.component.html'\n})\nexport class FetchDataComponent {\n    public forecasts: WeatherForecast[];\n\n    constructor(http: Http, @Inject('BASE_URL') baseUrl: string) {\n        http.get(baseUrl + 'api/weather-forecasts').subscribe(result => {\n            this.forecasts = result.json() as WeatherForecast[];\n        }, error => console.error(error));\n    }\n}\n\ninterface WeatherForecast {\n    dateFormatted: string;\n    temperatureC: number;\n    temperatureF: number;\n    summary: string;\n}\n";
-},"useData":true});
   Handlebars.templates['web+angular4/src/main/ts/app/components/home/home.component.html'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "<h1>Hello, world!</h1>\n<p>Welcome to your new single-page application, built with:</p>\n<ul>\n  <li><a href='http://vertx.io/'>Vert.x</a> for polyglot server-side code</li>\n  <li><a href='https://angular.io/'>Angular</a> and <a href='http://www.typescriptlang.org/'>TypeScript</a> for\n    client-side code\n  </li>\n  <li><a href='https://webpack.github.io/'>Webpack</a> for building and bundling client-side resources</li>\n  <li><a href='http://getbootstrap.com/'>Bootstrap</a> for layout and styling</li>\n</ul>\n<p>To help you get started, we've also set up:</p>\n<ul>\n  <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.\n  </li>\n  <li><strong>TODO: Server-side prerendering</strong>. For faster initial loading and improved SEO, your Angular app is\n    prerendered on the server. The resulting HTML is then transferred to the browser where a client-side copy of the app\n    takes over.\n  </li>\n  <li><strong>Webpack dev middleware</strong>. In development mode, there's no need to run the <code>webpack</code>\n    build tool. Your client-side resources are dynamically built on demand. Updates are available as soon as you modify\n    any file.\n  </li>\n  <li><strong>Hot module replacement</strong>. In development mode, you don't even need to reload the page after making\n    most changes. Within seconds of saving changes to files, your Angular app will be rebuilt and a new instance\n    injected is into the page.\n  </li>\n  <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and the\n    <code>webpack</code> build tool produces minified static CSS and JavaScript files.\n  </li>\n</ul>\n";
 },"useData":true});
   Handlebars.templates['web+angular4/src/main/ts/app/components/home/home.component.ts'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "import { Component } from '@angular/core';\n\n@Component({\n    selector: 'home',\n    templateUrl: './home.component.html'\n})\nexport class HomeComponent {\n}\n";
+},"useData":true});
+  Handlebars.templates['web+angular4/src/main/ts/app/components/fetchdata/fetchdata.component.html'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<h1>Weather forecast</h1>\n\n<p>This component demonstrates fetching data from the server.</p>\n\n<p *ngIf=\"!forecasts\"><em>Loading...</em></p>\n\n<table class='table' *ngIf=\"forecasts\">\n    <thead>\n        <tr>\n            <th>Date</th>\n            <th>Temp. (C)</th>\n            <th>Temp. (F)</th>\n            <th>Summary</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr *ngFor=\"let forecast of forecasts\">\n            <td>{{ forecast.dateFormatted }}</td>\n            <td>{{ forecast.temperatureC }}</td>\n            <td>{{ forecast.temperatureF }}</td>\n            <td>{{ forecast.summary }}</td>\n        </tr>\n    </tbody>\n</table>\n";
+},"useData":true});
+  Handlebars.templates['web+angular4/src/main/ts/app/components/fetchdata/fetchdata.component.ts'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "import { Component, Inject } from '@angular/core';\nimport { Http } from '@angular/http';\n\n@Component({\n    selector: 'fetchdata',\n    templateUrl: './fetchdata.component.html'\n})\nexport class FetchDataComponent {\n    public forecasts: WeatherForecast[];\n\n    constructor(http: Http, @Inject('BASE_URL') baseUrl: string) {\n        http.get(baseUrl + 'api/weather-forecasts').subscribe(result => {\n            this.forecasts = result.json() as WeatherForecast[];\n        }, error => console.error(error));\n    }\n}\n\ninterface WeatherForecast {\n    dateFormatted: string;\n    temperatureC: number;\n    temperatureF: number;\n    summary: string;\n}\n";
 },"useData":true});
   Handlebars.templates['web+angular4/src/main/ts/app/components/navmenu/navmenu.component.css'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "li .glyphicon {\n    margin-right: 10px;\n}\n\n/* Highlighting rules for nav menu items */\nli.link-active a,\nli.link-active a:hover,\nli.link-active a:focus {\n    background-color: #4189C7;\n    color: white;\n}\n\n/* Keep the nav menu independent of scrolling and on top of other items */\n.main-nav {\n    position: fixed;\n    top: 0;\n    left: 0;\n    right: 0;\n    z-index: 1;\n}\n\n@media (min-width: 768px) {\n    /* On small screens, convert the nav menu to a vertical sidebar */\n    .main-nav {\n        height: 100%;\n        width: calc(25% - 20px);\n    }\n    .navbar {\n        border-radius: 0px;\n        border-width: 0px;\n        height: 100%;\n    }\n    .navbar-header {\n        float: none;\n    }\n    .navbar-collapse {\n        border-top: 1px solid #444;\n        padding: 0px;\n    }\n    .navbar ul {\n        float: none;\n    }\n    .navbar li {\n        float: none;\n        font-size: 15px;\n        margin: 6px;\n    }\n    .navbar li a {\n        padding: 10px 16px;\n        border-radius: 4px;\n    }\n    .navbar a {\n        /* If a menu item's text is too long, truncate it */\n        width: 100%;\n        white-space: nowrap;\n        overflow: hidden;\n        text-overflow: ellipsis;\n    }\n}\n";
