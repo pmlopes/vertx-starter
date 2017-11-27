@@ -16,6 +16,7 @@
 
   <properties>
     <main.verticle>{{metadata.main}}</main.verticle>
+    <kotlin.compiler.jvmTarget>1.8</kotlin.compiler.jvmTarget>
   </properties>
 
   <dependencies>

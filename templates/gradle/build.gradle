@@ -37,6 +37,14 @@ dependencies {
 {{/each}}
 }
 
+{{#if metadata.kotlin}}
+compileKotlin {
+  kotlinOptions {
+    jvmTarget = '1.8'
+  }
+}
+{{/if}}
+
 shadowJar {
   classifier = 'fat'
   manifest {
