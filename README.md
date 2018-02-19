@@ -2,7 +2,7 @@
 
 This is a simple online generator for vert.x projects
 
-The whole SPA is data driven, build tools can be added to the file [metadata/buildtools.json](buildtools.json).
+The whole SPA is data-driven, build tools can be added to the file [metadata/buildtools.json](buildtools.json).
 
 # Data files
 
@@ -16,8 +16,8 @@ The whole SPA is data driven, build tools can be added to the file [metadata/bui
 * `languages` supported languages
 * `templates` simple templates that apply to all languages
 * `defaults` default dependencies that are automatically selected for this tool
-* `executables` list of template elements that should be marked as executable (required for unix OSes)
-* `blob` a existing zip file that will be merged to the final zip
+* `executables` list of template elements that should be marked as executable (required for Unix OSes)
+* `blob` an existing zip file that will be merged into the final zip
 
 #### fields
 
@@ -35,7 +35,7 @@ It allows the following properties:
 A language represents a programming language and has the following properties:
 
 * `id` an unique id (should match the `vertx-lang-xxx`)
-* `templates` a extra list of templates for this language
+* `templates` an extra list of templates for this language
 
 ### components.json
 
@@ -48,7 +48,7 @@ Components have the following properties:
 * `version`
 * `stack` is the component part of the official stack
 * `description`
-* `core` is a special marker for languages like scala. If true it means that there is no prefixed artifacts
+* `core` is a special marker for languages like scala. If true it means that there are no prefixed artifacts
 
 ### presets.json
 
@@ -63,11 +63,11 @@ A preset has the following properties:
 * `language` the language this preset requires
 * `templates` a list of extra templates that are required for this preset (no file name translation will occurr)
 * `executables` a list of extra executable templates that are required for this preset
-* `blob` a existing zip file that will be merged to the final zip (will override build tool one)
+* `blob` an existing zip file that will be merged into the final zip (will override build tool one)
 
 ## Templates
 
-The generated project comes from the handlebars templates under `templ` for each build tools there should be a folder. In this folder all files will be handled as handlebars templates.
+The generated project comes from the handlebars templates under `templ` for each build tools there should be a folder. In this folder, all files will be handled as handlebars templates.
 
 When dealing with templates that need to live in a specific package name the following rules apply:
 
@@ -78,7 +78,7 @@ Important to note that extra packages after the `{packageName}` are allowed e.g.
 
 ## Build process
 
-There is no build process except if templates are added/modified. In this case handlebars needs to precompile the templates.
+There is no build process except if templates are added/modified. In this case, handlebars needs to precompile the templates.
 
 This can be done using `NPM`, start by installing the required dependencies:
 
@@ -94,4 +94,4 @@ npm run build
 
 ## Release
 
-When releasing if the json files have been touched, the version should be bumped in the index.html, to invalidate caches.
+When releasing if the JSON files have been touched, the version should be bumped in the index.html, to invalidate caches.
