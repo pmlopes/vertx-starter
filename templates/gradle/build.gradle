@@ -16,6 +16,7 @@ buildscript {
 apply plugin: 'kotlin'
 {{/if}}
 apply plugin: 'java'
+apply plugin: 'eclipse'
 apply plugin: 'application'
 apply plugin: 'com.github.johnrengelman.shadow'
 
@@ -33,6 +34,7 @@ mainClassName = 'io.vertx.core.Launcher'
 
 dependencies {
 {{#each dependencies}}
+  // TODO use compileOnly instead compile for codegen
   compile '{{groupId}}:{{artifactId}}:{{version}}{{#if classifier}}:{{classifier}}{{/if}}'
 {{/each}}
 }
@@ -57,4 +59,12 @@ shadowJar {
 
 task wrapper(type: Wrapper) {
   gradleVersion = '2.13'
+}
+
+eclipse {
+  classpath {
+    file.beforeMerged { cp ->
+      cp.entries.add( new org.gradle.plugins.ide.eclipse.model.SourceFolder('build/classes/java/main', null) )
+    }
+  }
 }
