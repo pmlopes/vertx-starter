@@ -2,9 +2,11 @@
   "name": "vertx-starter",
   "version": "0.0.1",
   "scripts": {
-    "start": "cd dist && python3 -m http.server 8000"
+    "start": "cd dist && python3 -m http.server 8000",
+    "build": "gulp",
+    "watch": "guild watch",
+    "deploy": "gulp deploy"
   },
-
   "dependencies": {
     "wingcss": "^1.0.0-beta",
     "riot": "^3.7.2",
@@ -13,7 +15,6 @@
     "jszip": "^3.1.4",
     "jszip-utils": "^0.0.2"
   },
-
   "devDependencies": {
     "gulp": "^3.9.1",
     "jshint": "^2.9.5",
