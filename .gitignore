@@ -3,6 +3,7 @@
 .vscode
 # build dependencies
 node_modules
+package-lock.json
 # build artifacts
 js/analytics.js
 dist/js
