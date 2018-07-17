@@ -13,11 +13,13 @@
         <!-- iterate 2 at a time -->
         <virtual if={ i % 2 === 0 }>
           <div class="col-6">
-            <input name="{ tool.fields[i].key }" type="text" placeholder="{ tool.fields[i].label + (tool.fields[i].prefill ? ' e.g.: ' + tool.fields[i].prefill : '') }" required="{ tool.fields[i].required }">
+            <input name="{ tool.fields[i].key }" type="{ tool.fields[i].checkbox ? 'checkbox' : 'text' }" placeholder="{ tool.fields[i].label + (tool.fields[i].prefill ? ' e.g.: ' + tool.fields[i].prefill : '') }" required="{ tool.fields[i].required }">
+            <label if={ tool.fields[i].checkbox }><br><i>{ tool.fields[i].label + (tool.fields[i].prefill ? ' e.g.: ' + tool.fields[i].prefill : '') }</i></label>
           </div>
           <div class="col-6">
             <!-- if there is a next one -->
-            <input if={ tool.fields[i+1] }  name="{ tool.fields[i+1].key }" type="text" placeholder="{ tool.fields[i+1].label + (tool.fields[i+1].prefill ? ' e.g.: ' + tool.fields[i+1].prefill : '') }" required="{ tool.fields[i+1].required }">
+            <input if={ tool.fields[i+1] }  name="{ tool.fields[i+1].key }" type="{ tool.fields[i+1].checkbox ? 'checkbox' : 'text' }" placeholder="{ tool.fields[i+1].label + (tool.fields[i+1].prefill ? ' e.g.: ' + tool.fields[i+1].prefill : '') }" required="{ tool.fields[i+1].required }">
+            <label if={ tool.fields[i+1] && tool.fields[i+1].checkbox }><br><i>{ tool.fields[i+1].label + (tool.fields[i+1].prefill ? ' e.g.: ' + tool.fields[i+1].prefill : '') }</i></label>
           </div>
         </virtual>
       </div>
@@ -251,7 +253,9 @@
       if (obj.offsetParent) {
         do {
           curtop += obj.offsetTop;
-        } while (obj = obj.offsetParent);
+          // go to child
+          obj = obj.offsetParent;
+        } while (obj);
         return [curtop];
       }
     }

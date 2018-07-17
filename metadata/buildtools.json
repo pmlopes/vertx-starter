@@ -10,6 +10,9 @@
       { "key": "artifactId", "label": "Maven Artifact Id", "prefill": "demo" },
       { "key": "version", "label": "Project Version", "prefill": "0.0.1-SNAPSHOT" }
     ],
+    "disabled": [
+      { "key": "graalNativeImage", "label": "Support to build native images (requires: GraalVM)", "checkbox": true }
+    ],
     "languages": [
       {
         "id": "java",
@@ -51,6 +54,10 @@
       "git/.gitignore",
       "editorconfig/.editorconfig",
       "maven/pom.xml"
+    ],
+    "graalNativeImageTemplates": [
+      "graal-nativeimage/src/main/svm/reflection.json",
+      "graal-nativeimage/src/main/svm/substitutions.java"
     ],
     "blob": "blobs/mvnw.zip",
     "executables": [

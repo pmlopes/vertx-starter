@@ -83,9 +83,26 @@
     project.metadata[language] = true;
     project.metadata.artifactSuffix = project.buildtool['non-core-suffix'] || '';
 
+    var templates = [];
+
     // convert the fields to a form structure
     project.buildtool.fields.forEach(function (el) {
-      project.metadata[el.key] = el.value ? el.value : el.prefill;
+      if (el.checkbox) {
+        project.metadata[el.key] = el.value === 'on';
+        // we will also process extra templates if available
+        if (Array.isArray(project.buildtool[el.key + 'Templates'])) {
+          templates = templates.concat(project.buildtool[el.key + 'Templates']);
+        }
+        // Would like to know how popular this flag is
+        ga('send', {
+          hitType: 'event',
+          eventCategory: project.buildtool.id + ':feature',
+          eventAction: project.buildtool.id + '/' + el.key,
+          eventLabel: 'feature'
+        });
+      } else {
+        project.metadata[el.key] = el.value ? el.value : el.prefill;
+      }
     });
     // convert the fields to a form structure
     if (project.preset && project.preset.fields) {
@@ -103,8 +120,6 @@
 
     // create a new zip file
     var zip = new JSZip();
-
-    var templates = [];
 
     // merge all templates to be processed
     templates = templates.concat(project.buildtool.templates);
