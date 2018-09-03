@@ -7,11 +7,9 @@
       { "key": "name", "label": "Project Name", "required": true },
       { "key": "description", "label": "Project Description" },
       { "key": "groupId", "label": "Maven Group Id", "prefill": "com.example" },
-      { "key": "artifactId", "label": "Maven Artifact Id", "prefill": "demo" },
-      { "key": "version", "label": "Project Version", "prefill": "0.0.1-SNAPSHOT" }
-    ],
-    "disabled": [
-      { "key": "graalNativeImage", "label": "Support to build native images (requires: GraalVM)", "checkbox": true }
+      { "key": "artifactId", "label": "Maven Artifact Id", "prefill": "myapp" },
+      { "key": "version", "label": "Project Version", "prefill": "0.0.1-SNAPSHOT" },
+      { "key": "graalNativeImage", "label": "(Experimental!) native image support (requires: GraalVM)", "checkbox": true }
     ],
     "languages": [
       {

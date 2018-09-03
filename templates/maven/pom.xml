@@ -29,12 +29,13 @@
         <dependency>
           <groupId>com.oracle</groupId>
           <artifactId>substrate</artifactId>
-          <version>1.0.0-rc3</version>
+          <version>1.0.0-rc5</version>
           <scope>system</scope>
           <systemPath>${java.home}/lib/svm/builder/svm.jar</systemPath>
         </dependency>
       </dependencies>
       <build>
+        <defaultGoal>package exec:exec</defaultGoal>
         <plugins>
           <plugin>
             <groupId>org.codehaus.mojo</groupId>
@@ -53,6 +54,33 @@
                 </configuration>
               </execution>
             </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>1.6.0</version>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+              </execution>
+            </executions>
+            <configuration>
+              <executable>${java.home}/bin/native-image</executable>
+              <arguments>
+                <argument>--no-server</argument>
+                <argument>-Djava.net.preferIPv4Stack=true</argument>
+                <argument>-Dvertx.disableDnsResolver=true</argument>
+                <argument>-H:Name=${name}</argument>
+                <argument>-H:Path=${project.build.directory}</argument>
+                <argument>-H:IncludeResources=(META-INF/services|static|webroot|template)/.*</argument>
+                <argument>-H:+ReportUnsupportedElementsAtRuntime</argument>
+                <argument>-H:ReflectionConfigurationFiles=${project.basedir}/src/main/svm/reflection.json</argument>
+                <argument>-jar</argument>
+                <argument>${project.build.directory}/${project.artifactId}-${project.version}-fat.jar</argument>
+              </arguments>
+            </configuration>
           </plugin>
         </plugins>
       </build>
@@ -173,11 +201,24 @@
               <goal>shade</goal>
             </goals>
             <configuration>
+              <filters>
+                <filter>
+                  <excludes>
+                    <exclude>META-INF/*.SF</exclude>
+                    <exclude>META-INF/*.DSA</exclude>
+                    <exclude>META-INF/*.RSA</exclude>
+                  </excludes>
+                </filter>
+              </filters>
               <transformers>
                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                   <manifestEntries>
+                    {{#if metadata.graalNativeImage}}
+                    <Main-Class>${main.verticle}</Main-Class>
+                    {{else}}
                     <Main-Class>io.vertx.core.Launcher</Main-Class>
                     <Main-Verticle>${main.verticle}</Main-Verticle>
+                    {{/if}}
                   </manifestEntries>
                 </transformer>
                 <transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
