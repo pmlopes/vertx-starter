@@ -1,4 +1,4 @@
-/* Riot v3.11.1, @license MIT */
+/* Riot v3.12.0, @license MIT */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
   typeof define === 'function' && define.amd ? define(['exports'], factory) :
@@ -1578,6 +1578,7 @@
    * @param { ref } the dom reference location
    */
   function makeReplaceVirtual(tag, ref) {
+    if (!ref.parentNode) { return }
     var frag = createFragment();
     makeVirtual.call(tag, frag);
     ref.parentNode.replaceChild(frag, ref);
@@ -1973,7 +1974,11 @@
           setAttribute(root, IS_DIRECTIVE, tagName);
         }
 
-        tag = mount$1(root, riotTag || root.tagName.toLowerCase(), opts);
+        tag = mount$1(
+          root,
+          riotTag || root.tagName.toLowerCase(),
+          isFunction(opts) ? opts() : opts
+        );
 
         if (tag)
           { tags.push(tag); }
@@ -1984,7 +1989,7 @@
     // inject styles into DOM
     styleManager.inject();
 
-    if (isObject(tagName)) {
+    if (isObject(tagName) || isFunction(tagName)) {
       opts = tagName;
       tagName = 0;
     }
@@ -2078,7 +2083,7 @@
     return delete __TAG_IMPL[name]
   }
 
-  var version = 'v3.11.1';
+  var version = 'v3.12.0';
 
   var core = /*#__PURE__*/Object.freeze({
     Tag: Tag,
@@ -3562,7 +3567,7 @@ return route;
 /**!
 
  @license
- handlebars v4.0.11
+ handlebars v4.0.12
 
 Copyright (C) 2011-2017 by Yehuda Katz
 
@@ -3768,7 +3773,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _logger2 = _interopRequireDefault(_logger);
 
-	var VERSION = '4.0.11';
+	var VERSION = '4.0.12';
 	exports.VERSION = VERSION;
 	var COMPILER_REVISION = 7;
 
