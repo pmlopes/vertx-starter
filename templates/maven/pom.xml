@@ -29,7 +29,7 @@
         <dependency>
           <groupId>com.oracle</groupId>
           <artifactId>substrate</artifactId>
-          <version>1.0.0-rc5</version>
+          <version>1.0.0-rc6</version>
           <scope>system</scope>
           <systemPath>${java.home}/lib/svm/builder/svm.jar</systemPath>
         </dependency>
@@ -70,9 +70,9 @@
               <executable>${java.home}/bin/native-image</executable>
               <arguments>
                 <argument>--no-server</argument>
-                <argument>-Djava.net.preferIPv4Stack=true</argument>
+                <argument>--delay-class-initialization-to-runtime=io.netty.handler.codec.http.HttpObjectEncoder,io.netty.handler.codec.http2.Http2CodecUtil,io.netty.handler.codec.http2.DefaultHttp2FrameWriter,io.netty.handler.codec.http.websocketx.WebSocket00FrameEncoder,io.netty.handler.ssl.JdkNpnApplicationProtocolNegotiator,io.netty.handler.ssl.ReferenceCountedOpenSslEngine</argument>
                 <argument>-Dvertx.disableDnsResolver=true</argument>
-                <argument>-H:Name=${name}</argument>
+                <argument>-H:Name=${project.name}</argument>
                 <argument>-H:Path=${project.build.directory}</argument>
                 <argument>-H:IncludeResources=(META-INF/services|static|webroot|template)/.*</argument>
                 <argument>-H:+ReportUnsupportedElementsAtRuntime</argument>
