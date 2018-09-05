@@ -9,7 +9,7 @@ var rename = require('gulp-rename');
 var riot = require('gulp-riot');
 var download = require('gulp-downloader');
 var wrap = require('gulp-wrap');
-var ghPages = require('gulp-gh-pages');
+var ghPages = require('gulp-gh-pages-gift');
 var jsoncombine = require("gulp-jsoncombine");
 var minify = require('gulp-minify-css');
 
