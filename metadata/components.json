@@ -580,6 +580,12 @@
     "artifactId": "junit",
     "version": "4.12",
     "description": "Java Unit Testing."
+  },
+  {
+    "groupId": "io.reactiverse",
+    "artifactId": "reactive-pg-client",
+    "version": "0.10.2",
+    "description": "High performance reactive Postgres Client."
   }
 
 ]
