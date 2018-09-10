@@ -1,7 +1,6 @@
-import com.oracle.svm.core.annotate.Alias;
-import com.oracle.svm.core.annotate.RecomputeFieldValue;
-import com.oracle.svm.core.annotate.Substitute;
-import com.oracle.svm.core.annotate.TargetClass;
+import com.oracle.svm.core.annotate.*;
+import org.graalvm.nativeimage.*;
+
 import io.netty.handler.codec.compression.*;
 import io.netty.util.internal.logging.InternalLoggerFactory;
 import io.netty.util.internal.logging.JdkLoggerFactory;
@@ -117,5 +116,16 @@ final class TargetResolverProvider {
   @Substitute
   public static ResolverProvider factory(Vertx vertx, AddressResolverOptions options) {
     return new DefaultResolverProvider();
+  }
+}
+
+@AutomaticFeature
+class RuntimeReflectionRegistrationFeature implements Feature {
+  public void beforeAnalysis(BeforeAnalysisAccess access) {
+    try {
+      RuntimeReflection.register(java.util.LinkedHashMap.class.getDeclaredConstructor());
+    } catch (NoSuchMethodException e) {
+      throw new RuntimeException(e);
+    }
   }
 }

@@ -2,7 +2,7 @@
 
 // Incrementing CACHE_VERSION will kick off the install event and force previously cached
 // resources to be cached again.
-var CACHE_VERSION = 'v3.5.3';
+var CACHE_VERSION = 'v3.5.3-1';
 
 self.addEventListener('install', function (event) {
   event.waitUntil(
