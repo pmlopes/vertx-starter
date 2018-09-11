@@ -124,6 +124,9 @@ class RuntimeReflectionRegistrationFeature implements Feature {
   public void beforeAnalysis(BeforeAnalysisAccess access) {
     try {
       RuntimeReflection.register(java.util.LinkedHashMap.class.getDeclaredConstructor());
+      {{#if dependenciesGAV.[io.vertx:vertx-grpc]}}
+      RuntimeReflection.register(io.netty.channel.socket.nio.NioServerSocketChannel.class.getDeclaredConstructor());
+      {{/if}}
     } catch (NoSuchMethodException e) {
       throw new RuntimeException(e);
     }

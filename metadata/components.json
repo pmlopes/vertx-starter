@@ -399,7 +399,8 @@
     "groupId": "io.vertx",
     "artifactId": "vertx-grpc",
     "version": "3.5.3",
-    "stack": true
+    "stack": true,
+    "description": "Vert.x gRPC is a module that will align the programming style of Google gRPC with Vert.x style."
   },
   {
     "groupId": "io.vertx",
