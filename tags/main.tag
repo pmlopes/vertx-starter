@@ -78,7 +78,8 @@
             <div class={ dependency: dependencies[i].checked }>
               <input name="dependencies" type="checkbox" value="{ i }" checked="{ dependencies[i].checked }" onclick={ toggleDependency }>
               <div>
-                <span if={ dependencies[i].stack } class="pull-right"><img src="img/stack.svg" width="16px" /></span>
+                <span if={ dependencies[i].stack } class="pull-right">&nbsp;<img src="img/stack.svg" width="16px" /></span>
+                <span if={ dependencies[i].npm } class="pull-right"><img src="img/npm.svg" width="16px" /></span>
                 <strong>{ dependencies[i].artifactId }</strong>
                 <hr/>
                 <p if={ dependencies[i].description }>{ dependencies[i].description }</p>
@@ -91,7 +92,8 @@
             <div if={ dependencies[i+1] } class={ dependency: dependencies[i+1].checked }>
               <input name="dependencies" type="checkbox" value="{ i+1 }" checked="{ dependencies[i+1].checked }" onclick={ toggleDependency }>
               <div>
-                <span if={ dependencies[i+1].stack } class="pull-right"><img src="img/stack.svg" width="16px" /></span>
+                <span if={ dependencies[i+1].stack } class="pull-right">&nbsp;<img src="img/stack.svg" width="16px" /></span>
+                <span if={ dependencies[i+1].npm } class="pull-right"><img src="img/npm.svg" width="16px" /></span>
                 <strong>{ dependencies[i+1].artifactId }</strong>
                 <hr/>
                 <p if={ dependencies[i+1].description }>{ dependencies[i+1].description }</p>
@@ -279,7 +281,7 @@
       var selection = [].concat(self.dependencies);
 
       // exclude old lang support
-      if (oldLang) {
+      if (oldLang && !oldLang.noLangSupport) {
         for (var index = 0; index < selection.length; index++) {
           var el = selection[index];
           if (el.groupId === 'io.vertx' && el.artifactId === ('vertx-lang-' + oldLang.id)) {
@@ -288,16 +290,18 @@
         }
       }
       // add the default language dependency
-      opts.components.forEach(function (el, index) {
-        if (el.groupId === 'io.vertx' && el.artifactId === ('vertx-lang-' + newLang.id)) {
-          if (selection.filter(function (el2) { return el2.id === index; }).length === 0) {
-            var c = clone(el);
-            c.checked = true;
-            c.id = index;
-            selection.push(c);
+      if (newLang && !newLang.noLangSupport) {
+        opts.components.forEach(function (el, index) {
+          if (el.groupId === 'io.vertx' && el.artifactId === ('vertx-lang-' + newLang.id)) {
+            if (selection.filter(function (el2) { return el2.id === index; }).length === 0) {
+              var c = clone(el);
+              c.checked = true;
+              c.id = index;
+              selection.push(c);
+            }
           }
-        }
-      });
+        });
+      }
 
       var filteredPresets = filterPresets(self.tool.id, e.target.value);
       var filteredPresetsGroups = {};

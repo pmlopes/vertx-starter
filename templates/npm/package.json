@@ -4,30 +4,39 @@
   "description": "{{ metadata.description }}",
   "private": true,
 
-  "mainVerticle": "main.js",
+  "main": "{{ metadata.main }}",
 
   "scripts": {
-    "build": "./node_modules/.bin/webpack",
-    "build:release": "npm run build -- -p",
+    "postinstall": "vertx-scripts init",
+    "test": "vertx-scripts launcher test",
+    "start": "vertx-scripts launcher run",
+    "package": "vertx-scripts package",
+    "repl": "vertx-scripts repl"
+  },
 
-    "prestart": "npm run build",
-    "start": "java -jar target/{{metadata.artifactId}}-{{metadata.version}}-fat.jar"
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+
+  "devDependencies": {
+  {{#if metadata.typescript}}
+    "typescript": "^3.0.3",
+  {{/if}}
+  {{#each npmDevDependencies}}
+    "{{ npm }}": "^{{ version }}",
+  {{/each}}
+    "vertx-scripts": "^1.1.4"
   },
 
   "dependencies": {
+  {{#each npmProdDependencies}}
+    "{{ npm }}": "^{{ version }}"{{#unless @last}},{{/unless}}
+  {{/each}}
   },
 
-  "devDependencies": {
-    "webpack": "^2.2.0",
-    {{#if metadata.javascript}}
-    "babel-core": "^6.22.1",
-    "babel-loader": "^6.2.10",
-    "babel-preset-env": "^1.6.0",
-    {{/if}}
-    {{#if metadata.typescript}}
-    "typescript": "^2.3.2",
-    "ts-loader":"^2.0.3",
-    {{/if}}
-    "webpack-vertx-plugin": "^0.0.4"
+  "mvnDependencies": {
+  {{#each npmMavenDependencies}}
+    "{{ groupId }}:{{ artifactId }}": "{{ version }}{{#if scope}}:{{ scope }}{{/if}}{{#if classifier}}:{{ classifier }}{{/if}}"{{#unless @last}},{{/unless}}
+  {{/each}}
   }
 }

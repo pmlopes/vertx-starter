@@ -2,6 +2,7 @@
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-core",
+    "npm": "@vertx/core",
     "version": "3.5.3",
     "stack": true,
     "description": "Vert.x is a tool-kit for building reactive applications on the JVM.",
@@ -101,6 +102,7 @@
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-dropwizard-metrics",
+    "npm": "@vertx/dropwizard-metrics",
     "version": "3.5.3",
     "stack": true,
     "description": "Metrics Service Provider implementations for Vert.x using Dropwizard metrics library."
@@ -108,6 +110,7 @@
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-hawkular-metrics",
+    "npm": "@vertx/hawkular-metrics",
     "version": "3.5.3",
     "stack": true
   },
@@ -148,6 +151,7 @@
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-mongo-client",
+    "npm": "@vertx/mongo-client",
     "version": "3.5.3",
     "stack": true,
     "description": "An asynchronous client for interacting with a MongoDB database."
@@ -167,6 +171,7 @@
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-jdbc-client",
+    "npm": "@vertx/jdbc-client",
     "version": "3.5.3",
     "stack": true,
     "description": "JDBC support for Vert.x."
@@ -174,48 +179,56 @@
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-auth-common",
+    "npm": "@vertx/auth-common",
     "version": "3.5.3",
     "stack": true
   },
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-auth-jwt",
+    "npm": "@vertx/auth-jwt",
     "version": "3.5.3",
     "stack": true
   },
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-auth-jdbc",
+    "npm": "@vertx/auth-jdbc",
     "version": "3.5.3",
     "stack": true
   },
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-auth-shiro",
+    "npm": "@vertx/auth-shiro",
     "version": "3.5.3",
     "stack": true
   },
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-auth-oauth2",
+    "npm": "@vertx/auth-oauth2",
     "version": "3.5.3",
     "stack": true
   },
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-auth-mongo",
+    "npm": "@vertx/auth-mongo",
     "version": "3.5.3",
     "stack": true
   },
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-web-api-contract",
+    "npm": "@vertx/web-api-contract",
     "version": "3.5.3",
     "stack": true
   },
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-web",
+    "npm": "@vertx/web",
     "version": "3.5.3",
     "stack": true,
     "description": "Vert.x-Web is a set of building blocks for building web applications with Vert.x. Think of it as a Swiss Army Knife for building modern, scalable, web apps."
@@ -223,6 +236,7 @@
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-web-templ-thymeleaf",
+    "npm": "@vertx/web-templ-thymeleaf",
     "version": "3.5.3",
     "classifier": "shaded",
     "transitive": "false",
@@ -231,6 +245,7 @@
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-web-templ-handlebars",
+    "npm": "@vertx/web-templ-handlebars",
     "version": "3.5.3",
     "classifier": "shaded",
     "transitive": "false",
@@ -239,6 +254,7 @@
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-web-templ-jade",
+    "npm": "@vertx/web-templ-jade",
     "version": "3.5.3",
     "classifier": "shaded",
     "transitive": "false",
@@ -247,6 +263,7 @@
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-web-templ-mvel",
+    "npm": "@vertx/web-templ-mvel",
     "version": "3.5.3",
     "classifier": "shaded",
     "transitive": "false",
@@ -255,12 +272,14 @@
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-web-templ-pebble",
+    "npm": "@vertx/web-templ-pebble",
     "version": "3.5.3",
     "stack": true
   },
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-web-templ-freemarker",
+    "npm": "@vertx/web-templ-freemarker",
     "version": "3.5.3",
     "stack": true
   },
@@ -273,14 +292,19 @@
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-unit",
+    "npm": "@vertx/unit",
     "version": "3.5.3",
     "scope": "test",
     "stack": true,
-    "description": "Async polyglot unit testing for Vert.x."
+    "description": "Async polyglot unit testing for Vert.x.",
+    "jsTemplates": [
+      "npm/index.test.js"
+    ]
   },
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-mail-client",
+    "npm": "@vertx/mail-client",
     "version": "3.5.3",
     "stack": true,
     "description": "A simple asynchronous SMTP client for Vert.x."
@@ -294,6 +318,7 @@
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-redis-client",
+    "npm": "@vertx/redis-client",
     "version": "3.5.3",
     "stack": true,
     "description": "The Vert.x Redis client provides an asynchronous API to interact with a redis data-structure server."
@@ -301,6 +326,7 @@
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-shell",
+    "npm": "@vertx/shell",
     "version": "3.5.3",
     "stack": true,
     "description": "Shell for Vert.x."
@@ -314,84 +340,98 @@
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-stomp",
+    "npm": "@vertx/stomp",
     "version": "3.5.3",
     "stack": true
   },
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-bridge-common",
+    "npm": "@vertx/bridge-common",
     "version": "3.5.3",
     "stack": true
   },
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-tcp-eventbus-bridge",
+    "npm": "@vertx/tcp-eventbus-bridge",
     "version": "3.5.3",
     "stack": true
   },
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-mysql-postgresql-client",
+    "npm": "@vertx/mysql-postgresql-client",
     "version": "3.5.3",
     "stack": true
   },
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-camel-bridge",
+    "npm": "@vertx/camel-bridge",
     "version": "3.5.3",
     "stack": true
   },
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-ignite",
+    "npm": "@vertx/ignite",
     "version": "3.5.3",
     "stack": true
   },
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-rabbitmq-client",
+    "npm": "@vertx/rabbitmq-client",
     "version": "3.5.3",
     "stack": true
   },
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-service-discovery",
+    "npm": "@vertx/service-discovery",
     "version": "3.5.3",
     "stack": true
   },
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-circuit-breaker",
+    "npm": "@vertx/circuit-breaker",
     "version": "3.5.3",
     "stack": true
   },
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-service-discovery-bridge-kubernetes",
+    "npm": "@vertx/service-discovery-bridge-kubernetes",
     "version": "3.5.3",
     "stack": true
   },
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-service-discovery-bridge-docker-links",
+    "npm": "@vertx/service-discovery-bridge-docker-links",
     "version": "3.5.3",
     "stack": true
   },
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-service-discovery-bridge-docker",
+    "npm": "@vertx/service-discovery-bridge-docker",
     "version": "3.5.3",
     "stack": true
   },
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-service-discovery-backend-redis",
+    "npm": "@vertx/service-discovery-backend-redis",
     "version": "3.5.3",
     "stack": true
   },
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-service-discovery-bridge-consul",
+    "npm": "@vertx/service-discovery-bridge-consul",
     "version": "3.5.3",
     "stack": true
   },
@@ -405,6 +445,7 @@
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-amqp-bridge",
+    "npm": "@vertx/amqp-bridge",
     "version": "3.5.3",
     "stack": true
   },
@@ -424,6 +465,7 @@
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-consul-client",
+    "npm": "@vertx/consul-client",
     "version": "3.5.3",
     "stack": true,
     "description": "Vert.x Consul client."
@@ -438,6 +480,7 @@
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-web-client",
+    "npm": "@vertx/web-client",
     "version": "3.5.3",
     "stack": true,
     "description": "Vert.x WebClient."
@@ -459,6 +502,7 @@
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-config-git",
+    "npm": "@vertx/config-git",
     "version": "3.5.3",
     "stack": true,
     "description": "Vert.x Configuration service."
@@ -466,6 +510,7 @@
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-config-hocon",
+    "npm": "@vertx/config-hocon",
     "version": "3.5.3",
     "stack": true,
     "description": "Vert.x Configuration service."
@@ -473,6 +518,7 @@
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-config-kubernetes-configmap",
+    "npm": "@vertx/config-kubernetes-configmap",
     "version": "3.5.3",
     "stack": true,
     "description": "Vert.x Configuration service."
@@ -480,6 +526,7 @@
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-config-redis",
+    "npm": "@vertx/config-redis",
     "version": "3.5.3",
     "stack": true,
     "description": "Vert.x Configuration service."
@@ -487,6 +534,7 @@
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-config-spring-config-server",
+    "npm": "@vertx/config-spring-config-server",
     "version": "3.5.3",
     "stack": true,
     "description": "Vert.x Configuration service."
@@ -494,6 +542,7 @@
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-config-yaml",
+    "npm": "@vertx/config-yaml",
     "version": "3.5.3",
     "stack": true,
     "description": "Vert.x Configuration service."
@@ -501,6 +550,7 @@
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-config-zookeeper",
+    "npm": "@vertx/config-zookeeper",
     "version": "3.5.3",
     "stack": true,
     "description": "Vert.x Configuration service."
@@ -508,6 +558,7 @@
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-kafka-client",
+    "npm": "@vertx/kafka-client",
     "version": "3.5.3",
     "stack": true,
     "description": "Vert.x Kafka client."
@@ -515,6 +566,7 @@
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-mqtt-server",
+    "npm": "@vertx/mqtt-server",
     "version": "3.5.3",
     "stack": true,
     "description": "Vert.x MQTT server."
@@ -522,6 +574,7 @@
   {
     "groupId": "io.vertx",
     "artifactId": "vertx-health-check",
+    "npm": "@vertx/health-check",
     "version": "3.5.3",
     "stack": true,
     "description": "Vert.x Health Check."
@@ -585,6 +638,7 @@
   {
     "groupId": "io.reactiverse",
     "artifactId": "reactive-pg-client",
+    "npm": "@reactiverse/reactive-pg-client",
     "version": "0.10.2",
     "description": "High performance reactive Postgres Client."
   }

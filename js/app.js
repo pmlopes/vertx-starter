@@ -1,27 +1,5 @@
 (function (self) {
   'use strict';
-  function Clone() {
-  }
-
-  self.clone = function (obj) {
-    Clone.prototype = obj;
-    return new Clone();
-  };
-
-  self.loadJSON = function (file, callback) {
-    var xobj = new XMLHttpRequest();
-    xobj.overrideMimeType("application/json");
-    xobj.open('GET', file, true);
-    xobj.onreadystatechange = function () {
-      if (xobj.readyState === XMLHttpRequest.DONE) {
-        if (xobj.status !== 200 && xobj.status !== 304) {
-          return callback('Failed to load: ' + file + '!');
-        }
-        callback(null, xobj.responseText);
-      }
-    };
-    xobj.send(null);
-  };
 
   self.compileProject = function (project, callback) {
     var i;
@@ -42,11 +20,25 @@
 
     // alias for selected dependencies
     project.dependenciesGAV = {};
+    // filtered dependencies by scope "dev", "prod", "mvn"
+    project.npmDevDependencies = [];
+    project.npmProdDependencies = [];
+    project.npmMavenDependencies = [];
 
     project.dependencies.forEach(function (el) {
       project.dependenciesGAV[el.groupId + ':' + el.artifactId] = el.version;
       if (el.classifier) {
         project.dependenciesGAV[el.groupId + ':' + el.artifactId + ':' + el.classifier] = el.version;
+      }
+
+      if (el.npm) {
+        if (el.scope === 'test') {
+          project.npmDevDependencies.push(el);
+        } else {
+          project.npmProdDependencies.push(el);
+        }
+      } else {
+        project.npmMavenDependencies.push(el);
       }
 
       // track what dependencies are being selected
@@ -143,7 +135,10 @@
     }
     // merge dependency specific templates
     project.dependencies.forEach(function (el) {
+      // language agnostic
       templates = templates.concat(el.templates || []);
+      // language + dependency specific
+      templates = templates.concat(el[project.language.id + 'Templates'] || []);
     });
 
     // build tool specific templates
@@ -178,8 +173,7 @@
           }
         }).then(function (val) {
           callback(null, val);
-        })
-          .catch(function (ex) {
+        }).catch(function (ex) {
             ga('send', 'exception', {
               'exDescription': ex.message,
               'exFatal': true
