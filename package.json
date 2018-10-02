@@ -17,19 +17,31 @@
     "jszip-utils": "^0.0.2"
   },
   "devDependencies": {
+    "@babel/core": "7.0.0-beta.46",
+    "@babel/preset-env": "7.0.0-beta.46",
+    "babel-loader": "^8.0.0-beta.0",
     "gulp": "^3.9.1",
-    "jshint": "^2.9.6",
-    "gulp-jshint": "^2.1.0",
     "gulp-concat": "^2.6.1",
-    "gulp-uglify": "^3.0.1",
-    "gulp-rename": "^1.4.0",
-    "gulp-riot": "^1.1.4",
+    "gulp-declare": "^0.3.0",
+    "gulp-define-module": "^0.1.5",
     "gulp-downloader": "^1.0.4",
-    "gulp-wrap": "^0.14.0",
     "gulp-gh-pages-gift": "^0.5.5",
+    "gulp-handlebars": "^5.0.2",
+    "gulp-jshint": "^2.1.0",
     "gulp-jsoncombine": "^1.0.4",
     "gulp-minify-css": "^1.2.4",
+    "gulp-rename": "^1.4.0",
+    "gulp-sourcemaps": "^2.6.4",
     "gulp-util": "^3.0.8",
-    "through2": "^2.0.3"
+    "gulp-wrap": "^0.14.0",
+    "handlebars-loader": "^1.7.0",
+    "riot": "^3.9.2",
+    "riot-compiler": "^3.5.1",
+    "riot-hot-reload": "1.0.0",
+    "riot-tag-loader": "^2.0.2",
+    "through2": "^2.0.3",
+    "uglifyjs-webpack-plugin": "^2.0.1",
+    "webpack": "^4.5.0",
+    "webpack-stream": "^5.1.1"
   }
 }

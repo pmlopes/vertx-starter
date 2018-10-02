@@ -9,12 +9,10 @@ self.addEventListener('install', function (event) {
     caches.open(CACHE_VERSION).then(function (cache) {
       return cache.addAll([
         '/',
-        'metadata.json',
         'index.html',
         'css/bundle.min.css',
-        'js/vendor.min.js',
-        'js/app.min.js',
-        'js/templates.min.js',
+        'js/bundle.js',
+        'js/analytics.js',
         'img/stack.svg',
         'favicon.ico',
         'apple-touch-icon.png',

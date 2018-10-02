@@ -1,3 +1,4 @@
+
 <main>
   <div if={ tool } class="container">
     <div class="help-tip hide-phone">
@@ -33,7 +34,7 @@
         </div>
         <!-- preset selection -->
         <div class="col-6">
-          <select id="preset" disabled="{ !presetGroups || presetGroups.length == 0 }" onchange={ changePreset}>
+          <select id="preset" disabled="{ !presetGroups || presetGroups.length == 0 }" onchange={ changePreset }>
             <option value="">Empty Project</option>
             <optgroup each={ g, i in presetGroups } label="{ i }">
               <option each={ g } value="{ id }">{ id }</option>
@@ -135,18 +136,13 @@
   </div>
 
   <script>
-    var self = this;
 
-    var r = route.create();
-    // bind to the right route
-    opts.buildtools.forEach(function (el) {
-      r(el.id + '..', show.bind(self, el));
-    });
+    import compileProject from "../engine.js"
+    import route from 'riot-route'
+    import * as _ from "lodash"
+    import JSZip from "jszip"
 
-    // show default route
-    r(show.bind(self, self.opts.buildtools[0]));
-
-    function show(tool) {
+    this.show = tool => {
       var q = route.query();
       // parse initial values
       var setup = {
@@ -170,14 +166,14 @@
           var c;
           // check if initial setup requested this dependency
           if (setup.dependencies.indexOf(el.groupId + ':' + el.artifactId + (el.classifier ? ':' + el.classifier : '')) !== -1) {
-            c = clone(el);
+            c = _.cloneDeep(el);
             c.checked = true;
             c.id = index;
             selection.push(c);
             return;
           }
           if (setup.dependencies.indexOf(el.groupId + ':' + el.artifactId) !== -1) {
-            c = clone(el);
+            c = _.cloneDeep(el);
             c.checked = true;
             c.id = index;
             selection.push(c);
@@ -185,14 +181,14 @@
           }
           // unless it is a default for the tool
           if (tool.defaults.indexOf(el.groupId + ':' + el.artifactId + (el.classifier ? ':' + el.classifier : '')) !== -1) {
-            c = clone(el);
+            c = _.cloneDeep(el);
             c.checked = true;
             c.id = index;
             selection.push(c);
             return;
           }
           if (tool.defaults.indexOf(el.groupId + ':' + el.artifactId) !== -1) {
-            c = clone(el);
+            c = _.cloneDeep(el);
             c.checked = true;
             c.id = index;
             selection.push(c);
@@ -200,7 +196,7 @@
           }
         });
 
-        var filteredPresets = filterPresets(tool.id, tool.languages[0].id);
+        var filteredPresets = this.filterPresets(tool.id, tool.languages[0].id);
         var filteredPresetsGroups = {};
         filteredPresets.forEach(function (el) {
           if (!filteredPresetsGroups[el.group]) {
@@ -209,7 +205,7 @@
           filteredPresetsGroups[el.group].push(el);
         });
 
-        self.update({
+        this.update({
           // state change, disable old download
           downloading: false,
           tool: tool,
@@ -220,7 +216,7 @@
           dependencies: selection
         });
       } else {
-        self.update({
+        this.update({
           // state change, disable old download
           downloading: false,
           tool: tool,
@@ -229,7 +225,7 @@
       }
     }
 
-    function filterPresets(tool, lang) {
+    this.filterPresets = (tool, lang) => {
       return opts.presets.filter(function (el) {
         if (el.languages) {
           var l = el.languages.filter(function (e) {
@@ -252,7 +248,7 @@
     }
 
     //Finds y value of given object
-    function findPos(obj) {
+    this.findPos = (obj) =>  {
       var curtop = 0;
       if (obj.offsetParent) {
         do {
@@ -264,11 +260,11 @@
       }
     }
 
-    this.changeLanguage = function (e) {
+    this.changeLanguage = (e) => {
       // carry on with the task...
       e.preventDefault();
-      var oldLang = self.language;
-      var newLang = self.tool.languages.filter(function (el) {
+      var oldLang = this.language;
+      var newLang = this.tool.languages.filter(function (el) {
         return el.id === e.target.value;
       })[0];
 
@@ -280,7 +276,7 @@
       });
 
       // reset
-      var selection = [].concat(self.dependencies);
+      var selection = [].concat(this.dependencies);
 
       // exclude old lang support
       if (oldLang && !oldLang.noLangSupport) {
@@ -296,7 +292,7 @@
         opts.components.forEach(function (el, index) {
           if (el.groupId === 'io.vertx' && el.artifactId === ('vertx-lang-' + newLang.id)) {
             if (selection.filter(function (el2) { return el2.id === index; }).length === 0) {
-              var c = clone(el);
+              var c = _.cloneDeep(el);
               c.checked = true;
               c.id = index;
               selection.push(c);
@@ -305,7 +301,7 @@
         });
       }
 
-      var filteredPresets = filterPresets(self.tool.id, e.target.value);
+      var filteredPresets = this.filterPresets(this.tool.id, e.target.value);
       var filteredPresetsGroups = {};
       filteredPresets.forEach(function (el) {
         if (!filteredPresetsGroups[el.group]) {
@@ -314,28 +310,28 @@
         filteredPresetsGroups[el.group].push(el);
       });
 
-      self.update({
+      this.update({
         // state change, disable old download
         downloading: false,
         presets: filteredPresets,
         presetGroups: filteredPresetsGroups,
-        preset: filteredPresets.indexOf(self.preset) === -1 ? null : self.preset,
+        preset: filteredPresets.indexOf(this.preset) === -1 ? null : this.preset,
         language: newLang,
         dependencies: selection
       });
-    }.bind(this);
+    }
 
-    this.changePreset = function (e) {
+    this.changePreset = (e) => {
       // carry on with the task...
       e.preventDefault();
-      var oldPreset = self.preset;
+      var oldPreset = this.preset;
       // virtual empty preset
       var newPreset = { dependencies : [
         "io.vertx:vertx-core"
       ]};
 
       if (e.target.value) {
-        newPreset = self.presets.filter(function (el) {
+        newPreset = this.presets.filter(function (el) {
           return el.id === e.target.value;
         })[0];
 
@@ -348,7 +344,7 @@
       }
 
       // reset
-      var selection = [].concat(self.dependencies);
+      var selection = [].concat(this.dependencies);
       if (oldPreset) {
         for (var index = 0; index < selection.length; index++) {
           var el = selection[index];
@@ -370,7 +366,7 @@
         var c;
         if (newPreset.dependencies.indexOf(el.groupId + ':' + el.artifactId + (el.classifier ? ':' + el.classifier : '')) !== -1) {
           if (selection.filter(function (el2) { return el2.id === index; }).length === 0) {
-            c = clone(el);
+            c = _.cloneDeep(el);
             c.checked = true;
             c.id = index;
             selection.push(c);
@@ -379,7 +375,7 @@
         }
         if (newPreset.dependencies.indexOf(el.groupId + ':' + el.artifactId) !== -1) {
           if (selection.filter(function (el2) { return el2.id === index; }).length === 0) {
-            c = clone(el);
+            c = _.cloneDeep(el);
             c.checked = true;
             c.id = index;
             selection.push(c);
@@ -388,60 +384,54 @@
         }
       });
 
-      self.update({
+      this.update({
         // state change, disable old download
         downloading: false,
         preset: newPreset,
         dependencies: selection
       });
-    }.bind(this);
+    }
 
-    this.toggleDependency = function (e) {
+    this.toggleDependency = (e) => {
       // carry on with the task...
-      self.dependencies[e.target.value].checked = !self.dependencies[e.target.value].checked;
+      this.dependencies[e.target.value].checked = !this.dependencies[e.target.value].checked;
 
-      self.update({
+      this.update({
         // state change, disable old download
         downloading: false,
-        dependencies: self.dependencies
+        dependencies: this.dependencies
       });
-    }.bind(this);
+    }
 
-    this.generate = function (e) {
+    this.generate = (e) => {
       e.preventDefault();
 
       // animate to avoid the perception of slowness
-      window.scroll(0, findPos(document.getElementById("interaction")));
+      window.scroll(0, this.findPos(document.getElementById("interaction")));
 
       var submit = e.target.submit;
-      var a = self.refs.download;
+      var a = this.refs.download;
 
       submit.disabled = true;
 
-      self.tool.fields.forEach(function (el) {
+      this.tool.fields.forEach(function (el) {
         el.value = e.target[el.key].value;
       });
 
-      if (self.preset && self.preset.fields) {
-        self.preset.fields.forEach(function (el) {
+      if (this.preset && this.preset.fields) {
+        this.preset.fields.forEach(function (el) {
           el.value = e.target[el.key].value;
         });
       }
 
       // we need to filter in case the user was looking for other dependencies
-      var dependencies = self.dependencies.filter(function (el) {
+      var dependencies = this.dependencies.filter(function (el) {
         return el.checked;
       });
 
-      compileProject({buildtool: self.tool, dependencies: dependencies, language: self.language, preset: self.preset, components: opts.components}, function (err, zip) {
-        if (err) {
-          submit.disabled = false;
-          self.update({
-            generating: false
-          });
-          return alert(err);
-        }
+      const self = this
 
+      compileProject({buildtool: this.tool, dependencies: dependencies, language: this.language, preset: this.preset, components: opts.components}).then(zip => {
         if (JSZip.support.blob) {
           zip.generateAsync({ type: 'blob', platform: 'UNIX' }).then(function (blob) {
             if (a.href !== '#') {
@@ -487,27 +477,34 @@
             alert(err);
           });
         }
+      }, err => {
+          submit.disabled = false;
+          self.update({
+            generating: false
+          });
+          return alert(err);
+
       });
 
-      self.update({
+      this.update({
         generating: true,
         downloading: false,
         // the project name
         name: e.target.name.value
       });
-    }.bind(this);
+    }
 
-    this.clean = function (e) {
+    this.clean = (e) => {
       // disable the link after click
-      setTimeout(function () {
-        self.downloading = false;
-        self.update();
+      setTimeout(() => {
+        this.downloading = false;
+        this.update();
       }, 500);
-    }.bind(this);
+    }
 
-    this.search = function (e) {
+    this.search = (e) => {
       // create a filter index
-      var found = [].concat(self.dependencies.filter(function (el) {
+      var found = [].concat(this.dependencies.filter(function (el) {
         return el.checked;
       }));
 
@@ -516,7 +513,7 @@
       if (needle.length > 0) {
         opts.components.forEach(function (el, index) {
           if (el.artifactId.indexOf(needle) !== -1 || (el.description && el.description.indexOf(needle) !== -1)) {
-            var c = clone(el);
+            var c = _.cloneDeep(el);
             c.checked = false;
             c.id = index;
             found.push(c);
@@ -535,10 +532,21 @@
         }
       }
 
-      self.update({
+      this.update({
         notfound: needle.length > 0 && cnt === 0,
         dependencies : found
       });
-    }.bind(this);
+    }
+
+    var r = route.create();
+    // bind to the right route
+    for (let bt of opts.buildtools) {
+      r(bt.id + '..', () => this.show(bt))
+    }
+
+    // show default route
+    route(opts.buildtools[0].id);
+
+    route.start(true)
   </script>
 </main>
