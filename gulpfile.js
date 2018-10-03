@@ -76,11 +76,11 @@ gulp.task('handlebars', function () {
     // Compile each Handlebars template source file to a template function
     .pipe(handlebarsPlugin()) // Load out handlebars version
     // Wrap each template function in a call to Handlebars.template and export it
-    .pipe(wrap('exports[\'<%= file.templatePath %>\'] = Handlebars.template(<%= contents %>)'))
+    .pipe(wrap('exp[\'<%= file.templatePath %>\'] = Handlebars.template(<%= contents %>)'))
     // Concatenate down to a single file
     .pipe(concat('templates.js'))
     // Add the Handlebars module in the final output
-    .pipe(wrap('var Handlebars = require("handlebars/runtime");\n <%= contents %>'))
+    .pipe(wrap('var Handlebars = require("handlebars/runtime");\nlet isBrowser = new Function("try {return this===window;}catch(e){ return false;}");\n let exp = (isBrowser()) ? exports : module.exports\n<%= contents %>'))
     // WRite the output into the templates folder
     .pipe(gulp.dest('src/gen'));
 });
@@ -107,6 +107,8 @@ gulp.task('build', ['ga', 'css', 'handlebars', 'metadata', 'blobs'], function(){
 
 // Default Task
 gulp.task('default', ['build']);
+
+gulp.task('build-cli', ['handlebars', 'metadata']);
 
 // Deploy to gh-pages
 gulp.task('deploy', ['build'], function () {

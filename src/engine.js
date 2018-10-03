@@ -1,6 +1,8 @@
-import _ from 'lodash'
-import * as templateFunctions from './gen/templates.js'
-import JSZip from 'jszip'
+let _ = require('lodash')
+let templateFunctions = require('./gen/templates.js')
+let JSZip = require('jszip')
+
+let isBrowser = new Function("try {return this===window;}catch(e){ return false;}");
 
 function compileProject (project, trackFn, trackExceptionFn, loadBlob) {
   return new Promise((resolve, reject) => {
@@ -29,15 +31,11 @@ function compileProject (project, trackFn, trackExceptionFn, loadBlob) {
 
   // bom generation
   project.bom = [];
-
   project.components.forEach(function (el) {
     var c = _.cloneDeep(el);
-    c.included = false;
+    if (project.dependencies.find((el) => (el.classifier) ? el.groupId + ':' + el.artifactId + ':' + el.classifier in project.dependenciesGAV : el.groupId + ':' + el.artifactId)) c.included = true;
+    else c.included = false;
     project.bom.push(c);
-  });
-  // now apply the include rules from the dependencies
-  project.dependencies.forEach(function (el) {
-    project.bom[el.id].included = true;
   });
 
   // collect metadata
@@ -133,7 +131,7 @@ function compileProject (project, trackFn, trackExceptionFn, loadBlob) {
         }
       })
     })
-    .then(data => resolve(data))
+    .then(zip => resolve(zip))
     .catch(ex => {
       trackExceptionFn(ex);
       reject(ex);
@@ -190,4 +188,6 @@ function compile(project, file, exec, trackExceptionFn, zip) {
   }
 }
 
-export default compileProject
+// Note: Node.JS doesn't support ES6 modules directives, so I made some workaround here to enable this module both for webpack and node
+if (isBrowser()) exports.compileProject = compileProject
+else module.exports = compileProject

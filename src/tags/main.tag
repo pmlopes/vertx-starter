@@ -137,7 +137,7 @@
 
   <script>
 
-    import compileProject from "../engine.js"
+    let compileProject = require("../engine.js").compileProject
     import route from 'riot-route'
     import * as _ from "lodash"
     import JSZip from "jszip"
@@ -426,9 +426,7 @@
       }
 
       // we need to filter in case the user was looking for other dependencies
-      var dependencies = this.dependencies.filter(function (el) {
-        return el.checked;
-      });
+      var dependencies = this.dependencies.filter((el) => el.checked);
 
       const self = this
 
@@ -440,7 +438,7 @@
           ga('send', 'exception', {'exDescription': exception.message, 'exFatal': true});
         },
         (blob) => { return new Promise((resolve, reject) => {
-            JSZipUtils.getBinaryContent(blob, function (err, data) {
+            JSZipUtils.getBinaryContent("blobs/" + blob, function (err, data) {
               if (err) 
                 reject(err);
               else

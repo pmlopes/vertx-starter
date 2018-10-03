@@ -57,7 +57,7 @@
       "graal-nativeimage/src/main/svm/reflection.json",
       "graal-nativeimage/src/main/svm/substitutions.java"
     ],
-    "blob": "blobs/mvnw.zip",
+    "blob": "mvnw.zip",
     "executables": [
       "mvnw"
     ],
@@ -118,7 +118,7 @@
       "editorconfig/.editorconfig",
       "gradle/build.gradle"
     ],
-    "blob": "blobs/gradlew.zip",
+    "blob": "gradlew.zip",
     "executables": [
       "gradlew"
     ],
@@ -215,9 +215,15 @@
       "editorconfig/.editorconfig",
       "stack/vertx-stack.json"
     ],
-    "blob": "blobs/stack-min.zip",
+    "blob": "stack-min.zip",
     "defaults": [
       "io.vertx:vertx-core"
+    ],
+    "languages": [
+      {
+        "id": "js",
+        "main": "main-server.js"
+      }
     ]
   }
 ]

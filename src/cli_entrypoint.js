@@ -1,41 +1,67 @@
+#!/usr/bin/env node
+
 let inquirer = require('inquirer')
-
-let buildTools = require('../metadata/buildtools.json')
-let components = require('../metadata/components.json')
-let presets = require('../metadata/presets.json')
 let util = require('util')
-
 let _ = require('lodash')
+let fs = require('fs')
+let path = require('path')
+let program = require('commander');
+let mkdirp = require('mkdirp');
 
-let generationEngine = require('./engine.js')
+let metadata = require('./gen/metadata.json')
+let buildTools = metadata.buildtools
+let components = metadata.components
+let presets = metadata.presets
+let compileProject = require('./engine.js')
+
+program
+    .version('1.0.0')
+    .option('-z, --zip', 'Produce zip as output')
+    .parse(process.argv);
 
 function mapFieldsToPrompt(fields) {
-    return fields.map(f => ({
-        "name": f.key,
-        "message": f.label,
-        "type": f.checkbox ? "confirm" : "input",
-        "default": f.prefill
-    }))
+    return fields.map(f => {
+        if (f.checkbox) {
+        return {
+            "name": f.key,
+            "message": f.label,
+            "type": "confirm",
+            "default": f.prefill ? f.prefill : false
+        }
+    } else {
+        let obj = {
+            "name": f.key,
+            "message": f.label,
+            "type": "input",
+        };
+        if (f.prefill)
+            obj.default = f.prefill
+        if (f.required)
+            obj.validate = val => (val && val.length > 0) ? true : false
+        else {
+            obj.message = obj.message + " (Optional)"
+            obj.filter = val => (val && val.length > 0) ? val : undefined
+        }
+        return obj;
+    }
+});
+}
+
+function dependencyId(dep) {
+    return ((dep.classifier) ? dep.groupId + ":" + dep.artifactId + ":" + dep.classifier : dep.groupId + ":" + dep.artifactId)
 }
 
 function generateDepsPrompt(requiredDeps) {
     return [{
         "name": "dependencies",
-        "message":  "Choose your dependencies",
+        "message": "Choose your additional dependencies",
         "type": "checkbox",
-        "choices": components.map(c => {
-            if (requiredDeps.find(el => el === ((c.classifier) ? c.groupId + ":" + c.artifactId + ":" + c.classifier : c.groupId + ":" + c.artifactId))) {
-                return {
-                    "name": (c.classifier) ? c.groupId + ":" + c.artifactId + ":" + c.classifier : c.groupId + ":" + c.artifactId,
-                    "value": c,
-                    "checked": true,
-                    "disabled": "Required"
-                }          
-            } else {
-                return {
-                    "name": (c.classifier) ? c.groupId + ":" + c.artifactId + ":" + c.classifier : c.groupId + ":" + c.artifactId,
-                    "value": c
-                }
+        "choices": components
+            .filter(c => !requiredDeps.find(dep => dep == dependencyId(c)))
+            .map(c => {
+            return {
+                "name": dependencyId(c),
+                "value": c
             }
         })
     }]
@@ -44,6 +70,7 @@ function generateDepsPrompt(requiredDeps) {
 let tool
 let language
 let preset
+let requiredDepsStrings
 let deps
 
 inquirer.prompt([
@@ -51,7 +78,7 @@ inquirer.prompt([
         "name": "tool",
         "message": "Choose the build tool",
         "type": "list",
-        "choices": buildTools.map(t => ({"name": t.id, "value": t}))
+        "choices": buildTools.map(t => ({ "name": t.id, "value": t }))
     }
 ]).then(answers => {
     tool = answers.tool
@@ -64,7 +91,7 @@ inquirer.prompt([
         "name": "language",
         "message": "Choose your language",
         "type": "list",
-        choices: tool.languages.map(l => ({"name":  l.id, "value": l}))
+        choices: tool.languages.map(l => ({ "name": l.id, "value": l }))
     }])
 }).then(answers => {
     language = answers.language
@@ -72,7 +99,7 @@ inquirer.prompt([
         "name": "preset",
         "message": "Choose the project type",
         "type": "list",
-        choices: presets.map(p => ({"name":  p.id, "value": p}))
+        choices: presets.filter(p => p.languages.find(l => l.id == language.id)).map(p => ({ "name": p.id, "value": p }))
     }])
 }).then(answers => {
     preset = answers.preset
@@ -88,23 +115,63 @@ inquirer.prompt([
     } else {
         return Promise.resolve()
     }
-}).then(() => inquirer.prompt(generateDepsPrompt(tool.defaults.concat(preset.dependencies))))
-.then(answers => {
-    deps = answers.dependencies
-    console.log(util.inspect(tool))
-    console.log(util.inspect(language))
-    console.log(util.inspect(preset))
-    console.log(util.inspect(deps))
-    generationEngine.compileProject({
-        "buildtool": tool,
-        "dependencies": deps,
-        "language": language,
-        "preset": preset,
-        "components": components
-    }, (err, res) => {
-        if (err)
-            console.log(utils.inspect(err))
-        else
-            console.log(util.inspect(res))
-    })
-});
+}).then(() => {
+    requiredDepsStrings = tool.defaults.concat(preset.dependencies);
+    return inquirer.prompt(generateDepsPrompt(requiredDepsStrings))
+}).then(answers => {
+        deps = answers.dependencies.concat(
+            components.filter(c => (requiredDepsStrings.find(dep => dep == dependencyId(c))) ? true : false)
+        );
+        compileProject(
+            {
+                "buildtool": tool,
+                "dependencies": deps,
+                "language": language,
+                "preset": preset,
+                "components": components
+            },
+            () => { },
+            (ex) => console.err(ex),
+            (blobName) => {
+                return new Promise((resolve, reject) => {
+                    fs.readFile(path.join(__dirname, "..", "blobs", blobName), (err, buffer) => {
+                        if (err) reject(err);
+                        else resolve(buffer)
+                    });
+                });
+            }
+        ).then(zip => {
+            if (program.zip) {
+                return new Promise((resolve, reject) => {
+                    zip
+                    .generateNodeStream({ type: 'nodebuffer', streamFiles: true })
+                    .pipe(fs.createWriteStream('project.zip'))
+                    .on('error', (err) => reject(err))
+                    .on('finish', () => resolve());
+                })
+            } else {
+                return Promise.all(zip.file(/.*/).map(file => {
+                    return new Promise((resolve, reject) => {
+                        mkdirp(path.dirname(file.name), (err) => {
+                            if (err) {
+                                reject(err)
+                            }
+                            file
+                                .nodeStream()
+                                .pipe(fs.createWriteStream(file.name))
+                                .on('error', (err) => reject(err))
+                                .on('finish', function () {
+                                    console.log(file.name + " written");
+                                    resolve()
+                                });
+                        });
+                    })
+                }))
+            }
+        }).then((res) => {
+            console.log("Project generated")
+            process.exit(0)
+        }).catch(err => {
+            console.log(err)
+        });
+    });
