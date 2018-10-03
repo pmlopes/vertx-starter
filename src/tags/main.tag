@@ -14,13 +14,13 @@
         <!-- iterate 2 at a time -->
         <virtual if={ i % 2 === 0 }>
           <div class="col-6">
-            <input name="{ tool.fields[i].key }" type="{ tool.fields[i].checkbox ? 'checkbox' : 'text' }" placeholder="{ tool.fields[i].label + (tool.fields[i].prefill ? ' e.g.: ' + tool.fields[i].prefill : '') }" required="{ tool.fields[i].required }">
-            <label if={ tool.fields[i].checkbox }><br><i>{ tool.fields[i].label + (tool.fields[i].prefill ? ' e.g.: ' + tool.fields[i].prefill : '') }</i></label>
+            <input name="{ tool.fields[i].key }" type={ parseFieldType(tool.fields[i]) } placeholder="{ tool.fields[i].label + (tool.fields[i].prefill ? ' e.g.: ' + tool.fields[i].prefill : '') }" required="{ tool.fields[i].required }">
+            <label if={ parseFieldType(tool.fields[i]) == 'checkbox' }><br><i>{ tool.fields[i].label + (tool.fields[i].prefill ? ' e.g.: ' + tool.fields[i].prefill : '') }</i></label>
           </div>
           <div class="col-6">
             <!-- if there is a next one -->
-            <input if={ tool.fields[i+1] }  name="{ tool.fields[i+1].key }" type="{ tool.fields[i+1].checkbox ? 'checkbox' : 'text' }" placeholder="{ tool.fields[i+1].label + (tool.fields[i+1].prefill ? ' e.g.: ' + tool.fields[i+1].prefill : '') }" required="{ tool.fields[i+1].required }">
-            <label if={ tool.fields[i+1] && tool.fields[i+1].checkbox }><br><i>{ tool.fields[i+1].label + (tool.fields[i+1].prefill ? ' e.g.: ' + tool.fields[i+1].prefill : '') }</i></label>
+            <input if={ tool.fields[i+1] }  name="{ tool.fields[i+1].key }" type={ parseFieldType(tool.fields[i + 1]) } placeholder="{ tool.fields[i+1].label + (tool.fields[i+1].prefill ? ' e.g.: ' + tool.fields[i+1].prefill : '') }" required="{ tool.fields[i+1].required }">
+            <label if={ tool.fields[i+1] && parseFieldType(tool.fields[i + 1]) == 'checkbox' }><br><i>{ tool.fields[i+1].label + (tool.fields[i+1].prefill ? ' e.g.: ' + tool.fields[i+1].prefill : '') }</i></label>
           </div>
         </virtual>
       </div>
@@ -51,11 +51,11 @@
         <!-- iterate 2 at a time -->
         <virtual if={ i % 2 === 0 }>
           <div class="col-6">
-            <input name="{ preset.fields[i].key }" type="text" placeholder="{ preset.fields[i].label + (preset.fields[i].prefill ? ' e.g.: ' + preset.fields[i].prefill : '') }" required="{ preset.fields[i].required }">
+            <input name="{ preset.fields[i].key }" type={ parseFieldType(preset.fields[i]) } placeholder="{ preset.fields[i].label + (preset.fields[i].prefill ? ' e.g.: ' + preset.fields[i].prefill : '') }" required="{ preset.fields[i].required }">
           </div>
           <div class="col-6">
             <!-- if there is a next one -->
-            <input if={ preset.fields[i+1] }  name="{ preset.fields[i+1].key }" type="text" placeholder="{ preset.fields[i+1].label + (preset.fields[i+1].prefill ? ' e.g.: ' + preset.fields[i+1].prefill : '') }" required="{ preset.fields[i+1].required }">
+            <input if={ preset.fields[i+1] }  name="{ preset.fields[i+1].key }" type={ parseFieldType(preset.fields[i]) } placeholder="{ preset.fields[i+1].label + (preset.fields[i+1].prefill ? ' e.g.: ' + preset.fields[i+1].prefill : '') }" required="{ preset.fields[i+1].required }">
           </div>
         </virtual>
       </div>
@@ -261,6 +261,10 @@
       }
     }
 
+    this.parseFieldType = (field) => {
+      return (!field.type || field.type == 'input') ? 'text' : 'checkbox'
+    }
+
     this.changeLanguage = (e) => {
       // carry on with the task...
       e.preventDefault();
@@ -404,6 +408,14 @@
       });
     }
 
+    this.setFieldValue = e => field => {
+      if (!field.type || field.type == "input") {
+        field.value = e.target[field.key].value;
+      } else {
+        field.value = e.target[field.key].checked;
+      }
+    }
+
     this.generate = (e) => {
       e.preventDefault();
 
@@ -415,14 +427,10 @@
 
       submit.disabled = true;
 
-      this.tool.fields.forEach(function (el) {
-        el.value = e.target[el.key].value;
-      });
+      this.tool.fields.forEach(this.setFieldValue(e));
 
       if (this.preset && this.preset.fields) {
-        this.preset.fields.forEach(function (el) {
-          el.value = e.target[el.key].value;
-        });
+        this.preset.fields.forEach(this.setFieldValue(e));
       }
 
       // we need to filter in case the user was looking for other dependencies

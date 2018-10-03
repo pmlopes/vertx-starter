@@ -9,7 +9,7 @@
       { "key": "groupId", "label": "Maven Group Id", "prefill": "com.example" },
       { "key": "artifactId", "label": "Maven Artifact Id", "prefill": "myapp" },
       { "key": "version", "label": "Project Version", "prefill": "0.0.1-SNAPSHOT" },
-      { "key": "graalNativeImage", "label": "(Experimental!) native image support (requires: GraalVM)", "checkbox": true }
+      { "key": "graalNativeImage", "label": "(Experimental!) native image support (requires: GraalVM)", "type": "checkbox" }
     ],
     "languages": [
       {

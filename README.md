@@ -4,7 +4,22 @@ This is a simple online generator for vert.x projects
 
 The whole SPA is data-driven, build tools can be added to the file [metadata/buildtools.json](buildtools.json).
 
-# Data files
+## Usage from cli
+Build the required files with
+
+```bash
+gulp build-cli
+```
+
+And then run the cli with
+
+```bash
+npm run cli
+```
+
+If you want a zip output you can use `-z` flag
+
+## Data files
 
 ### buildtools.json
 
@@ -29,6 +44,7 @@ It allows the following properties:
 * `label` the label for the key
 * `required` boolean
 * `prefill` a default value for the key
+* `type` of the field. Allowed: `input`, `checkbox`. Default: `input`
 
 #### languages
 

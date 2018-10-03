@@ -4,6 +4,15 @@ let JSZip = require('jszip')
 
 let isBrowser = new Function("try {return this===window;}catch(e){ return false;}");
 
+let fieldsCallbacks = {
+  "graalNativeImage": (project, value, templates, trackFn) => {
+    if (value) {
+      templates.push(...project.buildtool["graalNativeImageTemplates"]);
+      trackFn(project.buildtool.id + ':feature', project.buildtool.id + '/graalNativeImage', 'feature')
+    }
+  }
+}
+
 function compileProject (project, trackFn, trackExceptionFn, loadBlob) {
   return new Promise((resolve, reject) => {
     
@@ -54,17 +63,12 @@ function compileProject (project, trackFn, trackExceptionFn, loadBlob) {
 
   // convert the fields to a form structure
   project.buildtool.fields.forEach(function (el) {
-    if (el.checkbox) {
-      project.metadata[el.key] = el.value === 'on';
-      // we will also process extra templates if available
-      if (Array.isArray(project.buildtool[el.key + 'Templates'])) {
-        templates = templates.concat(project.buildtool[el.key + 'Templates']);
-      }
-      // Would like to know how popular this flag is
-      trackFn(project.buildtool.id + ':feature', project.buildtool.id + '/' + el.key, 'feature')
-    } else {
+    if (!el.type || el.type === 'input') {
       project.metadata[el.key] = el.value ? el.value : el.prefill;
+    } else {
+      project.metadata[el.key] = el.value;
     }
+    if (fieldsCallbacks.hasOwnProperty(el.key)) fieldsCallbacks[el.key](project, el.value, templates, trackFn, trackExceptionFn)
   });
   // convert the fields to a form structure
   if (project.preset && project.preset.fields) {

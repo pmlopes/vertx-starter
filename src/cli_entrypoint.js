@@ -21,14 +21,7 @@ program
 
 function mapFieldsToPrompt(fields) {
     return fields.map(f => {
-        if (f.checkbox) {
-        return {
-            "name": f.key,
-            "message": f.label,
-            "type": "confirm",
-            "default": f.prefill ? f.prefill : false
-        }
-    } else {
+    if (!f.type || f.type == 'input') {
         let obj = {
             "name": f.key,
             "message": f.label,
@@ -43,6 +36,13 @@ function mapFieldsToPrompt(fields) {
             obj.filter = val => (val && val.length > 0) ? val : undefined
         }
         return obj;
+    } else {
+        return {
+            "name": f.key,
+            "message": f.label,
+            "type": "confirm",
+            "default": f.prefill ? f.prefill : false
+        }
     }
 });
 }

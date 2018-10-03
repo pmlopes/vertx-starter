@@ -5,7 +5,6 @@
     "start": "cd dist && python3 -m http.server 8000",
     "cli": "node src/cli_entrypoint.js",
     "build": "gulp",
-    "watch": "gulp watch",
     "deploy": "gulp deploy"
   },
   "bin": {
