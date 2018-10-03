@@ -1,13 +1,10 @@
 import _ from 'lodash'
 import * as templateFunctions from './gen/templates.js'
 import JSZip from 'jszip'
-import JSZipUtils from 'jszip-utils'
 
-function compileProject (project) {
+function compileProject (project, trackFn, trackExceptionFn, loadBlob) {
   return new Promise((resolve, reject) => {
-
-  var i;
-
+    
   // merge executables from buildtool and preset
   var executables = project.buildtool.executables || [];
   if (project.preset) {
@@ -15,12 +12,7 @@ function compileProject (project) {
   }
 
   // track what project type is being generated
-  ga('send', {
-    hitType: 'event',
-    eventCategory: project.buildtool.id + ':project',
-    eventAction: project.buildtool.id + '/new',
-    eventLabel: 'project'
-  });
+  trackFn(project.buildtool.id + ':project', project.buildtool.id + '/new', 'project')
 
   // alias for selected dependencies
   project.dependenciesGAV = {};
@@ -32,12 +24,7 @@ function compileProject (project) {
     }
 
     // track what dependencies are being selected
-    ga('send', {
-      hitType: 'event',
-      eventCategory: project.buildtool.id + ':dependency',
-      eventAction: project.buildtool.id + '/' + el.groupId + ':' + el.artifactId + ':' + el.version,
-      eventLabel: 'dependency'
-    });
+    trackFn(project.buildtool.id + ':dependency', project.buildtool.id + '/' + el.groupId + ':' + el.artifactId + ':' + el.version, 'dependency');
   });
 
   // bom generation
@@ -76,12 +63,7 @@ function compileProject (project) {
         templates = templates.concat(project.buildtool[el.key + 'Templates']);
       }
       // Would like to know how popular this flag is
-      ga('send', {
-        hitType: 'event',
-        eventCategory: project.buildtool.id + ':feature',
-        eventAction: project.buildtool.id + '/' + el.key,
-        eventLabel: 'feature'
-      });
+      trackFn(project.buildtool.id + ':feature', project.buildtool.id + '/' + el.key, 'feature')
     } else {
       project.metadata[el.key] = el.value ? el.value : el.prefill;
     }
@@ -129,8 +111,8 @@ function compileProject (project) {
   });
 
   // build tool specific templates
-  for (i = 0; i < templates.length; i++) {
-    compile(project, templates[i], (executables || []).indexOf(templates[i]) !== -1, zip);
+  for (let i = 0; i < templates.length; i++) {
+    compile(project, templates[i], (executables || []).indexOf(templates[i]) !== -1, trackExceptionFn, zip);
   }
 
   // blobs
@@ -141,40 +123,28 @@ function compileProject (project) {
 
   if (blob) {
     // get the buildtools from the server
-    JSZipUtils.getBinaryContent(blob, function (err, data) {
-      if (err) {
-        ga('send', 'exception', {
-          'exDescription': err,
-          'exFatal': true
-        });
-        reject(err);
-      }
-
-      zip.loadAsync(data, {
+    loadBlob(blob).then(data => {
+      return zip.loadAsync(data, {
         /**
          * Abuse the decode file name to do move the blog into the project path
          */
         decodeFileName: function (path) {
           return project.metadata.name.replace(/[ -]/g, '_') + '/' + String.fromCharCode.apply(null, path);
         }
-      }).then(function (val) {
-        resolve(val);
       })
-        .catch(function (ex) {
-          ga('send', 'exception', {
-            'exDescription': ex.message,
-            'exFatal': true
-          });
-          reject(err);
-        });
-    });
+    })
+    .then(data => resolve(data))
+    .catch(ex => {
+      trackExceptionFn(ex);
+      reject(ex);
+    })
   } else {
     resolve(zip);
   }
 });
 };
 
-function compile(project, file, exec, zip) {
+function compile(project, file, exec, trackExceptionFn, zip) {
   var hbfile, zfile, fn;
 
   // extract filename
@@ -203,14 +173,10 @@ function compile(project, file, exec, zip) {
   });
 
   // locate handlebars template
-  fn = _.get(templateFunctions, hbfile.split('/').map(s => (s.indexOf('.') != -1) ? s.substring(0, s.lastIndexOf('.')) : s) /* handlebars-loader don't preserve extensions */);
+  fn = _.get(templateFunctions, hbfile) /* handlebars-loader doesn't preserve extensions */
 
   if (!fn) {
-    ga('send', 'exception', {
-      'exDescription': 'Template not found: ' + hbfile,
-      'exFatal': true
-    });
-
+    trackExceptionFn(new Error("Function for template " + hbfile + " not found"));
     return;
   }
 

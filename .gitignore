@@ -5,10 +5,12 @@
 node_modules
 package-lock.json
 # build artifacts
-js/analytics.js
+src/gen
 dist/js
 dist/css
 dist/metadata.json
+dist/blobs
+/
 # deployment
 .publish
 # util

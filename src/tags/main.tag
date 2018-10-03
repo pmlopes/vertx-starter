@@ -141,6 +141,7 @@
     import route from 'riot-route'
     import * as _ from "lodash"
     import JSZip from "jszip"
+    import JSZipUtils from "jszip-utils"
 
     this.show = tool => {
       var q = route.query();
@@ -431,7 +432,22 @@
 
       const self = this
 
-      compileProject({buildtool: this.tool, dependencies: dependencies, language: this.language, preset: this.preset, components: opts.components}).then(zip => {
+      compileProject(
+        {buildtool: this.tool, dependencies: dependencies, language: this.language, preset: this.preset, components: opts.components},
+        (category, action, label) => { ga('send', {hitType: 'event', eventCategory: category, eventAction: action, eventLabel: label}) },
+        (exception) => { 
+          alert("Exception during code generation" + exception.message);
+          ga('send', 'exception', {'exDescription': exception.message, 'exFatal': true});
+        },
+        (blob) => { return new Promise((resolve, reject) => {
+            JSZipUtils.getBinaryContent(blob, function (err, data) {
+              if (err) 
+                reject(err);
+              else
+                resolve(data)
+            })
+          }) }
+        ).then(zip => {
         if (JSZip.support.blob) {
           zip.generateAsync({ type: 'blob', platform: 'UNIX' }).then(function (blob) {
             if (a.href !== '#') {

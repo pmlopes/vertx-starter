@@ -1,5 +1,4 @@
 var path = require('path')
-var UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
     entry: './src/web_entrypoint.js',
@@ -7,6 +6,7 @@ module.exports = {
         path: path.resolve(__dirname, 'dist', 'js'),
         filename: 'bundle.js'
     },
+    mode: "development",
     devtool: 'source-map',
     module: {
         rules: [
@@ -30,14 +30,7 @@ module.exports = {
                         presets: ['@babel/preset-env']
                     }
                 }
-            },
-            { 
-                test: /templates\/.*$/, 
-                loader: "handlebars-loader"
             }
         ]
-    },
-    optimization: {
-        minimizer: [new UglifyJsPlugin()]
     }
 }
