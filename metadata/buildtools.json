@@ -168,7 +168,7 @@
       "editorconfig/.editorconfig",
       "npm/package.json"
     ],
-    "blob": "blobs/mvnw.zip",
+    "blob": "mvnw.zip",
     "executables": [
       "mvnw"
     ],

@@ -65,6 +65,26 @@ function compileProject(project, trackFn, trackExceptionFn, loadBlob) {
       project.metadata.artifactSuffix = project.buildtool['non-core-suffix'] || '';
     }
 
+    if (project.buildtool.id == "npm") {
+        // filtered dependencies by scope "dev", "prod", "mvn"
+           project.npmDevDependencies = [];
+         project.npmProdDependencies = [];
+         project.npmMavenDependencies = [];
+
+      project.dependencies.forEach(function (el) {
+        if (el.npm) {
+          if (el.scope === 'test') {
+            project.npmDevDependencies.push(el);
+          } else {
+            project.npmProdDependencies.push(el);
+          }
+        } else {
+          project.npmMavenDependencies.push(el);
+        }
+      })
+
+    }
+
     // Make language id a boolean
     project.metadata[project.language.id] = true;
 

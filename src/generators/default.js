@@ -28,6 +28,7 @@ let generate = (project, templates, zip) => {
         // merge dependency specific templates
         project.dependencies.forEach(function (el) {
             templates = templates.concat(el.templates || []);
+            templates = templates.concat(el[project.language.id + 'Templates'] || []);
         });
 
         // build tool specific templates
