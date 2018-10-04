@@ -134,38 +134,38 @@
     "fields": [
       { "key": "name", "label": "Project Name", "required": true },
       { "key": "description", "label": "Project Description" },
-      { "key": "groupId", "label": "Maven Group Id", "prefill": "com.example" },
-      { "key": "artifactId", "label": "Maven Artifact Id", "prefill": "demo" },
       { "key": "version", "label": "Project Version", "prefill": "0.0.1" }
     ],
     "languages": [
       {
         "id": "js",
-        "main": "main-server.js",
+        "noLangSupport": true,
+        "main": "index.js",
         "templates": [
-          "npm/.babelrc",
-          "npm/src/main/js/index.js"
+          "npm/index.js"
         ]
       },
       {
         "id": "typescript",
-        "main": "main-server.js",
+        "noLangSupport": true,
+        "main": "index.js",
         "templates": [
           "npm/tsconfig.json",
-          "npm/src/main/ts/index.ts"
+          "npm/index.ts"
         ]
       }
     ],
     "templates": [
       "git/.gitignore",
       "editorconfig/.editorconfig",
-      "maven/pom.xml",
-      "npm/package.json",
-      "npm/webpack.config.js"
+      "npm/package.json"
+    ],
+    "blob": "blobs/mvnw.zip",
+    "executables": [
+      "mvnw"
     ],
     "defaults": [
-      "io.vertx:vertx-core",
-      "io.vertx:vertx-lang-js"
+      "io.vertx:vertx-core"
     ]
   },
   {
