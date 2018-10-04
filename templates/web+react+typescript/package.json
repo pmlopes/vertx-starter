@@ -11,7 +11,7 @@
     "@types/react-router-dom": "4.0.5",
     "@types/webpack-env": "1.13.0",
     "awesome-typescript-loader": "3.2.1",
-    "bootstrap": "3.3.7",
+    "bootstrap": "4.1.2",
     "css-loader": "0.28.4",
     "event-source-polyfill": "0.0.9",
     "extract-text-webpack-plugin": "2.1.2",
