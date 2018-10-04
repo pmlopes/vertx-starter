@@ -13,6 +13,7 @@ let buildTools = metadata.buildtools
 let components = metadata.components
 let presets = metadata.presets
 let compileProject = require('./engine.js').compileProject
+let utils = require('./utils.js')
 
 program
     .version('1.0.0')
@@ -95,15 +96,17 @@ inquirer.prompt([
     }])
 }).then(answers => {
     language = answers.language
+    let presetChoices = utils.filterPresets(presets)(language.id, tool.id).map(p => ({ "name": p.id, "value": p }))
+    presetChoices.push({ "name": "Empty project", "value": undefined })
     return inquirer.prompt([{
         "name": "preset",
         "message": "Choose the project type",
         "type": "list",
-        choices: presets.filter(p => p.languages.find(l => l.id == language.id)).map(p => ({ "name": p.id, "value": p }))
+        choices: presetChoices
     }])
 }).then(answers => {
     preset = answers.preset
-    if (preset.fields) {
+    if (_.has(preset, "fields")) {
         return inquirer
             .prompt(mapFieldsToPrompt(preset.fields))
             .then(answers => {
@@ -116,7 +119,7 @@ inquirer.prompt([
         return Promise.resolve()
     }
 }).then(() => {
-    requiredDepsStrings = tool.defaults.concat(preset.dependencies);
+    requiredDepsStrings = tool.defaults.concat(_.get(preset, "dependencies", []));
     return inquirer.prompt(generateDepsPrompt(requiredDepsStrings))
 }).then(answers => {
         deps = answers.dependencies.concat(

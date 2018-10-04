@@ -34,6 +34,30 @@ function solveZipDir(project, templatePath) {
     return zfile;
 }
 
+function filterPresets(presets) {
+  return (langId, toolId) =>
+    presets.filter((el) => {
+      if (el.languages) {
+        var l = el.languages.filter(function (e) {
+          return e.id === langId;
+        });
+
+        if (l.length === 0) {
+          return false;
+        }
+        if (el.buildtool) {
+          return el.buildtool === toolId;
+        }
+      } else {
+        if (el.buildtool) {
+          return el.buildtool === toolId;
+        }
+      }
+      return true;
+    })
+}
+
 exports.compileAndAddToZip = compileAndAddToZip
 exports.writeFileAndDirMetadata = writeFileAndDirMetadata
 exports.solveZipDir = solveZipDir
+exports.filterPresets = filterPresets

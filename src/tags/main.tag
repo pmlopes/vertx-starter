@@ -138,6 +138,8 @@
   <script>
 
     let compileProject = require("../engine.js").compileProject
+    let utils = require("../utils");
+
     import route from 'riot-route'
     import * as _ from "lodash"
     import JSZip from "jszip"
@@ -226,27 +228,7 @@
       }
     }
 
-    this.filterPresets = (tool, lang) => {
-      return opts.presets.filter(function (el) {
-        if (el.languages) {
-          var l = el.languages.filter(function (e) {
-            return e.id === lang;
-          });
-
-          if (l.length === 0) {
-            return false;
-          }
-          if (el.buildtool) {
-            return el.buildtool === tool;
-          }
-        } else {
-          if (el.buildtool) {
-            return el.buildtool === tool;
-          }
-        }
-        return true;
-      });
-    }
+    this.filterPresets = utils.filterPresets(opts.presets);
 
     //Finds y value of given object
     this.findPos = (obj) =>  {
