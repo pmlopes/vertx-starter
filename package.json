@@ -4,7 +4,7 @@
   "scripts": {
     "start": "cd dist && python3 -m http.server 8000",
     "build": "gulp",
-    "watch": "guild watch",
+    "watch": "gulp watch",
     "deploy": "gulp deploy"
   },
   "dependencies": {
