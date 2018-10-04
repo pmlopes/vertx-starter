@@ -82,6 +82,7 @@
                 <span if={ dependencies[i].npm } class="pull-right"><img src="img/npm.svg" width="16px" /></span>
                 <strong>{ dependencies[i].artifactId }</strong>
                 <hr/>
+                <p if={ dependencies[i].deprecated }><strong>DEPRECATED!!!</strong></p>
                 <p if={ dependencies[i].description }>{ dependencies[i].description }</p>
               </div>
               <br/>
@@ -96,6 +97,7 @@
                 <span if={ dependencies[i+1].npm } class="pull-right"><img src="img/npm.svg" width="16px" /></span>
                 <strong>{ dependencies[i+1].artifactId }</strong>
                 <hr/>
+                <p if={ dependencies[i+1].deprecated }><strong>DEPRECATED!!!</strong></p>
                 <p if={ dependencies[i+1].description }>{ dependencies[i+1].description }</p>
               </div>
               <br/>
