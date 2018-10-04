@@ -32,7 +32,7 @@
         <dependency>
           <groupId>com.oracle</groupId>
           <artifactId>substrate</artifactId>
-          <version>1.0.0-rc6</version>
+          <version>1.0.0-rc7</version>
           <scope>system</scope>
           <systemPath>${java.home}/lib/svm/builder/svm.jar</systemPath>
         </dependency>
@@ -73,6 +73,7 @@
               <executable>${java.home}/bin/native-image</executable>
               <arguments>
                 <argument>--no-server</argument>
+                <argument>--enable-all-security-services</argument>
                 <argument>--delay-class-initialization-to-runtime=io.netty.handler.codec.http.HttpObjectEncoder,io.netty.handler.codec.http2.Http2CodecUtil,io.netty.handler.codec.http2.DefaultHttp2FrameWriter,io.netty.handler.codec.http.websocketx.WebSocket00FrameEncoder,io.netty.handler.ssl.JdkNpnApplicationProtocolNegotiator,io.netty.handler.ssl.ReferenceCountedOpenSslEngine</argument>
                 <argument>-Dvertx.disableDnsResolver=true</argument>
                 <argument>-H:Name=${project.name}</argument>
