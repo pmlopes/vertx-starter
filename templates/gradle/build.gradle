@@ -50,7 +50,7 @@ compileKotlin {
 shadowJar {
   classifier = 'fat'
   manifest {
-    attributes 'Main-Verticle': '{{metadata.packageName}}.MainVerticle'
+    attributes 'Main-Verticle': '{{metadata.package}}.MainVerticle'
   }
   mergeServiceFiles {
     include 'META-INF/services/io.vertx.core.spi.VerticleFactory'

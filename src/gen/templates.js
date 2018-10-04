@@ -1,55 +1,6 @@
 var Handlebars = require("handlebars/runtime");
 let isBrowser = new Function("try {return this===window;}catch(e){ return false;}");
  let exp = (isBrowser()) ? exports : module.exports
-exp['gradle/build.gradle'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
-    return "    classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.1.0'\n";
-},"3":function(container,depth0,helpers,partials,data) {
-    return "apply plugin: 'kotlin'\n";
-},"5":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return "description = '"
-    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.description : stack1), depth0))
-    + "'\n";
-},"7":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
-
-  return "  // TODO use compileOnly instead compile for codegen\n  compile '"
-    + alias4(((helper = (helper = helpers.groupId || (depth0 != null ? depth0.groupId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"groupId","hash":{},"data":data}) : helper)))
-    + ":"
-    + alias4(((helper = (helper = helpers.artifactId || (depth0 != null ? depth0.artifactId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"artifactId","hash":{},"data":data}) : helper)))
-    + ":"
-    + alias4(((helper = (helper = helpers.version || (depth0 != null ? depth0.version : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"version","hash":{},"data":data}) : helper)))
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.classifier : depth0),{"name":"if","hash":{},"fn":container.program(8, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "'\n";
-},"8":function(container,depth0,helpers,partials,data) {
-    var helper;
-
-  return ":"
-    + container.escapeExpression(((helper = (helper = helpers.classifier || (depth0 != null ? depth0.classifier : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"classifier","hash":{},"data":data}) : helper)));
-},"10":function(container,depth0,helpers,partials,data) {
-    return "compileKotlin {\n  kotlinOptions {\n    jvmTarget = '1.8'\n  }\n}\n";
-},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=container.lambda, alias3=container.escapeExpression;
-
-  return "buildscript {\n  repositories {\n    mavenCentral()\n    jcenter()\n  }\n\n  dependencies {\n"
-    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.kotlin : stack1),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "    classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.4'\n  }\n}\n\n"
-    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.kotlin : stack1),{"name":"if","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "apply plugin: 'java'\napply plugin: 'eclipse'\napply plugin: 'application'\napply plugin: 'com.github.johnrengelman.shadow'\n\nrepositories {\n  mavenCentral()\n}\n\nversion = '"
-    + alias3(alias2(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.version : stack1), depth0))
-    + "'\ngroup = '"
-    + alias3(alias2(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.groupId : stack1), depth0))
-    + "'\n"
-    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.description : stack1),{"name":"if","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "sourceCompatibility = '1.8'\nmainClassName = 'io.vertx.core.Launcher'\n\ndependencies {\n"
-    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.dependencies : depth0),{"name":"each","hash":{},"fn":container.program(7, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "}\n\n"
-    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.kotlin : stack1),{"name":"if","hash":{},"fn":container.program(10, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "\nshadowJar {\n  classifier = 'fat'\n  manifest {\n    attributes 'Main-Verticle': '"
-    + alias3(alias2(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.packageName : stack1), depth0))
-    + ".MainVerticle'\n  }\n  mergeServiceFiles {\n    include 'META-INF/services/io.vertx.core.spi.VerticleFactory'\n  }\n}\n\ntask wrapper(type: Wrapper) {\n  gradleVersion = '2.13'\n}\n\neclipse {\n  classpath {\n    file.beforeMerged { cp ->\n      cp.entries.add( new org.gradle.plugins.ide.eclipse.model.SourceFolder('build/classes/java/main', null) )\n    }\n  }\n}\n";
-},"useData":true})
 exp['maven/pom.xml'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     var stack1;
 
@@ -140,6 +91,55 @@ exp['maven/pom.xml'] = Handlebars.template({"1":function(container,depth0,helper
     + ((stack1 = helpers["if"].call(alias3,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.graalNativeImage : stack1),{"name":"if","hash":{},"fn":container.program(26, data, 0),"inverse":container.program(28, data, 0),"data":data})) != null ? stack1 : "")
     + "                  </manifestEntries>\n                </transformer>\n                <transformer implementation=\"org.apache.maven.plugins.shade.resource.AppendingTransformer\">\n                  <resource>META-INF/services/io.vertx.core.spi.VerticleFactory</resource>\n                </transformer>\n              </transformers>\n              <artifactSet>\n              </artifactSet>\n              <outputFile>${project.build.directory}/${project.artifactId}-${project.version}-fat.jar</outputFile>\n            </configuration>\n          </execution>\n        </executions>\n      </plugin>\n    </plugins>\n  </build>\n</project>\n";
 },"useData":true})
+exp['gradle/build.gradle'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
+    return "    classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.1.0'\n";
+},"3":function(container,depth0,helpers,partials,data) {
+    return "apply plugin: 'kotlin'\n";
+},"5":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "description = '"
+    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.description : stack1), depth0))
+    + "'\n";
+},"7":function(container,depth0,helpers,partials,data) {
+    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function", alias4=container.escapeExpression;
+
+  return "  // TODO use compileOnly instead compile for codegen\n  compile '"
+    + alias4(((helper = (helper = helpers.groupId || (depth0 != null ? depth0.groupId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"groupId","hash":{},"data":data}) : helper)))
+    + ":"
+    + alias4(((helper = (helper = helpers.artifactId || (depth0 != null ? depth0.artifactId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"artifactId","hash":{},"data":data}) : helper)))
+    + ":"
+    + alias4(((helper = (helper = helpers.version || (depth0 != null ? depth0.version : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"version","hash":{},"data":data}) : helper)))
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.classifier : depth0),{"name":"if","hash":{},"fn":container.program(8, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "'\n";
+},"8":function(container,depth0,helpers,partials,data) {
+    var helper;
+
+  return ":"
+    + container.escapeExpression(((helper = (helper = helpers.classifier || (depth0 != null ? depth0.classifier : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"classifier","hash":{},"data":data}) : helper)));
+},"10":function(container,depth0,helpers,partials,data) {
+    return "compileKotlin {\n  kotlinOptions {\n    jvmTarget = '1.8'\n  }\n}\n";
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=container.lambda, alias3=container.escapeExpression;
+
+  return "buildscript {\n  repositories {\n    mavenCentral()\n    jcenter()\n  }\n\n  dependencies {\n"
+    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.kotlin : stack1),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "    classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.4'\n  }\n}\n\n"
+    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.kotlin : stack1),{"name":"if","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "apply plugin: 'java'\napply plugin: 'eclipse'\napply plugin: 'application'\napply plugin: 'com.github.johnrengelman.shadow'\n\nrepositories {\n  mavenCentral()\n}\n\nversion = '"
+    + alias3(alias2(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.version : stack1), depth0))
+    + "'\ngroup = '"
+    + alias3(alias2(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.groupId : stack1), depth0))
+    + "'\n"
+    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.description : stack1),{"name":"if","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "sourceCompatibility = '1.8'\nmainClassName = 'io.vertx.core.Launcher'\n\ndependencies {\n"
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.dependencies : depth0),{"name":"each","hash":{},"fn":container.program(7, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "}\n\n"
+    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.kotlin : stack1),{"name":"if","hash":{},"fn":container.program(10, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "\nshadowJar {\n  classifier = 'fat'\n  manifest {\n    attributes 'Main-Verticle': '"
+    + alias3(alias2(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0))
+    + ".MainVerticle'\n  }\n  mergeServiceFiles {\n    include 'META-INF/services/io.vertx.core.spi.VerticleFactory'\n  }\n}\n\ntask wrapper(type: Wrapper) {\n  gradleVersion = '2.13'\n}\n\neclipse {\n  classpath {\n    file.beforeMerged { cp ->\n      cp.entries.add( new org.gradle.plugins.ide.eclipse.model.SourceFolder('build/classes/java/main', null) )\n    }\n  }\n}\n";
+},"useData":true})
 exp['npm/package.json'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     return "    \"babel-core\": \"^6.22.1\",\n    \"babel-loader\": \"^6.2.10\",\n    \"babel-preset-env\": \"^1.6.0\",\n";
 },"3":function(container,depth0,helpers,partials,data) {
@@ -221,7 +221,7 @@ exp['sbt/build.sbt'] = Handlebars.template({"1":function(container,depth0,helper
   return "import sbt.Package._\nimport sbt._\n\nscalaVersion := \"2.12.1\"\n\nlibraryDependencies ++= Seq(\n"
     + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.dependencies : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + ")\n\npackageOptions += ManifestAttributes(\n  (\"Main-Verticle\", \"scala:"
-    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.packageName : stack1), depth0))
+    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0))
     + ".MainVerticle\"))\n\nassemblyMergeStrategy in assembly := {\n  case PathList(\"META-INF\", \"MANIFEST.MF\") => MergeStrategy.discard\n  case PathList(\"META-INF\", xs @ _*) => MergeStrategy.last\n  case PathList(\"META-INF\", \"io.netty.versions.properties\") => MergeStrategy.last\n  case PathList(\"codegen.json\") => MergeStrategy.discard\n  case x =>\n    val oldStrategy = (assemblyMergeStrategy in assembly).value\n    oldStrategy(x)\n}\n";
 },"useData":true,"useDepths":true})
 exp['stack/vertx-stack.json'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
@@ -464,183 +464,32 @@ exp['graal-nativeimage/src/main/svm/substitutions.java'] = Handlebars.template({
     + ((stack1 = helpers["if"].call(depth0 != null ? depth0 : (container.nullContext || {}),((stack1 = (depth0 != null ? depth0.dependenciesGAV : depth0)) != null ? stack1["io.vertx:vertx-grpc"] : stack1),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "    } catch (NoSuchMethodException e) {\n      throw new RuntimeException(e);\n    }\n  }\n}\n";
 },"useData":true})
-exp['package-info/src/main/java/package-info.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=container.lambda, alias2=container.escapeExpression;
-
-  return "@ModuleGen(name=\""
-    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.artifactId : stack1), depth0))
-    + "\", groupPackage = \""
-    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.packageName : stack1), depth0))
-    + "\")\npackage "
-    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.packageName : stack1), depth0))
-    + ";\n\nimport io.vertx.codegen.annotations.ModuleGen;\n";
-},"useData":true})
 exp['npm/src/main/js/index.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "// your code goes here...\nvertx.createHttpServer()\n  .requestHandler(function (req) {\n    req.response()\n      .putHeader(\"content-type\", \"text/plain\")\n      .end(\"Hello from Vert.x!\");\n}).listen(8080);\n\nconsole.log('Listening at http://127.0.0.1:8080');\n";
 },"useData":true})
 exp['npm/src/main/ts/index.ts'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "// your code goes here...\ndeclare var vertx: any;\n\nvertx.createHttpServer()\n  .requestHandler(function (req: any) {\n    req.response()\n      .putHeader(\"content-type\", \"text/plain\")\n      .end(\"Hello from Vert.x!\");\n}).listen(8080);\n\nconsole.log('Listening at http://127.0.0.1:8080');\n";
 },"useData":true})
-exp['sbt/src/main/scala/MainVerticle.scala'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return "package "
-    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.packageName : stack1), depth0))
-    + "\n\nimport io.vertx.lang.scala.ScalaVerticle\n\nclass MainVerticle extends ScalaVerticle {\n\n  override def start(): Unit = {\n    // your code goes here...\n    vertx\n      .createHttpServer()\n      .requestHandler(_.response()\n        .putHeader(\"content-type\", \"text/plain\")\n        .end(\"Hello from Vert.x!\"))\n      .listenFuture(8080, \"0.0.0.0\")\n        .map(_ => ())\n  }\n}\n";
+exp['web+angular4/src/main/ts/boot.browser.ts'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "import 'reflect-metadata';\nimport 'zone.js';\nimport 'bootstrap';\nimport { enableProdMode } from '@angular/core';\nimport { platformBrowserDynamic } from '@angular/platform-browser-dynamic';\nimport { AppModule } from './app/app.module.browser';\n\nif (module.hot) {\n    module.hot.accept();\n    module.hot.dispose(() => {\n        // Before restarting the app, we create a new root element and dispose the old one\n        const oldRootElem = document.querySelector('app');\n        const newRootElem = document.createElement('app');\n        oldRootElem!.parentNode!.insertBefore(newRootElem, oldRootElem);\n        modulePromise.then(appModule => appModule.destroy());\n    });\n} else {\n    enableProdMode();\n}\n\n// Note: @ng-tools/webpack looks for the following expression when performing production\n// builds. Don't change how this line looks, otherwise you may break tree-shaking.\nconst modulePromise = platformBrowserDynamic().bootstrapModule(AppModule);\n";
 },"useData":true})
-exp['service-proxy/src/main/java/MainVerticle.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=container.lambda, alias2=container.escapeExpression;
-
-  return "package "
-    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.packageName : stack1), depth0))
-    + ";\n\nimport "
-    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.packageName : stack1), depth0))
-    + ".impl."
-    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0))
-    + "Impl;\n\nimport io.vertx.core.AbstractVerticle;\nimport io.vertx.serviceproxy.ServiceBinder;\n\npublic class MainVerticle extends AbstractVerticle {\n\n  private "
-    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0))
-    + "Impl service;\n\n  @Override\n  public void start() throws Exception {\n    service = new "
-    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0))
-    + "Impl(vertx, config());\n    new ServiceBinder(vertx)\n      .setAddress("
-    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0))
-    + ".DEFAULT_ADDRESS)\n      .register("
-    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0))
-    + ".class, service);\n  }\n\n  @Override\n  public void stop() throws Exception {\n    service.close();\n  }\n}\n";
+exp['web+angular4/src/test/ts/boot-tests.ts'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "// Load required polyfills and testing libraries\nimport 'reflect-metadata';\nimport 'zone.js';\nimport 'zone.js/dist/long-stack-trace-zone';\nimport 'zone.js/dist/proxy.js';\nimport 'zone.js/dist/sync-test';\nimport 'zone.js/dist/jasmine-patch';\nimport 'zone.js/dist/async-test';\nimport 'zone.js/dist/fake-async-test';\nimport * as testing from '@angular/core/testing';\nimport * as testingBrowser from '@angular/platform-browser-dynamic/testing';\n\n// There's no typing for the `__karma__` variable. Just declare it as any\ndeclare var __karma__: any;\ndeclare var require: any;\n\n// Prevent Karma from running prematurely\n__karma__.loaded = function () {};\n\n// First, initialize the Angular testing environment\ntesting.getTestBed().initTestEnvironment(\n    testingBrowser.BrowserDynamicTestingModule,\n    testingBrowser.platformBrowserDynamicTesting()\n);\n\n// Then we find all the tests\nconst context = require.context('../../main/ts', true, /\\.spec\\.ts$/);\n\n// And load the modules\ncontext.keys().map(context);\n\n// Finally, start Karma to run the tests\n__karma__.start();\n";
 },"useData":true})
-exp['service-proxy/src/main/java/Service.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=container.lambda, alias2=container.escapeExpression;
-
-  return "package "
-    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.packageName : stack1), depth0))
-    + ";\n\nimport io.vertx.codegen.annotations.ProxyGen;\nimport io.vertx.codegen.annotations.VertxGen;\nimport io.vertx.core.Vertx;\nimport io.vertx.serviceproxy.ServiceProxyBuilder;\n\n/**\n * "
-    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0))
-    + " API.\n */\n@VertxGen\n@ProxyGen\npublic interface "
-    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0))
-    + " {\n\n  /**\n   * The default service address.\n   */\n  String DEFAULT_ADDRESS = \""
-    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.packageName : stack1), depth0))
-    + ".service\";\n\n  /**\n    * Method called to create a proxy (to consume the service).\n    *\n    * @param vertx   vert.x\n    * @param address the address on the event bus where the service is served.\n    * @return the proxy\n    */\n  static "
-    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0))
-    + " createProxy(Vertx vertx, String address) {\n    return new ServiceProxyBuilder(vertx)\n      .setAddress(address)\n      .build("
-    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0))
-    + ".class);\n  }\n}\n";
+exp['web+angular4/src/test/ts/karma.conf.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "// Karma configuration file, see link for more information\n// https://karma-runner.github.io/0.13/config/configuration-file.html\n\nmodule.exports = function (config) {\n    config.set({\n        basePath: '.',\n        frameworks: ['jasmine'],\n        files: [\n            '../../main/resources/webroot/dist/vendor.js',\n            './boot-tests.ts'\n        ],\n        preprocessors: {\n            './boot-tests.ts': ['webpack']\n        },\n        reporters: ['progress'],\n        port: 9876,\n        colors: true,\n        logLevel: config.LOG_INFO,\n        autoWatch: true,\n        browsers: ['Chrome'],\n        mime: { 'application/javascript': ['ts','tsx'] },\n        singleRun: false,\n        webpack: require('../../../webpack.config.js')().filter(config => config.target !== 'node'), // Test against client bundle, because tests run in a browser\n        webpackMiddleware: { stats: 'errors-only' }\n    });\n};\n";
 },"useData":true})
-exp['verticle/src/main/java/MainVerticle.java'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
-    return "import io.vertx.core.Vertx;\n";
-},"3":function(container,depth0,helpers,partials,data) {
-    return "import io.vertx.core.AbstractVerticle;\n";
-},"5":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {});
-
-  return "import io.vertx.core.json.*;\n\nimport java.time.Instant;\nimport java.util.*;\n\nimport io.vertx.ext.web.Router;\nimport io.vertx.ext.web.handler.StaticHandler;\n"
-    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.dependenciesGAV : depth0)) != null ? stack1["io.vertx:vertx-web-templ-handlebars"] : stack1),{"name":"if","hash":{},"fn":container.program(6, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.dependenciesGAV : depth0)) != null ? stack1["xyz.jetdrone:hot-reload"] : stack1),{"name":"if","hash":{},"fn":container.program(8, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "\nimport static java.time.temporal.ChronoUnit.DAYS;\n";
-},"6":function(container,depth0,helpers,partials,data) {
-    return "import io.vertx.ext.web.templ.HandlebarsTemplateEngine;\n";
-},"8":function(container,depth0,helpers,partials,data) {
-    return "import xyz.jetdrone.vertx.hot.reload.HotReload;\n";
-},"10":function(container,depth0,helpers,partials,data) {
-    return " extends AbstractVerticle";
-},"12":function(container,depth0,helpers,partials,data) {
-    return "  public static void main(String[] args) {\n    final Vertx vertx = Vertx.vertx();\n    // your code goes here...\n  }\n";
-},"14":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {});
-
-  return "  @Override\n  public void start() {\n    // your code goes here...\n\n"
-    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.dependenciesGAV : depth0)) != null ? stack1["io.vertx:vertx-web"] : stack1),{"name":"if","hash":{},"fn":container.program(15, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "\n    vertx.createHttpServer().requestHandler("
-    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.dependenciesGAV : depth0)) != null ? stack1["io.vertx:vertx-web"] : stack1),{"name":"if","hash":{},"fn":container.program(28, data, 0),"inverse":container.program(30, data, 0),"data":data})) != null ? stack1 : "")
-    + ").listen(8080, res -> {\n      if (res.failed()) {\n        res.cause().printStackTrace();\n      } else {\n        System.out.println(\"Server listening at: http://localhost:8080/\");\n      }\n    });\n  }\n";
-},"15":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {});
-
-  return ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.dependenciesGAV : depth0)) != null ? stack1["io.vertx:vertx-web-templ-handlebars"] : stack1),{"name":"if","hash":{},"fn":container.program(16, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "    final Router router = Router.router(vertx);\n\n"
-    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.dependenciesGAV : depth0)) != null ? stack1["xyz.jetdrone:hot-reload"] : stack1),{"name":"if","hash":{},"fn":container.program(18, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "\n    router.get(\"/\").handler(ctx -> {\n"
-    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.dependenciesGAV : depth0)) != null ? stack1["io.vertx:vertx-web-templ-handlebars"] : stack1),{"name":"if","hash":{},"fn":container.program(20, data, 0),"inverse":container.program(22, data, 0),"data":data})) != null ? stack1 : "")
-    + "    });\n\n    // the example weather API\n    List<String> SUMMARIES = Arrays.asList(\"Freezing\", \"Bracing\", \"Chilly\", \"Cool\", \"Mild\", \"Warm\", \"Balmy\", \"Hot\", \"Sweltering\", \"Scorching\");\n\n    router.get(\"/api/weather-forecasts\").handler(ctx -> {\n      final JsonArray response = new JsonArray();\n      final Instant now = Instant.now();\n      final Random rnd = new Random();\n\n      for (int i = 1; i <= 5; i++) {\n        JsonObject forecast = new JsonObject()\n          .put(\"dateFormatted\", now.plus(i, DAYS))\n          .put(\"temperatureC\", -20 + rnd.nextInt(35))\n          .put(\"summary\", SUMMARIES.get(rnd.nextInt(SUMMARIES.size())));\n\n        forecast.put(\"temperatureF\", 32 + (int) (forecast.getInteger(\"temperatureC\") / 0.5556));\n\n        response.add(forecast);\n      }\n\n      ctx.response()\n        .putHeader(\"Content-Type\", \"application/json\")\n        .end(response.encode());\n    });\n\n    // Serve the static resources\n    router.route().handler("
-    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.dependenciesGAV : depth0)) != null ? stack1["xyz.jetdrone:hot-reload"] : stack1),{"name":"if","hash":{},"fn":container.program(24, data, 0),"inverse":container.program(26, data, 0),"data":data})) != null ? stack1 : "")
-    + ");\n";
-},"16":function(container,depth0,helpers,partials,data) {
-    return "    final HandlebarsTemplateEngine engine = HandlebarsTemplateEngine.create();\n";
-},"18":function(container,depth0,helpers,partials,data) {
-    return "    // development hot reload\n    router.get().handler(HotReload.create());\n";
-},"20":function(container,depth0,helpers,partials,data) {
-    return "      // we define a hardcoded title for our application\n      ctx.put(\"title\", \"Home Page\");\n      ctx.put(\"hotreload\", System.getenv(\"VERTX_HOT_RELOAD\"));\n\n      engine.render(ctx, \"templates\", \"/index.hbs\", res -> {\n        if (res.succeeded()) {\n          ctx.response().end(res.result());\n        } else {\n          ctx.fail(res.cause());\n        }\n      });\n";
-},"22":function(container,depth0,helpers,partials,data) {
-    return "      ctx.response()\n        .putHeader(\"content-type\", \"text/plain\")\n        .end(\"Hello from Vert.x!\");\n";
-},"24":function(container,depth0,helpers,partials,data) {
-    return "HotReload.createStaticHandler()";
-},"26":function(container,depth0,helpers,partials,data) {
-    return "StaticHandler.create()";
-},"28":function(container,depth0,helpers,partials,data) {
-    return "router::accept";
-},"30":function(container,depth0,helpers,partials,data) {
-    return "req -> {\n      req.response()\n        .putHeader(\"content-type\", \"text/plain\")\n        .end(\"Hello from Vert.x!\");\n    }";
-},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {});
-
-  return "package "
-    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.packageName : stack1), depth0))
-    + ";\n\n"
-    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.graalNativeImage : stack1),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.program(3, data, 0),"data":data})) != null ? stack1 : "")
-    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.dependenciesGAV : depth0)) != null ? stack1["io.vertx:vertx-web"] : stack1),{"name":"if","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "\npublic class MainVerticle"
-    + ((stack1 = helpers.unless.call(alias1,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.graalNativeImage : stack1),{"name":"unless","hash":{},"fn":container.program(10, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + " {\n\n"
-    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.graalNativeImage : stack1),{"name":"if","hash":{},"fn":container.program(12, data, 0),"inverse":container.program(14, data, 0),"data":data})) != null ? stack1 : "")
-    + "}\n";
+exp['web+aurelia/src/main/js/boot.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "import 'isomorphic-fetch';\nimport { Aurelia, PLATFORM } from 'aurelia-framework';\nimport { HttpClient } from 'aurelia-fetch-client';\nimport 'bootstrap/dist/css/bootstrap.css';\nimport 'bootstrap';\n\nexport function configure(aurelia) {\n    aurelia.use.standardConfiguration();\n\n    if (IS_DEV_BUILD) {\n        aurelia.use.developmentLogging();\n    }\n\n    new HttpClient().configure(config => {\n        const baseUrl = document.getElementsByTagName('base')[0].href;\n        config.withBaseUrl(baseUrl);\n    });\n\n    aurelia.start().then(() => aurelia.setRoot(PLATFORM.moduleName('app/components/app/app')));\n}\n";
 },"useData":true})
-exp['verticle/src/main/kotlin/MainVerticle.kt'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {});
-
-  return "import java.time.Instant\nimport java.time.temporal.ChronoUnit.DAYS\nimport java.util.*\n\nimport io.vertx.kotlin.core.json.array\nimport io.vertx.kotlin.core.json.json\nimport io.vertx.kotlin.core.json.obj\n\nimport io.vertx.ext.web.Router\nimport io.vertx.ext.web.handler.StaticHandler\n"
-    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.dependenciesGAV : depth0)) != null ? stack1["io.vertx:vertx-web-templ-handlebars"] : stack1),{"name":"if","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.dependenciesGAV : depth0)) != null ? stack1["xyz.jetdrone:hot-reload"] : stack1),{"name":"if","hash":{},"fn":container.program(4, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
-},"2":function(container,depth0,helpers,partials,data) {
-    return "import io.vertx.ext.web.templ.HandlebarsTemplateEngine\n";
-},"4":function(container,depth0,helpers,partials,data) {
-    return "import xyz.jetdrone.vertx.hot.reload.HotReload\n";
-},"6":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {});
-
-  return ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.dependenciesGAV : depth0)) != null ? stack1["io.vertx:vertx-web-templ-handlebars"] : stack1),{"name":"if","hash":{},"fn":container.program(7, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "    var router = Router.router(vertx)\n\n"
-    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.dependenciesGAV : depth0)) != null ? stack1["xyz.jetdrone:hot-reload"] : stack1),{"name":"if","hash":{},"fn":container.program(9, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "\n    router.get(\"/\").handler({ ctx ->\n"
-    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.dependenciesGAV : depth0)) != null ? stack1["io.vertx:vertx-web-templ-handlebars"] : stack1),{"name":"if","hash":{},"fn":container.program(11, data, 0),"inverse":container.program(13, data, 0),"data":data})) != null ? stack1 : "")
-    + "    })\n\n    // the example weather API\n    var SUMMARIES = listOf(\"Freezing\", \"Bracing\", \"Chilly\", \"Cool\", \"Mild\", \"Warm\", \"Balmy\", \"Hot\", \"Sweltering\", \"Scorching\")\n\n    router.get(\"/api/weather-forecasts\").handler({ ctx ->\n      var response = json {\n        array()\n      }\n\n      var now = Instant.now()\n      var rnd = Random()\n\n      for (i in 1..5) {\n        var forecast = json {\n          obj(\n            \"dateFormatted\" to now.plus(i.toLong(), DAYS),\n            \"temperatureC\" to -20 + rnd.nextInt(35),\n            \"summary\" to SUMMARIES[rnd.nextInt(SUMMARIES.size)]\n          )\n        }\n\n        forecast.put(\"temperatureF\", 32 + (forecast.getInteger(\"temperatureC\") / 0.5556))\n\n        response.add(forecast)\n      }\n\n      ctx.response()\n        .putHeader(\"Content-Type\", \"application/json\")\n        .end(response.toString())\n    })\n\n    // Serve the static resources\n    router.route().handler("
-    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.dependenciesGAV : depth0)) != null ? stack1["xyz.jetdrone:hot-reload"] : stack1),{"name":"if","hash":{},"fn":container.program(15, data, 0),"inverse":container.program(17, data, 0),"data":data})) != null ? stack1 : "")
-    + ")\n";
-},"7":function(container,depth0,helpers,partials,data) {
-    return "    var engine = HandlebarsTemplateEngine.create()\n";
-},"9":function(container,depth0,helpers,partials,data) {
-    return "    // development hot reload\n    router.get().handler(HotReload.create())\n";
-},"11":function(container,depth0,helpers,partials,data) {
-    return "      // we define a hardcoded title for our application\n      ctx.put(\"title\", \"Home Page\")\n      ctx.put(\"hotreload\", System.getenv(\"VERTX_HOT_RELOAD\"))\n\n      engine.render(ctx, \"templates\", \"/index.hbs\", { res ->\n        if (res.succeeded()) {\n          ctx.response().end(res.result())\n        } else {\n          ctx.fail(res.cause())\n        }\n      })\n";
-},"13":function(container,depth0,helpers,partials,data) {
-    return "      ctx.response()\n        .putHeader(\"content-type\", \"text/plain\")\n        .end(\"Hello from Vert.x!\")\n";
-},"15":function(container,depth0,helpers,partials,data) {
-    return "HotReload.createStaticHandler()";
-},"17":function(container,depth0,helpers,partials,data) {
-    return "StaticHandler.create()";
-},"19":function(container,depth0,helpers,partials,data) {
-    return "router::accept";
-},"21":function(container,depth0,helpers,partials,data) {
-    return "{ req ->\n      req.response()\n        .putHeader(\"content-type\", \"text/plain\")\n        .end(\"Hello from Vert.x!\")\n    }";
-},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {});
-
-  return "package "
-    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.packageName : stack1), depth0))
-    + "\n\nimport io.vertx.core.AbstractVerticle\n\n"
-    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.dependenciesGAV : depth0)) != null ? stack1["io.vertx:vertx-web"] : stack1),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "\nclass MainVerticle : AbstractVerticle() {\n\n  override fun start() {\n    // your code goes here...\n\n"
-    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.dependenciesGAV : depth0)) != null ? stack1["io.vertx:vertx-web"] : stack1),{"name":"if","hash":{},"fn":container.program(6, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "\n    vertx.createHttpServer().requestHandler("
-    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.dependenciesGAV : depth0)) != null ? stack1["io.vertx:vertx-web"] : stack1),{"name":"if","hash":{},"fn":container.program(19, data, 0),"inverse":container.program(21, data, 0),"data":data})) != null ? stack1 : "")
-    + ").listen(8080, { res ->\n      if (res.failed()) {\n        res.cause().printStackTrace()\n      } else {\n        System.out.println(\"Server listening at: http://localhost:8080/\")\n      }\n    })\n  }\n}\n";
+exp['web+knockout/src/main/js/boot.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "import './css/site.css';\nimport 'bootstrap';\nimport * as ko from 'knockout';\nimport { createBrowserHistory } from 'history';\nimport './webpack-component-loader';\nimport AppRootComponent from './components/app-root/app-root';\nconst baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');\nconst basename = baseUrl.substring(0, baseUrl.length - 1); // History component needs no trailing slash\n\n// Load and register the <app-root> component\nko.components.register('app-root', AppRootComponent);\n\n// Tell Knockout to start up an instance of your application\nko.applyBindings({ history: createBrowserHistory({ basename }), basename });\n\n// Basic hot reloading support. Automatically reloads and restarts the Knockout app each time\n// you modify source files. This will not preserve any application state other than the URL.\nif (module.hot) {\n    module.hot.accept();\n    module.hot.dispose(() => ko.cleanNode(document.body));\n}\n";
+},"useData":true})
+exp['web+knockout/src/main/js/router.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "import * as ko from 'knockout';\nimport * as History from 'history';\nconst $ = require('jquery');\nconst crossroads = require('crossroads');\n\n// This module configures crossroads.js, a routing library. If you prefer, you\n// can use any other routing library (or none at all) as Knockout is designed to\n// compose cleanly with external libraries.\n//\n// You *don't* have to follow the pattern established here (each route entry\n// specifies a 'page', which is a Knockout component) - there's nothing built into\n// Knockout that requires or even knows about this technique. It's just one of\n// many possible ways of setting up client-side routes.\nexport class Router {\n\n  constructor(history, routes, basename) {\n    this.currentRoute = ko.observable({});\n    this.history = history;\n    // Reset and configure Crossroads so it matches routes and updates this.currentRoute\n    crossroads.removeAllRoutes();\n    crossroads.resetState();\n    crossroads.normalizeFn = crossroads.NORM_AS_OBJECT;\n    routes.forEach(route => {\n      crossroads.addRoute(route.url, requestParams => {\n        this.currentRoute(ko.utils.extend(requestParams, route.params));\n      });\n    });\n\n    // Make history.js watch for navigation and notify Crossroads\n    this.disposeHistory = history.listen(location => crossroads.parse(location.pathname));\n    this.clickEventListener = evt => {\n      let target = evt.currentTarget;\n      if (target && target.tagName === 'A') {\n        let href = target.getAttribute('href');\n        if (href && href.indexOf(basename + '/') === 0) {\n          const hrefAfterBasename = href.substring(basename.length);\n          history.push(hrefAfterBasename);\n          evt.preventDefault();\n        }\n      }\n    };\n    $(document).on('click', 'a', this.clickEventListener);\n\n    // Initialize Crossroads with starting location\n    // Need to cast history to 'any' because @types/history is out-of-date\n    crossroads.parse((history).location.pathname);\n  }\n\n  link(url) {\n    return this.history.createHref({pathname: url});\n  }\n\n  dispose() {\n    this.disposeHistory();\n    $(document).off('click', 'a', this.clickEventListener);\n  }\n}\n";
+},"useData":true})
+exp['web+knockout/src/main/js/webpack-component-loader.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "import * as ko from 'knockout';\n\n// This Knockout component loader integrates with Webpack's lazy-loaded bundle feature.\n// Having this means you can optionally declare components as follows:\n//   ko.components.register('my-component', require('bundle-loader?lazy!../some-path-to-a-js-or-ts-module'));\n// ... and then it will be loaded on demand instead of being loaded up front.\nko.components.loaders.unshift({\n  loadComponent: (name, componentConfig, callback) => {\n    if (typeof componentConfig === 'function') {\n      // It's a lazy-loaded Webpack bundle\n      componentConfig(loadedModule => {\n        // Handle TypeScript-style default exports\n        if (loadedModule.__esModule && loadedModule.default) {\n          loadedModule = loadedModule.default;\n        }\n\n        // Pass the loaded module to KO's default loader\n        ko.components.defaultLoader.loadComponent(name, loadedModule, callback);\n      });\n    } else {\n      // It's something else - let another component loader handle it\n      callback(null); // workaround until https://github.com/DefinitelyTyped/DefinitelyTyped/pull/17999\n    }\n  }\n});\n";
 },"useData":true})
 exp['verticle/src/main/resources/main_verticle.groovy'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {});
@@ -784,36 +633,6 @@ exp['verticle/src/main/resources/main_verticle.rb'] = Handlebars.template({"1":f
     + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.dependenciesGAV : depth0)) != null ? stack1["io.vertx:vertx-web"] : stack1),{"name":"if","hash":{},"fn":container.program(19, data, 0),"inverse":container.program(21, data, 0),"data":data})) != null ? stack1 : "")
     + "\n\nhttp_server.listen(8080) { |res_err,res|\n  if (res_err != nil)\n    res_err.print_stack_trace()\n  else\n    puts \"Server listening at: http://localhost:8080/\"\n  end\n}\n";
 },"useData":true})
-exp['web+angular4/src/main/ts/boot.browser.ts'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "import 'reflect-metadata';\nimport 'zone.js';\nimport 'bootstrap';\nimport { enableProdMode } from '@angular/core';\nimport { platformBrowserDynamic } from '@angular/platform-browser-dynamic';\nimport { AppModule } from './app/app.module.browser';\n\nif (module.hot) {\n    module.hot.accept();\n    module.hot.dispose(() => {\n        // Before restarting the app, we create a new root element and dispose the old one\n        const oldRootElem = document.querySelector('app');\n        const newRootElem = document.createElement('app');\n        oldRootElem!.parentNode!.insertBefore(newRootElem, oldRootElem);\n        modulePromise.then(appModule => appModule.destroy());\n    });\n} else {\n    enableProdMode();\n}\n\n// Note: @ng-tools/webpack looks for the following expression when performing production\n// builds. Don't change how this line looks, otherwise you may break tree-shaking.\nconst modulePromise = platformBrowserDynamic().bootstrapModule(AppModule);\n";
-},"useData":true})
-exp['web+angular4/src/test/ts/boot-tests.ts'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "// Load required polyfills and testing libraries\nimport 'reflect-metadata';\nimport 'zone.js';\nimport 'zone.js/dist/long-stack-trace-zone';\nimport 'zone.js/dist/proxy.js';\nimport 'zone.js/dist/sync-test';\nimport 'zone.js/dist/jasmine-patch';\nimport 'zone.js/dist/async-test';\nimport 'zone.js/dist/fake-async-test';\nimport * as testing from '@angular/core/testing';\nimport * as testingBrowser from '@angular/platform-browser-dynamic/testing';\n\n// There's no typing for the `__karma__` variable. Just declare it as any\ndeclare var __karma__: any;\ndeclare var require: any;\n\n// Prevent Karma from running prematurely\n__karma__.loaded = function () {};\n\n// First, initialize the Angular testing environment\ntesting.getTestBed().initTestEnvironment(\n    testingBrowser.BrowserDynamicTestingModule,\n    testingBrowser.platformBrowserDynamicTesting()\n);\n\n// Then we find all the tests\nconst context = require.context('../../main/ts', true, /\\.spec\\.ts$/);\n\n// And load the modules\ncontext.keys().map(context);\n\n// Finally, start Karma to run the tests\n__karma__.start();\n";
-},"useData":true})
-exp['web+angular4/src/test/ts/karma.conf.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "// Karma configuration file, see link for more information\n// https://karma-runner.github.io/0.13/config/configuration-file.html\n\nmodule.exports = function (config) {\n    config.set({\n        basePath: '.',\n        frameworks: ['jasmine'],\n        files: [\n            '../../main/resources/webroot/dist/vendor.js',\n            './boot-tests.ts'\n        ],\n        preprocessors: {\n            './boot-tests.ts': ['webpack']\n        },\n        reporters: ['progress'],\n        port: 9876,\n        colors: true,\n        logLevel: config.LOG_INFO,\n        autoWatch: true,\n        browsers: ['Chrome'],\n        mime: { 'application/javascript': ['ts','tsx'] },\n        singleRun: false,\n        webpack: require('../../../webpack.config.js')().filter(config => config.target !== 'node'), // Test against client bundle, because tests run in a browser\n        webpackMiddleware: { stats: 'errors-only' }\n    });\n};\n";
-},"useData":true})
-exp['web+aurelia/src/main/js/boot.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "import 'isomorphic-fetch';\nimport { Aurelia, PLATFORM } from 'aurelia-framework';\nimport { HttpClient } from 'aurelia-fetch-client';\nimport 'bootstrap/dist/css/bootstrap.css';\nimport 'bootstrap';\n\nexport function configure(aurelia) {\n    aurelia.use.standardConfiguration();\n\n    if (IS_DEV_BUILD) {\n        aurelia.use.developmentLogging();\n    }\n\n    new HttpClient().configure(config => {\n        const baseUrl = document.getElementsByTagName('base')[0].href;\n        config.withBaseUrl(baseUrl);\n    });\n\n    aurelia.start().then(() => aurelia.setRoot(PLATFORM.moduleName('app/components/app/app')));\n}\n";
-},"useData":true})
-exp['web+knockout/src/main/js/boot.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "import './css/site.css';\nimport 'bootstrap';\nimport * as ko from 'knockout';\nimport { createBrowserHistory } from 'history';\nimport './webpack-component-loader';\nimport AppRootComponent from './components/app-root/app-root';\nconst baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');\nconst basename = baseUrl.substring(0, baseUrl.length - 1); // History component needs no trailing slash\n\n// Load and register the <app-root> component\nko.components.register('app-root', AppRootComponent);\n\n// Tell Knockout to start up an instance of your application\nko.applyBindings({ history: createBrowserHistory({ basename }), basename });\n\n// Basic hot reloading support. Automatically reloads and restarts the Knockout app each time\n// you modify source files. This will not preserve any application state other than the URL.\nif (module.hot) {\n    module.hot.accept();\n    module.hot.dispose(() => ko.cleanNode(document.body));\n}\n";
-},"useData":true})
-exp['web+knockout/src/main/js/router.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "import * as ko from 'knockout';\nimport * as History from 'history';\nconst $ = require('jquery');\nconst crossroads = require('crossroads');\n\n// This module configures crossroads.js, a routing library. If you prefer, you\n// can use any other routing library (or none at all) as Knockout is designed to\n// compose cleanly with external libraries.\n//\n// You *don't* have to follow the pattern established here (each route entry\n// specifies a 'page', which is a Knockout component) - there's nothing built into\n// Knockout that requires or even knows about this technique. It's just one of\n// many possible ways of setting up client-side routes.\nexport class Router {\n\n  constructor(history, routes, basename) {\n    this.currentRoute = ko.observable({});\n    this.history = history;\n    // Reset and configure Crossroads so it matches routes and updates this.currentRoute\n    crossroads.removeAllRoutes();\n    crossroads.resetState();\n    crossroads.normalizeFn = crossroads.NORM_AS_OBJECT;\n    routes.forEach(route => {\n      crossroads.addRoute(route.url, requestParams => {\n        this.currentRoute(ko.utils.extend(requestParams, route.params));\n      });\n    });\n\n    // Make history.js watch for navigation and notify Crossroads\n    this.disposeHistory = history.listen(location => crossroads.parse(location.pathname));\n    this.clickEventListener = evt => {\n      let target = evt.currentTarget;\n      if (target && target.tagName === 'A') {\n        let href = target.getAttribute('href');\n        if (href && href.indexOf(basename + '/') === 0) {\n          const hrefAfterBasename = href.substring(basename.length);\n          history.push(hrefAfterBasename);\n          evt.preventDefault();\n        }\n      }\n    };\n    $(document).on('click', 'a', this.clickEventListener);\n\n    // Initialize Crossroads with starting location\n    // Need to cast history to 'any' because @types/history is out-of-date\n    crossroads.parse((history).location.pathname);\n  }\n\n  link(url) {\n    return this.history.createHref({pathname: url});\n  }\n\n  dispose() {\n    this.disposeHistory();\n    $(document).off('click', 'a', this.clickEventListener);\n  }\n}\n";
-},"useData":true})
-exp['web+knockout/src/main/js/webpack-component-loader.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "import * as ko from 'knockout';\n\n// This Knockout component loader integrates with Webpack's lazy-loaded bundle feature.\n// Having this means you can optionally declare components as follows:\n//   ko.components.register('my-component', require('bundle-loader?lazy!../some-path-to-a-js-or-ts-module'));\n// ... and then it will be loaded on demand instead of being loaded up front.\nko.components.loaders.unshift({\n  loadComponent: (name, componentConfig, callback) => {\n    if (typeof componentConfig === 'function') {\n      // It's a lazy-loaded Webpack bundle\n      componentConfig(loadedModule => {\n        // Handle TypeScript-style default exports\n        if (loadedModule.__esModule && loadedModule.default) {\n          loadedModule = loadedModule.default;\n        }\n\n        // Pass the loaded module to KO's default loader\n        ko.components.defaultLoader.loadComponent(name, loadedModule, callback);\n      });\n    } else {\n      // It's something else - let another component loader handle it\n      callback(null); // workaround until https://github.com/DefinitelyTyped/DefinitelyTyped/pull/17999\n    }\n  }\n});\n";
-},"useData":true})
-exp['web+mongo/src/main/java/MainVerticle.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=container.lambda, alias2=container.escapeExpression;
-
-  return "package "
-    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.packageName : stack1), depth0))
-    + ";\n\nimport io.vertx.core.AbstractVerticle;\nimport io.vertx.core.http.HttpHeaders;\nimport io.vertx.core.json.JsonArray;\nimport io.vertx.core.json.JsonObject;\nimport io.vertx.ext.mongo.MongoClient;\nimport io.vertx.ext.web.Router;\nimport io.vertx.ext.web.handler.BodyHandler;\nimport io.vertx.ext.web.handler.StaticHandler;\nimport io.vertx.ext.web.templ.JadeTemplateEngine;\n\n/**\n * This is an example application to showcase the usage of MongDB and Vert.x Web.\n *\n * In this application you will see the usage of:\n *\n *  * JADE templates\n *  * Mongo Client\n *  * Vert.x Web\n *\n * The application allows to list, create and delete mongo documents using a simple web interface.\n *\n */\npublic class "
-    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.className : stack1), depth0))
-    + " extends AbstractVerticle {\n\n  @Override\n  public void start() throws Exception {\n\n    // Create a mongo client using all defaults (connect to localhost and default port) using the database name \"demo\".\n    final MongoClient mongo = MongoClient.createShared(vertx, new JsonObject().put(\"db_name\", \"demo\"));\n\n    // In order to use a JADE template we first need to create an engine\n    final JadeTemplateEngine jade = JadeTemplateEngine.create();\n\n    // To simplify the development of the web components we use a Router to route all HTTP requests\n    // to organize our code in a reusable way.\n    final Router router = Router.router(vertx);\n\n    // Enable the body parser to we can get the form data and json documents in out context.\n    router.route().handler(BodyHandler.create());\n\n    // Entry point to the application, this will render a custom JADE template.\n    router.get(\"/\").handler(ctx -> {\n      // we define a hardcoded title for our application\n      ctx.put(\"title\", \"Vert.x Web\");\n\n      // and now delegate to the engine to render it.\n      jade.render(ctx, \"templates/index\", res -> {\n        if (res.succeeded()) {\n          ctx.response().putHeader(HttpHeaders.CONTENT_TYPE, \"text/html\").end(res.result());\n        } else {\n          ctx.fail(res.cause());\n        }\n      });\n    });\n\n    // and now we mount the handlers in their appropriate routes\n\n    // Read all users from the mongo collection.\n    router.get(\"/users\").handler(ctx -> {\n      // issue a find command to mongo to fetch all documents from the \"users\" collection.\n      mongo.find(\"users\", new JsonObject(), lookup -> {\n        // error handling\n        if (lookup.failed()) {\n          ctx.fail(lookup.cause());\n          return;\n        }\n\n        // now convert the list to a JsonArray because it will be easier to encode the final object as the response.\n        final JsonArray json = new JsonArray();\n        for (JsonObject o : lookup.result()) {\n          json.add(o);\n        }\n\n        // since we are producing json we should inform the browser of the correct content type.\n        ctx.response().putHeader(HttpHeaders.CONTENT_TYPE, \"application/json\");\n        // encode to json string\n        ctx.response().end(json.encode());\n      });\n    });\n\n    // Create a new document on mongo.\n    router.post(\"/users\").handler(ctx -> {\n      // since jquery is sending data in multipart-form format to avoid preflight calls, we need to convert it to JSON.\n      JsonObject user = new JsonObject()\n              .put(\"username\", ctx.request().getFormAttribute(\"username\"))\n              .put(\"email\", ctx.request().getFormAttribute(\"email\"))\n              .put(\"fullname\", ctx.request().getFormAttribute(\"fullname\"))\n              .put(\"location\", ctx.request().getFormAttribute(\"location\"))\n              .put(\"age\", ctx.request().getFormAttribute(\"age\"))\n              .put(\"gender\", ctx.request().getFormAttribute(\"gender\"));\n\n      // insert into mongo\n      mongo.insert(\"users\", user, lookup -> {\n        // error handling\n        if (lookup.failed()) {\n          ctx.fail(lookup.cause());\n          return;\n        }\n\n        // inform that the document was created\n        ctx.response().setStatusCode(201);\n        ctx.response().end();\n      });\n    });\n\n    // Remove a document from mongo.\n    router.delete(\"/users/:id\").handler(ctx -> {\n      // catch the id to remove from the url /users/:id and transform it to a mongo query.\n      mongo.removeOne(\"users\", new JsonObject().put(\"_id\", ctx.request().getParam(\"id\")), lookup -> {\n        // error handling\n        if (lookup.failed()) {\n          ctx.fail(lookup.cause());\n          return;\n        }\n\n        // inform the browser that there is nothing to return.\n        ctx.response().setStatusCode(204);\n        ctx.response().end();\n      });\n    });\n\n    // Serve the non private static pages\n    router.route().handler(StaticHandler.create());\n\n    // start a HTTP web server on port 8080\n    vertx.createHttpServer().requestHandler(router::accept).listen(8080);\n  }\n}\n";
-},"useData":true})
 exp['web+react/src/main/js/boot.jsx'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "import './css/site.css';\nimport 'bootstrap';\nimport * as React from 'react';\nimport * as ReactDOM from 'react-dom';\nimport { AppContainer } from 'react-hot-loader';\nimport { BrowserRouter } from 'react-router-dom';\nimport * as RoutesModule from './routes';\nlet routes = RoutesModule.routes;\n\nfunction renderApp() {\n    // This code starts up the React app when it runs in a browser. It sets up the routing\n    // configuration and injects the app into a DOM element.\n    const baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');\n    ReactDOM.render(\n        <AppContainer>\n            <BrowserRouter children={ routes } basename={ baseUrl } />\n        </AppContainer>,\n        document.getElementById('react-app')\n    );\n}\n\nrenderApp();\n\n// Allow Hot Module Replacement\nif (module.hot) {\n    module.hot.accept('./routes', () => {\n        routes = require<typeof RoutesModule>('./routes').routes;\n        renderApp();\n    });\n}\n";
 },"useData":true})
@@ -841,25 +660,52 @@ exp['web+react-redux/src/main/js/routes.jsx'] = Handlebars.template({"compiler":
 exp['web+vue/src/main/js/boot.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "import './css/site.css';\nimport 'bootstrap';\nimport Vue from 'vue';\nimport VueRouter from 'vue-router';\nVue.use(VueRouter);\n\nconst routes = [\n    { path: '/', component: require('./components/home/home.vue.html') },\n    { path: '/counter', component: require('./components/counter/counter.vue.html') },\n    { path: '/fetchdata', component: require('./components/fetchdata/fetchdata.vue.html') }\n];\n\nnew Vue({\n    el: '#app',\n    router: new VueRouter({ mode: 'history', routes: routes }),\n    render: h => h(require('./components/app/app.vue.html'))\n});\n";
 },"useData":true})
-exp['service-proxy/src/main/java/impl/ServiceImpl.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+exp['package-info/src/main/java/{packageDir}/package-info.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=container.lambda, alias2=container.escapeExpression;
+
+  return "@ModuleGen(name=\""
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.artifactId : stack1), depth0))
+    + "\", groupPackage = \""
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0))
+    + "\")\npackage "
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0))
+    + ";\n\nimport io.vertx.codegen.annotations.ModuleGen;\n";
+},"useData":true})
+exp['service-proxy/src/main/java/{packageDir}/MainVerticle.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=container.lambda, alias2=container.escapeExpression;
 
   return "package "
-    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.packageName : stack1), depth0))
-    + ".impl;\n\nimport "
-    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.packageName : stack1), depth0))
-    + "."
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0))
+    + ";\n\nimport "
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0))
+    + ".impl."
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0))
-    + ";\n\nimport io.vertx.core.Vertx;\nimport io.vertx.core.json.JsonObject;\n\npublic class "
+    + "Impl;\n\nimport io.vertx.core.AbstractVerticle;\nimport io.vertx.serviceproxy.ServiceBinder;\n\npublic class MainVerticle extends AbstractVerticle {\n\n  private "
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0))
-    + "Impl implements "
+    + "Impl service;\n\n  @Override\n  public void start() throws Exception {\n    service = new "
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0))
-    + " {\n\n  public "
+    + "Impl(vertx, config());\n    new ServiceBinder(vertx)\n      .setAddress("
     + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0))
-    + "Impl(Vertx vertx, JsonObject config) {\n    // initialization...\n  }\n\n  // TODO: Implement your service here...\n\n  public void close() {\n    // clean up...\n  }\n}\n";
+    + ".DEFAULT_ADDRESS)\n      .register("
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0))
+    + ".class, service);\n  }\n\n  @Override\n  public void stop() throws Exception {\n    service.close();\n  }\n}\n";
 },"useData":true})
-exp['verticle/src/main/resources/templates/index.hbs'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<!DOCTYPE html>\n<html>\n<head>\n  <meta charset=\"utf-8\"/>\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"/>\n  <title>{{ title }}</title>\n  <base href=\"/\"/>\n\n  <link rel=\"stylesheet\" href=\"/dist/vendor.css\"/>\n</head>\n<body>\n  <div id=\"app\">Loading...</div>\n\n  <script src=\"/dist/vendor.js\"></script>\n  <script src=\"/dist/main.js\"></script>\n  {{#if hotreload}}\n  <script src=\"/hot-reload/script\"></script>\n  {{/if}}\n</body>\n</html>\n";
+exp['service-proxy/src/main/java/{packageDir}/{Service}.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=container.lambda, alias2=container.escapeExpression;
+
+  return "package "
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0))
+    + ";\n\nimport io.vertx.codegen.annotations.ProxyGen;\nimport io.vertx.codegen.annotations.VertxGen;\nimport io.vertx.core.Vertx;\nimport io.vertx.serviceproxy.ServiceProxyBuilder;\n\n/**\n * "
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0))
+    + " API.\n */\n@VertxGen\n@ProxyGen\npublic interface "
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0))
+    + " {\n\n  /**\n   * The default service address.\n   */\n  String DEFAULT_ADDRESS = \""
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0))
+    + ".service\";\n\n  /**\n    * Method called to create a proxy (to consume the service).\n    *\n    * @param vertx   vert.x\n    * @param address the address on the event bus where the service is served.\n    * @return the proxy\n    */\n  static "
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0))
+    + " createProxy(Vertx vertx, String address) {\n    return new ServiceProxyBuilder(vertx)\n      .setAddress(address)\n      .build("
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0))
+    + ".class);\n  }\n}\n";
 },"useData":true})
 exp['web+angular4/src/main/ts/app/app.module.browser.ts'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "import { NgModule } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\nimport { AppModuleShared } from './app.module.shared';\nimport { AppComponent } from './components/app/app.component';\n\n@NgModule({\n    bootstrap: [ AppComponent ],\n    imports: [\n        BrowserModule,\n        AppModuleShared\n    ],\n    providers: [\n        { provide: 'BASE_URL', useFactory: getBaseUrl }\n    ]\n})\nexport class AppModule {\n}\n\nexport function getBaseUrl() {\n    return document.getElementsByTagName('base')[0].href;\n}\n";
@@ -870,11 +716,148 @@ exp['web+angular4/src/main/ts/app/app.module.server.ts'] = Handlebars.template({
 exp['web+angular4/src/main/ts/app/app.module.shared.ts'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { FormsModule } from '@angular/forms';\nimport { HttpModule } from '@angular/http';\nimport { RouterModule } from '@angular/router';\n\nimport { AppComponent } from './components/app/app.component';\nimport { NavMenuComponent } from './components/navmenu/navmenu.component';\nimport { HomeComponent } from './components/home/home.component';\nimport { FetchDataComponent } from './components/fetchdata/fetchdata.component';\nimport { CounterComponent } from './components/counter/counter.component';\n\n@NgModule({\n    declarations: [\n        AppComponent,\n        NavMenuComponent,\n        CounterComponent,\n        FetchDataComponent,\n        HomeComponent\n    ],\n    imports: [\n        CommonModule,\n        HttpModule,\n        FormsModule,\n        RouterModule.forRoot([\n            { path: '', redirectTo: 'home', pathMatch: 'full' },\n            { path: 'home', component: HomeComponent },\n            { path: 'counter', component: CounterComponent },\n            { path: 'fetch-data', component: FetchDataComponent },\n            { path: '**', redirectTo: 'home' }\n        ])\n    ]\n})\nexport class AppModuleShared {\n}\n";
 },"useData":true})
+exp['sbt/src/main/scala/{packageDir}/MainVerticle.scala'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "package "
+    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0))
+    + "\n\nimport io.vertx.lang.scala.ScalaVerticle\n\nclass MainVerticle extends ScalaVerticle {\n\n  override def start(): Unit = {\n    // your code goes here...\n    vertx\n      .createHttpServer()\n      .requestHandler(_.response()\n        .putHeader(\"content-type\", \"text/plain\")\n        .end(\"Hello from Vert.x!\"))\n      .listenFuture(8080, \"0.0.0.0\")\n        .map(_ => ())\n  }\n}\n";
+},"useData":true})
+exp['verticle/src/main/java/{packageDir}/MainVerticle.java'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
+    return "import io.vertx.core.Vertx;\n";
+},"3":function(container,depth0,helpers,partials,data) {
+    return "import io.vertx.core.AbstractVerticle;\n";
+},"5":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {});
+
+  return "import io.vertx.core.json.*;\n\nimport java.time.Instant;\nimport java.util.*;\n\nimport io.vertx.ext.web.Router;\nimport io.vertx.ext.web.handler.StaticHandler;\n"
+    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.dependenciesGAV : depth0)) != null ? stack1["io.vertx:vertx-web-templ-handlebars"] : stack1),{"name":"if","hash":{},"fn":container.program(6, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.dependenciesGAV : depth0)) != null ? stack1["xyz.jetdrone:hot-reload"] : stack1),{"name":"if","hash":{},"fn":container.program(8, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "\nimport static java.time.temporal.ChronoUnit.DAYS;\n";
+},"6":function(container,depth0,helpers,partials,data) {
+    return "import io.vertx.ext.web.templ.HandlebarsTemplateEngine;\n";
+},"8":function(container,depth0,helpers,partials,data) {
+    return "import xyz.jetdrone.vertx.hot.reload.HotReload;\n";
+},"10":function(container,depth0,helpers,partials,data) {
+    return " extends AbstractVerticle";
+},"12":function(container,depth0,helpers,partials,data) {
+    return "  public static void main(String[] args) {\n    final Vertx vertx = Vertx.vertx();\n    // your code goes here...\n  }\n";
+},"14":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {});
+
+  return "  @Override\n  public void start() {\n    // your code goes here...\n\n"
+    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.dependenciesGAV : depth0)) != null ? stack1["io.vertx:vertx-web"] : stack1),{"name":"if","hash":{},"fn":container.program(15, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "\n    vertx.createHttpServer().requestHandler("
+    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.dependenciesGAV : depth0)) != null ? stack1["io.vertx:vertx-web"] : stack1),{"name":"if","hash":{},"fn":container.program(28, data, 0),"inverse":container.program(30, data, 0),"data":data})) != null ? stack1 : "")
+    + ").listen(8080, res -> {\n      if (res.failed()) {\n        res.cause().printStackTrace();\n      } else {\n        System.out.println(\"Server listening at: http://localhost:8080/\");\n      }\n    });\n  }\n";
+},"15":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {});
+
+  return ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.dependenciesGAV : depth0)) != null ? stack1["io.vertx:vertx-web-templ-handlebars"] : stack1),{"name":"if","hash":{},"fn":container.program(16, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "    final Router router = Router.router(vertx);\n\n"
+    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.dependenciesGAV : depth0)) != null ? stack1["xyz.jetdrone:hot-reload"] : stack1),{"name":"if","hash":{},"fn":container.program(18, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "\n    router.get(\"/\").handler(ctx -> {\n"
+    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.dependenciesGAV : depth0)) != null ? stack1["io.vertx:vertx-web-templ-handlebars"] : stack1),{"name":"if","hash":{},"fn":container.program(20, data, 0),"inverse":container.program(22, data, 0),"data":data})) != null ? stack1 : "")
+    + "    });\n\n    // the example weather API\n    List<String> SUMMARIES = Arrays.asList(\"Freezing\", \"Bracing\", \"Chilly\", \"Cool\", \"Mild\", \"Warm\", \"Balmy\", \"Hot\", \"Sweltering\", \"Scorching\");\n\n    router.get(\"/api/weather-forecasts\").handler(ctx -> {\n      final JsonArray response = new JsonArray();\n      final Instant now = Instant.now();\n      final Random rnd = new Random();\n\n      for (int i = 1; i <= 5; i++) {\n        JsonObject forecast = new JsonObject()\n          .put(\"dateFormatted\", now.plus(i, DAYS))\n          .put(\"temperatureC\", -20 + rnd.nextInt(35))\n          .put(\"summary\", SUMMARIES.get(rnd.nextInt(SUMMARIES.size())));\n\n        forecast.put(\"temperatureF\", 32 + (int) (forecast.getInteger(\"temperatureC\") / 0.5556));\n\n        response.add(forecast);\n      }\n\n      ctx.response()\n        .putHeader(\"Content-Type\", \"application/json\")\n        .end(response.encode());\n    });\n\n    // Serve the static resources\n    router.route().handler("
+    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.dependenciesGAV : depth0)) != null ? stack1["xyz.jetdrone:hot-reload"] : stack1),{"name":"if","hash":{},"fn":container.program(24, data, 0),"inverse":container.program(26, data, 0),"data":data})) != null ? stack1 : "")
+    + ");\n";
+},"16":function(container,depth0,helpers,partials,data) {
+    return "    final HandlebarsTemplateEngine engine = HandlebarsTemplateEngine.create();\n";
+},"18":function(container,depth0,helpers,partials,data) {
+    return "    // development hot reload\n    router.get().handler(HotReload.create());\n";
+},"20":function(container,depth0,helpers,partials,data) {
+    return "      // we define a hardcoded title for our application\n      ctx.put(\"title\", \"Home Page\");\n      ctx.put(\"hotreload\", System.getenv(\"VERTX_HOT_RELOAD\"));\n\n      engine.render(ctx, \"templates\", \"/index.hbs\", res -> {\n        if (res.succeeded()) {\n          ctx.response().end(res.result());\n        } else {\n          ctx.fail(res.cause());\n        }\n      });\n";
+},"22":function(container,depth0,helpers,partials,data) {
+    return "      ctx.response()\n        .putHeader(\"content-type\", \"text/plain\")\n        .end(\"Hello from Vert.x!\");\n";
+},"24":function(container,depth0,helpers,partials,data) {
+    return "HotReload.createStaticHandler()";
+},"26":function(container,depth0,helpers,partials,data) {
+    return "StaticHandler.create()";
+},"28":function(container,depth0,helpers,partials,data) {
+    return "router::accept";
+},"30":function(container,depth0,helpers,partials,data) {
+    return "req -> {\n      req.response()\n        .putHeader(\"content-type\", \"text/plain\")\n        .end(\"Hello from Vert.x!\");\n    }";
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {});
+
+  return "package "
+    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0))
+    + ";\n\n"
+    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.graalNativeImage : stack1),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.program(3, data, 0),"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.dependenciesGAV : depth0)) != null ? stack1["io.vertx:vertx-web"] : stack1),{"name":"if","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "\npublic class MainVerticle"
+    + ((stack1 = helpers.unless.call(alias1,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.graalNativeImage : stack1),{"name":"unless","hash":{},"fn":container.program(10, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + " {\n\n"
+    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.graalNativeImage : stack1),{"name":"if","hash":{},"fn":container.program(12, data, 0),"inverse":container.program(14, data, 0),"data":data})) != null ? stack1 : "")
+    + "}\n";
+},"useData":true})
+exp['verticle/src/main/kotlin/{packageDir}/MainVerticle.kt'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {});
+
+  return "import java.time.Instant\nimport java.time.temporal.ChronoUnit.DAYS\nimport java.util.*\n\nimport io.vertx.kotlin.core.json.array\nimport io.vertx.kotlin.core.json.json\nimport io.vertx.kotlin.core.json.obj\n\nimport io.vertx.ext.web.Router\nimport io.vertx.ext.web.handler.StaticHandler\n"
+    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.dependenciesGAV : depth0)) != null ? stack1["io.vertx:vertx-web-templ-handlebars"] : stack1),{"name":"if","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.dependenciesGAV : depth0)) != null ? stack1["xyz.jetdrone:hot-reload"] : stack1),{"name":"if","hash":{},"fn":container.program(4, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
+},"2":function(container,depth0,helpers,partials,data) {
+    return "import io.vertx.ext.web.templ.HandlebarsTemplateEngine\n";
+},"4":function(container,depth0,helpers,partials,data) {
+    return "import xyz.jetdrone.vertx.hot.reload.HotReload\n";
+},"6":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {});
+
+  return ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.dependenciesGAV : depth0)) != null ? stack1["io.vertx:vertx-web-templ-handlebars"] : stack1),{"name":"if","hash":{},"fn":container.program(7, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "    var router = Router.router(vertx)\n\n"
+    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.dependenciesGAV : depth0)) != null ? stack1["xyz.jetdrone:hot-reload"] : stack1),{"name":"if","hash":{},"fn":container.program(9, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "\n    router.get(\"/\").handler({ ctx ->\n"
+    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.dependenciesGAV : depth0)) != null ? stack1["io.vertx:vertx-web-templ-handlebars"] : stack1),{"name":"if","hash":{},"fn":container.program(11, data, 0),"inverse":container.program(13, data, 0),"data":data})) != null ? stack1 : "")
+    + "    })\n\n    // the example weather API\n    var SUMMARIES = listOf(\"Freezing\", \"Bracing\", \"Chilly\", \"Cool\", \"Mild\", \"Warm\", \"Balmy\", \"Hot\", \"Sweltering\", \"Scorching\")\n\n    router.get(\"/api/weather-forecasts\").handler({ ctx ->\n      var response = json {\n        array()\n      }\n\n      var now = Instant.now()\n      var rnd = Random()\n\n      for (i in 1..5) {\n        var forecast = json {\n          obj(\n            \"dateFormatted\" to now.plus(i.toLong(), DAYS),\n            \"temperatureC\" to -20 + rnd.nextInt(35),\n            \"summary\" to SUMMARIES[rnd.nextInt(SUMMARIES.size)]\n          )\n        }\n\n        forecast.put(\"temperatureF\", 32 + (forecast.getInteger(\"temperatureC\") / 0.5556))\n\n        response.add(forecast)\n      }\n\n      ctx.response()\n        .putHeader(\"Content-Type\", \"application/json\")\n        .end(response.toString())\n    })\n\n    // Serve the static resources\n    router.route().handler("
+    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.dependenciesGAV : depth0)) != null ? stack1["xyz.jetdrone:hot-reload"] : stack1),{"name":"if","hash":{},"fn":container.program(15, data, 0),"inverse":container.program(17, data, 0),"data":data})) != null ? stack1 : "")
+    + ")\n";
+},"7":function(container,depth0,helpers,partials,data) {
+    return "    var engine = HandlebarsTemplateEngine.create()\n";
+},"9":function(container,depth0,helpers,partials,data) {
+    return "    // development hot reload\n    router.get().handler(HotReload.create())\n";
+},"11":function(container,depth0,helpers,partials,data) {
+    return "      // we define a hardcoded title for our application\n      ctx.put(\"title\", \"Home Page\")\n      ctx.put(\"hotreload\", System.getenv(\"VERTX_HOT_RELOAD\"))\n\n      engine.render(ctx, \"templates\", \"/index.hbs\", { res ->\n        if (res.succeeded()) {\n          ctx.response().end(res.result())\n        } else {\n          ctx.fail(res.cause())\n        }\n      })\n";
+},"13":function(container,depth0,helpers,partials,data) {
+    return "      ctx.response()\n        .putHeader(\"content-type\", \"text/plain\")\n        .end(\"Hello from Vert.x!\")\n";
+},"15":function(container,depth0,helpers,partials,data) {
+    return "HotReload.createStaticHandler()";
+},"17":function(container,depth0,helpers,partials,data) {
+    return "StaticHandler.create()";
+},"19":function(container,depth0,helpers,partials,data) {
+    return "router::accept";
+},"21":function(container,depth0,helpers,partials,data) {
+    return "{ req ->\n      req.response()\n        .putHeader(\"content-type\", \"text/plain\")\n        .end(\"Hello from Vert.x!\")\n    }";
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {});
+
+  return "package "
+    + container.escapeExpression(container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0))
+    + "\n\nimport io.vertx.core.AbstractVerticle\n\n"
+    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.dependenciesGAV : depth0)) != null ? stack1["io.vertx:vertx-web"] : stack1),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "\nclass MainVerticle : AbstractVerticle() {\n\n  override fun start() {\n    // your code goes here...\n\n"
+    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.dependenciesGAV : depth0)) != null ? stack1["io.vertx:vertx-web"] : stack1),{"name":"if","hash":{},"fn":container.program(6, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "\n    vertx.createHttpServer().requestHandler("
+    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.dependenciesGAV : depth0)) != null ? stack1["io.vertx:vertx-web"] : stack1),{"name":"if","hash":{},"fn":container.program(19, data, 0),"inverse":container.program(21, data, 0),"data":data})) != null ? stack1 : "")
+    + ").listen(8080, { res ->\n      if (res.failed()) {\n        res.cause().printStackTrace()\n      } else {\n        System.out.println(\"Server listening at: http://localhost:8080/\")\n      }\n    })\n  }\n}\n";
+},"useData":true})
 exp['web+knockout/src/main/js/css/site.css'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return ".main-nav li .glyphicon {\n    margin-right: 10px;\n}\n\n/* Highlighting rules for nav menu items */\n.main-nav li a.active,\n.main-nav li a.active:hover,\n.main-nav li a.active:focus {\n    background-color: #4189C7;\n    color: white;\n}\n\n/* Keep the nav menu independent of scrolling and on top of other items */\n.main-nav {\n    position: fixed;\n    top: 0;\n    left: 0;\n    right: 0;\n    z-index: 1;\n}\n\n@media (max-width: 767px) {\n    /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */\n    body {\n        padding-top: 50px;\n    }\n}\n\n@media (min-width: 768px) {\n    /* On small screens, convert the nav menu to a vertical sidebar */\n    .main-nav {\n        height: 100%;\n        width: calc(25% - 20px);\n    }\n    .main-nav .navbar {\n        border-radius: 0px;\n        border-width: 0px;\n        height: 100%;\n    }\n    .main-nav .navbar-header {\n        float: none;\n    }\n    .main-nav .navbar-collapse {\n        border-top: 1px solid #444;\n        padding: 0px;\n    }\n    .main-nav .navbar ul {\n        float: none;\n    }\n    .main-nav .navbar li {\n        float: none;\n        font-size: 15px;\n        margin: 6px;\n    }\n    .main-nav .navbar li a {\n        padding: 10px 16px;\n        border-radius: 4px;\n    }\n    .main-nav .navbar a {\n        /* If a menu item's text is too long, truncate it */\n        width: 100%;\n        white-space: nowrap;\n        overflow: hidden;\n        text-overflow: ellipsis;\n    }\n}\n";
 },"useData":true})
+exp['verticle/src/main/resources/templates/index.hbs'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<!DOCTYPE html>\n<html>\n<head>\n  <meta charset=\"utf-8\"/>\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"/>\n  <title>{{ title }}</title>\n  <base href=\"/\"/>\n\n  <link rel=\"stylesheet\" href=\"/dist/vendor.css\"/>\n</head>\n<body>\n  <div id=\"app\">Loading...</div>\n\n  <script src=\"/dist/vendor.js\"></script>\n  <script src=\"/dist/main.js\"></script>\n  {{#if hotreload}}\n  <script src=\"/hot-reload/script\"></script>\n  {{/if}}\n</body>\n</html>\n";
+},"useData":true})
 exp['web+knockout/src/main/resources/templates/index.hbs'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "<!DOCTYPE html>\n<html>\n<head>\n  <meta charset=\"utf-8\" />\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />\n  <title>{{ title }}</title>\n  <base href=\"/\" />\n\n  <link rel=\"stylesheet\" href=\"/dist/vendor.css\"/>\n</head>\n<body>\n\n  <app-root params=\"history: history, basename: basename\"></app-root>\n\n  <script src=\"/dist/vendor.js\"></script>\n  <script src=\"/dist/main.js\"></script>\n</body>\n</html>\n";
+},"useData":true})
+exp['web+mongo/src/main/java/{packageDir}/MainVerticle.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=container.lambda, alias2=container.escapeExpression;
+
+  return "package "
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0))
+    + ";\n\nimport io.vertx.core.AbstractVerticle;\nimport io.vertx.core.http.HttpHeaders;\nimport io.vertx.core.json.JsonArray;\nimport io.vertx.core.json.JsonObject;\nimport io.vertx.ext.mongo.MongoClient;\nimport io.vertx.ext.web.Router;\nimport io.vertx.ext.web.handler.BodyHandler;\nimport io.vertx.ext.web.handler.StaticHandler;\nimport io.vertx.ext.web.templ.JadeTemplateEngine;\n\n/**\n * This is an example application to showcase the usage of MongDB and Vert.x Web.\n *\n * In this application you will see the usage of:\n *\n *  * JADE templates\n *  * Mongo Client\n *  * Vert.x Web\n *\n * The application allows to list, create and delete mongo documents using a simple web interface.\n *\n */\npublic class "
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.className : stack1), depth0))
+    + " extends AbstractVerticle {\n\n  @Override\n  public void start() throws Exception {\n\n    // Create a mongo client using all defaults (connect to localhost and default port) using the database name \"demo\".\n    final MongoClient mongo = MongoClient.createShared(vertx, new JsonObject().put(\"db_name\", \"demo\"));\n\n    // In order to use a JADE template we first need to create an engine\n    final JadeTemplateEngine jade = JadeTemplateEngine.create();\n\n    // To simplify the development of the web components we use a Router to route all HTTP requests\n    // to organize our code in a reusable way.\n    final Router router = Router.router(vertx);\n\n    // Enable the body parser to we can get the form data and json documents in out context.\n    router.route().handler(BodyHandler.create());\n\n    // Entry point to the application, this will render a custom JADE template.\n    router.get(\"/\").handler(ctx -> {\n      // we define a hardcoded title for our application\n      ctx.put(\"title\", \"Vert.x Web\");\n\n      // and now delegate to the engine to render it.\n      jade.render(ctx, \"templates/index\", res -> {\n        if (res.succeeded()) {\n          ctx.response().putHeader(HttpHeaders.CONTENT_TYPE, \"text/html\").end(res.result());\n        } else {\n          ctx.fail(res.cause());\n        }\n      });\n    });\n\n    // and now we mount the handlers in their appropriate routes\n\n    // Read all users from the mongo collection.\n    router.get(\"/users\").handler(ctx -> {\n      // issue a find command to mongo to fetch all documents from the \"users\" collection.\n      mongo.find(\"users\", new JsonObject(), lookup -> {\n        // error handling\n        if (lookup.failed()) {\n          ctx.fail(lookup.cause());\n          return;\n        }\n\n        // now convert the list to a JsonArray because it will be easier to encode the final object as the response.\n        final JsonArray json = new JsonArray();\n        for (JsonObject o : lookup.result()) {\n          json.add(o);\n        }\n\n        // since we are producing json we should inform the browser of the correct content type.\n        ctx.response().putHeader(HttpHeaders.CONTENT_TYPE, \"application/json\");\n        // encode to json string\n        ctx.response().end(json.encode());\n      });\n    });\n\n    // Create a new document on mongo.\n    router.post(\"/users\").handler(ctx -> {\n      // since jquery is sending data in multipart-form format to avoid preflight calls, we need to convert it to JSON.\n      JsonObject user = new JsonObject()\n              .put(\"username\", ctx.request().getFormAttribute(\"username\"))\n              .put(\"email\", ctx.request().getFormAttribute(\"email\"))\n              .put(\"fullname\", ctx.request().getFormAttribute(\"fullname\"))\n              .put(\"location\", ctx.request().getFormAttribute(\"location\"))\n              .put(\"age\", ctx.request().getFormAttribute(\"age\"))\n              .put(\"gender\", ctx.request().getFormAttribute(\"gender\"));\n\n      // insert into mongo\n      mongo.insert(\"users\", user, lookup -> {\n        // error handling\n        if (lookup.failed()) {\n          ctx.fail(lookup.cause());\n          return;\n        }\n\n        // inform that the document was created\n        ctx.response().setStatusCode(201);\n        ctx.response().end();\n      });\n    });\n\n    // Remove a document from mongo.\n    router.delete(\"/users/:id\").handler(ctx -> {\n      // catch the id to remove from the url /users/:id and transform it to a mongo query.\n      mongo.removeOne(\"users\", new JsonObject().put(\"_id\", ctx.request().getParam(\"id\")), lookup -> {\n        // error handling\n        if (lookup.failed()) {\n          ctx.fail(lookup.cause());\n          return;\n        }\n\n        // inform the browser that there is nothing to return.\n        ctx.response().setStatusCode(204);\n        ctx.response().end();\n      });\n    });\n\n    // Serve the non private static pages\n    router.route().handler(StaticHandler.create());\n\n    // start a HTTP web server on port 8080\n    vertx.createHttpServer().requestHandler(router::accept).listen(8080);\n  }\n}\n";
 },"useData":true})
 exp['web+mongo/src/main/resources/templates/index.jade'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "extends layout\n\nblock content\n    h1= context.title\n    p Welcome to our test\n\n    #wrapper\n        #userInfo\n            h2 User Info\n            p\n                strong Name:\n                |  <span id='userInfoName'></span>\n                br\n                strong Age:\n                |  <span id='userInfoAge'></span>\n                br\n                strong Gender:\n                |  <span id='userInfoGender'></span>\n                br\n                strong Location:\n                |  <span id='userInfoLocation'></span>\n\n        h2 User List\n        #userList\n            table\n                thead\n                    th UserName\n                    th Email\n                    th Delete?\n                tbody\n\n        h2 Add User\n        #addUser\n            fieldset\n                input#inputUserName(type='text', placeholder='Username')\n                input#inputUserEmail(type='text', placeholder='Email')\n                br\n                input#inputUserFullname(type='text', placeholder='Full Name')\n                input#inputUserAge(type='text', placeholder='Age')\n                br\n                input#inputUserLocation(type='text', placeholder='Location')\n                input#inputUserGender(type='text', placeholder='gender')\n                br\n                button#btnAddUser Add User\n";
@@ -948,6 +931,23 @@ exp['web+react-redux/src/main/js/store/index.js'] = Handlebars.template({"compil
 exp['web+vue/src/main/js/css/site.css'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "@media (max-width: 767px) {\n    /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */\n    body {\n        padding-top: 50px;\n    }\n}";
 },"useData":true})
+exp['service-proxy/src/main/java/{packageDir}/impl/{Service}Impl.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=container.lambda, alias2=container.escapeExpression;
+
+  return "package "
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0))
+    + ".impl;\n\nimport "
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0))
+    + "."
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0))
+    + ";\n\nimport io.vertx.core.Vertx;\nimport io.vertx.core.json.JsonObject;\n\npublic class "
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0))
+    + "Impl implements "
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0))
+    + " {\n\n  public "
+    + alias2(alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0))
+    + "Impl(Vertx vertx, JsonObject config) {\n    // initialization...\n  }\n\n  // TODO: Implement your service here...\n\n  public void close() {\n    // clean up...\n  }\n}\n";
+},"useData":true})
 exp['web+knockout/src/main/js/components/app-root/app-root.html'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "<div class='container-fluid'>\n    <div class='row'>\n        <div class='col-sm-3'>\n            <nav-menu params='router: router'></nav-menu>\n        </div>\n        <div class='col-sm-9' data-bind='component: { name: route().page, params: route }'></div>\n    </div>\n</div>\n";
 },"useData":true})
@@ -996,26 +996,20 @@ exp['web+vue/src/main/js/components/counter/counter.js'] = Handlebars.template({
 exp['web+vue/src/main/js/components/counter/counter.vue.html'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "<template>\n    <div>\n        <h1>Counter</h1>\n\n        <p>This is a simple example of a Vue.js component.</p>\n\n        <p>Current count: <strong>{{ currentcount }}</strong></p>\n\n        <button @click=\"incrementCounter\">Increment</button>\n    </div>\n</template>\n\n<script src=\"./counter.js\"></script>\n";
 },"useData":true})
+exp['web+vue/src/main/js/components/home/home.vue.html'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<template>\n    <div>\n        <h1>Hello, world!</h1>\n        <p>Welcome to your new single-page application, built with:</p>\n        <ul>\n            <li><a href=\"http://vertx.io/\">Vert.x</a> for polyglot server-side code</li>\n            <li><a href=\"https://vuejs.org/\">Vue.js</a> for client-side code</li>\n            <li><a href=\"https://webpack.github.io/\">Webpack</a> for building and bundling client-side resources</li>\n            <li><a href=\"http://getbootstrap.com/\">Bootstrap</a> for layout and styling</li>\n        </ul>\n        <p>To help you get started, we've also set up:</p>\n        <ul>\n            <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.</li>\n            <li><strong>Webpack dev middleware</strong>. In development mode, there's no need to run the <code>webpack</code> build tool. Your client-side resources are dynamically built on demand. Updates are available as soon as you modify any file.</li>\n            <li><strong>Hot module replacement</strong>. In development mode, you don't even need to reload the page after making most changes. Within seconds of saving changes to files, your Vue app will be rebuilt and a new instance injected is into the page.</li>\n            <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and the <code>webpack</code> build tool produces minified static CSS and JavaScript files.</li>\n        </ul>\n    </div>\n</template>\n";
+},"useData":true})
 exp['web+vue/src/main/js/components/fetchdata/fetchdata.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "import Vue from 'vue';\nimport { Component } from 'vue-property-decorator';\n\n@Component\nexport default class FetchDataComponent extends Vue {\n  forecasts = [];\n\n  mounted() {\n    fetch('api/weather-forecasts')\n      .then(response => response.json())\n      .then(data => {\n        this.forecasts = data;\n      });\n  }\n}\n";
 },"useData":true})
 exp['web+vue/src/main/js/components/fetchdata/fetchdata.vue.html'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "<template>\n    <div>\n        <h1>Weather forecast</h1>\n\n        <p>This component demonstrates fetching data from the server.</p>\n\n        <table v-if=\"forecasts.length\" class=\"table\">\n            <thead>\n                <tr>\n                    <th>Date</th>\n                    <th>Temp. (C)</th>\n                    <th>Temp. (F)</th>\n                    <th>Summary</th>\n                </tr>\n            </thead>\n            <tbody>\n                <tr v-for=\"item in forecasts\">\n                    <td>{{ item.dateFormatted }}</td>\n                    <td>{{ item.temperatureC }}</td>\n                    <td>{{ item.temperatureF }}</td>\n                    <td>{{ item.summary }}</td>\n                </tr>\n            </tbody>\n        </table>\n\n        <p v-else><em>Loading...</em></p>\n    </div>\n</template>\n\n<script src=\"./fetchdata.js\"></script>\n";
 },"useData":true})
-exp['web+vue/src/main/js/components/home/home.vue.html'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<template>\n    <div>\n        <h1>Hello, world!</h1>\n        <p>Welcome to your new single-page application, built with:</p>\n        <ul>\n            <li><a href=\"http://vertx.io/\">Vert.x</a> for polyglot server-side code</li>\n            <li><a href=\"https://vuejs.org/\">Vue.js</a> for client-side code</li>\n            <li><a href=\"https://webpack.github.io/\">Webpack</a> for building and bundling client-side resources</li>\n            <li><a href=\"http://getbootstrap.com/\">Bootstrap</a> for layout and styling</li>\n        </ul>\n        <p>To help you get started, we've also set up:</p>\n        <ul>\n            <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.</li>\n            <li><strong>Webpack dev middleware</strong>. In development mode, there's no need to run the <code>webpack</code> build tool. Your client-side resources are dynamically built on demand. Updates are available as soon as you modify any file.</li>\n            <li><strong>Hot module replacement</strong>. In development mode, you don't even need to reload the page after making most changes. Within seconds of saving changes to files, your Vue app will be rebuilt and a new instance injected is into the page.</li>\n            <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and the <code>webpack</code> build tool produces minified static CSS and JavaScript files.</li>\n        </ul>\n    </div>\n</template>\n";
-},"useData":true})
 exp['web+vue/src/main/js/components/navmenu/navmenu.css'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return ".main-nav li .glyphicon {\n    margin-right: 10px;\n}\n\n/* Highlighting rules for nav menu items */\n.main-nav li a.router-link-active,\n.main-nav li a.router-link-active:hover,\n.main-nav li a.router-link-active:focus {\n    background-color: #4189C7;\n    color: white;\n}\n\n/* Keep the nav menu independent of scrolling and on top of other items */\n.main-nav {\n    position: fixed;\n    top: 0;\n    left: 0;\n    right: 0;\n    z-index: 1;\n}\n\n@media (min-width: 768px) {\n    /* On small screens, convert the nav menu to a vertical sidebar */\n    .main-nav {\n        height: 100%;\n        width: calc(25% - 20px);\n    }\n    .main-nav .navbar {\n        border-radius: 0px;\n        border-width: 0px;\n        height: 100%;\n    }\n    .main-nav .navbar-header {\n        float: none;\n    }\n    .main-nav .navbar-collapse {\n        border-top: 1px solid #444;\n        padding: 0px;\n    }\n    .main-nav .navbar ul {\n        float: none;\n    }\n    .main-nav .navbar li {\n        float: none;\n        font-size: 15px;\n        margin: 6px;\n    }\n    .main-nav .navbar li a {\n        padding: 10px 16px;\n        border-radius: 4px;\n    }\n    .main-nav .navbar a {\n        /* If a menu item's text is too long, truncate it */\n        width: 100%;\n        white-space: nowrap;\n        overflow: hidden;\n        text-overflow: ellipsis;\n    }\n}\n";
 },"useData":true})
 exp['web+vue/src/main/js/components/navmenu/navmenu.vue.html'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "<template>\n    <div class=\"main-nav\">\n        <div class=\"navbar navbar-inverse\">\n            <div class=\"navbar-header\">\n                <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".navbar-collapse\">\n                    <span class=\"sr-only\">Toggle navigation</span>\n                    <span class=\"icon-bar\"></span>\n                    <span class=\"icon-bar\"></span>\n                    <span class=\"icon-bar\"></span>\n                </button>\n                <a class=\"navbar-brand\" href=\"/\">WebApplicationBasic</a>\n            </div>\n            <div class=\"clearfix\"></div>\n            <div class=\"navbar-collapse collapse\">\n                <ul class=\"nav navbar-nav\">\n                    <li>\n                        <router-link to=\"/\" :exact=\"true\">\n                            <span class=\"glyphicon glyphicon-home\"></span> Home\n                        </router-link>\n                    </li>\n                    <li>\n                        <router-link to=\"/counter\">\n                            <span class=\"glyphicon glyphicon-education\"></span> Counter\n                        </router-link>\n                    </li>\n                    <li>\n                        <router-link to=\"/fetchdata\">\n                            <span class=\"glyphicon glyphicon-th-list\"></span> Fetch data\n                        </router-link>\n                    </li>\n                </ul>\n            </div>\n        </div>\n    </div>\n</template>\n\n<style src=\"./navmenu.css\" />\n";
-},"useData":true})
-exp['web+angular4/src/main/ts/app/components/fetchdata/fetchdata.component.html'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<h1>Weather forecast</h1>\n\n<p>This component demonstrates fetching data from the server.</p>\n\n<p *ngIf=\"!forecasts\"><em>Loading...</em></p>\n\n<table class='table' *ngIf=\"forecasts\">\n    <thead>\n        <tr>\n            <th>Date</th>\n            <th>Temp. (C)</th>\n            <th>Temp. (F)</th>\n            <th>Summary</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr *ngFor=\"let forecast of forecasts\">\n            <td>{{ forecast.dateFormatted }}</td>\n            <td>{{ forecast.temperatureC }}</td>\n            <td>{{ forecast.temperatureF }}</td>\n            <td>{{ forecast.summary }}</td>\n        </tr>\n    </tbody>\n</table>\n";
-},"useData":true})
-exp['web+angular4/src/main/ts/app/components/fetchdata/fetchdata.component.ts'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "import { Component, Inject } from '@angular/core';\nimport { Http } from '@angular/http';\n\n@Component({\n    selector: 'fetchdata',\n    templateUrl: './fetchdata.component.html'\n})\nexport class FetchDataComponent {\n    public forecasts: WeatherForecast[];\n\n    constructor(http: Http, @Inject('BASE_URL') baseUrl: string) {\n        http.get(baseUrl + 'api/weather-forecasts').subscribe(result => {\n            this.forecasts = result.json() as WeatherForecast[];\n        }, error => console.error(error));\n    }\n}\n\ninterface WeatherForecast {\n    dateFormatted: string;\n    temperatureC: number;\n    temperatureF: number;\n    summary: string;\n}\n";
 },"useData":true})
 exp['web+angular4/src/main/ts/app/components/app/app.component.css'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "@media (max-width: 767px) {\n    /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */\n    .body-content {\n        padding-top: 50px;\n    }\n}\n";
@@ -1035,6 +1029,12 @@ exp['web+angular4/src/main/ts/app/components/counter/counter.component.spec.ts']
 exp['web+angular4/src/main/ts/app/components/counter/counter.component.ts'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "import { Component } from '@angular/core';\n\n@Component({\n    selector: 'counter',\n    templateUrl: './counter.component.html'\n})\nexport class CounterComponent {\n    public currentCount = 0;\n\n    public incrementCounter() {\n        this.currentCount++;\n    }\n}\n";
 },"useData":true})
+exp['web+angular4/src/main/ts/app/components/fetchdata/fetchdata.component.html'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<h1>Weather forecast</h1>\n\n<p>This component demonstrates fetching data from the server.</p>\n\n<p *ngIf=\"!forecasts\"><em>Loading...</em></p>\n\n<table class='table' *ngIf=\"forecasts\">\n    <thead>\n        <tr>\n            <th>Date</th>\n            <th>Temp. (C)</th>\n            <th>Temp. (F)</th>\n            <th>Summary</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr *ngFor=\"let forecast of forecasts\">\n            <td>{{ forecast.dateFormatted }}</td>\n            <td>{{ forecast.temperatureC }}</td>\n            <td>{{ forecast.temperatureF }}</td>\n            <td>{{ forecast.summary }}</td>\n        </tr>\n    </tbody>\n</table>\n";
+},"useData":true})
+exp['web+angular4/src/main/ts/app/components/fetchdata/fetchdata.component.ts'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "import { Component, Inject } from '@angular/core';\nimport { Http } from '@angular/http';\n\n@Component({\n    selector: 'fetchdata',\n    templateUrl: './fetchdata.component.html'\n})\nexport class FetchDataComponent {\n    public forecasts: WeatherForecast[];\n\n    constructor(http: Http, @Inject('BASE_URL') baseUrl: string) {\n        http.get(baseUrl + 'api/weather-forecasts').subscribe(result => {\n            this.forecasts = result.json() as WeatherForecast[];\n        }, error => console.error(error));\n    }\n}\n\ninterface WeatherForecast {\n    dateFormatted: string;\n    temperatureC: number;\n    temperatureF: number;\n    summary: string;\n}\n";
+},"useData":true})
 exp['web+angular4/src/main/ts/app/components/home/home.component.html'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "<h1>Hello, world!</h1>\n<p>Welcome to your new single-page application, built with:</p>\n<ul>\n  <li><a href='http://vertx.io/'>Vert.x</a> for polyglot server-side code</li>\n  <li><a href='https://angular.io/'>Angular</a> and <a href='http://www.typescriptlang.org/'>TypeScript</a> for\n    client-side code\n  </li>\n  <li><a href='https://webpack.github.io/'>Webpack</a> for building and bundling client-side resources</li>\n  <li><a href='http://getbootstrap.com/'>Bootstrap</a> for layout and styling</li>\n</ul>\n<p>To help you get started, we've also set up:</p>\n<ul>\n  <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.\n  </li>\n  <li><strong>TODO: Server-side prerendering</strong>. For faster initial loading and improved SEO, your Angular app is\n    prerendered on the server. The resulting HTML is then transferred to the browser where a client-side copy of the app\n    takes over.\n  </li>\n  <li><strong>Webpack dev middleware</strong>. In development mode, there's no need to run the <code>webpack</code>\n    build tool. Your client-side resources are dynamically built on demand. Updates are available as soon as you modify\n    any file.\n  </li>\n  <li><strong>Hot module replacement</strong>. In development mode, you don't even need to reload the page after making\n    most changes. Within seconds of saving changes to files, your Angular app will be rebuilt and a new instance\n    injected is into the page.\n  </li>\n  <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and the\n    <code>webpack</code> build tool produces minified static CSS and JavaScript files.\n  </li>\n</ul>\n";
 },"useData":true})
@@ -1050,12 +1050,6 @@ exp['web+angular4/src/main/ts/app/components/navmenu/navmenu.component.html'] = 
 exp['web+angular4/src/main/ts/app/components/navmenu/navmenu.component.ts'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "import { Component } from '@angular/core';\n\n@Component({\n    selector: 'nav-menu',\n    templateUrl: './navmenu.component.html',\n    styleUrls: ['./navmenu.component.css']\n})\nexport class NavMenuComponent {\n}\n";
 },"useData":true})
-exp['web+aurelia/src/main/js/app/components/counter/counter.html'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<template>\n    <h1>Counter</h1>\n\n    <p>This is a simple example of an Aurelia component.</p>\n\n    <p>Current count: <strong>${currentCount}</strong></p>\n\n    <button click.delegate=\"incrementCounter()\">Increment</button>\n</template>\n";
-},"useData":true})
-exp['web+aurelia/src/main/js/app/components/counter/counter.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "export class Counter {\n    currentCount = 0;\n\n    incrementCounter() {\n        this.currentCount++;\n    }\n}\n";
-},"useData":true})
 exp['web+aurelia/src/main/js/app/components/app/app.css'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "@media (max-width: 767px) {\n    /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */\n    .body-content {\n        padding-top: 50px;\n    }\n}\n";
 },"useData":true})
@@ -1064,6 +1058,12 @@ exp['web+aurelia/src/main/js/app/components/app/app.html'] = Handlebars.template
 },"useData":true})
 exp['web+aurelia/src/main/js/app/components/app/app.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "import { PLATFORM } from 'aurelia-framework';\n\nexport class App {\n    configureRouter(config, router) {\n        config.title = 'Aurelia';\n        config.map([{\n            route: [ '', 'home' ],\n            name: 'home',\n            settings: { icon: 'home' },\n            moduleId: PLATFORM.moduleName('../home/home'),\n            nav: true,\n            title: 'Home'\n        }, {\n            route: 'counter',\n            name: 'counter',\n            settings: { icon: 'education' },\n            moduleId: PLATFORM.moduleName('../counter/counter'),\n            nav: true,\n            title: 'Counter'\n        }, {\n            route: 'fetch-data',\n            name: 'fetchdata',\n            settings: { icon: 'th-list' },\n            moduleId: PLATFORM.moduleName('../fetchdata/fetchdata'),\n            nav: true,\n            title: 'Fetch data'\n        }]);\n\n        this.router = router;\n    }\n}\n";
+},"useData":true})
+exp['web+aurelia/src/main/js/app/components/counter/counter.html'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<template>\n    <h1>Counter</h1>\n\n    <p>This is a simple example of an Aurelia component.</p>\n\n    <p>Current count: <strong>${currentCount}</strong></p>\n\n    <button click.delegate=\"incrementCounter()\">Increment</button>\n</template>\n";
+},"useData":true})
+exp['web+aurelia/src/main/js/app/components/counter/counter.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "export class Counter {\n    currentCount = 0;\n\n    incrementCounter() {\n        this.currentCount++;\n    }\n}\n";
 },"useData":true})
 exp['web+aurelia/src/main/js/app/components/fetchdata/fetchdata.html'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "<template>\n    <h1>Weather forecast</h1>\n\n    <p>This component demonstrates fetching data from the server.</p>\n\n    <p if.bind=\"!forecasts\"><em>Loading...</em></p>\n\n    <table if.bind=\"forecasts\" class=\"table\">\n        <thead>\n            <tr>\n                <th>Date</th>\n                <th>Temp. (C)</th>\n                <th>Temp. (F)</th>\n                <th>Summary</th>\n            </tr>\n        </thead>\n        <tbody>\n            <tr repeat.for=\"forecast of forecasts\">\n                <td>${ forecast.dateFormatted }</td>\n                <td>${ forecast.temperatureC }</td>\n                <td>${ forecast.temperatureF }</td>\n                <td>${ forecast.summary }</td>\n            </tr>\n        </tbody>\n    </table>\n</template>\n";

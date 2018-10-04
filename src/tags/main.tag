@@ -414,6 +414,8 @@
       } else {
         field.value = e.target[field.key].checked;
       }
+      if (field.prefill && (!field.value || (typeof field.value == String && field.value.length == 0)))
+        field.value = field.prefill
     }
 
     this.generate = (e) => {

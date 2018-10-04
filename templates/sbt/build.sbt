@@ -14,7 +14,7 @@ libraryDependencies ++= Seq(
 )
 
 packageOptions += ManifestAttributes(
-  ("Main-Verticle", "scala:{{metadata.packageName}}.MainVerticle"))
+  ("Main-Verticle", "scala:{{metadata.package}}.MainVerticle"))
 
 assemblyMergeStrategy in assembly := {
   case PathList("META-INF", "MANIFEST.MF") => MergeStrategy.discard

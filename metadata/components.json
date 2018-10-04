@@ -596,7 +596,7 @@
     "classifier": "processor",
     "description": "Vert.x Service Proxy processor generates the required stubs at build time.",
     "templates": [
-      "package-info/src/main/java/{package}/package-info.java"
+      "package-info/src/main/java/{packageDir}/package-info.java"
     ]
   },
   {

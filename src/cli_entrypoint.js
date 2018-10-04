@@ -12,7 +12,7 @@ let metadata = require('./gen/metadata.json')
 let buildTools = metadata.buildtools
 let components = metadata.components
 let presets = metadata.presets
-let compileProject = require('./engine.js')
+let compileProject = require('./engine.js').compileProject
 
 program
     .version('1.0.0')
@@ -131,7 +131,7 @@ inquirer.prompt([
                 "components": components
             },
             () => { },
-            (ex) => console.err(ex),
+            (ex) => console.error(ex.message),
             (blobName) => {
                 return new Promise((resolve, reject) => {
                     fs.readFile(path.join(__dirname, "..", "blobs", blobName), (err, buffer) => {

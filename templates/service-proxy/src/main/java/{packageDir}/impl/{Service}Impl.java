@@ -1,6 +1,6 @@
-package {{metadata.packageName}}.impl;
+package {{metadata.package}}.impl;
 
-import {{metadata.packageName}}.{{ metadata.Service }};
+import {{metadata.package}}.{{ metadata.Service }};
 
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;

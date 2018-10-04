@@ -1,4 +1,4 @@
-package {{ metadata.packageName }};
+package {{ metadata.package }};
 
 {{#if metadata.graalNativeImage}}
 import io.vertx.core.Vertx;

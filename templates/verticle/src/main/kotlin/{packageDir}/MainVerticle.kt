@@ -1,4 +1,4 @@
-package {{ metadata.packageName }}
+package {{ metadata.package }}
 
 import io.vertx.core.AbstractVerticle
 

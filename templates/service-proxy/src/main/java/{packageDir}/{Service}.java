@@ -1,4 +1,4 @@
-package {{ metadata.packageName }};
+package {{ metadata.package }};
 
 import io.vertx.codegen.annotations.ProxyGen;
 import io.vertx.codegen.annotations.VertxGen;
@@ -15,7 +15,7 @@ public interface {{ metadata.Service }} {
   /**
    * The default service address.
    */
-  String DEFAULT_ADDRESS = "{{ metadata.packageName }}.service";
+  String DEFAULT_ADDRESS = "{{ metadata.package }}.service";
 
   /**
     * Method called to create a proxy (to consume the service).

@@ -1,6 +1,6 @@
-package {{ metadata.packageName }};
+package {{ metadata.package }};
 
-import {{ metadata.packageName }}.impl.{{ metadata.Service }}Impl;
+import {{ metadata.package }}.impl.{{ metadata.Service }}Impl;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.serviceproxy.ServiceBinder;

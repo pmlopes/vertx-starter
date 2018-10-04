@@ -14,9 +14,11 @@
     "languages": [
       {
         "id": "java",
-        "main": "{package}.MainVerticle",
+        "var_templates": {
+          "main": "{package}.MainVerticle"
+        },
         "templates": [
-          "verticle/src/main/java/{package}/MainVerticle.java"
+          "verticle/src/main/java/{packageDir}/MainVerticle.java"
         ]
       },
       {
@@ -35,9 +37,11 @@
       },
       {
         "id": "kotlin",
-        "main": "{package}.MainVerticle",
+        "var_templates": {
+          "main": "{package}.MainVerticle"
+        },
         "templates": [
-          "verticle/src/main/kotlin/{package}/MainVerticle.kt"
+          "verticle/src/main/kotlin/{packageDir}/MainVerticle.kt"
         ]
       },
       {
@@ -79,9 +83,11 @@
     "languages": [
       {
         "id": "java",
-        "main": "{package}.MainVerticle",
+        "var_templates": {
+          "main": "{package}.MainVerticle"
+        },
         "templates": [
-          "verticle/src/main/java/{package}/MainVerticle.java"
+          "verticle/src/main/java/{packageDir}/MainVerticle.java"
         ]
       },
       {
@@ -100,9 +106,11 @@
       },
       {
         "id": "kotlin",
-        "main": "{package}.MainVerticle",
+        "var_templates": {
+          "main": "{package}.MainVerticle"
+        },
         "templates": [
-          "verticle/src/main/kotlin/{package}/MainVerticle.kt"
+          "verticle/src/main/kotlin/{packageDir}/MainVerticle.kt"
         ]
       },
       {
@@ -182,9 +190,11 @@
     "languages": [
       {
         "id": "scala",
-        "main": "{package}.MainVerticle",
+        "var_templates": {
+          "main": "{package}.MainVerticle"
+        },
         "templates": [
-          "sbt/src/main/scala/{package}/MainVerticle.scala"
+          "sbt/src/main/scala/{packageDir}/MainVerticle.scala"
         ]
       }
     ],
