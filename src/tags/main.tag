@@ -199,7 +199,7 @@
           }
         });
 
-        var filteredPresets = this.filterPresets(tool.id, tool.languages[0].id);
+        var filteredPresets = this.filterPresets(tool.languages[0].id, tool.id);
         var filteredPresetsGroups = {};
         filteredPresets.forEach(function (el) {
           if (!filteredPresetsGroups[el.group]) {
@@ -244,7 +244,7 @@
     }
 
     this.parseFieldType = (field) => {
-      return (!field.type || field.type == 'input') ? 'text' : 'checkbox'
+      return (!field.type || field.type === 'input') ? 'text' : field.type
     }
 
     this.changeLanguage = (e) => {
@@ -391,14 +391,28 @@
     }
 
     this.setFieldValue = e => field => {
-      if (!field.type || field.type == "input") {
+      if (!field.type) field.type = "input";
+      if (field.type === "file") {
+        return new Promise((resolve, reject) => {
+          let reader = new FileReader();
+          reader.onloadend = () => {
+            if (reader.error) reject(reader.error);
+            else {
+              field.value = reader.result;
+              resolve();
+            }
+          };
+          reader.readAsText(e.target[field.key].files[0]);
+        });
+      } else if (field.type === "input") {
         field.value = e.target[field.key].value;
       } else {
         field.value = e.target[field.key].checked;
       }
-      if (field.prefill && (!field.value || (typeof field.value == String && field.value.length == 0)))
-        field.value = field.prefill
-    }
+      if (field.prefill && (!field.value || (typeof field.value === String && field.value.length === 0)))
+        field.value = field.prefill;
+      return Promise.resolve();
+    };
 
     this.generate = (e) => {
       e.preventDefault();
@@ -411,33 +425,36 @@
 
       submit.disabled = true;
 
-      this.tool.fields.forEach(this.setFieldValue(e));
-
-      if (this.preset && this.preset.fields) {
-        this.preset.fields.forEach(this.setFieldValue(e));
-      }
-
       // we need to filter in case the user was looking for other dependencies
       var dependencies = this.dependencies.filter((el) => el.checked);
 
-      const self = this
+      const self = this;
 
-      compileProject(
-        {buildtool: this.tool, dependencies: dependencies, language: this.language, preset: this.preset, components: opts.components},
-        (category, action, label) => { ga('send', {hitType: 'event', eventCategory: category, eventAction: action, eventLabel: label}) },
-        (exception) => { 
-          alert("Exception during code generation" + exception.message);
-          ga('send', 'exception', {'exDescription': exception.message, 'exFatal': true});
-        },
-        (blob) => { return new Promise((resolve, reject) => {
-            JSZipUtils.getBinaryContent("blobs/" + blob, function (err, data) {
-              if (err) 
-                reject(err);
-              else
-                resolve(data)
-            })
-          }) }
-        ).then(zip => {
+      // Set field values
+      var promises = this.tool.fields.map(this.setFieldValue(e));
+      if (this.preset && this.preset.fields) {
+        promises = promises.concat(this.preset.fields.map(this.setFieldValue(e)));
+      }
+      Promise
+        .all(promises)
+        .then(p => {
+          return compileProject(
+            {buildtool: this.tool, dependencies: dependencies, language: this.language, preset: this.preset, components: opts.components},
+            (category, action, label) => { ga('send', {hitType: 'event', eventCategory: category, eventAction: action, eventLabel: label}) },
+            (exception) => {
+              alert("Exception during code generation" + exception.message);
+              ga('send', 'exception', {'exDescription': exception.message, 'exFatal': true});
+            },
+            (blob) => { return new Promise((resolve, reject) => {
+                JSZipUtils.getBinaryContent("blobs/" + blob, function (err, data) {
+                  if (err)
+                    reject(err);
+                  else
+                    resolve(data)
+                })
+              }) }
+            )
+        }).then(zip => {
         if (JSZip.support.blob) {
           zip.generateAsync({ type: 'blob', platform: 'UNIX' }).then(function (blob) {
             if (a.href !== '#') {

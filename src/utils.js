@@ -35,8 +35,8 @@ function solveZipDir(project, templatePath) {
 }
 
 function filterPresets(presets) {
-  return (langId, toolId) =>
-    presets.filter((el) => {
+  return (langId, toolId) => {
+    return presets.filter((el) => {
       if (el.languages) {
         var l = el.languages.filter(function (e) {
           return e.id === langId;
@@ -55,6 +55,7 @@ function filterPresets(presets) {
       }
       return true;
     })
+  }
 }
 
 exports.compileAndAddToZip = compileAndAddToZip

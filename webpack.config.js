@@ -8,6 +8,7 @@ module.exports = {
     },
     mode: "development",
     devtool: 'source-map',
+    target: 'web',
     module: {
         rules: [
             {

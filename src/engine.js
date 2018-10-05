@@ -1,21 +1,33 @@
 let _ = require('lodash')
 let JSZip = require('jszip')
+let openapiUtils = require('./openapi_utils.js');
 
-let resolveGenerator = require('./generators/generators.js').resolveGenerator
+let resolveGenerator = require('./generators/generators.js').resolveGenerator;
 
 let fieldsCallbacks = {
   "graalNativeImage": (project, value, templates, trackFn) => {
     if (value) {
       templates.push(...project.buildtool["graalNativeImageTemplates"]);
       trackFn(project.buildtool.id + ':feature', project.buildtool.id + '/graalNativeImage', 'feature')
+      return Promise.resolve()
     }
   },
   "groupId": (project, value) => {
     _.set(project, "metadata.package", value + '.' + (project.metadata.artifactId || project.metadata.name.replace(/[ -]/g, '_')));
     project.metadata.packageDir = project.metadata.package.replace(/\./g, '/');
+    return Promise.resolve();
   },
   "name": (project, value) => {
     project.metadata.name = value.replace(/[ -]/g, '_')
+    return Promise.resolve()
+  },
+  "openapi": (project, value) => {
+    return openapiUtils
+      .loadOpenAPIAndValidate(value)
+      .then(openapi => {
+        project.metadata.openapi = openapi;
+        return Promise.resolve();
+      });
   }
 }
 
@@ -88,50 +100,55 @@ function compileProject(project, trackFn, trackExceptionFn, loadBlob) {
     // Make language id a boolean
     project.metadata[project.language.id] = true;
 
-    // Load responses into metadata
-    _.concat(
-      _.get(project, "buildtool.fields", []),
-      _.get(project, "preset.fields", [])
-    ).forEach(function (el) {
-      if (!el.type || el.type === 'input') {
-        project.metadata[el.key] = el.value ? el.value : el.prefill;
-      } else {
-        project.metadata[el.key] = el.value;
-      }
-      if (fieldsCallbacks.hasOwnProperty(el.key)) fieldsCallbacks[el.key](project, el.value, templates, trackFn, trackExceptionFn)
-    });
-    // Process var templates
-    _.forEach(_.merge(
-      {},
-      _.get(project, "buildtool.var_templates", {}),
-      _.get(project, "language.var_templates", {}),
-      _.get(project, "preset.var_templates", {})
-    ), (var_template, var_template_name) => {
-      project.metadata[var_template_name] = 
-        var_template.replace(/{(.*?)}/g, (match, varName) => project.metadata[varName] || '')
-    });
-
     // create a new zip file
     var zip = new JSZip();
 
-    let generator = (project.preset) ? resolveGenerator(project.preset.id) : resolveGenerator("default")
-    generator(project, templates, zip).then(zip => {
-      let blob = _.get(project, "preset.blob", project.buildtool.blob);
-      if (blob) {
-        return loadBlob(blob).then(data => {
-          return zip.loadAsync(data, {
-            /**
-             * Abuse the decode file name to do move the blog into the project path
-             */
-            decodeFileName: function (path) {
-              return project.metadata.name.replace(/[ -]/g, '_') + '/' + String.fromCharCode.apply(null, path);
-            }
+    let generator = (project.preset) ? resolveGenerator(project.preset.id) : resolveGenerator("default");
+
+    //---------- Solve fields (fieldCallbacks could be async)!
+
+    // Load responses into metadata
+    let promises = _.concat(
+      _.get(project, "buildtool.fields", []),
+      _.get(project, "preset.fields", [])
+    ).map(function (el) {
+      project.metadata[el.key] = el.value;
+      if (fieldsCallbacks.hasOwnProperty(el.key)) return fieldsCallbacks[el.key](project, el.value, templates, trackFn, trackExceptionFn);
+      else return Promise.resolve();
+    });
+
+    Promise
+      .all(promises)
+      .then(p => {
+        // Process var templates
+        _.forEach(_.merge(
+          {},
+          _.get(project, "buildtool.var_templates", {}),
+          _.get(project, "language.var_templates", {}),
+          _.get(project, "preset.var_templates", {})
+        ), (var_template, var_template_name) => {
+          project.metadata[var_template_name] =
+            var_template.replace(/{(.*?)}/g, (match, varName) => project.metadata[varName] || '')
+        });
+        return generator(project, templates, zip);
+      })
+      .then(zip => {
+        let blob = _.get(project, "preset.blob", project.buildtool.blob);
+        if (blob) {
+          return loadBlob(blob).then(data => {
+            return zip.loadAsync(data, {
+              /**
+               * Abuse the decode file name to do move the blog into the project path
+               */
+              decodeFileName: function (path) {
+                return project.metadata.name.replace(/[ -]/g, '_') + '/' + String.fromCharCode.apply(null, path);
+              }
+            })
           })
-        })
-      } else {
-        return Promise.resolve(zip)
-      }
-    })
+        } else {
+          return Promise.resolve(zip)
+        }
+      })
       .then(zip => resolve(zip))
       .catch(ex => {
         trackExceptionFn(ex);

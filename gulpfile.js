@@ -11,10 +11,12 @@ var ghPages = require('gulp-gh-pages-gift');
 var jsoncombine = require("gulp-jsoncombine");
 var minify = require('gulp-minify-css');
 var webpack = require('webpack-stream');
-var through2 = require('through2')
+var through2 = require('through2');
 var gutil = require('gulp-util'); 
 
-var path = require('path')
+var path = require('path');
+
+let handlebars = require('handlebars');
 
 // Google Analytics Task
 gulp.task('ga', function () {
@@ -33,8 +35,7 @@ gulp.task('css', function () {
 
 // Insipired to gulp-handlebars but with some changes
 function handlebarsPlugin() {
-  var handlebars = require('handlebars');
-  var compilerOptions = {}
+  var compilerOptions = {noEscape: true};
 
   return through2.obj(function(file, enc, callback) {
     if (file.isNull()) {
@@ -76,11 +77,13 @@ gulp.task('handlebars', function () {
     // Compile each Handlebars template source file to a template function
     .pipe(handlebarsPlugin()) // Load out handlebars version
     // Wrap each template function in a call to Handlebars.template and export it
-    .pipe(wrap('exp[\'<%= file.templatePath %>\'] = Handlebars.template(<%= contents %>)'))
+    .pipe(wrap('exports[\'<%= file.templatePath %>\'] = Handlebars.template(<%= contents %>)'))
     // Concatenate down to a single file
     .pipe(concat('templates.js'))
     // Add the Handlebars module in the final output
-    .pipe(wrap('var Handlebars = require("handlebars/runtime");\nlet isBrowser = new Function("try {return this===window;}catch(e){ return false;}");\n let exp = (isBrowser()) ? exports : module.exports\n<%= contents %>'))
+    .pipe(wrap('var Handlebars = require("handlebars/runtime");\n' +
+      'require(\'../handlebars_helpers_loader.js\').load(Handlebars);\n' +
+      '<%= contents %>'))
     // WRite the output into the templates folder
     .pipe(gulp.dest('src/gen'));
 });
