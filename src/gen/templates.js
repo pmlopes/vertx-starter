@@ -236,6 +236,44 @@ exports['npm/webpack.config.js'] = Handlebars.template({"1":function(container,d
     + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.typescript : stack1),{"name":"if","hash":{},"fn":container.program(7, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "    ]\n  },\n\n  plugins: [\n    new VertxPlugin()\n  ]\n};\n\nmodule.exports = [backend];\n";
 },"useData":true})
+exports['stack/vertx-stack.json'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
+    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function";
+
+  return "    {\n      \"groupId\": \""
+    + ((stack1 = ((helper = (helper = helpers.groupId || (depth0 != null ? depth0.groupId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"groupId","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "\",\n      \"artifactId\": \""
+    + ((stack1 = ((helper = (helper = helpers.artifactId || (depth0 != null ? depth0.artifactId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"artifactId","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "\",\n      \"version\": \""
+    + ((stack1 = ((helper = (helper = helpers.version || (depth0 != null ? depth0.version : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"version","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "\",\n"
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.classifier : depth0),{"name":"if","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.transitive : depth0),{"name":"if","hash":{},"fn":container.program(4, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "      \"included\": "
+    + ((stack1 = ((helper = (helper = helpers.included || (depth0 != null ? depth0.included : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"included","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "\n    }"
+    + ((stack1 = helpers.unless.call(alias1,(data && data.last),{"name":"unless","hash":{},"fn":container.program(6, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "\n";
+},"2":function(container,depth0,helpers,partials,data) {
+    var stack1, helper;
+
+  return "      \"classifier\": \""
+    + ((stack1 = ((helper = (helper = helpers.classifier || (depth0 != null ? depth0.classifier : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"classifier","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "\",\n";
+},"4":function(container,depth0,helpers,partials,data) {
+    var stack1, helper;
+
+  return "      \"transitive\": "
+    + ((stack1 = ((helper = (helper = helpers.transitive || (depth0 != null ? depth0.transitive : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"transitive","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + ",\n";
+},"6":function(container,depth0,helpers,partials,data) {
+    return ",";
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "{\n  \"dependencies\": [\n"
+    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.bom : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "  ]\n}\n";
+},"useData":true})
 exports['sbt/build.sbt'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var stack1;
 
@@ -276,44 +314,6 @@ exports['sbt/build.sbt'] = Handlebars.template({"1":function(container,depth0,he
     + ((stack1 = container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
     + ".MainVerticle\"))\n\nassemblyMergeStrategy in assembly := {\n  case PathList(\"META-INF\", \"MANIFEST.MF\") => MergeStrategy.discard\n  case PathList(\"META-INF\", xs @ _*) => MergeStrategy.last\n  case PathList(\"META-INF\", \"io.netty.versions.properties\") => MergeStrategy.last\n  case PathList(\"codegen.json\") => MergeStrategy.discard\n  case x =>\n    val oldStrategy = (assemblyMergeStrategy in assembly).value\n    oldStrategy(x)\n}\n";
 },"useData":true,"useDepths":true})
-exports['stack/vertx-stack.json'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function";
-
-  return "    {\n      \"groupId\": \""
-    + ((stack1 = ((helper = (helper = helpers.groupId || (depth0 != null ? depth0.groupId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"groupId","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "\",\n      \"artifactId\": \""
-    + ((stack1 = ((helper = (helper = helpers.artifactId || (depth0 != null ? depth0.artifactId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"artifactId","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "\",\n      \"version\": \""
-    + ((stack1 = ((helper = (helper = helpers.version || (depth0 != null ? depth0.version : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"version","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "\",\n"
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.classifier : depth0),{"name":"if","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.transitive : depth0),{"name":"if","hash":{},"fn":container.program(4, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "      \"included\": "
-    + ((stack1 = ((helper = (helper = helpers.included || (depth0 != null ? depth0.included : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"included","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "\n    }"
-    + ((stack1 = helpers.unless.call(alias1,(data && data.last),{"name":"unless","hash":{},"fn":container.program(6, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "\n";
-},"2":function(container,depth0,helpers,partials,data) {
-    var stack1, helper;
-
-  return "      \"classifier\": \""
-    + ((stack1 = ((helper = (helper = helpers.classifier || (depth0 != null ? depth0.classifier : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"classifier","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "\",\n";
-},"4":function(container,depth0,helpers,partials,data) {
-    var stack1, helper;
-
-  return "      \"transitive\": "
-    + ((stack1 = ((helper = (helper = helpers.transitive || (depth0 != null ? depth0.transitive : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"transitive","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + ",\n";
-},"6":function(container,depth0,helpers,partials,data) {
-    return ",";
-},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return "{\n  \"dependencies\": [\n"
-    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.bom : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "  ]\n}\n";
-},"useData":true})
 exports['web+angular4/package.json'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     var stack1;
 
@@ -504,6 +504,9 @@ exports['sbt/project/build.properties'] = Handlebars.template({"compiler":[7,">=
 exports['sbt/project/plugins.sbt'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "addSbtPlugin(\"com.eed3si9n\"      % \"sbt-assembly\"        % \"0.14.3\")\naddSbtPlugin(\"com.geirsson\"      % \"sbt-scalafmt\"        % \"0.5.5\")\naddSbtPlugin(\"org.scoverage\"     % \"sbt-scoverage\"       % \"1.5.0\")\naddSbtPlugin(\"net.virtual-void\"  % \"sbt-dependency-graph\"% \"0.8.2\")\n";
 },"useData":true})
+exports['npm/src/main/js/index.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "// your code goes here...\nvertx.createHttpServer()\n  .requestHandler(function (req) {\n    req.response()\n      .putHeader(\"content-type\", \"text/plain\")\n      .end(\"Hello from Vert.x!\");\n}).listen(8080);\n\nconsole.log('Listening at http://127.0.0.1:8080');\n";
+},"useData":true})
 exports['graal-nativeimage/src/main/svm/reflection.json'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "[\n]\n";
 },"useData":true})
@@ -515,9 +518,6 @@ exports['graal-nativeimage/src/main/svm/substitutions.java'] = Handlebars.templa
   return "import com.oracle.svm.core.annotate.*;\nimport org.graalvm.nativeimage.*;\n\nimport io.netty.handler.codec.compression.*;\nimport io.netty.util.internal.logging.InternalLoggerFactory;\nimport io.netty.util.internal.logging.JdkLoggerFactory;\nimport io.vertx.core.Vertx;\nimport io.vertx.core.dns.AddressResolverOptions;\nimport io.vertx.core.impl.resolver.DefaultResolverProvider;\nimport io.vertx.core.spi.resolver.ResolverProvider;\n\n/**\n * This substitution avoid having loggers added to the build\n */\n@TargetClass(className = \"io.netty.util.internal.logging.InternalLoggerFactory\")\nfinal class TargetInternalLoggerFactory {\n  @Substitute\n  private static InternalLoggerFactory newDefaultFactory(String name) {\n    return JdkLoggerFactory.INSTANCE;\n  }\n}\n\n/**\n * This substitution allows the usage of platform specific code to do low level buffer related tasks\n */\n@TargetClass(className = \"io.netty.util.internal.CleanerJava6\")\nfinal class TargetCleanerJava6 {\n  @Alias\n  @RecomputeFieldValue(kind = RecomputeFieldValue.Kind.FieldOffset, declClassName = \"java.nio.DirectByteBuffer\", name = \"cleaner\")\n  private static long CLEANER_FIELD_OFFSET;\n}\n\n/**\n * This substitution allows the usage of platform specific code to do low level buffer related tasks\n */\n@TargetClass(className = \"io.netty.util.internal.PlatformDependent0\")\nfinal class TargetPlatformDependent0 {\n  @Alias\n  @RecomputeFieldValue(kind = RecomputeFieldValue.Kind.FieldOffset, declClassName = \"java.nio.Buffer\", name = \"address\")\n  private static long ADDRESS_FIELD_OFFSET;\n}\n\n/**\n * This substitution allows the usage of platform specific code to do low level buffer related tasks\n */\n@TargetClass(className = \"io.netty.util.internal.shaded.org.jctools.util.UnsafeRefArrayAccess\")\nfinal class TargetUnsafeRefArrayAccess {\n  @Alias\n  @RecomputeFieldValue(kind = RecomputeFieldValue.Kind.ArrayIndexShift, declClass = Object[].class)\n  public static int REF_ELEMENT_SHIFT;\n}\n\n/**\n * This substitution avoid having jcraft zlib added to the build\n */\n@TargetClass(className = \"io.netty.handler.codec.compression.ZlibCodecFactory\")\nfinal class TargetZlibCodecFactory {\n\n  @Substitute\n  public static ZlibEncoder newZlibEncoder(int compressionLevel) {\n    return new JdkZlibEncoder(compressionLevel);\n  }\n\n  @Substitute\n  public static ZlibEncoder newZlibEncoder(ZlibWrapper wrapper) {\n    return new JdkZlibEncoder(wrapper);\n  }\n\n  @Substitute\n  public static ZlibEncoder newZlibEncoder(ZlibWrapper wrapper, int compressionLevel) {\n    return new JdkZlibEncoder(wrapper, compressionLevel);\n  }\n\n  @Substitute\n  public static ZlibEncoder newZlibEncoder(ZlibWrapper wrapper, int compressionLevel, int windowBits, int memLevel) {\n    return new JdkZlibEncoder(wrapper, compressionLevel);\n  }\n\n  @Substitute\n  public static ZlibEncoder newZlibEncoder(byte[] dictionary) {\n    return new JdkZlibEncoder(dictionary);\n  }\n\n  @Substitute\n  public static ZlibEncoder newZlibEncoder(int compressionLevel, byte[] dictionary) {\n    return new JdkZlibEncoder(compressionLevel, dictionary);\n  }\n\n  @Substitute\n  public static ZlibEncoder newZlibEncoder(int compressionLevel, int windowBits, int memLevel, byte[] dictionary) {\n    return new JdkZlibEncoder(compressionLevel, dictionary);\n  }\n\n  @Substitute\n  public static ZlibDecoder newZlibDecoder() {\n    return new JdkZlibDecoder(true);\n  }\n\n  @Substitute\n  public static ZlibDecoder newZlibDecoder(ZlibWrapper wrapper) {\n    return new JdkZlibDecoder(wrapper, true);\n  }\n\n  @Substitute\n  public static ZlibDecoder newZlibDecoder(byte[] dictionary) {\n    return new JdkZlibDecoder(dictionary);\n  }\n}\n\n/**\n * This substitution forces the usage of the blocking DNS resolver\n */\n@TargetClass(className = \"io.vertx.core.spi.resolver.ResolverProvider\")\nfinal class TargetResolverProvider {\n\n  @Substitute\n  public static ResolverProvider factory(Vertx vertx, AddressResolverOptions options) {\n    return new DefaultResolverProvider();\n  }\n}\n\n@AutomaticFeature\nclass RuntimeReflectionRegistrationFeature implements Feature {\n  public void beforeAnalysis(BeforeAnalysisAccess access) {\n    try {\n      RuntimeReflection.register(java.util.LinkedHashMap.class.getDeclaredConstructor());\n"
     + ((stack1 = helpers["if"].call(depth0 != null ? depth0 : (container.nullContext || {}),((stack1 = (depth0 != null ? depth0.dependenciesGAV : depth0)) != null ? stack1["io.vertx:vertx-grpc"] : stack1),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "    } catch (NoSuchMethodException e) {\n      throw new RuntimeException(e);\n    }\n  }\n}\n";
-},"useData":true})
-exports['npm/src/main/js/index.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "// your code goes here...\nvertx.createHttpServer()\n  .requestHandler(function (req) {\n    req.response()\n      .putHeader(\"content-type\", \"text/plain\")\n      .end(\"Hello from Vert.x!\");\n}).listen(8080);\n\nconsole.log('Listening at http://127.0.0.1:8080');\n";
 },"useData":true})
 exports['npm/src/main/ts/index.ts'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "// your code goes here...\ndeclare var vertx: any;\n\nvertx.createHttpServer()\n  .requestHandler(function (req: any) {\n    req.response()\n      .putHeader(\"content-type\", \"text/plain\")\n      .end(\"Hello from Vert.x!\");\n}).listen(8080);\n\nconsole.log('Listening at http://127.0.0.1:8080');\n";
@@ -729,6 +729,42 @@ exports['package-info/src/main/java/{packageDir}/package-info.java'] = Handlebar
     + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
     + ";\n\nimport io.vertx.codegen.annotations.ModuleGen;\n";
 },"useData":true})
+exports['service-proxy/src/main/java/{packageDir}/MainVerticle.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=container.lambda;
+
+  return "package "
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
+    + ";\n\nimport "
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
+    + ".impl."
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0)) != null ? stack1 : "")
+    + "Impl;\n\nimport io.vertx.core.AbstractVerticle;\nimport io.vertx.serviceproxy.ServiceBinder;\n\npublic class MainVerticle extends AbstractVerticle {\n\n  private "
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0)) != null ? stack1 : "")
+    + "Impl service;\n\n  @Override\n  public void start() throws Exception {\n    service = new "
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0)) != null ? stack1 : "")
+    + "Impl(vertx, config());\n    new ServiceBinder(vertx)\n      .setAddress("
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0)) != null ? stack1 : "")
+    + ".DEFAULT_ADDRESS)\n      .register("
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0)) != null ? stack1 : "")
+    + ".class, service);\n  }\n\n  @Override\n  public void stop() throws Exception {\n    service.close();\n  }\n}\n";
+},"useData":true})
+exports['service-proxy/src/main/java/{packageDir}/{Service}.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=container.lambda;
+
+  return "package "
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
+    + ";\n\nimport io.vertx.codegen.annotations.ProxyGen;\nimport io.vertx.codegen.annotations.VertxGen;\nimport io.vertx.core.Vertx;\nimport io.vertx.serviceproxy.ServiceProxyBuilder;\n\n/**\n * "
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0)) != null ? stack1 : "")
+    + " API.\n */\n@VertxGen\n@ProxyGen\npublic interface "
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0)) != null ? stack1 : "")
+    + " {\n\n  /**\n   * The default service address.\n   */\n  String DEFAULT_ADDRESS = \""
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
+    + ".service\";\n\n  /**\n    * Method called to create a proxy (to consume the service).\n    *\n    * @param vertx   vert.x\n    * @param address the address on the event bus where the service is served.\n    * @return the proxy\n    */\n  static "
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0)) != null ? stack1 : "")
+    + " createProxy(Vertx vertx, String address) {\n    return new ServiceProxyBuilder(vertx)\n      .setAddress(address)\n      .build("
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0)) != null ? stack1 : "")
+    + ".class);\n  }\n}\n";
+},"useData":true})
 exports['verticle/src/main/java/{packageDir}/MainVerticle.java'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     return "import io.vertx.core.Vertx;\n";
 },"3":function(container,depth0,helpers,partials,data) {
@@ -857,42 +893,6 @@ exports['verticle/src/main/kotlin/{packageDir}/MainVerticle.kt'] = Handlebars.te
 exports['verticle/src/main/resources/templates/index.hbs'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "<!DOCTYPE html>\n<html>\n<head>\n  <meta charset=\"utf-8\"/>\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"/>\n  <title>{{ title }}</title>\n  <base href=\"/\"/>\n\n  <link rel=\"stylesheet\" href=\"/dist/vendor.css\"/>\n</head>\n<body>\n  <div id=\"app\">Loading...</div>\n\n  <script src=\"/dist/vendor.js\"></script>\n  <script src=\"/dist/main.js\"></script>\n  {{#if hotreload}}\n  <script src=\"/hot-reload/script\"></script>\n  {{/if}}\n</body>\n</html>\n";
 },"useData":true})
-exports['service-proxy/src/main/java/{packageDir}/MainVerticle.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=container.lambda;
-
-  return "package "
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
-    + ";\n\nimport "
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
-    + ".impl."
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0)) != null ? stack1 : "")
-    + "Impl;\n\nimport io.vertx.core.AbstractVerticle;\nimport io.vertx.serviceproxy.ServiceBinder;\n\npublic class MainVerticle extends AbstractVerticle {\n\n  private "
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0)) != null ? stack1 : "")
-    + "Impl service;\n\n  @Override\n  public void start() throws Exception {\n    service = new "
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0)) != null ? stack1 : "")
-    + "Impl(vertx, config());\n    new ServiceBinder(vertx)\n      .setAddress("
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0)) != null ? stack1 : "")
-    + ".DEFAULT_ADDRESS)\n      .register("
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0)) != null ? stack1 : "")
-    + ".class, service);\n  }\n\n  @Override\n  public void stop() throws Exception {\n    service.close();\n  }\n}\n";
-},"useData":true})
-exports['service-proxy/src/main/java/{packageDir}/{Service}.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=container.lambda;
-
-  return "package "
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
-    + ";\n\nimport io.vertx.codegen.annotations.ProxyGen;\nimport io.vertx.codegen.annotations.VertxGen;\nimport io.vertx.core.Vertx;\nimport io.vertx.serviceproxy.ServiceProxyBuilder;\n\n/**\n * "
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0)) != null ? stack1 : "")
-    + " API.\n */\n@VertxGen\n@ProxyGen\npublic interface "
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0)) != null ? stack1 : "")
-    + " {\n\n  /**\n   * The default service address.\n   */\n  String DEFAULT_ADDRESS = \""
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
-    + ".service\";\n\n  /**\n    * Method called to create a proxy (to consume the service).\n    *\n    * @param vertx   vert.x\n    * @param address the address on the event bus where the service is served.\n    * @return the proxy\n    */\n  static "
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0)) != null ? stack1 : "")
-    + " createProxy(Vertx vertx, String address) {\n    return new ServiceProxyBuilder(vertx)\n      .setAddress(address)\n      .build("
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0)) != null ? stack1 : "")
-    + ".class);\n  }\n}\n";
-},"useData":true})
 exports['web+angular4/src/main/ts/app/app.module.browser.ts'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "import { NgModule } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\nimport { AppModuleShared } from './app.module.shared';\nimport { AppComponent } from './components/app/app.component';\n\n@NgModule({\n    bootstrap: [ AppComponent ],\n    imports: [\n        BrowserModule,\n        AppModuleShared\n    ],\n    providers: [\n        { provide: 'BASE_URL', useFactory: getBaseUrl }\n    ]\n})\nexport class AppModule {\n}\n\nexport function getBaseUrl() {\n    return document.getElementsByTagName('base')[0].href;\n}\n";
 },"useData":true})
@@ -989,6 +989,111 @@ exports['web+react-redux/src/main/js/store/index.js'] = Handlebars.template({"co
 exports['web+vue/src/main/js/css/site.css'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "@media (max-width: 767px) {\n    /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */\n    body {\n        padding-top: 50px;\n    }\n}";
 },"useData":true})
+exports['openapi/src/main/java/{packageDir}/models/{ModelName}.java'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing;
+
+  return ((stack1 = helpers["if"].call(alias1,(helpers.eq || (depth0 && depth0.eq) || alias2).call(alias1,(depth0 != null ? depth0.type : depth0),"boolean",{"name":"eq","hash":{},"data":data}),{"name":"if","hash":{},"fn":container.program(2, data, 0),"inverse":container.program(4, data, 0),"data":data})) != null ? stack1 : "")
+    + ((stack1 = (helpers.firstUppercase || (depth0 && depth0.firstUppercase) || alias2).call(alias1,(helpers.sanitizeOasParameterName || (depth0 && depth0.sanitizeOasParameterName) || alias2).call(alias1,(depth0 != null ? depth0.name : depth0),{"name":"sanitizeOasParameterName","hash":{},"data":data}),{"name":"firstUppercase","hash":{},"data":data})) != null ? stack1 : "");
+},"2":function(container,depth0,helpers,partials,data) {
+    return "is";
+},"4":function(container,depth0,helpers,partials,data) {
+    return "get";
+},"6":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing;
+
+  return "    final "
+    + ((stack1 = (helpers.solveOasType || (depth0 && depth0.solveOasType) || alias2).call(alias1,"java",(depth0 != null ? depth0.modelType : depth0),(depth0 != null ? depth0.type : depth0),(depth0 != null ? depth0.format : depth0),{"name":"solveOasType","hash":{},"data":data})) != null ? stack1 : "")
+    + " "
+    + ((stack1 = (helpers.sanitizeOasParameterName || (depth0 && depth0.sanitizeOasParameterName) || alias2).call(alias1,(data && data.key),{"name":"sanitizeOasParameterName","hash":{},"data":data})) != null ? stack1 : "")
+    + ";\n";
+},"8":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing;
+
+  return "        "
+    + ((stack1 = (helpers.solveOasType || (depth0 && depth0.solveOasType) || alias2).call(alias1,"java",(depth0 != null ? depth0.modelType : depth0),(depth0 != null ? depth0.type : depth0),(depth0 != null ? depth0.format : depth0),{"name":"solveOasType","hash":{},"data":data})) != null ? stack1 : "")
+    + " "
+    + ((stack1 = (helpers.sanitizeOasParameterName || (depth0 && depth0.sanitizeOasParameterName) || alias2).call(alias1,(data && data.key),{"name":"sanitizeOasParameterName","hash":{},"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers.unless.call(alias1,(data && data.last),{"name":"unless","hash":{},"fn":container.program(9, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "\n";
+},"9":function(container,depth0,helpers,partials,data) {
+    return ",";
+},"11":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing;
+
+  return "        this."
+    + ((stack1 = (helpers.sanitizeOasParameterName || (depth0 && depth0.sanitizeOasParameterName) || alias2).call(alias1,(data && data.key),{"name":"sanitizeOasParameterName","hash":{},"data":data})) != null ? stack1 : "")
+    + " = "
+    + ((stack1 = (helpers.sanitizeOasParameterName || (depth0 && depth0.sanitizeOasParameterName) || alias2).call(alias1,(data && data.key),{"name":"sanitizeOasParameterName","hash":{},"data":data})) != null ? stack1 : "")
+    + ";\n";
+},"13":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "    this."
+    + ((stack1 = (helpers.sanitizeOasParameterName || (depth0 && depth0.sanitizeOasParameterName) || helpers.helperMissing).call(depth0 != null ? depth0 : (container.nullContext || {}),(data && data.key),{"name":"sanitizeOasParameterName","hash":{},"data":data})) != null ? stack1 : "")
+    + " = other."
+    + ((stack1 = container.invokePartial(partials.getFnName,depth0,{"name":"getFnName","hash":{"type":(depth0 != null ? depth0.type : depth0),"name":(data && data.key)},"data":data,"helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
+    + "();\n";
+},"15":function(container,depth0,helpers,partials,data,blockParams,depths) {
+    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing;
+
+  return "    @Fluent "
+    + ((stack1 = container.lambda((depths[1] != null ? depths[1].modelName : depths[1]), depth0)) != null ? stack1 : "")
+    + " set"
+    + ((stack1 = (helpers.firstUppercase || (depth0 && depth0.firstUppercase) || alias2).call(alias1,(helpers.sanitizeOasParameterName || (depth0 && depth0.sanitizeOasParameterName) || alias2).call(alias1,(data && data.key),{"name":"sanitizeOasParameterName","hash":{},"data":data}),{"name":"firstUppercase","hash":{},"data":data})) != null ? stack1 : "")
+    + "("
+    + ((stack1 = (helpers.solveOasType || (depth0 && depth0.solveOasType) || alias2).call(alias1,"java",(depth0 != null ? depth0.modelType : depth0),(depth0 != null ? depth0.type : depth0),(depth0 != null ? depth0.format : depth0),{"name":"solveOasType","hash":{},"data":data})) != null ? stack1 : "")
+    + " "
+    + ((stack1 = (helpers.sanitizeOasParameterName || (depth0 && depth0.sanitizeOasParameterName) || alias2).call(alias1,(data && data.key),{"name":"sanitizeOasParameterName","hash":{},"data":data})) != null ? stack1 : "")
+    + "){\n        this."
+    + ((stack1 = (helpers.sanitizeOasParameterName || (depth0 && depth0.sanitizeOasParameterName) || alias2).call(alias1,(data && data.key),{"name":"sanitizeOasParameterName","hash":{},"data":data})) != null ? stack1 : "")
+    + " = "
+    + ((stack1 = (helpers.sanitizeOasParameterName || (depth0 && depth0.sanitizeOasParameterName) || alias2).call(alias1,(data && data.key),{"name":"sanitizeOasParameterName","hash":{},"data":data})) != null ? stack1 : "")
+    + ";\n        return this;\n    }\n    "
+    + ((stack1 = (helpers.solveOasType || (depth0 && depth0.solveOasType) || alias2).call(alias1,"java",(depth0 != null ? depth0.modelType : depth0),(depth0 != null ? depth0.type : depth0),(depth0 != null ? depth0.format : depth0),{"name":"solveOasType","hash":{},"data":data})) != null ? stack1 : "")
+    + " "
+    + ((stack1 = container.invokePartial(partials.getFnName,depth0,{"name":"getFnName","hash":{"type":(depth0 != null ? depth0.type : depth0),"name":(data && data.key)},"data":data,"helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "")
+    + "() {\n        return this."
+    + ((stack1 = (helpers.sanitizeOasParameterName || (depth0 && depth0.sanitizeOasParameterName) || alias2).call(alias1,(data && data.key),{"name":"sanitizeOasParameterName","hash":{},"data":data})) != null ? stack1 : "")
+    + ";\n    }\n\n";
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data,blockParams,depths) {
+    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function";
+
+  return "\npackage "
+    + ((stack1 = ((helper = (helper = helpers["package"] || (depth0 != null ? depth0["package"] : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"package","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + ";\n\nimport io.vertx.codegen.annotations.DataObject;\nimport io.vertx.codegen.annotations.Fluent;\nimport io.vertx.core.json.JsonObject;\nimport java.util.List;\nimport java.util.Map;\n\n@DataObject(generateConverter = true, publicConverter = false)\npublic class "
+    + ((stack1 = ((helper = (helper = helpers.modelName || (depth0 != null ? depth0.modelName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"modelName","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + " {\n\n"
+    + ((stack1 = helpers.each.call(alias1,((stack1 = (depth0 != null ? depth0.schema : depth0)) != null ? stack1.properties : stack1),{"name":"each","hash":{},"fn":container.program(6, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "\n    public "
+    + ((stack1 = ((helper = (helper = helpers.modelName || (depth0 != null ? depth0.modelName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"modelName","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + " (\n"
+    + ((stack1 = helpers.each.call(alias1,((stack1 = (depth0 != null ? depth0.schema : depth0)) != null ? stack1.properties : stack1),{"name":"each","hash":{},"fn":container.program(8, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "    ) {\n"
+    + ((stack1 = helpers.each.call(alias1,((stack1 = (depth0 != null ? depth0.schema : depth0)) != null ? stack1.properties : stack1),{"name":"each","hash":{},"fn":container.program(11, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "    }\n\n  public "
+    + ((stack1 = ((helper = (helper = helpers.modelName || (depth0 != null ? depth0.modelName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"modelName","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "(JsonObject json) {\n    "
+    + ((stack1 = ((helper = (helper = helpers.modelName || (depth0 != null ? depth0.modelName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"modelName","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "Converter.fromJson(json, this);\n    }\n\n  public "
+    + ((stack1 = ((helper = (helper = helpers.modelName || (depth0 != null ? depth0.modelName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"modelName","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "("
+    + ((stack1 = ((helper = (helper = helpers.modelName || (depth0 != null ? depth0.modelName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"modelName","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + " other) {\n"
+    + ((stack1 = helpers.each.call(alias1,((stack1 = (depth0 != null ? depth0.schema : depth0)) != null ? stack1.properties : stack1),{"name":"each","hash":{},"fn":container.program(13, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "    }\n\n  public JsonObject toJson() {\n    JsonObject json = new JsonObject();\n    "
+    + ((stack1 = ((helper = (helper = helpers.modelName || (depth0 != null ? depth0.modelName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"modelName","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "Converter.toJson(this, json);\n    return json;\n  }\n\n"
+    + ((stack1 = helpers.each.call(alias1,((stack1 = (depth0 != null ? depth0.schema : depth0)) != null ? stack1.properties : stack1),{"name":"each","hash":{},"fn":container.program(15, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "}";
+},"main_d":  function(fn, props, container, depth0, data, blockParams, depths) {
+
+  var decorators = container.decorators;
+
+  fn = decorators.inline(fn,props,container,{"name":"inline","hash":{},"fn":container.program(1, data, 0, blockParams, depths),"inverse":container.noop,"args":["getFnName"],"data":data}) || fn;
+  return fn;
+  }
+
+,"useDecorators":true,"usePartial":true,"useData":true,"useDepths":true})
 exports['service-proxy/src/main/java/{packageDir}/impl/{Service}Impl.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=container.lambda;
 
@@ -1018,12 +1123,6 @@ exports['web+knockout/src/main/js/components/counter-example/counter-example.htm
 exports['web+knockout/src/main/js/components/counter-example/counter-example.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "import * as ko from 'knockout';\n\nclass CounterExampleViewModel {\n  constructor() {\n    this.currentCount = ko.observable(0);\n  }\n\n  incrementCounter() {\n    let prevCount = this.currentCount();\n    this.currentCount(prevCount + 1);\n  }\n}\n\nexport default {viewModel: CounterExampleViewModel, template: require('./counter-example.html')};\n";
 },"useData":true})
-exports['web+knockout/src/main/js/components/home-page/home-page.html'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<h1>Hello, world!</h1>\n<p>Welcome to your new single-page application, built with:</p>\n<ul>\n    <li><a href='http://vertx.io/'>Vert.x</a> for polyglot server-side code</li>\n    <li><a href='http://knockoutjs.com/'>Knockout.js</a> and <a href='http://www.typescriptlang.org/'>TypeScript</a> for client-side code</li>\n    <li><a href='https://webpack.github.io/'>Webpack</a> for building and bundling client-side resources</li>\n    <li><a href='http://getbootstrap.com/'>Bootstrap</a> for layout and styling</li>\n</ul>\n<p>To help you get started, we've also set up:</p>\n<ul>\n    <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.</li>\n    <li><strong>Webpack dev middleware</strong>. In development mode, there's no need to run the <code>webpack</code> build tool. Your client-side resources are dynamically built on demand. Updates are available as soon as you modify any file.</li>\n    <li><strong>Hot module replacement</strong>. In development mode, you don't even need to reload the page after making most changes. Within seconds of saving changes to files, your Knockout app will be rebuilt and a new instance injected is into the page.</li>\n    <li><strong>Code splitting and lazy loading</strong>. KO components may optionally be bundled individually and loaded on demand. For example, the code and template for 'Counter' is not loaded until you navigate to it..</li>\n    <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and the <code>webpack</code> build tool produces minified static CSS and JavaScript files.</li>\n</ul>\n";
-},"useData":true})
-exports['web+knockout/src/main/js/components/home-page/home-page.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "import * as ko from 'knockout';\n\nclass HomePageViewModel {\n}\n\nexport default { viewModel: HomePageViewModel, template: require('./home-page.html') };\n";
-},"useData":true})
 exports['web+knockout/src/main/js/components/fetch-data/fetch-data.html'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "<h1>Weather forecast</h1>\n\n<p>This component demonstrates fetching data from the server.</p>\n\n<p data-bind='ifnot: forecasts'><em>Loading...</em></p>\n\n<table class='table' data-bind='if: forecasts'>\n    <thead>\n        <tr>\n            <th>Date</th>\n            <th>Temp. (C)</th>\n            <th>Temp. (F)</th>\n            <th>Summary</th>\n        </tr>\n    </thead>\n    <tbody data-bind='foreach: forecasts'>\n        <tr>\n            <td data-bind='text: dateFormatted'></td>\n            <td data-bind='text: temperatureC'></td>\n            <td data-bind='text: temperatureF'></td>\n            <td data-bind='text: summary'></td>\n        </tr>\n    </tbody>\n</table>\n";
 },"useData":true})
@@ -1036,23 +1135,29 @@ exports['web+knockout/src/main/js/components/nav-menu/nav-menu.html'] = Handleba
 exports['web+knockout/src/main/js/components/nav-menu/nav-menu.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "import * as ko from 'knockout';\nimport {Route, Router} from '../../router';\n\nclass NavMenuViewModel {\n  constructor(params) {\n    // This viewmodel doesn't do anything except pass through the 'route' parameter to the view.\n    // You could remove this viewmodel entirely, and define 'nav-menu' as a template-only component.\n    // But in most apps, you'll want some viewmodel logic to determine what navigation options appear.\n    this.router = params.router;\n    this.route = this.router.currentRoute;\n  }\n}\n\nexport default {viewModel: NavMenuViewModel, template: require('./nav-menu.html')};\n";
 },"useData":true})
+exports['web+knockout/src/main/js/components/home-page/home-page.html'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<h1>Hello, world!</h1>\n<p>Welcome to your new single-page application, built with:</p>\n<ul>\n    <li><a href='http://vertx.io/'>Vert.x</a> for polyglot server-side code</li>\n    <li><a href='http://knockoutjs.com/'>Knockout.js</a> and <a href='http://www.typescriptlang.org/'>TypeScript</a> for client-side code</li>\n    <li><a href='https://webpack.github.io/'>Webpack</a> for building and bundling client-side resources</li>\n    <li><a href='http://getbootstrap.com/'>Bootstrap</a> for layout and styling</li>\n</ul>\n<p>To help you get started, we've also set up:</p>\n<ul>\n    <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.</li>\n    <li><strong>Webpack dev middleware</strong>. In development mode, there's no need to run the <code>webpack</code> build tool. Your client-side resources are dynamically built on demand. Updates are available as soon as you modify any file.</li>\n    <li><strong>Hot module replacement</strong>. In development mode, you don't even need to reload the page after making most changes. Within seconds of saving changes to files, your Knockout app will be rebuilt and a new instance injected is into the page.</li>\n    <li><strong>Code splitting and lazy loading</strong>. KO components may optionally be bundled individually and loaded on demand. For example, the code and template for 'Counter' is not loaded until you navigate to it..</li>\n    <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and the <code>webpack</code> build tool produces minified static CSS and JavaScript files.</li>\n</ul>\n";
+},"useData":true})
+exports['web+knockout/src/main/js/components/home-page/home-page.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "import * as ko from 'knockout';\n\nclass HomePageViewModel {\n}\n\nexport default { viewModel: HomePageViewModel, template: require('./home-page.html') };\n";
+},"useData":true})
 exports['web+mongo/src/main/resources/webroot/css/style.css'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "body {\n  padding: 30px;\n  font: 14px \"Lucida Grande\", Helvetica, Arial, sans-serif;\n}\n\nh2 {\n	margin:0 0 .5em 0;\n}\n\na {\n  color: #00B7FF;\n}\n\n#wrapper {\n	padding-left:312px;\n	position:relative;\n}\n\n#userList {\n	margin:0 0 30px 0;\n}\n	#userList table {\n		border-collapse:separate;\n		border-spacing:1px;\n		background:#CCC;\n	}\n		#userList table th {\n			background:#EEE;\n			font-weight:600;\n			padding:10px 20px;\n			text-align:center;\n		}\n		#userList table tbody {\n			padding:0; margin:0;\n			border-collapse:collapse;\n			border-spacing:0px;\n		}\n			#userList table td {\n				background:#FFF;\n				padding:5px 10px;\n				text-align:center;\n			}\n\n#userInfo {\n	width:250px;\n	position:absolute;\n	top:0; left:0;\n}\n	#userInfo p {\n		padding:15px;\n		border:1px solid #CCC;\n		background:rgba(80,120,255,0.05);\n	}\n\nfieldset {\n	border:0;\n	padding:0; margin:0;\n}\n";
 },"useData":true})
 exports['web+mongo/src/main/resources/webroot/js/app.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "// Userlist data array for filling in info box\nvar userListData = [];\n\n// DOM Ready =============================================================\n$(document).ready(function () {\n\n    // Populate the user table on initial page load\n    populateTable();\n\n    // Username link click\n    $('#userList table tbody').on('click', 'td a.linkshowuser', showUserInfo);\n\n    // Add User button click\n    $('#btnAddUser').on('click', addUser);\n\n    // Delete User link click\n    $('#userList table tbody').on('click', 'td a.linkdeleteuser', deleteUser);\n\n});\n\n// Functions =============================================================\n\n// Fill table with data\nfunction populateTable() {\n\n    // Empty content string\n    var tableContent = '';\n\n    // jQuery AJAX call for JSON\n    $.getJSON('/users', function (data) {\n\n        // Stick our user data array into a userlist variable in the global object\n        userListData = data;\n\n        // For each item in our JSON, add a table row and cells to the content string\n        $.each(data, function () {\n            tableContent += '<tr>';\n            tableContent += '<td><a href=\"#\" class=\"linkshowuser\" rel=\"' + this.username + '\" title=\"Show Details\">' + this.username + '</a></td>';\n            tableContent += '<td>' + this.email + '</td>';\n            tableContent += '<td><a href=\"#\" class=\"linkdeleteuser\" rel=\"' + this._id + '\">delete</a></td>';\n            tableContent += '</tr>';\n        });\n\n        // Inject the whole content string into our existing HTML table\n        $('#userList table tbody').html(tableContent);\n    });\n};\n\n// Show User Info\nfunction showUserInfo(event) {\n\n    // Prevent Link from Firing\n    event.preventDefault();\n\n    // Retrieve username from link rel attribute\n    var thisUserName = $(this).attr('rel');\n\n    // Get Index of object based on id value\n    var arrayPosition = userListData.map(function (arrayItem) {\n        return arrayItem.username;\n    }).indexOf(thisUserName);\n\n    // Get our User Object\n    var thisUserObject = userListData[arrayPosition];\n\n    //Populate Info Box\n    $('#userInfoName').text(thisUserObject.fullname);\n    $('#userInfoAge').text(thisUserObject.age);\n    $('#userInfoGender').text(thisUserObject.gender);\n    $('#userInfoLocation').text(thisUserObject.location);\n\n};\n\n// Add User\nfunction addUser(event) {\n    event.preventDefault();\n\n    // Super basic validation - increase errorCount variable if any fields are blank\n    var errorCount = 0;\n    $('#addUser input').each(function (index, val) {\n        if ($(this).val() === '') {\n            errorCount++;\n        }\n    });\n\n    // Check and make sure errorCount's still at zero\n    if (errorCount === 0) {\n\n        // If it is, compile all user info into one object\n        var newUser = {\n            'username': $('#addUser fieldset input#inputUserName').val(),\n            'email': $('#addUser fieldset input#inputUserEmail').val(),\n            'fullname': $('#addUser fieldset input#inputUserFullname').val(),\n            'age': $('#addUser fieldset input#inputUserAge').val(),\n            'location': $('#addUser fieldset input#inputUserLocation').val(),\n            'gender': $('#addUser fieldset input#inputUserGender').val()\n        };\n\n        // Use AJAX to post the object to our adduser service\n        $.ajax({\n            type: 'POST',\n            data: newUser,\n            url: '/users'\n        }).done(function (response) {\n            // Clear the form inputs\n            $('#addUser fieldset input').val('');\n\n            // Update the table\n            populateTable();\n        }).fail(function () {\n            // If something goes wrong, alert the error message that our service returned\n            alert('Error: Something went wrong.');\n        });\n    }\n    else {\n        // If errorCount is more than 0, error out\n        alert('Please fill in all fields');\n        return false;\n    }\n};\n\n// Delete User\nfunction deleteUser(event) {\n\n    event.preventDefault();\n\n    // Pop up a confirmation dialog\n    var confirmation = confirm('Are you sure you want to delete this user?');\n\n    // Check and make sure the user confirmed\n    if (confirmation === true) {\n\n        // If they did, do our delete\n        $.ajax({\n            type: 'DELETE',\n            url: '/users/' + $(this).attr('rel')\n        }).done(function (response) {\n            // Update the table\n            populateTable();\n\n        }).fail(function () {\n            alert('Error: Something went wrong.');\n            // Update the table\n            populateTable();\n        });\n    } else {\n\n        // If they said no to the confirm, do nothing\n        return false;\n\n    }\n\n};\n";
 },"useData":true})
-exports['web+vue/src/main/js/components/counter/counter.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "import Vue from 'vue';\nimport { Component } from 'vue-property-decorator';\n\n@Component\nexport default class CounterComponent extends Vue {\n  currentcount = 0;\n\n  incrementCounter() {\n    this.currentcount++;\n  }\n}\n";
-},"useData":true})
-exports['web+vue/src/main/js/components/counter/counter.vue.html'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<template>\n    <div>\n        <h1>Counter</h1>\n\n        <p>This is a simple example of a Vue.js component.</p>\n\n        <p>Current count: <strong>{{ currentcount }}</strong></p>\n\n        <button @click=\"incrementCounter\">Increment</button>\n    </div>\n</template>\n\n<script src=\"./counter.js\"></script>\n";
-},"useData":true})
 exports['web+vue/src/main/js/components/app/app.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "import Vue from 'vue';\nimport { Component } from 'vue-property-decorator';\n\n@Component({\n  components: {\n    MenuComponent: require('../navmenu/navmenu.vue.html')\n  }\n})\nexport default class AppComponent extends Vue {\n}\n";
 },"useData":true})
 exports['web+vue/src/main/js/components/app/app.vue.html'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "<template>\n    <div id='app-root' class=\"container-fluid\">\n        <div class=\"row\">\n            <div class=\"col-sm-3\">\n                <menu-component />\n            </div>\n            <div class=\"col-sm-9\">\n                <router-view></router-view>\n            </div>\n        </div>\n    </div>\n</template>\n\n<script src=\"./app.js\"></script>\n";
+},"useData":true})
+exports['web+vue/src/main/js/components/counter/counter.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "import Vue from 'vue';\nimport { Component } from 'vue-property-decorator';\n\n@Component\nexport default class CounterComponent extends Vue {\n  currentcount = 0;\n\n  incrementCounter() {\n    this.currentcount++;\n  }\n}\n";
+},"useData":true})
+exports['web+vue/src/main/js/components/counter/counter.vue.html'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<template>\n    <div>\n        <h1>Counter</h1>\n\n        <p>This is a simple example of a Vue.js component.</p>\n\n        <p>Current count: <strong>{{ currentcount }}</strong></p>\n\n        <button @click=\"incrementCounter\">Increment</button>\n    </div>\n</template>\n\n<script src=\"./counter.js\"></script>\n";
 },"useData":true})
 exports['web+vue/src/main/js/components/fetchdata/fetchdata.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "import Vue from 'vue';\nimport { Component } from 'vue-property-decorator';\n\n@Component\nexport default class FetchDataComponent extends Vue {\n  forecasts = [];\n\n  mounted() {\n    fetch('api/weather-forecasts')\n      .then(response => response.json())\n      .then(data => {\n        this.forecasts = data;\n      });\n  }\n}\n";
@@ -1141,11 +1246,11 @@ exports['web+aurelia/src/main/js/app/components/navmenu/navmenu.css'] = Handleba
 exports['web+aurelia/src/main/js/app/components/navmenu/navmenu.html'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "<template bindable=\"router\">\n    <require from=\"./navmenu.css\"></require>\n    <div class=\"main-nav\">\n        <div class=\"navbar navbar-inverse\">\n            <div class=\"navbar-header\">\n                <button type=\"button\" class=\"navbar-toggle\" data-toggle=\"collapse\" data-target=\".navbar-collapse\">\n                    <span class=\"sr-only\">Toggle navigation</span>\n                    <span class=\"icon-bar\"></span>\n                    <span class=\"icon-bar\"></span>\n                    <span class=\"icon-bar\"></span>\n                </button>\n                <a class=\"navbar-brand\" href=\"#/home\">WebApplicationBasic</a>\n            </div>\n            <div class=\"clearfix\"></div>\n            <div class=\"navbar-collapse collapse\">\n                <ul class=\"nav navbar-nav\">\n                    <li repeat.for = \"row of router.navigation\" class=\"${ row.isActive ? 'link-active' : '' }\" >\n                        <a href.bind = \"row.href\">\n                            <span class=\"glyphicon glyphicon-${ row.settings.icon }\"></span> ${ row.title }\n                        </a>\n                    </li>\n                </ul>\n            </div>\n        </div>\n    </div>\n</template>\n";
 },"useData":true})
-exports['editorconfig/.editorconfig'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "root = true\n\n[*]\ncharset = utf-8\nindent_style = space\nindent_size = 2\ntrim_trailing_whitespace = true\nend_of_line = lf\ninsert_final_newline = true";
-},"useData":true})
 exports['git/.gitignore'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "# build files\ntarget\nbuild\nlib_managed\n# runtime files\nnode_modules\n.vertx\n# ide\n.classpath\n.project\n.idea\n.vscode\n\n";
+},"useData":true})
+exports['editorconfig/.editorconfig'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "root = true\n\n[*]\ncharset = utf-8\nindent_style = space\nindent_size = 2\ntrim_trailing_whitespace = true\nend_of_line = lf\ninsert_final_newline = true";
 },"useData":true})
 exports['npm/.babelrc'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "{\n  \"presets\": [\"env\"]\n}\n";
