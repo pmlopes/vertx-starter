@@ -82,8 +82,8 @@ gulp.task('handlebars', function () {
     .pipe(concat('templates.js'))
     // Add the Handlebars module in the final output
     .pipe(wrap('var Handlebars = require("handlebars/runtime");\n' +
-      'require(\'../handlebars_helpers_loader.js\').load(Handlebars);\n' +
-      '<%= contents %>'))
+      '<%= contents %>\n' +
+      'require(\'../handlebars_helpers_loader.js\').load(Handlebars);'))
     // WRite the output into the templates folder
     .pipe(gulp.dest('src/gen'));
 });

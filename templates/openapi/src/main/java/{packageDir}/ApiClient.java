@@ -22,6 +22,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.Base64;
 
+import {{ package }}.models.*;
+
 public class ApiClient {
     private WebClient client;
     private int port;
@@ -30,9 +32,9 @@ public class ApiClient {
     {{#each security_schemas}}{{#eqAny  type 'http' 'basic'}}
     private String {{sanitized_schema_name}}_username;
     private String {{sanitized_schema_name}}_password;
-    {{/and}}{{#or (and (compare type '==' 'http') (compare type '==' 'bearer')) (compare type '==' 'apiKey') (compare type '==' 'oauth2') (compare type '==' 'openIdConnect')}}
+    {{/eqAny}}{{#or (and (eq type 'http') (eq schema 'bearer')) (eq type 'apiKey') (eq type 'oauth2') (eq type 'openIdConnect')}}
     private String {{sanitized_schema_name}}_token;
-    {{/or}}{{/forOwn}}
+    {{/or}}{{/each}}
 
     private MultiMap cookieParams;
 
@@ -50,79 +52,78 @@ public class ApiClient {
         cookieParams = MultiMap.caseInsensitiveMultiMap();
     }
 
-    {{#forOwn operations}}
+    {{#each operations}}
     {{#each functions}}
     /**
      * Call {{ ../operationId }} with {{#if json}}Json body{{else if form}}form {{contentType}} body{{else if stream}}{{contentType}} stream body{{else if buffer}}{{contentType}} buffer body{{else}}empty body{{/if}}. {{#if ../description}}
      * {{description}}{{/if}}
-{{#each ../parameters.path}}     * @param {{name}} Parameter {{oasParameter.name}} inside path
-{{/each}}{{#each ../parameters.cookie}}     * @param {{name}} Parameter {{oasParameter.name}} inside cookie
-{{/each}}{{#each ../parameters.query}}     * @param {{name}} Parameter {{oasParameter.name}} inside query
-{{/each}}{{#each ../parameters.header}}     * @param {{name}} Parameter {{oasParameter.name}} inside header
-{{/each}}{{#if json}}     * @param body Json object or bean that represents the body of the request
+{{#each ../parsedParameters.path}}     * @param {{sanitizedName}} Parameter {{name}} inside path
+{{/each}}{{#each ../parsedParameters.cookie}}     * @param {{sanitizedName}} Parameter {{name}} inside cookie
+{{/each}}{{#each ../parsedParameters.query}}     * @param {{sanitizedName}} Parameter {{name}} inside query
+{{/each}}{{#each ../parsedParameters.header}}     * @param {{sanitizedName}} Parameter {{name}} inside header
+{{/each}}{{#if json}}     * @param body {{type}} that represents the body of the request
 {{else if form}}     * @param form Form that represents the body of the request
 {{else if stream}}     * @param stream ReadStream that represents the body of the request
 {{else if buffer}}     * @param buffer Buffer that represents the body of the request
-{{else}}
 {{/if}}
      * @param handler The handler for the asynchronous request
      */
     public void {{name}}(
-{{#each ../parameters.path}}        {{languageType}} {{name}},
-{{/each}}{{#each ../parameters.cookie}}        {{languageType}} {{name}},
-{{/each}}{{#each ../parameters.query}}        {{languageType}} {{name}},
-{{/each}}{{#each ../parameters.header}}        {{languageType}} {{name}},
-{{/each}}        {{#if empty}}Handler<AsyncResult<HttpResponse>> handler{{else if json}}Object body, Handler<AsyncResult<HttpResponse>> handler{{else if form}}MultiMap form, Handler<AsyncResult<HttpResponse>> handler{{else if stream}}ReadStream<Buffer> stream, Handler<AsyncResult<HttpResponse>> handler{{else if buffer}}Buffer buffer, Handler<AsyncResult<HttpResponse>> handler{{else}}Handler<AsyncResult<HttpResponse>> handler{{/if}}) {
+{{#each ../parsedParameters.path}}        {{solveOasType 'java' schema @root.modelsCache}} {{sanitizedName}},
+{{/each}}{{#each ../parsedParameters.cookie}}        {{solveOasType 'java' schema @root.modelsCache}} {{sanitizedName}},
+{{/each}}{{#each ../parsedParameters.query}}        {{solveOasType 'java' schema @root.modelsCache}} {{sanitizedName}},
+{{/each}}{{#each ../parsedParameters.header}}        {{solveOasType 'java' schema @root.modelsCache}} {{sanitizedName}},
+{{/each}}        {{#if empty}}Handler<AsyncResult<HttpResponse>> handler{{else if json}}{{solveOasType 'java' schema @root.modelsCache}} body, Handler<AsyncResult<HttpResponse>> handler{{else if form}}MultiMap form, Handler<AsyncResult<HttpResponse>> handler{{else if stream}}ReadStream<Buffer> stream, Handler<AsyncResult<HttpResponse>> handler{{else if buffer}}Buffer buffer, Handler<AsyncResult<HttpResponse>> handler{{else}}Handler<AsyncResult<HttpResponse>> handler{{/if}}) {
         // Check required params
-        {{#each ../parameters.path}}if ({{name}} == null) throw new RuntimeException("Missing parameter {{name}} in {{oasParameter.in}}");
-        {{/each}}{{#each ../parameters.cookie}}{{#if required}}if ({{name}} == null) throw new RuntimeException("Missing parameter {{name}}");
-        {{/if}}{{/each}}{{#each ../parameters.query}}{{#if required}}if ({{name}} == null) throw new RuntimeException("Missing parameter {{name}}");
-        {{/if}}{{/each}}{{#each ../parameters.header}}{{#if required}}if ({{name}} == null) throw new RuntimeException("Missing parameter {{name}}");
+        {{#each ../parsedParameters.path}}if ({{sanitizedName}} == null) throw new NullPointerException("Missing parameter {{sanitizedName}} in {{in}}");
+        {{/each}}{{#each ../parsedParameters.cookie}}{{#if required}}if ({{sanitizedName}} == null) throw new NullPointerException("Missing parameter {{sanitizedName}} in {{in}}");
+        {{/if}}{{/each}}{{#each ../parsedParameters.query}}{{#if required}}if ({{sanitizedName}} == null) throw new NullPointerException("Missing parameter {{sanitizedName}} in {{in}}");
+        {{/if}}{{/each}}{{#each ../parsedParameters.header}}{{#if required}}if ({{sanitizedName}} == null) throw new NullPointerException("Missing parameter {{sanitizedName}} in {{in}}");
         {{/if}}{{/each}}
 
         // Generate the uri
-        String uri = "{{../path}}";{{#if ../parameters.path}}
+        String uri = "{{../path}}";{{#if ../parsedParameters.path}}
         {{{{raw-helper}}}}uri = uri.replaceAll("\\{{1}([.;?*+]*([^\\{\\}.;?*+]+)[^\\}]*)\\}{1}", "{$2}"); //Remove * . ; ? from url template{{{{/raw-helper}}}}
-        {{#each ../parameters.path}}uri = uri.replace("{{append (prepend oasParameter.name "{") "}"}}", this.{{renderFunctionName}}("{{oasParameter.name}}", {{name}}));
+        {{#each ../parsedParameters.path}}uri = uri.replace("{{concat "{" name "}"}}", this.{{renderFunctionName}}("{{name}}", {{castIfNeeded 'java' sanitizedName schema @root.modelsCache}}));
         {{/each}}{{/if}}
 
         HttpRequest request = client.{{ ../method }}(uri);
 
         MultiMap requestCookies = MultiMap.caseInsensitiveMultiMap();
-        {{#each ../parameters.cookie}}if ({{name}} != null) this.{{renderFunctionName}}("{{oasParameter.name}}", {{name}}, requestCookies);
-        {{/each}}{{#each ../parameters.header}}if ({{name}} != null) this.{{renderFunctionName}}("{{oasParameter.name}}", {{name}}, request);
-        {{/each}}{{#each ../parameters.query}}if ({{name}} != null) this.{{renderFunctionName}}("{{oasParameter.name}}", {{name}}, request);
+        {{#each ../parsedParameters.cookie}}if ({{sanitizedName}} != null) this.{{renderFunctionName}}("{{name}}", {{castIfNeeded 'java' sanitizedName schema @root.modelsCache}}, requestCookies);
+        {{/each}}{{#each ../parsedParameters.header}}if ({{sanitizedName}} != null) this.{{renderFunctionName}}("{{name}}", {{castIfNeeded 'java' sanitizedName schema @root.modelsCache}}, request);
+        {{/each}}{{#each ../parsedParameters.query}}if ({{sanitizedName}} != null) this.{{renderFunctionName}}("{{name}}", {{castIfNeeded 'java' sanitizedName schema @root.modelsCache}}, request);
         {{/each}}{{#if contentType}}this.addHeaderParam("Content-Type", "{{contentType}}", request);
-        {{/if}}{{#if ../security}}{{#forOwn ../security}}this.attach{{capitalize .}}Security(request, requestCookies);
-        {{/forOwn}}{{/if}}
+        {{/if}}{{#if ../security}}{{#each ../security}}this.attach{{capitalize .}}Security(request, requestCookies);
+        {{/each}}{{/if}}
 
         this.renderAndAttachCookieHeader(request, requestCookies);
-        {{#if empty}}request.send(handler);{{else if json}}request.sendJson(body, handler);{{else if form}}request.sendForm(form, handler);{{else if stream}}request.sendStream(stream, handler);{{else if buffer}}request.sendBuffer(buffer, handler);{{else}}request.send(handler);{{/if}}
+        {{#if empty}}request.send(handler);{{else if json}}request.sendJson({{castBodyIfNeeded 'java' 'body' schema @root.modelsCache}}, handler);{{else if form}}request.sendForm(form, handler);{{else if stream}}request.sendStream(stream, handler);{{else if buffer}}request.sendBuffer(buffer, handler);{{else}}request.send(handler);{{/if}}
     }
 
     {{/each}}
-    {{/forOwn}}
+    {{/each}}
 
     {{#if security_schemas}}// Security requirements functions
-    {{#forOwn security_schemas}}
+    {{#each security_schemas}}
     private void attach{{capitalize sanitized_schema_name}}Security (HttpRequest request, MultiMap cookies) {
-        {{#and (compare type '==' 'http') (compare type '==' 'basic')}}
+        {{#and (eq type 'http') (eq scheme 'basic')}}
         this.addHeaderParam("Authorization", "Basic " + Base64.getEncoder()
             .encode((this.{{sanitized_schema_name}}_username + ":" + this.{{sanitized_schema_name}}_password).getBytes()), request);
-        {{/and}}{{#or (and (compare type '==' 'http') (compare type '==' 'bearer')) (compare type '==' 'oauth2') (compare type '==' 'openIdConnect')}}
+        {{/and}}{{#or (and (eq type 'http') (eq scheme 'bearer')) (eq type 'oauth2') (eq type 'openIdConnect')}}
         this.addHeaderParam("Authorization", "Bearer " + {{sanitized_schema_name}}_token, request);
-        {{/or}}{{#compare type '==' 'apiKey'}}
-        {{#compare in '==' 'header'}}
+        {{/or}}{{#eq type 'apiKey'}}
+        {{#eq in 'header'}}
         this.addHeaderParam("{{name}}", this.{{sanitized_schema_name}}_token, request);
-        {{/compare}}{{#compare in '==' 'cookie'}}
+        {{/eq}}{{#eq in 'cookie'}}
         this.renderCookieParam("{{name}}", this.{{sanitized_schema_name}}_token, cookies);
-        {{/compare}}{{#compare in '==' 'query'}}
+        {{/eq}}{{#eq in 'query'}}
         this.addQueryParam("{{name}}", this.{{sanitized_schema_name}}_token, request);
-        {{/compare}}{{/compare}}
+        {{/eq}}{{/eq}}
     }
 
-    {{/forOwn}}{{/if}}{{#if security_schemas}}// Security parameters functions
-    {{#forOwn security_schemas}}{{#and (compare type '==' 'http') (compare type '==' 'basic')}}
+    {{/each}}{{/if}}{{#if security_schemas}}// Security parsedParameters functions
+    {{#each security_schemas}}{{#and (eq type 'http') (eq type 'basic')}}
     /**
      * Set username and password for basic http security scheme {{@key}}
      */
@@ -130,14 +131,14 @@ public class ApiClient {
         this.{{sanitized_schema_name}}_username = username;
         this.{{sanitized_schema_name}}_password = password;
     }
-    {{/and}}{{#or (and (compare type '==' 'http') (compare type '==' 'bearer')) (compare type '==' 'apiKey') (compare type '==' 'oauth2') (compare type '==' 'openIdConnect')}}
+    {{/and}}{{#or (and (eq type 'http') (eq scheme 'bearer')) (eq type 'apiKey') (eq type 'oauth2') (eq type 'openIdConnect')}}
     /**
      * Set access token for security scheme {{@key}}
      */
     public void set{{capitalize sanitized_schema_name}}Token(String token) {
         this.{{sanitized_schema_name}}_token = token;
     }
-    {{/or}}{{/forOwn}}{{/if}}
+    {{/or}}{{/each}}{{/if}}
 
     // Parameters functions
 
@@ -178,7 +179,7 @@ public class ApiClient {
     }
 
     /**
-     * Following this table to implement parameters serialization
+     * Following this table to implement parsedParameters serialization
      *
      +----------------+---------+---------------+-------------------------------------+----------------------------------------+
      | style          | explode | in            | array                               | object                                 |

@@ -52,7 +52,9 @@
     "group": "OpenAPI",
     "description": "OpenAPI client based on OpenAPI spec",
     "dependencies": [
-      "io.vertx:vertx-web-client"
+      "io.vertx:vertx-core",
+      "io.vertx:vertx-web-client",
+      "io-vertx:vertx-codegen"
     ],
     "fields" :[
       { "key": "openapi", "label": "OpenAPI file (YAML or JSON)", "type": "file", "required": true }
@@ -61,7 +63,9 @@
       {
         "id": "java",
         "templates": [
-          "openapi/src/main/resources/openapi.json"
+          "openapi/src/main/resources/openapi.json",
+          "openapi/src/main/java/{packageDir}/ApiClient.java",
+          "openapi/src/main/java/{packageDir}/models/{modelName}.java"
         ]
       }
     ]

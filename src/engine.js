@@ -1,6 +1,6 @@
 let _ = require('lodash')
 let JSZip = require('jszip')
-let openapiUtils = require('./openapi_utils.js');
+let OpenAPILoader = require('./openapi/OpenAPILoader').loadOpenAPIAndValidate;
 
 let resolveGenerator = require('./generators/generators.js').resolveGenerator;
 
@@ -22,8 +22,7 @@ let fieldsCallbacks = {
     return Promise.resolve()
   },
   "openapi": (project, value) => {
-    return openapiUtils
-      .loadOpenAPIAndValidate(value)
+    return OpenAPILoader(value)
       .then(openapi => {
         project.metadata.openapi = openapi;
         return Promise.resolve();

@@ -6,7 +6,7 @@ function compileAndAddToZip(project, templatePath, exec, zip) {
   // Write inside metadata dirName and fileName
   writeFileAndDirMetadata(project, templatePath)
 
-  let zfile = project.metadata.name + '/' + solveZipDir(project, templatePath);
+  let zfile = solveZipDir(project.metadata.name, project.metadata, templatePath);
 
   // locate handlebars template
   let fn = _.get(templateFunctions, templatePath)
@@ -37,14 +37,14 @@ function writeFileAndDirMetadata(project, templatePath) {
     project.metadata.fileName = templatePath.substring(lslash + 1, dot);
 }
 
-function solveZipDir(project, templatePath) {
+function solveZipDir(projectName, data, templatePath) {
     // first path element is always ignored
-    let zfile = templatePath.substr(templatePath.indexOf('/') + 1);
+    let zfile = projectName + '/' + templatePath.substr(templatePath.indexOf('/') + 1);
 
     // replace placeholders with variables if present
     zfile = zfile
         .replace(/{(.*?)}/g, function (match, varName) {
-            return project.metadata[varName] || '';
+            return data[varName] || '';
         }).replace(/\/\//, '/');
 
     return zfile;
