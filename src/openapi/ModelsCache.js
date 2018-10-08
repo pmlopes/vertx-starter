@@ -14,21 +14,24 @@ exports.ModelsCache = class ModelsCache {
         _.set(schema, "$ref", ref);
       }
       // Generate model only and only if this is not a solved ref already in models cache and is an object
-      if ((!schema["$ref"] || (!!schema["$ref"] && !this.hasModel(schema["$ref"]))) &&
-      schema.type === 'object') {
+      if (schema.type === 'object' && (!schema["$ref"] || (!!schema["$ref"] && !this.hasModel(schema["$ref"])))) {
         _.set(schema, "$thisref", thisRef)
         this.addModelToParse(thisRef, schema, maybeModelName);
+      } else if (schema.type === 'array' && (schema.items.type === 'object' || schema.items["$ref"])) {
+        schema.items = this.handleJustDiscoveredSchema(schema.items, thisRef + "/items", maybeModelName + "Item")
       }
       return schema;
     }
   
     addModelToParse(ref, jsonSchema, maybeModelName) {
-      if (!this.models[ref] && !_.find(this.models, m => m === jsonSchema) && jsonSchema.type === "object") {
-        this.models[ref] = jsonSchema;
+      if (jsonSchema.type === "object") {
+        if (!this.models[ref] && !_.find(this.models, m => m === jsonSchema)) {
+          this.models[ref] = jsonSchema;
+        }
+        this.models[ref].modelType = OpenAPISanitizers.toClassName(
+          this.models[ref].modelType || this.models[ref].title || maybeModelName
+        );
       }
-      this.models[ref].modelType = OpenAPISanitizers.toClassName(
-        this.models[ref].modelType || this.models[ref].title || maybeModelName
-      );
     }
   
     hasModel(ref) {

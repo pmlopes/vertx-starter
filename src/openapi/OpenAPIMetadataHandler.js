@@ -19,7 +19,7 @@ function solveFunctionNameForParameterRendering(language, paramLocation, type, s
 function solveOasType(language, schema, modelsCache) {
   if (schema["$thisref"]) {
     return modelsCache.models[schema["$thisref"]].modelType;
-  } else if (schema["$ref"]) {
+  } else if (schema["$ref"] && (!schema.type || schema.type !== "array")) {
     if (modelsCache.hasModel(schema["$ref"])) {
       return modelsCache.models[schema["$ref"]].modelType;
     } else {
