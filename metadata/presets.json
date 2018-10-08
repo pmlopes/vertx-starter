@@ -53,7 +53,7 @@
     "description": "OpenAPI client based on OpenAPI spec",
     "dependencies": [
       "io.vertx:vertx-core",
-      "io.vertx:vertx-codegen",
+      "io.vertx:vertx-codegen:processor",
       "io.vertx:vertx-web-client"
     ],
     "fields" :[
@@ -65,7 +65,8 @@
         "templates": [
           "openapi/src/main/resources/openapi.json",
           "openapi/src/main/java/{packageDir}/ApiClient.java",
-          "openapi/src/main/java/{packageDir}/models/{modelName}.java"
+          "openapi/src/main/java/{packageDir}/models/{modelName}.java",
+          "openapi/src/main/java/{packageDir}/models/package-info.java"
         ]
       }
     ]

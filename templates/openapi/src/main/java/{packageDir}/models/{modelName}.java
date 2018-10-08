@@ -9,7 +9,7 @@ import java.util.Map;
 @DataObject(generateConverter = true, publicConverter = false)
 public class {{modelName}} {
 
-{{#each schema.properties}}  {{solveOasType 'java' . ../modelsCache}} {{toVariableName @key}};
+{{#each schema.properties}}  private {{solveOasType 'java' . ../modelsCache}} {{toVariableName @key}};
 {{/each}}
 
   public {{modelName}} (
@@ -32,11 +32,11 @@ public class {{modelName}} {
     return json;
   }
 
-{{#each schema.properties}}  @Fluent {{../modelName}} set{{capitalize (toVariableName @key)}}({{solveOasType 'java' . ../modelsCache}} {{toVariableName @key}}){
+{{#each schema.properties}}  @Fluent public {{../modelName}} set{{capitalize (toVariableName @key)}}({{solveOasType 'java' . ../modelsCache}} {{toVariableName @key}}){
     this.{{toVariableName @key}} = {{toVariableName @key}};
     return this;
   }
-  {{solveOasType 'java' . ../modelsCache}} {{> getFnName name=@key type=type}}() {
+  public {{solveOasType 'java' . ../modelsCache}} {{> getFnName name=@key type=type}}() {
     return this.{{toVariableName @key}};
   }
 
