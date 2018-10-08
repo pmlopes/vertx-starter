@@ -7,7 +7,7 @@ let _ = require('lodash')
  * This also merges parameters from path definition and deference $refs
  * @param {*} openapi 
  */
-function getPathsByOperationIds(openapi) {
+function getPathsByOperationIds(openapi, failOnMissingOperationId = true) {
   let result = {};
   let oas = openapi.original;
   for (let key in oas.paths) {
@@ -15,7 +15,15 @@ function getPathsByOperationIds(openapi) {
     for (let method in path) {
       let operation = (path[method]["$ref"]) ? openapi.refs.get(path[method]["$ref"]) : path[method];
       let operationId = operation.operationId;
+      if (!operationId) {
+        if (failOnMissingOperationId) {
+          throw new Error("Missing operation id for operation " + method + " "  + key)
+        } else {
+          operationId = OpenAPISanitizers.generateOperationId(method, key);
+        }
+      }
       result[operationId] = _.cloneDeep(operation);
+      result[operationId]['operationId'] = operationId
       result[operationId]['parameters'] = _.unionBy(result[operationId]['parameters'], path.parameters, "name");
       result[operationId]['parameters'] = result[operationId]['parameters'].map((op) => (op["$ref"]) ? openapi.refs.get(op["$ref"]) : op);
       result[operationId]['method'] = _.clone(method);

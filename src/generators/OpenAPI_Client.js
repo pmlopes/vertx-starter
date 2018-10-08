@@ -27,7 +27,7 @@ let generate = (project, templates, zip) => {
     modelsCache.addModelToParse("#/components/schemas/" + name, schema, name);
   });
   
-  project.metadata.openapi.operations = OpenAPIUtils.getPathsByOperationIds(project.metadata.openapi)
+  project.metadata.openapi.operations = OpenAPIUtils.getPathsByOperationIds(project.metadata.openapi, false)
   
   _.forOwn(project.metadata.openapi.operations, (operation, key) => {
       // Generate functions based on request bodies
