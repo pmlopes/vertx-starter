@@ -14,7 +14,7 @@
       {
         "id": "java",
         "templates": [
-          "web+mongo/src/main/java/{package}/MainVerticle.java",
+          "web+mongo/src/main/java/{packageDir}/MainVerticle.java",
           "web+mongo/src/main/resources/templates/index.jade",
           "web+mongo/src/main/resources/templates/layout.jade",
           "web+mongo/src/main/resources/webroot/css/style.css",
@@ -40,9 +40,9 @@
       {
         "id": "java",
         "templates": [
-          "service-proxy/src/main/java/{package}/{Service}.java",
-          "service-proxy/src/main/java/{package}/MainVerticle.java",
-          "service-proxy/src/main/java/{package}/impl/{Service}Impl.java"
+          "service-proxy/src/main/java/{packageDir}/{Service}.java",
+          "service-proxy/src/main/java/{packageDir}/MainVerticle.java",
+          "service-proxy/src/main/java/{packageDir}/impl/{Service}Impl.java"
         ]
       }
     ]

@@ -20,11 +20,8 @@
       border-radius: 5px;
     }
   </style>
-  <script src="js/vendor.min.js"></script>
-  <!-- the app -->
-  <script src="js/app.min.js"></script>
-  <!-- code generation -->
-  <script src="js/templates.min.js" defer></script>
+
+  <script src="js/analytics.js"></script>
 </head>
 
 <body>
@@ -34,24 +31,18 @@
 
   <div class="site-wrap" data-is="main"></div>
 
-  <script type="text/javascript">
-    if ('serviceWorker' in navigator) {
+  <!-- the app -->
+  <script src="js/bundle.js"></script>
+  <script>
+      if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('sw.js');
     }
-
-    loadJSON('metadata.json', function(err, response) {
-      if (err) {
-        return alert('Error: ' + err);
-      }
-      riot.mount('*', JSON.parse(response));
-      route.start(true);
-    });
   </script>
-  <!-- Google Analytics -->
-  <script>
-    ga('create', 'UA-84828576-1', 'auto');
-    ga('send', 'pageview');
-  </script>
+  <!-- Google Analytics script -->
+  <script> 
+      ga('create', 'UA-84828576-1', 'auto'); 
+      ga('send', 'pageview'); 
+  </script> 
 </body>
 
 </html>

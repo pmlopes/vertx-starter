@@ -9,14 +9,16 @@
       { "key": "groupId", "label": "Maven Group Id", "prefill": "com.example" },
       { "key": "artifactId", "label": "Maven Artifact Id", "prefill": "myapp" },
       { "key": "version", "label": "Project Version", "prefill": "0.0.1-SNAPSHOT" },
-      { "key": "graalNativeImage", "label": "(Experimental!) native image support (requires: GraalVM)", "checkbox": true }
+      { "key": "graalNativeImage", "label": "(Experimental!) native image support (requires: GraalVM)", "type": "checkbox" }
     ],
     "languages": [
       {
         "id": "java",
-        "main": "{package}.MainVerticle",
+        "var_templates": {
+          "main": "{package}.MainVerticle"
+        },
         "templates": [
-          "verticle/src/main/java/{package}/MainVerticle.java"
+          "verticle/src/main/java/{packageDir}/MainVerticle.java"
         ]
       },
       {
@@ -35,9 +37,11 @@
       },
       {
         "id": "kotlin",
-        "main": "{package}.MainVerticle",
+        "var_templates": {
+          "main": "{package}.MainVerticle"
+        },
         "templates": [
-          "verticle/src/main/kotlin/{package}/MainVerticle.kt"
+          "verticle/src/main/kotlin/{packageDir}/MainVerticle.kt"
         ]
       },
       {
@@ -57,7 +61,7 @@
       "graal-nativeimage/src/main/svm/reflection.json",
       "graal-nativeimage/src/main/svm/substitutions.java"
     ],
-    "blob": "blobs/mvnw.zip",
+    "blob": "mvnw.zip",
     "executables": [
       "mvnw"
     ],
@@ -79,9 +83,11 @@
     "languages": [
       {
         "id": "java",
-        "main": "{package}.MainVerticle",
+        "var_templates": {
+          "main": "{package}.MainVerticle"
+        },
         "templates": [
-          "verticle/src/main/java/{package}/MainVerticle.java"
+          "verticle/src/main/java/{packageDir}/MainVerticle.java"
         ]
       },
       {
@@ -100,9 +106,11 @@
       },
       {
         "id": "kotlin",
-        "main": "{package}.MainVerticle",
+        "var_templates": {
+          "main": "{package}.MainVerticle"
+        },
         "templates": [
-          "verticle/src/main/kotlin/{package}/MainVerticle.kt"
+          "verticle/src/main/kotlin/{packageDir}/MainVerticle.kt"
         ]
       },
       {
@@ -118,7 +126,7 @@
       "editorconfig/.editorconfig",
       "gradle/build.gradle"
     ],
-    "blob": "blobs/gradlew.zip",
+    "blob": "gradlew.zip",
     "executables": [
       "gradlew"
     ],
@@ -160,7 +168,7 @@
       "editorconfig/.editorconfig",
       "npm/package.json"
     ],
-    "blob": "blobs/mvnw.zip",
+    "blob": "mvnw.zip",
     "executables": [
       "mvnw"
     ],
@@ -182,9 +190,11 @@
     "languages": [
       {
         "id": "scala",
-        "main": "{package}.MainVerticle",
+        "var_templates": {
+          "main": "{package}.MainVerticle"
+        },
         "templates": [
-          "sbt/src/main/scala/{package}/MainVerticle.scala"
+          "sbt/src/main/scala/{packageDir}/MainVerticle.scala"
         ]
       }
     ],
@@ -215,9 +225,15 @@
       "editorconfig/.editorconfig",
       "stack/vertx-stack.json"
     ],
-    "blob": "blobs/stack-min.zip",
+    "blob": "stack-min.zip",
     "defaults": [
       "io.vertx:vertx-core"
+    ],
+    "languages": [
+      {
+        "id": "js",
+        "main": "main-server.js"
+      }
     ]
   }
 ]
