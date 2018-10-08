@@ -53,8 +53,8 @@
     "description": "OpenAPI client based on OpenAPI spec",
     "dependencies": [
       "io.vertx:vertx-core",
-      "io.vertx:vertx-web-client",
-      "io-vertx:vertx-codegen"
+      "io.vertx:vertx-codegen",
+      "io.vertx:vertx-web-client"
     ],
     "fields" :[
       { "key": "openapi", "label": "OpenAPI file (YAML or JSON)", "type": "file", "required": true }

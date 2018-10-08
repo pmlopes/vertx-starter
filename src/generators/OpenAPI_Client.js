@@ -9,7 +9,7 @@ let OpenAPISanitizer = require('../openapi/OpenAPISanitizers')
 let generate = (project, templates, zip) => {
   // merge all templates to be processed
   templates = utils.mergeTemplates(project, templates);
-  templatesToProcess = templates.filter(t => !t.includes("modelName") && !t.includes("Client"));
+  let templatesToProcess = templates.filter(t => !t.includes("modelName") && !t.includes("Client"));
 
   // build all templates
   for (let i = 0; i < templatesToProcess.length; i++) {
