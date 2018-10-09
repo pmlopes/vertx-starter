@@ -2,20 +2,18 @@
 
 // Incrementing CACHE_VERSION will kick off the install event and force previously cached
 // resources to be cached again.
-var CACHE_VERSION = 'v3.5.4-0';
+var CACHE_VERSION = 'v3.5.4-2';
 
 self.addEventListener('install', function (event) {
   event.waitUntil(
     caches.open(CACHE_VERSION).then(function (cache) {
       return cache.addAll([
         '/',
-        'metadata.json',
         'index.html',
         'css/bundle.min.css',
-        'js/vendor.min.js',
-        'js/app.min.js',
-        'js/templates.min.js',
+        'js/bundle.js',
         'img/stack.svg',
+        'img/npm.svg',
         'favicon.ico',
         'apple-touch-icon.png',
         'blobs/stack.zip',
@@ -55,7 +53,8 @@ self.addEventListener('fetch', function (event) {
                 return response;
               });
             }
-            throw new Error('Failed to fetch resource.');
+            // failed to fetch, fallback
+            return response;
           })
           .catch(function (err) {
             throw err;
