@@ -43,22 +43,24 @@
         </div>
       </div>
 
-      <div if={ preset.fields } class="row">
-        <h5>Extra variables for { preset.id }:</h5>
-      </div>
+      <virtual if={ preset }>
+        <div if={ preset.fields } class="row">
+          <h5>Extra variables for { preset.id }:</h5>
+        </div>
 
-      <div each={ f, i in preset.fields } class="row">
-        <!-- iterate 2 at a time -->
-        <virtual if={ i % 2 === 0 }>
-          <div class="col-6">
-            <input name="{ preset.fields[i].key }" type={ parseFieldType(preset.fields[i]) } placeholder="{ preset.fields[i].label + (preset.fields[i].prefill ? ' e.g.: ' + preset.fields[i].prefill : '') }" required="{ preset.fields[i].required }">
-          </div>
-          <div class="col-6">
-            <!-- if there is a next one -->
-            <input if={ preset.fields[i+1] }  name="{ preset.fields[i+1].key }" type={ parseFieldType(preset.fields[i]) } placeholder="{ preset.fields[i+1].label + (preset.fields[i+1].prefill ? ' e.g.: ' + preset.fields[i+1].prefill : '') }" required="{ preset.fields[i+1].required }">
-          </div>
-        </virtual>
-      </div>
+        <div each={ f, i in preset.fields } class="row">
+          <!-- iterate 2 at a time -->
+          <virtual if={ i % 2 === 0 }>
+            <div class="col-6">
+              <input name="{ preset.fields[i].key }" type={ parseFieldType(preset.fields[i]) } placeholder="{ preset.fields[i].label + (preset.fields[i].prefill ? ' e.g.: ' + preset.fields[i].prefill : '') }" required="{ preset.fields[i].required }">
+            </div>
+            <div class="col-6">
+              <!-- if there is a next one -->
+              <input if={ preset.fields[i+1] }  name="{ preset.fields[i+1].key }" type={ parseFieldType(preset.fields[i]) } placeholder="{ preset.fields[i+1].label + (preset.fields[i+1].prefill ? ' e.g.: ' + preset.fields[i+1].prefill : '') }" required="{ preset.fields[i+1].required }">
+            </div>
+          </virtual>
+        </div>
+      </virtual>
 
       <div class="row">
         <div class="col-6">

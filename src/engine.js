@@ -77,10 +77,10 @@ function compileProject(project, trackFn, trackExceptionFn, loadBlob) {
     }
 
     if (project.buildtool.id == "npm") {
-        // filtered dependencies by scope "dev", "prod", "mvn"
-           project.npmDevDependencies = [];
-         project.npmProdDependencies = [];
-         project.npmMavenDependencies = [];
+      // filtered dependencies by scope "dev", "prod", "mvn"
+      project.npmDevDependencies = [];
+      project.npmProdDependencies = [];
+      project.npmMavenDependencies = [];
 
       project.dependencies.forEach(function (el) {
         if (el.npm) {

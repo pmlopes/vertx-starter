@@ -1,14 +1,16 @@
 {
-  "name": "vertx-starter",
+  "name": "create-vertx-app",
   "version": "0.0.1",
   "scripts": {
     "start": "cd dist && python3 -m http.server 8000",
     "cli": "node src/cli_entrypoint.js",
-    "build": "gulp",
+    "build:web": "gulp",
+    "build:cli": "gulp build-cli",
+    "build:all": "gulp && gulp build-cli",
     "deploy": "gulp deploy"
   },
   "bin": {
-    "vertx-starter": "./src/cli_entrypoint.js"
+    "create-vertx-app": "./src/cli_entrypoint.js"
   },
   "dependencies": {
     "handlebars": "^4.0.12",
@@ -17,20 +19,16 @@
     "jszip": "^3.1.5",
     "jszip-utils": "^0.0.2",
     "mkdirp": "^0.5.1",
-    "riot": "^3.12.0",
-    "riot-route": "^3.1.3",
     "swagger-parser": "^5.0.6",
-    "wingcss": "^1.0.0-beta",
     "commander": "^2.18.0"
   },
   "devDependencies": {
     "@babel/core": "7.0.0-beta.46",
     "@babel/preset-env": "7.0.0-beta.46",
     "babel-loader": "^8.0.0-beta.0",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.0",
     "gulp-concat": "^2.6.1",
     "gulp-declare": "^0.3.0",
-    "gulp-downloader": "^1.0.4",
     "gulp-gh-pages-gift": "^0.5.5",
     "gulp-jshint": "^2.1.0",
     "gulp-jsoncombine": "^1.0.4",
@@ -39,12 +37,14 @@
     "gulp-sourcemaps": "^2.6.4",
     "gulp-util": "^3.0.8",
     "gulp-wrap": "^0.14.0",
-    "riot": "^3.9.2",
+    "riot": "^3.12.0",
+    "riot-route": "^3.1.3",
     "riot-compiler": "^3.5.1",
     "riot-hot-reload": "1.0.0",
     "riot-tag-loader": "^2.0.2",
     "through2": "^2.0.3",
     "webpack": "^4.5.0",
-    "webpack-stream": "^5.1.1"
+    "webpack-stream": "^5.1.1",
+    "wingcss": "^1.0.0-beta"
   }
 }
