@@ -1,6 +1,6 @@
 {
   "name": "create-vertx-app",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "scripts": {
     "start": "cd dist && python3 -m http.server 8000",
     "cli": "node src/cli_entrypoint.js",
@@ -45,5 +45,9 @@
     "webpack": "^4.5.0",
     "webpack-stream": "^5.1.1",
     "wingcss": "^1.0.0-beta"
-  }
+  },
+  "files": [
+    "src/**/*",
+    "blobs/**/*"
+  ]
 }
