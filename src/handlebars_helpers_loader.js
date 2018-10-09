@@ -41,6 +41,7 @@ exports.load = Handlebars => {
   Handlebars.registerHelper('castIfNeeded', OpenAPIMetadataHandler.castIfNeeded);
   Handlebars.registerHelper('castBodyIfNeeded', OpenAPIMetadataHandler.castBodyIfNeeded);
   Handlebars.registerHelper('toVariableName', OpenAPISanitizers.toVariableName);
+  Handlebars.registerHelper('toClassName', OpenAPISanitizers.toClassName);
 
   Handlebars.registerHelper('capitalize', s => s.charAt(0).toUpperCase() + s.slice(1));
 
