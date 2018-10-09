@@ -107,9 +107,9 @@ gulp.task('default', gulp.series('build'));
 gulp.task('build-cli', gulp.series('handlebars', 'metadata'));
 
 // Deploy to gh-pages
-gulp.task('deploy', gulp.series('build'), function () {
+gulp.task('deploy', gulp.series('build', function () {
   return gulp.src('dist/**/*')
     .pipe(ghPages({
       push: true
     }));
-});
+}));
