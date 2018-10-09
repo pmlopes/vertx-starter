@@ -142,7 +142,7 @@ function buildOpenAPIBaseMetadata(oldOpenAPI, failOnMissingOperationId) {
 
 }
 
-function generateApiClient(project, clientTemplatePath, zip) {
+function generateApiClient(project, zip, clientTemplatePath, operationsMdTemplatePath) {
   var openapi = cloneOpenAPIMetadataContainer(project.metadata.openapi);
 
   // Generate method names
@@ -202,6 +202,20 @@ function generateApiClient(project, clientTemplatePath, zip) {
     false,
     zip
   )
+
+  // Render Operations.md if there is the template
+  if (operationsMdTemplatePath) {
+    utils.addToZip(
+      utils.solveZipDir(project.metadata.name, project.metadata, operationsMdTemplatePath),
+      templatesFunctions[operationsMdTemplatePath]({
+        project: project,
+        operations: openapi.operations,
+        modelsCache: openapi.modelsCache
+      }),
+      false,
+      zip
+    )
+  }
 
   return Promise.resolve(zip);
 
