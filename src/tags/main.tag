@@ -139,8 +139,10 @@
 
   <script>
 
-    let compileProject = require("../engine.js").compileProject
+    let compileProject = require("../engine.js").compileProject;
     let utils = require("../utils");
+    // if ga is not available don't crash
+    let ga = window.ga || function () {};
 
     import route from 'riot-route'
     import * as _ from "lodash"
