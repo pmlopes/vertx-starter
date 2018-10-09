@@ -2,7 +2,7 @@
 
 // Incrementing CACHE_VERSION will kick off the install event and force previously cached
 // resources to be cached again.
-var CACHE_VERSION = 'v3.5.4-2';
+var CACHE_VERSION = 'v3.5.4-3';
 
 self.addEventListener('install', function (event) {
   event.waitUntil(
@@ -41,24 +41,19 @@ self.addEventListener('fetch', function (event) {
     caches.match(event.request).then(function (response) {
       // caches.match() always resolves
       // but in case of success response will have value
-      if (response !== undefined) {
-        return response;
-      } else {
-        // always attempt to fetch first
-        return fetch(event.request)
-          .then(function (response) {
-            if (response.ok) {
-              return caches.open(CACHE_VERSION).then(function (cache) {
-                cache.put(event.request, response.clone());
-                return response;
-              });
-            }
-            // failed to fetch, fallback
-            return response;
-          })
-          .catch(function (err) {
-            throw err;
-          });
-      }
+      return response || fetch(event.request)
+        .then(function (response) {
+          if (response.ok) {
+            return caches.open(CACHE_VERSION).then(function (cache) {
+              cache.put(event.request, response.clone());
+              return response;
+            });
+          }
+          // failed to fetch, fallback
+          return response;
+        })
+        .catch(function (err) {
+          throw err;
+        });
     }));
 });
