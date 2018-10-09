@@ -12,3 +12,5 @@ dist/metadata.json
 dist/blobs
 # deployment
 .publish
+# test specs
+specs

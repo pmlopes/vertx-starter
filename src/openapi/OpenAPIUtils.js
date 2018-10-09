@@ -11,7 +11,7 @@ function cloneOpenAPIMetadataContainer(old) {
   return {
     refs: old.refs,
     original: _.cloneDeep(old.original),
-    securitySchemas: _.cloneDeep(old.securitySchemas),
+    securitySchemes: _.cloneDeep(old.securitySchemes),
     operations: _.cloneDeep(old.operations),
     modelsCache: old.modelsCache
   }
@@ -107,14 +107,6 @@ function buildOpenAPIBaseMetadata(oldOpenAPI, failOnMissingOperationId) {
       });
     }
 
-    // Map security functions
-    if (operation.security)
-      // Generate an object with security schemas as keys and sanitized secuirity schema names as values
-      operation.security = _.mapValues(
-        _.keyBy(_.flatten(_.map(operation.security, (value) => _.keys(value)))),
-        (value) => OpenAPISanitizers.sanitize(value)
-      );
-
     // Handle newly discovered parameters schemas and add to operation
     operation.parameters = _.mapValues(operation.parameters, (param, i) => {
       if (param.schema) {
@@ -142,13 +134,6 @@ function buildOpenAPIBaseMetadata(oldOpenAPI, failOnMissingOperationId) {
         );
       }
     });
-  });
-
-  // Prepare security schemas array
-  openapi.securitySchemas = _.get(openapi.original, 'components.securitySchemes', []);
-  _.forOwn(openapi.securitySchemas, (value, key) => {
-    value.schemeName = key;
-    value.sanitized_schema_name = magicReplace(key);
   });
 
   openapi.modelsCache = modelsCache;
@@ -210,7 +195,7 @@ function generateApiClient(project, clientTemplatePath, zip) {
     utils.solveZipDir(project.metadata.name, project.metadata, clientTemplatePath),
     templatesFunctions[clientTemplatePath]({
       package: project.metadata.package,
-      security_schemas: openapi.securitySchemas,
+      openapiSpec: openapi.original,
       operations: openapi.operations,
       modelsCache: openapi.modelsCache
     }),

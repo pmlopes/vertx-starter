@@ -30,14 +30,14 @@ public class ApiClient {
     private int port;
     private String host;
 
-    {{#each security_schemas}}{{#eqAny  type 'http' 'basic'}}
-    private String {{sanitized_schema_name}}_username;
-    private String {{sanitized_schema_name}}_password;
+{{#if openapiSpec.components.securitySchemes}}{{#each openapiSpec.components.securitySchemes}}{{#eqAny  type 'http' 'basic'}}
+    private String {{toVariableName @key}}_username;
+    private String {{toVariableName @key}}_password;
     {{/eqAny}}{{#or (and (eq type 'http') (eq schema 'bearer')) (eq type 'apiKey') (eq type 'oauth2') (eq type 'openIdConnect')}}
-    private String {{sanitized_schema_name}}_token;
+    private String {{toVariableName @key}}_token;
     {{/or}}{{/each}}
 
-    private MultiMap cookieParams;
+{{/if}}    private MultiMap cookieParams;
 
     ApiClient(Vertx vertx, String host, int port) {
         client = WebClient.create(vertx, new WebClientOptions().setDefaultHost(host).setDefaultPort(port));
@@ -95,7 +95,7 @@ public class ApiClient {
         {{/each}}{{#each ../parsedParameters.header}}if ({{sanitizedName}} != null) this.{{renderFunctionName}}("{{name}}", {{castIfNeeded 'java' sanitizedName schema @root.modelsCache}}, request);
         {{/each}}{{#each ../parsedParameters.query}}if ({{sanitizedName}} != null) this.{{renderFunctionName}}("{{name}}", {{castIfNeeded 'java' sanitizedName schema @root.modelsCache}}, request);
         {{/each}}{{#if contentType}}this.addHeaderParam("Content-Type", "{{contentType}}", request);
-        {{/if}}{{#if ../security}}{{#each ../security}}this.attach{{capitalize .}}Security(request, requestCookies);
+        {{/if}}{{#if ../security}}{{#each ../security}}this.attach{{capitalize (sanitize @key)}}Security(request, requestCookies);
         {{/each}}{{/if}}
 
         this.renderAndAttachCookieHeader(request, requestCookies);
@@ -105,39 +105,32 @@ public class ApiClient {
     {{/each}}
     {{/each}}
 
-    {{#if security_schemas}}// Security requirements functions
-    {{#each security_schemas}}
-    private void attach{{capitalize sanitized_schema_name}}Security (HttpRequest request, MultiMap cookies) {
-        {{#and (eq type 'http') (eq scheme 'basic')}}
-        this.addHeaderParam("Authorization", "Basic " + Base64.getEncoder()
-            .encode((this.{{sanitized_schema_name}}_username + ":" + this.{{sanitized_schema_name}}_password).getBytes()), request);
-        {{/and}}{{#or (and (eq type 'http') (eq scheme 'bearer')) (eq type 'oauth2') (eq type 'openIdConnect')}}
-        this.addHeaderParam("Authorization", "Bearer " + {{sanitized_schema_name}}_token, request);
-        {{/or}}{{#eq type 'apiKey'}}
-        {{#eq in 'header'}}
-        this.addHeaderParam("{{name}}", this.{{sanitized_schema_name}}_token, request);
-        {{/eq}}{{#eq in 'cookie'}}
-        this.renderCookieParam("{{name}}", this.{{sanitized_schema_name}}_token, cookies);
-        {{/eq}}{{#eq in 'query'}}
-        this.addQueryParam("{{name}}", this.{{sanitized_schema_name}}_token, request);
-        {{/eq}}{{/eq}}
+    {{#if openapiSpec.components.securitySchemes}}// Security requirements functions
+    {{#each openapiSpec.components.securitySchemes}}
+    private void attach{{capitalize (sanitize @key)}}Security (HttpRequest request, MultiMap cookies) {
+{{#and (eq type 'http') (eq scheme 'basic')}}        this.addHeaderParam("Authorization", "Basic " + Base64.getEncoder()
+            .encode((this.{{toVariableName @key}}_username + ":" + this.{{toVariableName @key}}_password).getBytes()), request);
+{{/and}}{{#or (and (eq type 'http') (eq scheme 'bearer')) (eq type 'oauth2') (eq type 'openIdConnect')}}        this.addHeaderParam("Authorization", "Bearer " + {{toVariableName @key}}_token, request);
+{{/or}}{{#if (eq type 'apiKey')}}{{#if (eq in 'header')}}        this.addHeaderParam("{{name}}", this.{{toVariableName @key}}_token, request);
+{{else if (eq in 'cookie')}}        this.renderCookieParam("{{name}}", this.{{toVariableName @key}}_token, cookies);
+{{else if (eq in 'query')}}        this.addQueryParam("{{name}}", this.{{toVariableName @key}}_token, request);{{/if}}{{/if}}
     }
 
-    {{/each}}{{/if}}{{#if security_schemas}}// Security parsedParameters functions
-    {{#each security_schemas}}{{#and (eq type 'http') (eq type 'basic')}}
+{{/each}}{{/if}}{{#if openapiSpec.components.securitySchemes}}    // Security parsedParameters functions
+    {{#each openapiSpec.components.securitySchemes}}{{#and (eq type 'http') (eq scheme 'basic')}}
     /**
      * Set username and password for basic http security scheme {{@key}}
      */
-    public void set{{capitalize sanitized_schema_name}}Params(String username, String password) {
-        this.{{sanitized_schema_name}}_username = username;
-        this.{{sanitized_schema_name}}_password = password;
+    public void set{{capitalize (sanitize @key)}}Params(String username, String password) {
+        this.{{toVariableName @key}}_username = username;
+        this.{{toVariableName @key}}_password = password;
     }
     {{/and}}{{#or (and (eq type 'http') (eq scheme 'bearer')) (eq type 'apiKey') (eq type 'oauth2') (eq type 'openIdConnect')}}
     /**
      * Set access token for security scheme {{@key}}
      */
-    public void set{{capitalize sanitized_schema_name}}Token(String token) {
-        this.{{sanitized_schema_name}}_token = token;
+    public void set{{capitalize (sanitize @key)}}Token(String token) {
+        this.{{toVariableName @key}}_token = token;
     }
     {{/or}}{{/each}}{{/if}}
 
