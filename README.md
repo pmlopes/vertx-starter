@@ -44,7 +44,9 @@ It allows the following properties:
 * `label` the label for the key
 * `required` boolean
 * `prefill` a default value for the key
-* `type` of the field. Allowed: `input`, `checkbox`. Default: `input`
+* `type` of the field. Allowed: `input`, `checkbox`, `file`. Default: `input`
+
+Note on `type: file`: In browser files are feed in the engine as string UTF-8 decoded, while on CLI they are paths to the file
 
 #### languages
 

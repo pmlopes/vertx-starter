@@ -48,6 +48,30 @@
     ]
   },
   {
+    "id": "OpenAPI Client",
+    "group": "OpenAPI",
+    "description": "OpenAPI client based on OpenAPI spec",
+    "dependencies": [
+      "io.vertx:vertx-core",
+      "io.vertx:vertx-codegen:processor",
+      "io.vertx:vertx-web-client"
+    ],
+    "fields" :[
+      { "key": "openapi", "label": "OpenAPI file (YAML or JSON)", "type": "file", "required": true }
+    ],
+    "languages": [
+      {
+        "id": "java",
+        "templates": [
+          "openapi/src/main/resources/openapi.json",
+          "openapi/src/main/java/{packageDir}/ApiClient.java",
+          "openapi/src/main/java/{packageDir}/models/{modelName}.java",
+          "openapi/src/main/java/{packageDir}/models/package-info.java"
+        ]
+      }
+    ]
+  },
+  {
     "id": "AngularJS",
     "group": "webapp",
     "description": "A simple webapp with a AngularJS",

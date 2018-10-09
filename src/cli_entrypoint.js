@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 let inquirer = require('inquirer')
-let util = require('util')
 let _ = require('lodash')
 let fs = require('fs')
 let path = require('path')
@@ -22,7 +21,7 @@ program
 
 function mapFieldsToPrompt(fields) {
     return fields.map(f => {
-    if (!f.type || f.type == 'input') {
+    if (!f.type || f.type === 'input' || f.type === "file") {
         let obj = {
             "name": f.key,
             "message": f.label,
@@ -31,7 +30,7 @@ function mapFieldsToPrompt(fields) {
         if (f.prefill)
             obj.default = f.prefill
         if (f.required)
-            obj.validate = val => (val && val.length > 0) ? true : false
+            obj.validate = val => !!(val && val.length > 0)
         else {
             obj.message = obj.message + " (Optional)"
             obj.filter = val => (val && val.length > 0) ? val : undefined
