@@ -9,6 +9,7 @@ src/gen
 dist/js
 dist/css
 dist/metadata.json
+dist/sw.js
 dist/blobs
 # deployment
 .publish

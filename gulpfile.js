@@ -12,6 +12,7 @@ var minify = require('gulp-minify-css');
 var webpack = require('webpack-stream');
 var through2 = require('through2');
 var gutil = require('gulp-util');
+var replace = require('gulp-replace');
 
 var path = require('path');
 
@@ -106,8 +107,16 @@ gulp.task('default', gulp.series('build'));
 
 gulp.task('build-cli', gulp.series('handlebars', 'metadata'));
 
+gulp.task('kill-cache', function() {
+  var packageJson = require('./package.json');
+
+  return gulp.src('src/sw.js')
+    .pipe(replace('release', 'v' + packageJson.version))
+    .pipe(gulp.dest('dist'));
+});
+
 // Deploy to gh-pages
-gulp.task('deploy', gulp.series('build', function () {
+gulp.task('deploy', gulp.series('kill-cache', 'build', function () {
   return gulp.src('dist/**/*')
     .pipe(ghPages({
       push: true
