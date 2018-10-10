@@ -27,6 +27,7 @@ function getOperations(openapi, failOnMissingOperationId) {
   for (let key in oas.paths) {
     let path = (oas.paths[key]["$ref"]) ? openapi.refs.get(oas.paths[key]["$ref"]) : oas.paths[key];
     for (let method in path) {
+      if (method === "parameters") continue;
       let operation = (path[method]["$ref"]) ? openapi.refs.get(path[method]["$ref"]) : path[method];
       let operationId = operation.operationId;
       if (!operationId) {
