@@ -1,59 +1,71 @@
 'use strict';
 
-// Incrementing CACHE_VERSION will kick off the install event and force previously cached
-// resources to be cached again.
-var CACHE_VERSION = 'v3.5.4-3';
+// Names of the two caches used in this version of the service worker.
+// The id should expand from git on every deploy.
+const PRECACHE = 'v0.0.3';
+const RUNTIME = 'runtime';
 
-self.addEventListener('install', function (event) {
+// A list of local resources we always want to be cached.
+const PRECACHE_URLS = [
+  // Alias for index.html
+  '/',
+  'index.html',
+  'css/bundle.min.css',
+  'js/bundle.js',
+  'img/stack.svg',
+  'img/npm.svg',
+  'favicon.ico',
+  'apple-touch-icon.png',
+  'blobs/stack.zip',
+  'blobs/mvnw.zip',
+  'blobs/gradlew.zip',
+  'blobs/stack-min.zip'
+];
+
+// The install handler takes care of precaching the resources we always need.
+self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_VERSION).then(function (cache) {
-      return cache.addAll([
-        '/',
-        'index.html',
-        'css/bundle.min.css',
-        'js/bundle.js',
-        'img/stack.svg',
-        'img/npm.svg',
-        'favicon.ico',
-        'apple-touch-icon.png',
-        'blobs/stack.zip',
-        'blobs/mvnw.zip',
-        'blobs/gradlew.zip',
-        'blobs/stack-min.zip'
-      ]);
-    }));
+    caches.open(PRECACHE)
+      .then(cache => cache.addAll(PRECACHE_URLS))
+      .then(self.skipWaiting())
+  );
 });
 
-self.addEventListener('activate', function (event) {
+// The activate handler takes care of cleaning up old caches.
+self.addEventListener('activate', event => {
+  const currentCaches = [PRECACHE, RUNTIME];
   event.waitUntil(
-    caches.keys().then(function (cacheNames) {
-      return Promise.all(
-        cacheNames.map(function (cacheName) {
-          if (CACHE_VERSION !== cacheName) {
-            return caches.delete(cacheName);
-          }
-        }));
-    }));
+    caches.keys().then(cacheNames => {
+      return cacheNames.filter(cacheName => !currentCaches.includes(cacheName));
+    }).then(cachesToDelete => {
+      return Promise.all(cachesToDelete.map(cacheToDelete => {
+        return caches.delete(cacheToDelete);
+      }));
+    }).then(() => self.clients.claim())
+  );
 });
 
-self.addEventListener('fetch', function (event) {
-  event.respondWith(
-    caches.match(event.request).then(function (response) {
-      // caches.match() always resolves
-      // but in case of success response will have value
-      return response || fetch(event.request)
-        .then(function (response) {
-          if (response.ok) {
-            return caches.open(CACHE_VERSION).then(function (cache) {
-              cache.put(event.request, response.clone());
+// The fetch handler serves responses for same-origin resources from a cache.
+// If no response is found, it populates the runtime cache with the response
+// from the network before returning it to the page.
+self.addEventListener('fetch', event => {
+  // Skip cross-origin requests, like those for Google Analytics.
+  if (event.request.url.startsWith(self.location.origin)) {
+    event.respondWith(
+      caches.match(event.request).then(cachedResponse => {
+        if (cachedResponse) {
+          return cachedResponse;
+        }
+
+        return caches.open(RUNTIME).then(cache => {
+          return fetch(event.request).then(response => {
+            // Put a copy of the response in the runtime cache.
+            return cache.put(event.request, response.clone()).then(() => {
               return response;
             });
-          }
-          // failed to fetch, fallback
-          return response;
-        })
-        .catch(function (err) {
-          throw err;
+          });
         });
-    }));
+      })
+    );
+  }
 });
