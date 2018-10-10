@@ -10,6 +10,7 @@ dist/js
 dist/css
 dist/metadata.json
 dist/sw.js
+dist/index.html
 dist/blobs
 # deployment
 .publish

@@ -110,8 +110,8 @@ gulp.task('build-cli', gulp.series('handlebars', 'metadata'));
 gulp.task('kill-cache', function() {
   var packageJson = require('./package.json');
 
-  return gulp.src('src/sw.js')
-    .pipe(replace('release', 'v' + packageJson.version))
+  return gulp.src(['src/sw.js', 'src/index.html'])
+    .pipe(replace('$version$', 'v' + packageJson.version))
     .pipe(gulp.dest('dist'));
 });
 

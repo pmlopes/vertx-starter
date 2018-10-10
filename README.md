@@ -112,4 +112,4 @@ npm run build
 
 ## Release
 
-When releasing if the JSON files have been touched, the version should be bumped in the index.html, to invalidate caches.
+Increase the version in `package.json` will generate a new `sw.js` cache version and invalidate the old one.
