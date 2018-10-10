@@ -66,7 +66,9 @@
           "openapi/src/main/resources/openapi.json",
           "openapi/src/main/java/{packageDir}/ApiClient.java",
           "openapi/src/main/java/{packageDir}/models/{modelName}.java",
-          "openapi/src/main/java/{packageDir}/models/package-info.java"
+          "openapi/src/main/java/{packageDir}/models/package-info.java",
+          "openapi-client/README.md",
+          "openapi-client/Operations.md"
         ]
       }
     ]

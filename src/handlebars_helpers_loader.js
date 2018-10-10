@@ -37,10 +37,18 @@ exports.load = Handlebars => {
     return JSON.stringify(obj, null, indent);
   });
 
+  Handlebars.registerHelper('split', function(str, splitter) {
+    return str.split(splitter);
+  })
+
+  Handlebars.registerHelper('get', (obj, i, def) => _.get(obj, i, def))
+
   Handlebars.registerHelper('solveOasType', OpenAPIMetadataHandler.solveOasType);
   Handlebars.registerHelper('castIfNeeded', OpenAPIMetadataHandler.castIfNeeded);
   Handlebars.registerHelper('castBodyIfNeeded', OpenAPIMetadataHandler.castBodyIfNeeded);
   Handlebars.registerHelper('toVariableName', OpenAPISanitizers.toVariableName);
+  Handlebars.registerHelper('toClassName', OpenAPISanitizers.toClassName);
+  Handlebars.registerHelper('sanitize', OpenAPISanitizers.sanitize)
 
   Handlebars.registerHelper('capitalize', s => s.charAt(0).toUpperCase() + s.slice(1));
 
@@ -73,9 +81,8 @@ exports.load = Handlebars => {
   }
 
   Handlebars.registerHelper('and', generateConditionalHelper(andBooleanArray))
-
   Handlebars.registerHelper('or', generateConditionalHelper(orBooleanArray))
-
   Handlebars.registerHelper('eqAny', generateConditionalHelper(eqAnyArray))
-
+  Handlebars.registerHelper('nonEmpty', generateConditionalHelper(arr => !_.isEmpty(arr[0])))
+  Handlebars.registerHelper('isEmpty', generateConditionalHelper(arr => _.isEmpty(arr[0])))
 };

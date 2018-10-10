@@ -641,7 +641,8 @@
     "groupId": "junit",
     "artifactId": "junit",
     "version": "4.12",
-    "description": "Java Unit Testing."
+    "description": "Java Unit Testing.",
+    "scope": "test"
   },
   {
     "groupId": "io.reactiverse",
