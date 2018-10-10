@@ -15,12 +15,12 @@
         <virtual if={ i % 2 === 0 }>
           <div class="col-6">
             <input name="{ tool.fields[i].key }" type={ parseFieldType(tool.fields[i]) } placeholder="{ tool.fields[i].label + (tool.fields[i].prefill ? ' e.g.: ' + tool.fields[i].prefill : '') }" required="{ tool.fields[i].required }">
-            <label if={ parseFieldType(tool.fields[i]) == 'checkbox' }><br><i>{ tool.fields[i].label + (tool.fields[i].prefill ? ' e.g.: ' + tool.fields[i].prefill : '') }</i></label>
+            <label if={ parseFieldType(tool.fields[i]) == 'checkbox' || parseFieldType(tool.fields[i]) == 'file' }><br><i>{ tool.fields[i].label + (tool.fields[i].prefill ? ' e.g.: ' + tool.fields[i].prefill : '') }</i></label>
           </div>
           <div class="col-6">
             <!-- if there is a next one -->
             <input if={ tool.fields[i+1] }  name="{ tool.fields[i+1].key }" type={ parseFieldType(tool.fields[i + 1]) } placeholder="{ tool.fields[i+1].label + (tool.fields[i+1].prefill ? ' e.g.: ' + tool.fields[i+1].prefill : '') }" required="{ tool.fields[i+1].required }">
-            <label if={ tool.fields[i+1] && parseFieldType(tool.fields[i + 1]) == 'checkbox' }><br><i>{ tool.fields[i+1].label + (tool.fields[i+1].prefill ? ' e.g.: ' + tool.fields[i+1].prefill : '') }</i></label>
+            <label if={ tool.fields[i+1] && (parseFieldType(tool.fields[i + 1]) == 'checkbox' || parseFieldType(tool.fields[i + 1]) == 'file') }><br><i>{ tool.fields[i+1].label + (tool.fields[i+1].prefill ? ' e.g.: ' + tool.fields[i+1].prefill : '') }</i></label>
           </div>
         </virtual>
       </div>
@@ -53,10 +53,12 @@
           <virtual if={ i % 2 === 0 }>
             <div class="col-6">
               <input name="{ preset.fields[i].key }" type={ parseFieldType(preset.fields[i]) } placeholder="{ preset.fields[i].label + (preset.fields[i].prefill ? ' e.g.: ' + preset.fields[i].prefill : '') }" required="{ preset.fields[i].required }">
+              <label if={ parseFieldType(preset.fields[i]) == 'checkbox' || parseFieldType(preset.fields[i]) == 'file' }><br><i>{ preset.fields[i].label + (preset.fields[i].prefill ? ' e.g.: ' + preset.fields[i].prefill : '') }</i></label>
             </div>
             <div class="col-6">
               <!-- if there is a next one -->
               <input if={ preset.fields[i+1] }  name="{ preset.fields[i+1].key }" type={ parseFieldType(preset.fields[i]) } placeholder="{ preset.fields[i+1].label + (preset.fields[i+1].prefill ? ' e.g.: ' + preset.fields[i+1].prefill : '') }" required="{ preset.fields[i+1].required }">
+              <label if={ preset.fields[i+1] && (parseFieldType(preset.fields[i + 1]) == 'checkbox' || parseFieldType(preset.fields[i + 1]) == 'file') }><br><i>{ preset.fields[i+1].label + (preset.fields[i+1].prefill ? ' e.g.: ' + preset.fields[i+1].prefill : '') }</i></label>
             </div>
           </virtual>
         </div>
@@ -230,7 +232,7 @@
           dependencies: []
         });
       }
-    }
+    };
 
     this.filterPresets = utils.filterPresets(opts.presets);
 
@@ -245,11 +247,11 @@
         } while (obj);
         return [curtop];
       }
-    }
+    };
 
     this.parseFieldType = (field) => {
       return (!field.type || field.type === 'input') ? 'text' : field.type
-    }
+    };
 
     this.changeLanguage = (e) => {
       // carry on with the task...
@@ -310,7 +312,7 @@
         language: newLang,
         dependencies: selection
       });
-    }
+    };
 
     this.changePreset = (e) => {
       // carry on with the task...
@@ -381,7 +383,7 @@
         preset: newPreset,
         dependencies: selection
       });
-    }
+    };
 
     this.toggleDependency = (e) => {
       // carry on with the task...
@@ -392,7 +394,7 @@
         downloading: false,
         dependencies: this.dependencies
       });
-    }
+    };
 
     this.setFieldValue = e => field => {
       if (!field.type) field.type = "input";
@@ -519,7 +521,7 @@
         // the project name
         name: e.target.name.value
       });
-    }
+    };
 
     this.clean = (e) => {
       // disable the link after click
@@ -527,7 +529,7 @@
         this.downloading = false;
         this.update();
       }, 500);
-    }
+    };
 
     this.search = (e) => {
       // create a filter index
@@ -563,7 +565,7 @@
         notfound: needle.length > 0 && cnt === 0,
         dependencies : found
       });
-    }
+    };
 
     var r = route.create();
     // bind to the right route
