@@ -85,7 +85,7 @@ public class ApiClient {
         // Generate the uri
         String uri = "{{get (split ../path "?") 0}}";{{#if ../parsedParameters.path}}
         {{{{raw-helper}}}}uri = uri.replaceAll("\\{{1}([.;?*+]*([^\\{\\}.;?*+]+)[^\\}]*)\\}{1}", "{$2}"); //Remove * . ; ? from url template{{{{/raw-helper}}}}
-        {{#each ../parsedParameters.path}}uri = uri.replace("{{concat "{" name "}"}}", this.{{renderFunctionName}}("{{name}}", {{castIfNeeded 'java' sanitizedName schema @root.modelsCache}}));
+        {{#each ../parsedParameters.path}}uri = uri.replace("{{brace name}}", this.{{renderFunctionName}}("{{name}}", {{castIfNeeded 'java' sanitizedName schema @root.modelsCache}}));
         {{/each}}{{/if}}
 
         HttpRequest request = client.{{ ../method }}(uri);

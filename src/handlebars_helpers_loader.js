@@ -64,7 +64,7 @@ exports.load = Handlebars => {
     return utils.value(a === b, this, options);
   })
 
-  Handlebars.registerHelper('concat', (s1, ...s2) => s1.concat(...s2));
+  Handlebars.registerHelper('brace', s => "{" + s + "}");
 
   function orBooleanArray(arr) {
     return _.reduce(arr, (r, y) => r || y, false);
@@ -85,4 +85,5 @@ exports.load = Handlebars => {
   Handlebars.registerHelper('eqAny', generateConditionalHelper(eqAnyArray))
   Handlebars.registerHelper('nonEmpty', generateConditionalHelper(arr => !_.isEmpty(arr[0])))
   Handlebars.registerHelper('isEmpty', generateConditionalHelper(arr => _.isEmpty(arr[0])))
+  Handlebars.registerHelper('size', _.size)
 };

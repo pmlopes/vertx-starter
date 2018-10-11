@@ -11,7 +11,6 @@ function cloneOpenAPIMetadataContainer(old) {
   return {
     refs: old.refs,
     original: _.cloneDeep(old.original),
-    securitySchemes: _.cloneDeep(old.securitySchemes),
     operations: _.cloneDeep(old.operations),
     modelsCache: old.modelsCache
   }
@@ -22,7 +21,7 @@ function cloneOpenAPIMetadataContainer(old) {
  * This also merges parameters from path definition and deference $refs
  * @param {*} openapi 
  */
-function getPathsByOperationIds(openapi, failOnMissingOperationId = true) {
+function getOperations(openapi, failOnMissingOperationId) {
   let result = {};
   let oas = openapi.original;
   for (let key in oas.paths) {
@@ -61,14 +60,13 @@ function extractParametersOrganizedByIn(operation, language) {
   if (operation.parameters)
     _.forEach(operation.parameters, (e) => {
       e.sanitizedName = OpenAPISanitizers.toVariableName(e.name);
-      e.renderFunctionName = OpenAPIMetadatahandler.solveFunctionNameForParameterRendering(language, e.in, e.schema.type, e.style, e.explode)
       result[e.in].push(e);
     });
 
   return result;
 }
 
-function buildOpenAPIBaseMetadata(oldOpenAPI, failOnMissingOperationId) {
+function buildOpenAPIBaseMetadata(oldOpenAPI, language, failOnMissingOperationId) {
   var openapi = {
     refs: oldOpenAPI.refs,
     original: _.cloneDeep(oldOpenAPI.original)
@@ -81,7 +79,7 @@ function buildOpenAPIBaseMetadata(oldOpenAPI, failOnMissingOperationId) {
       modelsCache.addModelToParse("#/components/schemas/" + name, schema, name);
     });
 
-  openapi.operations = getPathsByOperationIds(openapi, failOnMissingOperationId)
+  openapi.operations = getOperations(openapi, failOnMissingOperationId)
 
   _.forOwn(openapi.operations, (operation, key) => {
     // Load $ref
@@ -121,7 +119,7 @@ function buildOpenAPIBaseMetadata(oldOpenAPI, failOnMissingOperationId) {
 
     // Remap parameters in object organized by parameter location
     operation.parsedParameters = extractParametersOrganizedByIn(
-      operation, "java"
+      operation, language
     )
 
     // Solve responses models
@@ -142,11 +140,26 @@ function buildOpenAPIBaseMetadata(oldOpenAPI, failOnMissingOperationId) {
 
 }
 
-function generateApiClient(project, zip, clientTemplatePath, operationsMdTemplatePath) {
+function generateApiClientOpenapiMetadata(project) {
   var openapi = cloneOpenAPIMetadataContainer(project.metadata.openapi);
+  let language = project.language.id
 
   // Generate method names
   _.forOwn(openapi.operations, (operation, key) => {
+    // Generate render function names for parameters
+    operation.parsedParameters.header.forEach((e) => {
+      e.renderFunctionName = OpenAPIMetadatahandler.solveFunctionNameForParameterRendering(language, e.in, e.schema.type, e.style, e.explode)
+    });
+    operation.parsedParameters.query.forEach((e) => {
+      e.renderFunctionName = OpenAPIMetadatahandler.solveFunctionNameForParameterRendering(language, e.in, e.schema.type, e.style, e.explode)
+    });
+    operation.parsedParameters.cookie.forEach((e) => {
+      e.renderFunctionName = OpenAPIMetadatahandler.solveFunctionNameForParameterRendering(language, e.in, e.schema.type, e.style, e.explode)
+    });
+    operation.parsedParameters.path.forEach((e) => {
+      e.renderFunctionName = OpenAPIMetadatahandler.solveFunctionNameForParameterRendering(language, e.in, e.schema.type, e.style, e.explode)
+    });
+
     // Generate functions based on request bodies
     let baseFunctionName = OpenAPISanitizers.sanitize(key);
     operation.functions = [];
@@ -189,6 +202,11 @@ function generateApiClient(project, zip, clientTemplatePath, operationsMdTemplat
       });
     }
   });
+
+  return openapi;
+}
+
+function generateApiClient(project, openapi, zip, clientTemplatePath, operationsMdTemplatePath) {
 
   // Render client template
   utils.addToZip(
@@ -239,8 +257,9 @@ function generateModels(project, modelTemplatePath, zip) {
   return Promise.resolve(zip)
 }
 
-exports.getPathsByOperationIds = getPathsByOperationIds;
+exports.getOperations = getOperations;
 exports.extractParametersOrganizedByIn = extractParametersOrganizedByIn;
 exports.buildOpenAPIBaseMetadata = buildOpenAPIBaseMetadata;
+exports.generateApiClientOpenapiMetadata = generateApiClientOpenapiMetadata;
 exports.generateApiClient = generateApiClient;
 exports.generateModels = generateModels;
