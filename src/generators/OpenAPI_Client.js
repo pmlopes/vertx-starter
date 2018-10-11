@@ -27,7 +27,10 @@ let generate = (project, templates, zip) => {
 
   return OpenAPIUtils
     .generateModels(project, modelTemplatePath, zip)
-    .then(zip => OpenAPIUtils.generateApiClient(project, zip, clientTemplatePath, operationsMdTemplatePath))
+    .then(zip => {
+      let openapiClientMetadata = OpenAPIUtils.generateApiClientOpenapiMetadata(project)
+      return OpenAPIUtils.generateApiClient(project, openapiClientMetadata, zip, clientTemplatePath, operationsMdTemplatePath)
+    })
 };
 
 exports.generate = generate;
