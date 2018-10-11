@@ -1,12 +1,12 @@
 {
   "name": "create-vertx-app",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "scripts": {
     "start": "cd dist && python3 -m http.server 8000",
     "cli": "node src/cli_entrypoint.js",
-    "build:web": "gulp",
+    "build:web": "gulp build kill-cache",
     "build:cli": "gulp build-cli",
-    "build": "gulp && gulp build-cli",
+    "build": "gulp build kill-cache && gulp build-cli",
     "deploy": "gulp deploy"
   },
   "bin": {
