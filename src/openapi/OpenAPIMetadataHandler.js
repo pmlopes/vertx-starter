@@ -35,6 +35,25 @@ function solveOasType(language, schema, modelsCache) {
     return solvePrimitiveOasType(language, schema.type, schema.format);
 }
 
+function solveOasTypeForService(language, schema, modelsCache) {
+  if (schema["$thisref"]) {
+    return modelsCache.models[schema["$thisref"]].modelType;
+  } else if (schema["$ref"] && (!schema.type || schema.type !== "array")) {
+    if (modelsCache.hasModel(schema["$ref"])) {
+      return modelsCache.models[schema["$ref"]].modelType;
+    } else {
+      return "RequestParameter";
+    }
+  } else if (schema.type === "array") {
+    return oasMetadata.types_map[language].array_template(
+      solveOasType(language, schema.items, modelsCache)
+    )
+  } else if (_.has(schema, "anyOf") && _.has(schema, "oneOf") && _.has(schema, "allOf")) {
+    return "RequestParameter";
+  } else
+    return solvePrimitiveOasType(language, schema.type, schema.format);
+}
+
 function castIfNeeded(language, paramName, schema, modelsCache) {
   if (schema["$thisref"]) {
     return oasMetadata.types_conversion[language].model_to_map(paramName);
@@ -75,6 +94,7 @@ function isPrimitiveType(language, langType) {
 exports.solvePrimitiveOasType = solvePrimitiveOasType
 exports.solveFunctionNameForParameterRendering = solveFunctionNameForParameterRendering
 exports.solveOasType = solveOasType
+exports.solveOasTypeForService = solveOasTypeForService
 exports.isPrimitiveType = isPrimitiveType
 exports.castIfNeeded = castIfNeeded
 exports.castBodyIfNeeded = castBodyIfNeeded

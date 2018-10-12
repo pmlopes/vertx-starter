@@ -107,6 +107,43 @@
     ]
   },
   {
+    "id": "OpenAPI Server With Event Bus Services",
+    "group": "OpenAPI",
+    "description": "OpenAPI server that routes requests to event bus with Vert.x Web, Vert.x Web API Contract and Vert.x Web API Codegen based on OpenAPI spec",
+    "dependencies": [
+      "io.vertx:vertx-core",
+      "io.vertx:vertx-codegen:processor",
+      "io.vertx:vertx-web",
+      "io.vertx:vertx-web-api-contract",
+      "io.vertx:vertx-web-api-codegen:processor",
+      "io.vertx:vertx-web-client",
+      "junit:junit",
+      "io.vertx:vertx-unit"
+    ],
+    "fields" :[
+      { "key": "openapi", "label": "OpenAPI file (YAML or JSON)", "type": "file", "required": true }
+    ],
+    "languages": [
+      {
+        "id": "java",
+        "templates": [
+          "openapi/src/main/resources/openapi.json",
+          "openapi/src/main/java/{packageDir}/ApiClient.java",
+          "openapi/src/main/java/{packageDir}/models/{modelName}.java",
+          "openapi/src/main/java/{packageDir}/models/package-info.java",
+          "openapi-server/src/main/java/{packageDir}/handlers/{operationId}Handler.java",
+          "openapi-server/src/main/java/{packageDir}/security/{securitySchemaId}Handler.java",
+          "openapi-server/src/test/java/{packageDir}/{operationId}Test.java",
+          "openapi-server/src/test/java/{packageDir}/BaseTest.java",
+          "openapi-server-sp/src/main/java/{packageDir}/MainVerticle.java",
+          "openapi-server-sp/src/main/java/{packageDir}/services/{serviceName}.java",
+          "openapi-server-sp/src/main/java/{packageDir}/services/impl/{serviceName}Impl.java",
+          "openapi-server-sp/src/test/java/{packageDir}/services/{serviceName}Test.java"
+        ]
+      }
+    ]
+  },
+  {
     "id": "AngularJS",
     "group": "webapp",
     "description": "A simple webapp with a AngularJS",
