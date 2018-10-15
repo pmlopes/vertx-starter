@@ -1,4 +1,4 @@
-package {{package}};
+package {{package}}.services;
 
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;

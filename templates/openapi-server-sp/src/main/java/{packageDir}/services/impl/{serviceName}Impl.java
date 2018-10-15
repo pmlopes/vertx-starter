@@ -1,4 +1,4 @@
-package {{package}};
+package {{package}}.services.impl;
 
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
@@ -21,7 +21,7 @@ public class {{serviceName}}Impl implements {{serviceName}} {
   }
 
 {{#each operations}}  @Override
-  void {{serviceMethodName}}(
+  public void {{serviceMethodName}}(
 {{#each parsedParameters.path}}    {{solveOasTypeForService 'java' schema @root.modelsCache}} {{sanitizedName}},
 {{/each}}{{#each parsedParameters.cookie}}    {{solveOasTypeForService 'java' schema @root.modelsCache}} {{sanitizedName}},
 {{/each}}{{#each parsedParameters.query}}    {{solveOasTypeForService 'java' schema @root.modelsCache}} {{sanitizedName}},

@@ -26,7 +26,7 @@ exports.ModelsCache = class ModelsCache {
     addModelToParse(ref, jsonSchema, maybeModelName) {
       if (jsonSchema.type === "object") {
         if (!this.models[ref] && !_.find(this.models, m => m === jsonSchema)) {
-          this.models[ref] = jsonSchema;
+          this.models[ref] = _.cloneDeep(jsonSchema);
         }
         this.models[ref].modelType = OpenAPISanitizers.toClassName(
           this.models[ref].modelType || this.models[ref].title || maybeModelName

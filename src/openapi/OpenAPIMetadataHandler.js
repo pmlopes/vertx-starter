@@ -29,7 +29,7 @@ function solveOasType(language, schema, modelsCache) {
     return oasMetadata.types_map[language].array_template(
       solveOasType(language, schema.items, modelsCache)
     )
-  } else if (_.has(schema, "anyOf") && _.has(schema, "oneOf") && _.has(schema, "allOf")) {
+  } else if (_.has(schema, "anyOf") || _.has(schema, "oneOf") || _.has(schema, "allOf")) {
     return oasMetadata.types_map[language].default;
   } else
     return solvePrimitiveOasType(language, schema.type, schema.format);
@@ -48,7 +48,7 @@ function solveOasTypeForService(language, schema, modelsCache) {
     return oasMetadata.types_map[language].array_template(
       solveOasType(language, schema.items, modelsCache)
     )
-  } else if (_.has(schema, "anyOf") && _.has(schema, "oneOf") && _.has(schema, "allOf")) {
+  } else if (_.has(schema, "anyOf") || _.has(schema, "oneOf") || _.has(schema, "allOf")) {
     return "RequestParameter";
   } else
     return solvePrimitiveOasType(language, schema.type, schema.format);

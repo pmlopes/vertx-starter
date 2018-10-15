@@ -1,4 +1,4 @@
-package {{ package }};
+package {{ package }}.services;
 
 import io.vertx.core.Vertx;
 import io.vertx.ext.unit.Async;
@@ -42,7 +42,7 @@ public class {{ serviceName }}Test {
 
 {{#each operations}}  @Test
   public void {{operationId}}Test(TestContext context) {
-    Async async = test.async({{size responses}});
+    Async async = context.async({{size responses}});
 {{#each parsedParameters.path}}    {{solveOasTypeForService 'java' schema @root.modelsCache}} {{sanitizedName}};
 {{/each}}{{#each parsedParameters.cookie}}    {{solveOasTypeForService 'java' schema @root.modelsCache}} {{sanitizedName}};
 {{/each}}{{#each parsedParameters.query}}    {{solveOasTypeForService 'java' schema @root.modelsCache}} {{sanitizedName}};
@@ -51,24 +51,24 @@ public class {{ serviceName }}Test {
 {{/if}}
 {{#each responses}}
 
-        // TODO set parameters for {{@key}} response test
+    // TODO set parameters for {{@key}} response test
 {{#each ../parsedParameters.path}}    {{sanitizedName}} = null;
 {{/each}}{{#each ../parsedParameters.cookie}}    {{sanitizedName}} = null;
 {{/each}}{{#each ../parsedParameters.query}}    {{sanitizedName}} = null;
 {{/each}}{{#each ../parsedParameters.header}}    {{sanitizedName}} = null;
 {{/each}}{{#if ../bodySchema}}    body = null;
 {{/if}}    {{toVariableName @root.serviceName}}.{{../serviceMethodName}}({{#each ../parsedParameters.path}}{{sanitizedName}}, {{/each}}{{#each ../parsedParameters.cookie}}{{sanitizedName}}, {{/each}}{{#each ../parsedParameters.query}}{{sanitizedName}}, {{/each}}{{#each ../parsedParameters.header}}{{sanitizedName}}, {{/each}}{{#if ../bodySchema}}body, {{/if}}new OperationRequest(), ar -> {
-        if (ar.succeeded()) {
-          OperationResponse result = ar.result();
-          context.assertEquals({{@key}}, result.getStatusCode());
-          //TODO add your asserts
-        } else {
-          context.fail("Operation failed with " + ar.cause().toString());
-        }
-        async.countDown();
-        });
+      if (ar.succeeded()) {
+        OperationResponse result = ar.result();
+        context.assertEquals({{@key}}, result.getStatusCode());
+        //TODO add your asserts
+      } else {
+        context.fail("Operation failed with " + ar.cause().toString());
+      }
+      async.countDown();
+    });
 {{/each}}
-    }
+  }
 
 {{/each}}
 
