@@ -116,8 +116,8 @@
       "io.vertx:vertx-web",
       "io.vertx:vertx-web-api-contract",
       "io.vertx:vertx-service-proxy",
-      "io.vertx:vertx-web-api-codegen",
-      "io.vertx:vertx-web-api-codegen:processor",
+      "io.vertx:vertx-web-api-service",
+      "io.vertx:vertx-web-api-service:processor",
       "io.vertx:vertx-web-client",
       "junit:junit",
       "io.vertx:vertx-unit"
@@ -139,6 +139,7 @@
           "openapi-server/src/test/java/{packageDir}/BaseTest.java",
           "openapi-server-sp/src/main/java/{packageDir}/MainVerticle.java",
           "openapi-server-sp/src/main/java/{packageDir}/services/{serviceName}.java",
+          "openapi-server-sp/src/main/java/{packageDir}/services/package-info.java",
           "openapi-server-sp/src/main/java/{packageDir}/services/impl/{serviceName}Impl.java",
           "openapi-server-sp/src/test/java/{packageDir}/services/{serviceName}Test.java"
         ]

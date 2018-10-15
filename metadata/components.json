@@ -227,14 +227,14 @@
   },
   {
     "groupId": "io.vertx",
-    "artifactId": "vertx-web-api-codegen",
+    "artifactId": "vertx-web-api-service",
     "description": "Vert.x Web API Codegen helps you routing the API requests incoming from a Vert.x Web Router built with Vert.x Web API Contract Router Factory to event bus",
     "version": "3.5.4",
     "stack": true
   },
   {
     "groupId": "io.vertx",
-    "artifactId": "vertx-web-api-codegen",
+    "artifactId": "vertx-web-api-service",
     "classifier": "processor",
     "description": "Processor. Vert.x Web API Codegen helps you routing the API requests incoming from a Vert.x Web Router built with Vert.x Web API Contract Router Factory to event bus",
     "version": "3.5.4",
