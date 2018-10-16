@@ -39,7 +39,8 @@ function getOperations(openapi, failOnMissingOperationId) {
       result[operationId] = _.cloneDeep(operation);
       result[operationId]['operationId'] = operationId
       result[operationId]['parameters'] = _.unionBy(result[operationId]['parameters'], path.parameters, "name");
-      result[operationId]['parameters'] = result[operationId]['parameters'].map((op) => (op["$ref"]) ? openapi.refs.get(op["$ref"]) : op);
+      if (result[operationId]['parameters']) result[operationId]['parameters'] = result[operationId]['parameters'].map((op) => (op["$ref"]) ? openapi.refs.get(op["$ref"]) : op);
+      else result[operationId]['parameters'] = [];
       result[operationId]['method'] = _.clone(method);
       result[operationId]['path'] = _.clone(key);
       result[operationId]['operationId'] = _.clone(operationId);
