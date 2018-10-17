@@ -532,16 +532,34 @@
     };
 
     this.search = (e) => {
+      var idx = {};
       // create a filter index
       var found = [].concat(this.dependencies.filter(function (el) {
+        if (el.checked) {
+          idx[el.groupId + ':' + el.artifactId] = true;
+        }
         return el.checked;
       }));
 
       var needle = e.target.value;
       var cnt = 0;
+      var duplicate = false;
       if (needle.length > 0) {
+        var lookup = needle.toUpperCase();
         opts.components.forEach(function (el, index) {
-          if (el.artifactId.indexOf(needle) !== -1 || (el.description && el.description.indexOf(needle) !== -1)) {
+
+          var artifactMatch = el.artifactId.toUpperCase().indexOf(lookup) !== -1;
+          var descriptionMatch = (el.description || '').toUpperCase().indexOf(lookup) !== -1;
+
+          if (artifactMatch || descriptionMatch) {
+            if (idx[el.groupId + ':' + el.artifactId]) {
+              // already listed
+              duplicate = true;
+              return;
+            }
+
+            idx[el.groupId + ':' + el.artifactId] = true;
+
             var c = _.cloneDeep(el);
             c.checked = false;
             c.id = index;
@@ -562,7 +580,7 @@
       }
 
       this.update({
-        notfound: needle.length > 0 && cnt === 0,
+        notfound: needle.length > 0 && cnt === 0 && !duplicate,
         dependencies : found
       });
     };
