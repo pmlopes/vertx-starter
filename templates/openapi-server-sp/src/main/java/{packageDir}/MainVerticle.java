@@ -29,7 +29,8 @@ public class MainVerticle extends AbstractVerticle {
    * This method starts all services
    */
   private void startServices() {
-    serviceBinder = new ServiceBinder(vertx);
+    this.serviceBinder = new ServiceBinder(vertx);
+    this.registeredConsumers = new ArrayList<>();
 
 {{#each services}}    {{@key}} {{toVariableName @key}} = {{@key}}.create(vertx);
     registeredConsumers.add(
