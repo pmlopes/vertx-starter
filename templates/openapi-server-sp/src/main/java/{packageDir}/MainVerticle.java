@@ -47,12 +47,12 @@ public class MainVerticle extends AbstractVerticle {
    */
   private Future<Void> startHttpServer() {
     Future<Void> future = Future.future();
-    OpenAPI3RouterFactory.createRouterFactoryFromFile(this.vertx, getClass().getResource("/openapi.yaml").getFile(), openAPI3RouterFactoryAsyncResult -> {
+    OpenAPI3RouterFactory.create(this.vertx, getClass().getResource("/openapi.yaml").getFile(), openAPI3RouterFactoryAsyncResult -> {
       if (openAPI3RouterFactoryAsyncResult.succeeded()) {
         OpenAPI3RouterFactory routerFactory = openAPI3RouterFactoryAsyncResult.result();
 
         // Enable automatic response when ValidationException is thrown
-        routerFactory.enableValidationFailureHandler(true);
+        routerFactory.setOptions(new RouterFactoryOptions().setMountValidationFailureHandler(true));
 
         // Mount services on event bus based on extensions
         routerFactory.mountServicesFromExtensions();
@@ -68,7 +68,7 @@ public class MainVerticle extends AbstractVerticle {
         // Generate the router
         Router router = routerFactory.getRouter();
         server = vertx.createHttpServer(new HttpServerOptions().setPort(8080).setHost("localhost"));
-        server.requestHandler(router::accept).listen();
+        server.requestHandler(router).listen();
         future.complete();
       } else {
         // Something went wrong during router factory initialization
