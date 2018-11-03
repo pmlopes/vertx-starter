@@ -43,8 +43,8 @@ exports.load = Handlebars => {
 
   Handlebars.registerHelper('get', (obj, i, def) => _.get(obj, i, def))
 
-  Handlebars.registerHelper('solveOasType', OpenAPIMetadataHandler.solveOasType);
-  Handlebars.registerHelper('solveOasTypeForService', OpenAPIMetadataHandler.solveOasTypeForService);
+  Handlebars.registerHelper('solveOasType', (language, schema, modelsCache) => OpenAPIMetadataHandler.solveOasType(language, schema, modelsCache, OpenAPIMetadataHandler.solvePrimitiveOasType(language, "default")));
+  Handlebars.registerHelper('solveOasTypeForService', (language, schema, modelsCache) => OpenAPIMetadataHandler.solveOasType(language, schema, modelsCache, "RequestParameter"));
   Handlebars.registerHelper('castIfNeeded', OpenAPIMetadataHandler.castIfNeeded);
   Handlebars.registerHelper('castBodyIfNeeded', OpenAPIMetadataHandler.castBodyIfNeeded);
   Handlebars.registerHelper('toVariableName', OpenAPISanitizers.toVariableName);

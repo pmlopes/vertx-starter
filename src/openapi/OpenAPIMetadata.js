@@ -1,8 +1,8 @@
 exports.metadata = {
     types_map: {
       java: { // First nested is type, second nested is format
-        object: "Map<String, Object>",
-        array: "List<Object>",
+        object: "JsonObject",
+        array: "JsonArray",
         array_template: (it) => "List<" + it + ">", 
         string: "String",
         integer: {

@@ -79,7 +79,7 @@ function buildOpenAPIBaseMetadata(oldOpenAPI, language, failOnMissingOperationId
   let modelsCache = new ModelsCache(openapi);
   if (_.has(openapi.original, "components.schemas"))
     _.forEach(openapi.original.components.schemas, (schema, name) => {
-      modelsCache.addModelToParse("#/components/schemas/" + name, schema, name);
+      modelsCache.handleJustDiscoveredSchema(schema, "#/components/schemas/" + name, name);
     });
 
   openapi.operations = getOperations(openapi, failOnMissingOperationId)
