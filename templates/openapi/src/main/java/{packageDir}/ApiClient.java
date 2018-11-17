@@ -30,10 +30,10 @@ public class ApiClient {
     private int port;
     private String host;
 
-{{#if openapiSpec.components.securitySchemes}}{{#each openapiSpec.components.securitySchemes}}{{#eqAny  type 'http' 'basic'}}
+{{#if openapiSpec.components.securitySchemes}}{{#each openapiSpec.components.securitySchemes}}{{#and (eq type 'http') (eq scheme 'basic')}}
     private String {{toVariableName @key}}_username;
     private String {{toVariableName @key}}_password;
-    {{/eqAny}}{{#or (and (eq type 'http') (eq schema 'bearer')) (eq type 'apiKey') (eq type 'oauth2') (eq type 'openIdConnect')}}
+    {{/and}}{{#or (and (eq type 'http') (eq scheme 'bearer')) (eq type 'apiKey') (eq type 'oauth2') (eq type 'openIdConnect')}}
     private String {{toVariableName @key}}_token;
     {{/or}}{{/each}}
 

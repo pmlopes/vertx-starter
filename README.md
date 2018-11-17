@@ -19,6 +19,12 @@ npm run cli
 
 If you want a zip output you can use `-z` flag
 
+## Preset documentation
+
+Look at preset specific documentation for more info:
+
+* [OpenAPI Server with Event Bus Services](docs/OpenAPI_Server_with_Services.md)
+
 ## Data files
 
 ### buildtools.json

@@ -27,6 +27,8 @@ function getOperations(openapi, failOnMissingOperationId) {
   for (let key in oas.paths) {
     let path = (oas.paths[key]["$ref"]) ? openapi.refs.get(oas.paths[key]["$ref"]) : oas.paths[key];
     for (let method in path) {
+      // Skip if it isn't an http verb
+      if (!["get", "post", "put", "delete", "options", "head", "patch", "trace"].includes(method)) continue;
       let operation = (path[method]["$ref"]) ? openapi.refs.get(path[method]["$ref"]) : path[method];
       let operationId = operation.operationId;
       if (!operationId) {
@@ -38,12 +40,13 @@ function getOperations(openapi, failOnMissingOperationId) {
       }
       result[operationId] = _.cloneDeep(operation);
       result[operationId]['operationId'] = operationId
-      result[operationId]['parameters'] = _.unionBy(result[operationId]['parameters'], path.parameters, "name");
-      result[operationId]['parameters'] = result[operationId]['parameters'].map((op) => (op["$ref"]) ? openapi.refs.get(op["$ref"]) : op);
       result[operationId]['method'] = _.clone(method);
       result[operationId]['path'] = _.clone(key);
-      result[operationId]['operationId'] = _.clone(operationId);
       result[operationId]['sanitizedOperationId'] = OpenAPISanitizers.sanitize(operationId);
+
+      let joinedParameters = _.unionBy(result[operationId]['parameters'], path.parameters, "name") || [];
+      joinedParameters.map((op) => (op["$ref"]) ? openapi.refs.get(op["$ref"]) : op);
+      result[operationId]['parameters'] = joinedParameters;
     }
   }
   return result;
@@ -76,7 +79,7 @@ function buildOpenAPIBaseMetadata(oldOpenAPI, language, failOnMissingOperationId
   let modelsCache = new ModelsCache(openapi);
   if (_.has(openapi.original, "components.schemas"))
     _.forEach(openapi.original.components.schemas, (schema, name) => {
-      modelsCache.addModelToParse("#/components/schemas/" + name, schema, name);
+      modelsCache.handleJustDiscoveredSchema(schema, "#/components/schemas/" + name, name);
     });
 
   openapi.operations = getOperations(openapi, failOnMissingOperationId)
@@ -132,6 +135,9 @@ function buildOpenAPIBaseMetadata(oldOpenAPI, language, failOnMissingOperationId
         );
       }
     });
+
+    // Flatten security requirements
+    operation.security = _.reduce(operation.security, _.assign, {}) || {};
   });
 
   openapi.modelsCache = modelsCache;

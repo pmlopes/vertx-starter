@@ -16,23 +16,19 @@ function solveFunctionNameForParameterRendering(language, paramLocation, type, s
   return walkOasMetadata(oasMetadata.client_parameters_functions_map, [language, paramLocation, type, style, explode])
 }
 
-function solveOasType(language, schema, modelsCache) {
+function solveOasType(language, schema, modelsCache, defaultType) {
   if (schema["$thisref"]) {
-    return modelsCache.models[schema["$thisref"]].modelType;
-  } else if (schema["$ref"] && (!schema.type || schema.type !== "array")) {
-    if (modelsCache.hasModel(schema["$ref"])) {
-      return modelsCache.models[schema["$ref"]].modelType;
-    } else {
-      return solvePrimitiveOasType(language, "default");
-    }
-  } else if (schema.type === "array") {
+    return modelsCache.solveModelType(schema["$thisref"], (t, f) => solvePrimitiveOasType(language, t, f))
+  } else if (schema["$ref"]) {
+    return modelsCache.solveModelType(schema["$ref"], (t, f) => solvePrimitiveOasType(language, t, f))
+  } else if (modelsCache.isArrayType(schema)) {
     return oasMetadata.types_map[language].array_template(
       solveOasType(language, schema.items, modelsCache)
     )
-  } else if (_.has(schema, "anyOf") && _.has(schema, "oneOf") && _.has(schema, "allOf")) {
-    return oasMetadata.types_map[language].default;
-  } else
+  } else if (!!schema.type) {
     return solvePrimitiveOasType(language, schema.type, schema.format);
+  } else
+    return defaultType;
 }
 
 function castIfNeeded(language, paramName, schema, modelsCache) {

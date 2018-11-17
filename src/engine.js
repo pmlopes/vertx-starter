@@ -13,7 +13,7 @@ let fieldsCallbacks = {
     }
   },
   "groupId": (project, value) => {
-    _.set(project, "metadata.package", value + '.' + (project.metadata.artifactId || project.metadata.name.replace(/[ -]/g, '_')));
+    _.set(project, "metadata.package", (value + '.' + (project.metadata.artifactId || project.metadata.name.replace(/[ -]/g, '_'))).toLowerCase());
     project.metadata.packageDir = project.metadata.package.replace(/\./g, '/');
     return Promise.resolve();
   },
