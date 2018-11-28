@@ -1,19 +1,19 @@
 // Include gulp
-var gulp = require('gulp');
-var PluginError = require('plugin-error');
+const gulp = require('gulp');
+const PluginError = require('plugin-error');
 
 // Include Plugins
-var concat = require('gulp-concat');
-var rename = require('gulp-rename');
-var wrap = require('gulp-wrap');
-var jsoncombine = require("gulp-jsoncombine");
-var minify = require('gulp-minify-css');
-var webpack = require('webpack-stream');
-var through2 = require('through2');
-var gutil = require('gulp-util');
-var replace = require('gulp-replace');
+const concat = require('gulp-concat');
+const rename = require('gulp-rename');
+const wrap = require('gulp-wrap');
+const jsoncombine = require("gulp-jsoncombine");
+const minify = require('gulp-minify-css');
+const webpack = require('webpack-stream');
+const through2 = require('through2');
+const gutil = require('gulp-util');
+const replace = require('gulp-replace');
 
-var path = require('path');
+const path = require('path');
 
 let handlebars = require('handlebars');
 
@@ -28,7 +28,7 @@ gulp.task('css', function () {
 
 // Insipired to gulp-handlebars but with some changes
 function handlebarsPlugin() {
-  var compilerOptions = {noEscape: true};
+  const compilerOptions = {noEscape: true};
 
   return through2.obj(function (file, enc, callback) {
     if (file.isNull()) {
@@ -40,8 +40,8 @@ function handlebarsPlugin() {
       return callback();
     }
 
-    var contents = file.contents.toString();
-    var compiled = null;
+    const contents = file.contents.toString();
+    let compiled = null;
     try {
       compiled = handlebars.precompile(
         handlebars.parse(contents),
@@ -93,7 +93,7 @@ gulp.task('metadata', function () {
 gulp.task('build-cli', gulp.series('handlebars', 'metadata'));
 
 gulp.task('kill-cache', function() {
-  var packageJson = require('./package.json');
+  const packageJson = require('./package.json');
 
   return gulp.src(['src/sw.js', 'src/index.html'])
     .pipe(replace('{{version}}', 'v' + packageJson.version))
