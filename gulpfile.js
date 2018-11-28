@@ -18,12 +18,12 @@ var path = require('path');
 let handlebars = require('handlebars');
 
 gulp.task('css', function () {
-  return gulp.src(['css/tooltip.css', 'css/hamburger.css', 'css/spinner.css', 'node_modules/wingcss/dist/wing.css'])
+  return gulp.src(['src/css/tooltip.css', 'src/css/hamburger.css', 'src/css/spinner.css', 'node_modules/wingcss/dist/wing.css'])
     .pipe(concat('bundle.css'))
-    .pipe(gulp.dest('dist/css'))
+    .pipe(gulp.dest('docs/css'))
     .pipe(rename('bundle.min.css'))
     .pipe(minify({keepBreaks: true}))
-    .pipe(gulp.dest('dist/css'));
+    .pipe(gulp.dest('docs/css'));
 });
 
 // Insipired to gulp-handlebars but with some changes
@@ -97,19 +97,19 @@ gulp.task('kill-cache', function() {
 
   return gulp.src(['src/sw.js', 'src/index.html'])
     .pipe(replace('{{version}}', 'v' + packageJson.version))
-    .pipe(gulp.dest('dist'));
+    .pipe(gulp.dest('docs'));
 });
 
 gulp.task('webpack', function() {
   return gulp.src('src/web_entrypoint.js')
     .pipe(webpack(require('./webpack.config.js')))
-    .pipe(gulp.dest('dist/js'));
+    .pipe(gulp.dest('docs/js'));
 });
 
 gulp.task('webpack-vendor', function() {
   return gulp.src('src/web_entrypoint.js')
     .pipe(webpack(require('./vendor.webpack.config.js')))
-    .pipe(gulp.dest('dist/js'));
+    .pipe(gulp.dest('docs/js'));
 });
 
 gulp.task('build', gulp.series('css', 'handlebars', 'metadata', 'kill-cache', 'webpack'));

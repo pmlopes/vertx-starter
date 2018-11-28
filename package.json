@@ -2,7 +2,7 @@
   "name": "create-vertx-app",
   "version": "0.0.6",
   "scripts": {
-    "start": "cd dist && python3 -m http.server 8000",
+    "start": "cd docs && python3 -m http.server 8000",
     "cli": "node src/cli_entrypoint.js",
     "build:web": "gulp build",
     "build:cli": "gulp build-cli",

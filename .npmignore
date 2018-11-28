@@ -1,3 +1,2 @@
 # ignore the webapp build dir
-css
-dist
+docs
