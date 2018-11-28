@@ -1,24 +1,20 @@
 language: node_js
 node_js:
-- "node"
+- node
 cache:
   directories:
-  - "node_modules"
+  - node_modules
 before_script:
 - npm install -g gulp-cli
 script: gulp
-#before_deploy:
-#- .travis/update_version.sh
-#deploy:
-#- provider: npm
-#  email: $NPM_EMAIL_ADDRESS
-#  api_key: $NPM_AUTH_TOKEN
-#  on:
-#    branch: master
-#- provider: pages
-#  skip-cleanup: true
-#  github-token: $GITHUB_TOKEN
-#  local-dir: dist
-#  keep-history: true
-#  on:
-#    branch: master
+deploy:
+- provider: pages
+  skip-cleanup: true
+  github-token: "$GITHUB_TOKEN"
+  local-dir: dist
+  keep-history: true
+  on:
+    branch: master
+env:
+  global:
+    secure: kH4LMfw21QDrNHcAAICjvP7vECDCsfM65PXjkj+xGiMDew2jzL/xOs7e0chYP7xHZwwPqXUXC9gdA9KKBfOCXfi7HK/RLDF3gSNS5yPOXNhIXjk0gx2XgQu2sC4xm7xukV7n5+RuV7EJwfp+/O/+w0/tar1yjZ+VG1xvKVSoCbTeHnt8GL365wesLoxK21iUji7E6c83P+KjE+/MhSDAGEyg+cxMlYxypn/ssaWL2SLPySnIKTcz8qIgOyvzkNUKqPUZBmUMj8AXAacIHeqfTVLjP+zZ2+OEZJH++uq64QnBxD0MCB3+5DCg/oRd55B5siVCY/3yG8SqOPn8QM4DPNO3REPNU1KM930oBa9UaBJqQgZ0/TqQLUhEk5a0Q4bH0dqo5+JXO4R/ZuaxZrTeEMKmrPVlXf8QQeD0upHJYQ7BrRvIn782ov8Xq/Hw0HcZ4u1MwoPH8YNQpdjcwlYDoHtB2OlUuDlgk273n5gfD/Fu7i61h8SMWQPCxxICVN7m/Fp6Xea2UFlQ2QSB0n/iN17wchykighntGqyPaRb1zESpf1rvlqvWn5LDs3LCtMaGpyuqbdrmLPCkgLj6Fw8G/kfVIEZHVc0Y5XAm8UrfrZPmkfDMhhh3iQgmkbL132O0qJ2dVUfLXLnhYkmp6uJ2HjYypaExLzPO3PGD+hftgg=
