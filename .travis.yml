@@ -5,10 +5,11 @@ cache:
   directories:
   - node_modules
 before_script:
+- npm install -g npm
 - npm install -g gulp-cli
 script: gulp
 before_deploy:
-- npm version "0.0.$TRAVIS_JOB_NUMBER" --no-git-tag-version
+- npm version "0.0.${TRAVIS_JOB_NUMBER}" --no-git-tag-version
 deploy:
 - provider: npm
   email: "$NPM_EMAIL_ADDRESS"
