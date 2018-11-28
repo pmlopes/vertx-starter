@@ -1,18 +1,18 @@
 #!/usr/bin/env node
 
-let inquirer = require('inquirer')
-let _ = require('lodash')
-let fs = require('fs')
-let path = require('path')
+let inquirer = require('inquirer');
+let _ = require('lodash');
+let fs = require('fs');
+let path = require('path');
 let program = require('commander');
 let mkdirp = require('mkdirp');
 
-let metadata = require('./gen/metadata.json')
-let buildTools = metadata.buildtools
-let components = metadata.components
-let presets = metadata.presets
-let compileProject = require('./engine.js').compileProject
-let utils = require('./utils.js')
+let metadata = require('./gen/metadata.json');
+let buildTools = metadata.buildtools;
+let components = metadata.components;
+let presets = metadata.presets;
+let compileProject = require('./engine.js').compileProject;
+let utils = require('./utils.js');
 
 program
     .version('1.0.0')
@@ -28,11 +28,11 @@ function mapFieldsToPrompt(fields) {
             "type": "input",
         };
         if (f.prefill)
-            obj.default = f.prefill
+            obj.default = f.prefill;
         if (f.required)
-            obj.validate = val => !!(val && val.length > 0)
+            obj.validate = val => !!(val && val.length > 0);
         else {
-            obj.message = obj.message + " (Optional)"
+            obj.message = obj.message + " (Optional)";
             obj.filter = val => (val && val.length > 0) ? val : undefined
         }
         return obj;
@@ -57,7 +57,7 @@ function generateDepsPrompt(requiredDeps) {
         "message": "Choose your additional dependencies",
         "type": "checkbox",
         "choices": components
-            .filter(c => !requiredDeps.find(dep => dep == dependencyId(c)))
+            .filter(c => !requiredDeps.find(dep => dep === dependencyId(c)))
             .map(c => {
             return {
                 "name": dependencyId(c),
@@ -67,11 +67,11 @@ function generateDepsPrompt(requiredDeps) {
     }]
 }
 
-let tool
-let language
-let preset
-let requiredDepsStrings
-let deps
+let tool;
+let language;
+let preset;
+let requiredDepsStrings;
+let deps;
 
 inquirer.prompt([
     {
@@ -81,7 +81,7 @@ inquirer.prompt([
         "choices": buildTools.map(t => ({ "name": t.id, "value": t }))
     }
 ]).then(answers => {
-    tool = answers.tool
+    tool = answers.tool;
     return inquirer.prompt(mapFieldsToPrompt(tool.fields))
 }).then(answers => {
     tool.fields.forEach(element => {
@@ -94,9 +94,9 @@ inquirer.prompt([
         choices: tool.languages.map(l => ({ "name": l.id, "value": l }))
     }])
 }).then(answers => {
-    language = answers.language
-    let presetChoices = utils.filterPresets(presets)(language.id, tool.id).map(p => ({ "name": p.id, "value": p }))
-    presetChoices.push({ "name": "Empty project", "value": undefined })
+    language = answers.language;
+    let presetChoices = utils.filterPresets(presets)(language.id, tool.id).map(p => ({ "name": p.id, "value": p }));
+    presetChoices.push({ "name": "Empty project", "value": undefined });
     return inquirer.prompt([{
         "name": "preset",
         "message": "Choose the project type",
@@ -104,7 +104,7 @@ inquirer.prompt([
         choices: presetChoices
     }])
 }).then(answers => {
-    preset = answers.preset
+    preset = answers.preset;
     if (_.has(preset, "fields")) {
         return inquirer
             .prompt(mapFieldsToPrompt(preset.fields))
@@ -122,7 +122,7 @@ inquirer.prompt([
     return inquirer.prompt(generateDepsPrompt(requiredDepsStrings))
 }).then(answers => {
         deps = answers.dependencies.concat(
-            components.filter(c => (requiredDepsStrings.find(dep => dep == dependencyId(c))) ? true : false)
+            components.filter(c => !!(requiredDepsStrings.find(dep => dep === dependencyId(c))))
         );
         compileProject(
             {
@@ -171,10 +171,10 @@ inquirer.prompt([
                 }))
             }
         }).then((res) => {
-            console.log("Project generated")
+            console.log("Project generated");
             process.exit(0)
         }).catch(err => {
-            console.log(err)
+            console.log(err);
             process.exit(1)
         });
     });

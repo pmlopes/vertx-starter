@@ -1,7 +1,7 @@
-let _ = require('lodash')
+let _ = require('lodash');
 
-let utils = require('../utils.js')
-let OpenAPIUtils = require('../openapi/OpenAPIUtils')
+let utils = require('../utils.js');
+let OpenAPIUtils = require('../openapi/OpenAPIUtils');
 
 let generate = (project, templates, zip) => {
   // merge all templates to be processed
@@ -28,7 +28,7 @@ let generate = (project, templates, zip) => {
   return OpenAPIUtils
     .generateModels(project, modelTemplatePath, zip)
     .then(zip => {
-      let openapiClientMetadata = OpenAPIUtils.generateApiClientOpenapiMetadata(project)
+      let openapiClientMetadata = OpenAPIUtils.generateApiClientOpenapiMetadata(project);
       return OpenAPIUtils.generateApiClient(project, openapiClientMetadata, zip, clientTemplatePath, operationsMdTemplatePath)
     })
 };

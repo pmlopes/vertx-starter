@@ -1,4 +1,4 @@
-let _ = require('lodash')
+let _ = require('lodash');
 let oasMetadata = require('./OpenAPIMetadata').metadata;
 
 function walkOasMetadata(metadata, path) {
@@ -68,9 +68,9 @@ function isPrimitiveType(language, langType) {
     .find(v => v.includes(lan)))
 }
 
-exports.solvePrimitiveOasType = solvePrimitiveOasType
-exports.solveFunctionNameForParameterRendering = solveFunctionNameForParameterRendering
-exports.solveOasType = solveOasType
-exports.isPrimitiveType = isPrimitiveType
-exports.castIfNeeded = castIfNeeded
-exports.castBodyIfNeeded = castBodyIfNeeded
+exports.solvePrimitiveOasType = solvePrimitiveOasType;
+exports.solveFunctionNameForParameterRendering = solveFunctionNameForParameterRendering;
+exports.solveOasType = solveOasType;
+exports.isPrimitiveType = isPrimitiveType;
+exports.castIfNeeded = castIfNeeded;
+exports.castBodyIfNeeded = castBodyIfNeeded;

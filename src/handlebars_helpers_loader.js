@@ -1,8 +1,8 @@
 exports.load = Handlebars => {
   let _ = require('lodash');
-  let utils = require('handlebars-utils')
-  let OpenAPISanitizers = require('./openapi/OpenAPISanitizers')
-  let OpenAPIMetadataHandler = require('./openapi/OpenAPIMetadataHandler')
+  let utils = require('handlebars-utils');
+  let OpenAPISanitizers = require('./openapi/OpenAPISanitizers');
+  let OpenAPIMetadataHandler = require('./openapi/OpenAPIMetadataHandler');
 
   /**
    * Some code was taken from handlebars-helpers
@@ -39,9 +39,9 @@ exports.load = Handlebars => {
 
   Handlebars.registerHelper('split', function(str, splitter) {
     return str.split(splitter);
-  })
+  });
 
-  Handlebars.registerHelper('get', (obj, i, def) => _.get(obj, i, def))
+  Handlebars.registerHelper('get', (obj, i, def) => _.get(obj, i, def));
 
   Handlebars.registerHelper('solveOasType', (language, schema, modelsCache) => OpenAPIMetadataHandler.solveOasType(language, schema, modelsCache, OpenAPIMetadataHandler.solvePrimitiveOasType(language, "default")));
   Handlebars.registerHelper('solveOasTypeForService', (language, schema, modelsCache) => OpenAPIMetadataHandler.solveOasType(language, schema, modelsCache, "RequestParameter"));
@@ -49,14 +49,14 @@ exports.load = Handlebars => {
   Handlebars.registerHelper('castBodyIfNeeded', OpenAPIMetadataHandler.castBodyIfNeeded);
   Handlebars.registerHelper('toVariableName', OpenAPISanitizers.toVariableName);
   Handlebars.registerHelper('toClassName', OpenAPISanitizers.toClassName);
-  Handlebars.registerHelper('sanitize', OpenAPISanitizers.sanitize)
+  Handlebars.registerHelper('sanitize', OpenAPISanitizers.sanitize);
 
   Handlebars.registerHelper('capitalize', s => s.charAt(0).toUpperCase() + s.slice(1));
   Handlebars.registerHelper('lowerCase', s => s.toLowerCase());
 
   Handlebars.registerHelper('not', (condition, options) => {
     return utils.value(!condition, this, options);
-  })
+  });
 
   Handlebars.registerHelper('eq', (a, b, options) => {
     if (arguments.length === 2) {
@@ -64,7 +64,7 @@ exports.load = Handlebars => {
       b = options.hash.compare;
     }
     return utils.value(a === b, this, options);
-  })
+  });
 
   Handlebars.registerHelper('brace', s => "{" + s + "}");
 
@@ -82,10 +82,10 @@ exports.load = Handlebars => {
     return _.reduce(arr, (r, y) => r || (x === y), false);
   }
 
-  Handlebars.registerHelper('and', generateConditionalHelper(andBooleanArray))
-  Handlebars.registerHelper('or', generateConditionalHelper(orBooleanArray))
-  Handlebars.registerHelper('eqAny', generateConditionalHelper(eqAnyArray))
-  Handlebars.registerHelper('nonEmpty', generateConditionalHelper(arr => !_.isEmpty(arr[0])))
-  Handlebars.registerHelper('isEmpty', generateConditionalHelper(arr => _.isEmpty(arr[0])))
+  Handlebars.registerHelper('and', generateConditionalHelper(andBooleanArray));
+  Handlebars.registerHelper('or', generateConditionalHelper(orBooleanArray));
+  Handlebars.registerHelper('eqAny', generateConditionalHelper(eqAnyArray));
+  Handlebars.registerHelper('nonEmpty', generateConditionalHelper(arr => !_.isEmpty(arr[0])));
+  Handlebars.registerHelper('isEmpty', generateConditionalHelper(arr => _.isEmpty(arr[0])));
   Handlebars.registerHelper('size', _.size)
 };

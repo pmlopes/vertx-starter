@@ -1,5 +1,5 @@
 let _ = require('lodash');
-let OpenAPISanitizers = require('./OpenAPISanitizers')
+let OpenAPISanitizers = require('./OpenAPISanitizers');
 
 exports.ModelsCache = class ModelsCache {
     constructor(openapi) {
@@ -12,16 +12,16 @@ exports.ModelsCache = class ModelsCache {
     }
 
     isObjectType(schema) {
-      return (schema.type != undefined && schema.type === "object") || schema.hasOwnProperty("properties")
+      return (schema.type !== undefined && schema.type === "object") || schema.hasOwnProperty("properties")
     }
 
     isArrayType(schema) {
-      return (schema.type != undefined && schema.type === "array") || schema.hasOwnProperty("items")
+      return (schema.type !== undefined && schema.type === "array") || schema.hasOwnProperty("items")
     }
 
     mergeSchemas(schemas) {
-      let newSchema = {}
-      newSchema.type = "object"
+      let newSchema = {};
+      newSchema.type = "object";
       newSchema.properties = _.chain(schemas).map(t => t.properties).filter(_.isObject).reduce(_.assign, {}).value();
       newSchema.required = _.union(...(_.chain(schemas).map(t => t.required).filter(_.isArray).value()));
       return newSchema;
@@ -36,13 +36,13 @@ exports.ModelsCache = class ModelsCache {
       // Generate model only and only if this is not a solved ref already in models cache
       if (!schema["$ref"] || (!!schema["$ref"] && !this.hasModel(schema["$ref"]))) {
         if (this.isObjectType(schema)) {
-          _.set(schema, "$thisref", thisRef)
+          _.set(schema, "$thisref", thisRef);
           this.addModelToParse(thisRef, schema, maybeModelName);
         } else if (this.isAllOf(schema)) {
           // Solve all schemas
           let schemas = _.map(schema.allOf, (s, i) => (s["$ref"]) ? this.openapi.refs.get(s["$ref"]) : s);
           let mergedSchema = this.mergeSchemas(schemas);
-          _.set(mergedSchema, "$thisref", thisRef)
+          _.set(mergedSchema, "$thisref", thisRef);
           this.addModelToParse(thisRef, mergedSchema, maybeModelName);
         }
       } else if (this.isArrayType(schema) && (this.isObjectType(schema.items) || schema.items["$ref"])) {
@@ -64,7 +64,7 @@ exports.ModelsCache = class ModelsCache {
     }
 
     solveModelType(ref, primitiveTypeSolver) {
-      let s = this.models[ref] || this.openapi.refs.get(ref)
+      let s = this.models[ref] || this.openapi.refs.get(ref);
       return s.modelType || primitiveTypeSolver(s.type, s.format);
     }
   
@@ -114,4 +114,4 @@ exports.ModelsCache = class ModelsCache {
         this.generateSingleModel(modelTemplate, this.openapi.refs, jsonSchema, jsonSchema.modelType, packageName)
       ).filter(x => x !== undefined)
     }
-  }
+  };

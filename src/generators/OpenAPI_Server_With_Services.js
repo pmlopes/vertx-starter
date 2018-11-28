@@ -1,9 +1,9 @@
-let _ = require('lodash')
+let _ = require('lodash');
 
-let utils = require('../utils.js')
-let templatesFunctions = require('../gen/templates')
-let OpenAPIUtils = require('../openapi/OpenAPIUtils')
-let OpenAPISanitizers = require('../openapi/OpenAPISanitizers')
+let utils = require('../utils.js');
+let templatesFunctions = require('../gen/templates');
+let OpenAPIUtils = require('../openapi/OpenAPIUtils');
+let OpenAPISanitizers = require('../openapi/OpenAPISanitizers');
 
 class OperationsCache {
   constructor(openapi) {
@@ -81,26 +81,26 @@ let generate = (project, templates, zip) => {
 
   let modelTemplatePath = templates.find(t => t.includes("modelName"));
   let clientTemplatePath = templates.find(t => t.includes("Client"));
-  let handlerTemplatePath = templates.find(t => t.includes("{operationId}Handler"))
-  let securityHandlerTemplatePath = templates.find(t => t.includes("{securitySchemaId}Handler"))
-  let testTemplatePath = templates.find(t => t.includes("{operationId}Test"))
-  let mainVerticleTemplatePath = templates.find(t => /openapi-server-sp\/.*MainVerticle\..*/.test(t))
-  let serviceInterfaceTemplatePath = templates.find(t => t.includes("{serviceName}."))
-  let serviceImplTemplatePath = templates.find(t => t.includes("{serviceName}Impl."))
-  let serviceTestTemplatePath = templates.find(t => t.includes("{serviceName}Test."))
+  let handlerTemplatePath = templates.find(t => t.includes("{operationId}Handler"));
+  let securityHandlerTemplatePath = templates.find(t => t.includes("{securitySchemaId}Handler"));
+  let testTemplatePath = templates.find(t => t.includes("{operationId}Test"));
+  let mainVerticleTemplatePath = templates.find(t => /openapi-server-sp\/.*MainVerticle\..*/.test(t));
+  let serviceInterfaceTemplatePath = templates.find(t => t.includes("{serviceName}."));
+  let serviceImplTemplatePath = templates.find(t => t.includes("{serviceName}Impl."));
+  let serviceTestTemplatePath = templates.find(t => t.includes("{serviceName}Test."));
 
   let operationsCache = new OperationsCache(project.metadata.openapi);
 
   // Load operations into operationsCache
   _.each(project.metadata.openapi.operations, (operation => {
     // Extract body schema
-    operation.bodySchema = _.get(operation, ['requestBody', 'content', 'application/json', 'schema'])
+    operation.bodySchema = _.get(operation, ['requestBody', 'content', 'application/json', 'schema']);
     operationsCache.addOperation(operation);
   }));
 
   // Generate handlers and tests for operations without associated service
   _.each(operationsCache.operationsOutOfServices, (operation => {
-    operation.className = OpenAPISanitizers.toClassName(operation.operationId)
+    operation.className = OpenAPISanitizers.toClassName(operation.operationId);
     utils.addToZip(
       utils.solveZipDir(project.metadata.name, {
         packageDir: project.metadata.packageDir,
@@ -134,13 +134,13 @@ let generate = (project, templates, zip) => {
       templatesFunctions[serviceInterfaceTemplatePath](genMetadata),
       false,
       zip
-    )
+    );
     utils.addToZip(
       utils.solveZipDir(project.metadata.name, pathMetadata, serviceImplTemplatePath),
       templatesFunctions[serviceImplTemplatePath](genMetadata),
       false,
       zip
-    )
+    );
     utils.addToZip(
       utils.solveZipDir(project.metadata.name, pathMetadata, serviceTestTemplatePath),
       templatesFunctions[serviceTestTemplatePath](genMetadata),
@@ -148,11 +148,11 @@ let generate = (project, templates, zip) => {
       zip
     )
 
-  })
+  });
 
   // Generate security handlers
   _.each(_.get(project.metadata.openapi.original, "components.securitySchemes", {}), (securitySchema, securitySchemaName) => {
-    securitySchema.className = OpenAPISanitizers.toClassName(securitySchemaName)
+    securitySchema.className = OpenAPISanitizers.toClassName(securitySchemaName);
     utils.addToZip(
       utils.solveZipDir(project.metadata.name, {
         packageDir: project.metadata.packageDir,
@@ -172,7 +172,7 @@ let generate = (project, templates, zip) => {
   let openapiClientMetadata = OpenAPIUtils.generateApiClientOpenapiMetadata(project); // Required to use api client in tests
   _.each(openapiClientMetadata.operations, (operation => {
     if (!operationsCache.isOperationLinkedToService(operation.operationId)) {
-      operation.className = OpenAPISanitizers.toClassName(operation.operationId)
+      operation.className = OpenAPISanitizers.toClassName(operation.operationId);
       _.each(operation.responses, (response, statusCode) => {
         response.statusCode = (statusCode !== 'default') ? statusCode : undefined;
       });
@@ -206,11 +206,11 @@ let generate = (project, templates, zip) => {
     }),
     false,
     zip
-  )
+  );
 
   return OpenAPIUtils
     .generateModels(project, modelTemplatePath, zip)
     .then(zip => OpenAPIUtils.generateApiClient(project, openapiClientMetadata, zip, clientTemplatePath))
-}
+};
 
-exports.generate = generate
+exports.generate = generate;

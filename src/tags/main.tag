@@ -152,9 +152,9 @@
     import JSZipUtils from "jszip-utils"
 
     this.show = tool => {
-      var q = route.query();
+      const q = route.query();
       // parse initial values
-      var setup = {
+      const setup = {
         dependencies: decodeURIComponent(q.dependencies || '').split(',')
       };
 
@@ -168,12 +168,12 @@
           eventLabel: 'project'
         });
 
-        var selection = [];
+        const selection = [];
 
         // reset the dependencies
         opts.components.forEach(function (el, index) {
-          var c;
-          // check if initial setup requested this dependency
+        let c;
+        // check if initial setup requested this dependency
           if (setup.dependencies.indexOf(el.groupId + ':' + el.artifactId + (el.classifier ? ':' + el.classifier : '')) !== -1) {
             c = _.cloneDeep(el);
             c.checked = true;
@@ -201,12 +201,12 @@
             c.checked = true;
             c.id = index;
             selection.push(c);
-            return;
+
           }
         });
 
-        var filteredPresets = this.filterPresets(tool.languages[0].id, tool.id);
-        var filteredPresetsGroups = {};
+        const filteredPresets = this.filterPresets(tool.languages[0].id, tool.id);
+        const filteredPresetsGroups = {};
         filteredPresets.forEach(function (el) {
           if (!filteredPresetsGroups[el.group]) {
             filteredPresetsGroups[el.group] = [];
@@ -238,7 +238,7 @@
 
     //Finds y value of given object
     this.findPos = (obj) =>  {
-      var curtop = 0;
+      let curtop = 0;
       if (obj.offsetParent) {
         do {
           curtop += obj.offsetTop;
@@ -256,8 +256,8 @@
     this.changeLanguage = (e) => {
       // carry on with the task...
       e.preventDefault();
-      var oldLang = this.language;
-      var newLang = this.tool.languages.filter(function (el) {
+      const oldLang = this.language;
+      const newLang = this.tool.languages.filter(function (el) {
         return el.id === e.target.value;
       })[0];
 
@@ -269,7 +269,7 @@
       });
 
       // reset
-      var selection = [].concat(this.dependencies);
+      const selection = [].concat(this.dependencies);
 
       // exclude old lang support
       if (oldLang && !oldLang.noLangSupport) {
@@ -285,7 +285,7 @@
         opts.components.forEach(function (el, index) {
           if (el.groupId === 'io.vertx' && el.artifactId === ('vertx-lang-' + newLang.id)) {
             if (selection.filter(function (el2) { return el2.id === index; }).length === 0) {
-              var c = _.cloneDeep(el);
+              const c = _.cloneDeep(el);
               c.checked = true;
               c.id = index;
               selection.push(c);
@@ -294,8 +294,8 @@
         });
       }
 
-      var filteredPresets = this.filterPresets(this.tool.id, e.target.value);
-      var filteredPresetsGroups = {};
+      const filteredPresets = this.filterPresets(this.tool.id, e.target.value);
+      const filteredPresetsGroups = {};
       filteredPresets.forEach(function (el) {
         if (!filteredPresetsGroups[el.group]) {
           filteredPresetsGroups[el.group] = [];
@@ -317,9 +317,9 @@
     this.changePreset = (e) => {
       // carry on with the task...
       e.preventDefault();
-      var oldPreset = this.preset;
+      const oldPreset = this.preset;
       // virtual empty preset
-      var newPreset = { dependencies : [
+      let newPreset = { dependencies : [
         "io.vertx:vertx-core"
       ]};
 
@@ -337,7 +337,7 @@
       }
 
       // reset
-      var selection = [].concat(this.dependencies);
+      const selection = [].concat(this.dependencies);
       if (oldPreset) {
         for (var index = 0; index < selection.length; index++) {
           var el = selection[index];
@@ -349,14 +349,14 @@
           // test without classifier
           if (oldPreset.dependencies.indexOf(el.groupId + ':' + el.artifactId) !== -1) {
             selection.splice(index--, 1);
-            continue;
+
           }
         }
       }
 
       // check the default language dependency
       opts.components.forEach(function (el, index) {
-        var c;
+        let c;
         if (newPreset.dependencies.indexOf(el.groupId + ':' + el.artifactId + (el.classifier ? ':' + el.classifier : '')) !== -1) {
           if (selection.filter(function (el2) { return el2.id === index; }).length === 0) {
             c = _.cloneDeep(el);
@@ -372,7 +372,6 @@
             c.checked = true;
             c.id = index;
             selection.push(c);
-            return;
           }
         }
       });
@@ -426,18 +425,18 @@
       // animate to avoid the perception of slowness
       window.scroll(0, this.findPos(document.getElementById("interaction")));
 
-      var submit = e.target.submit;
-      var a = this.refs.download;
+      const submit = e.target.submit;
+      const a = this.refs.download;
 
       submit.disabled = true;
 
       // we need to filter in case the user was looking for other dependencies
-      var dependencies = this.dependencies.filter((el) => el.checked);
+      const dependencies = this.dependencies.filter((el) => el.checked);
 
       const self = this;
 
       // Set field values
-      var promises = this.tool.fields.map(this.setFieldValue(e));
+      let promises = this.tool.fields.map(this.setFieldValue(e));
       if (this.preset && this.preset.fields) {
         promises = promises.concat(this.preset.fields.map(this.setFieldValue(e)));
       }
@@ -532,24 +531,24 @@
     };
 
     this.search = (e) => {
-      var idx = {};
+      const idx = {};
       // create a filter index
-      var found = [].concat(this.dependencies.filter(function (el) {
+      const found = [].concat(this.dependencies.filter(function (el) {
         if (el.checked) {
           idx[el.groupId + ':' + el.artifactId] = true;
         }
         return el.checked;
       }));
 
-      var needle = e.target.value;
-      var cnt = 0;
-      var duplicate = false;
+      const needle = e.target.value;
+      let cnt = 0;
+      let duplicate = false;
       if (needle.length > 0) {
-        var lookup = needle.toUpperCase();
+        const lookup = needle.toUpperCase();
         opts.components.forEach(function (el, index) {
 
-          var artifactMatch = el.artifactId.toUpperCase().indexOf(lookup) !== -1;
-          var descriptionMatch = (el.description || '').toUpperCase().indexOf(lookup) !== -1;
+          const artifactMatch = el.artifactId.toUpperCase().indexOf(lookup) !== -1;
+          const descriptionMatch = (el.description || '').toUpperCase().indexOf(lookup) !== -1;
 
           if (artifactMatch || descriptionMatch) {
             if (idx[el.groupId + ':' + el.artifactId]) {
@@ -560,7 +559,7 @@
 
             idx[el.groupId + ':' + el.artifactId] = true;
 
-            var c = _.cloneDeep(el);
+            const c = _.cloneDeep(el);
             c.checked = false;
             c.id = index;
             found.push(c);
@@ -585,7 +584,7 @@
       });
     };
 
-    var r = route.create();
+    const r = route.create();
     // bind to the right route
     for (let bt of opts.buildtools) {
       r(bt.id + '..', () => this.show(bt))

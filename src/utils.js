@@ -1,17 +1,17 @@
 let _ = require('lodash');
-let templateFunctions = require('./gen/templates.js')
+let templateFunctions = require('./gen/templates.js');
 
 function compileAndAddToZip(project, templatePath, exec, zip) {
 
   // Write inside metadata dirName and fileName
-  writeFileAndDirMetadata(project, templatePath)
+  writeFileAndDirMetadata(project, templatePath);
 
   let zfile = solveZipDir(project.metadata.name, project.metadata, templatePath);
 
   // locate handlebars template
-  let fn = _.get(templateFunctions, templatePath)
+  let fn = _.get(templateFunctions, templatePath);
   if (!fn)
-    throw new Error("Cannot find template for " + templatePath)
+    throw new Error("Cannot find template for " + templatePath);
 
   // Compile with fn and add to zip
   addToZip(zfile, fn(project), exec, zip)
@@ -31,9 +31,9 @@ function addToZip(filePath, fileContent, exec, zip) {
 
 function writeFileAndDirMetadata(project, templatePath) {
     // extract filename
-    var dot = templatePath.indexOf('.');
-    var lslash = templatePath.lastIndexOf('/');
-    project.metadata.dirName = _.get(project.metadata.packageDir || '')
+  const dot = templatePath.indexOf('.');
+  const lslash = templatePath.lastIndexOf('/');
+  project.metadata.dirName = _.get(project.metadata.packageDir || '');
     project.metadata.fileName = templatePath.substring(lslash + 1, dot);
 }
 
@@ -54,7 +54,7 @@ function filterPresets(presets) {
   return (langId, toolId) => {
     return presets.filter((el) => {
       if (el.languages) {
-        var l = el.languages.filter(function (e) {
+        const l = el.languages.filter(function (e) {
           return e.id === langId;
         });
 
@@ -86,7 +86,7 @@ function mergeTemplates(project, alreadyCollectedTemplates) {
     templates = templates.concat(project.preset.templates || []);
     // merge preset language specific templates
     if (project.preset.languages) {
-      var presetLanguages = project.preset.languages.filter(function (el) {
+      const presetLanguages = project.preset.languages.filter(function (el) {
         return el.id === project.language.id;
       });
 
@@ -103,9 +103,9 @@ function mergeTemplates(project, alreadyCollectedTemplates) {
   return templates
 }
 
-exports.addToZip = addToZip
-exports.compileAndAddToZip = compileAndAddToZip
-exports.writeFileAndDirMetadata = writeFileAndDirMetadata
-exports.solveZipDir = solveZipDir
-exports.filterPresets = filterPresets
-exports.mergeTemplates = mergeTemplates
+exports.addToZip = addToZip;
+exports.compileAndAddToZip = compileAndAddToZip;
+exports.writeFileAndDirMetadata = writeFileAndDirMetadata;
+exports.solveZipDir = solveZipDir;
+exports.filterPresets = filterPresets;
+exports.mergeTemplates = mergeTemplates;

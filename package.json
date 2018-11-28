@@ -19,7 +19,8 @@
     "jszip": "^3.1.5",
     "jszip-utils": "^0.0.2",
     "mkdirp": "^0.5.1",
-    "swagger-parser": "^6.0.2"
+    "swagger-parser": "^6.0.2",
+    "lodash": "latest"
   },
   "devDependencies": {
     "@babel/core": "^7.1.6",
@@ -43,6 +44,7 @@
     "through2": "^3.0.0",
     "webpack": "^4.26.1",
     "webpack-stream": "^5.1.1",
-    "wingcss": "^1.0.0-beta"
+    "wingcss": "^1.0.0-beta",
+    "terser-webpack-plugin": "^1.1.0"
   }
 }

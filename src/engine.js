@@ -1,5 +1,5 @@
-let _ = require('lodash')
-let JSZip = require('jszip')
+let _ = require('lodash');
+let JSZip = require('jszip');
 let OpenAPILoader = require('./openapi/OpenAPILoader').loadOpenAPIAndValidate;
 
 let resolveGenerator = require('./generators/generators.js').resolveGenerator;
@@ -8,7 +8,7 @@ let fieldsCallbacks = {
   "graalNativeImage": (project, value, templates, trackFn) => {
     if (value) {
       templates.push(...project.buildtool["graalNativeImageTemplates"]);
-      trackFn(project.buildtool.id + ':feature', project.buildtool.id + '/graalNativeImage', 'feature')
+      trackFn(project.buildtool.id + ':feature', project.buildtool.id + '/graalNativeImage', 'feature');
       return Promise.resolve()
     }
   },
@@ -18,7 +18,7 @@ let fieldsCallbacks = {
     return Promise.resolve();
   },
   "name": (project, value) => {
-    project.metadata.name = value.replace(/[ -]/g, '_')
+    project.metadata.name = value.replace(/[ -]/g, '_');
     return Promise.resolve()
   },
   "openapi": (project, value) => {
@@ -28,16 +28,16 @@ let fieldsCallbacks = {
         return Promise.resolve();
       });
   }
-}
+};
 
 function compileProject(project, trackFn, trackExceptionFn, loadBlob) {
   return new Promise((resolve, reject) => {
 
-    var templates = [];
+    const templates = [];
     project.metadata = {};
 
     // track what project type is being generated
-    trackFn(project.buildtool.id + ':project', project.buildtool.id + '/new', 'project')
+    trackFn(project.buildtool.id + ':project', project.buildtool.id + '/new', 'project');
 
     //---------- Build tool related metadata
 
@@ -45,7 +45,7 @@ function compileProject(project, trackFn, trackExceptionFn, loadBlob) {
     project.executables = _.concat(
       _.get(project, "buildtool.executables", []),
       _.get(project, "preset.executables", [])
-    )
+    );
 
     // alias for selected dependencies
     project.dependenciesGAV = {};
@@ -61,22 +61,21 @@ function compileProject(project, trackFn, trackExceptionFn, loadBlob) {
     });
 
     // bom generation
-    if (project.buildtool.id == "stack") {
+    if (project.buildtool.id === "stack") {
       project.bom = [];
       project.components.forEach(function (el) {
-        var c = _.cloneDeep(el);
-        if (project.dependencies.find((el) => (el.classifier) ? el.groupId + ':' + el.artifactId + ':' + el.classifier in project.dependenciesGAV : el.groupId + ':' + el.artifactId)) c.included = true;
-        else c.included = false;
+        const c = _.cloneDeep(el);
+        c.included = !!project.dependencies.find((el) => (el.classifier) ? el.groupId + ':' + el.artifactId + ':' + el.classifier in project.dependenciesGAV : el.groupId + ':' + el.artifactId);
         project.bom.push(c);
       });
     }
 
     // Suffix for artifacts
-    if (project.buildtool.id == "sbt") {
+    if (project.buildtool.id === "sbt") {
       project.metadata.artifactSuffix = project.buildtool['non-core-suffix'] || '';
     }
 
-    if (project.buildtool.id == "npm") {
+    if (project.buildtool.id === "npm") {
       // filtered dependencies by scope "dev", "prod", "mvn"
       project.npmDevDependencies = [];
       project.npmProdDependencies = [];
@@ -100,7 +99,7 @@ function compileProject(project, trackFn, trackExceptionFn, loadBlob) {
     project.metadata[project.language.id] = true;
 
     // create a new zip file
-    var zip = new JSZip();
+    const zip = new JSZip();
 
     let generator = (project.preset) ? resolveGenerator(project.preset.id) : resolveGenerator("default");
 
@@ -154,7 +153,7 @@ function compileProject(project, trackFn, trackExceptionFn, loadBlob) {
         reject(ex);
       })
   });
-};
+}
 
 // Note: Node.JS doesn't support ES6 modules directives. exports works both for webpack and node
-exports.compileProject = compileProject
+exports.compileProject = compileProject;

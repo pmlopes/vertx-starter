@@ -1,6 +1,6 @@
-let _ = require('lodash')
+let _ = require('lodash');
 
-let utils = require('../utils.js')
+let utils = require('../utils.js');
 
 let generate = (project, templates, zip) => {
     return new Promise((resolve, reject) => {
@@ -17,6 +17,6 @@ let generate = (project, templates, zip) => {
         }
         resolve(zip)
     });
-}
+};
 
-exports.generate = generate
+exports.generate = generate;

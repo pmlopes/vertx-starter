@@ -1,10 +1,10 @@
-let _ = require('lodash')
+let _ = require('lodash');
 
 let OpenAPISanitizers = require('./OpenAPISanitizers');
-let OpenAPIMetadatahandler = require('./OpenAPIMetadataHandler')
-let ModelsCache = require('./ModelsCache').ModelsCache
-let templatesFunctions = require('../gen/templates')
-let utils = require('../utils')
+let OpenAPIMetadatahandler = require('./OpenAPIMetadataHandler');
+let ModelsCache = require('./ModelsCache').ModelsCache;
+let templatesFunctions = require('../gen/templates');
+let utils = require('../utils');
 
 
 function cloneOpenAPIMetadataContainer(old) {
@@ -39,7 +39,7 @@ function getOperations(openapi, failOnMissingOperationId) {
         }
       }
       result[operationId] = _.cloneDeep(operation);
-      result[operationId]['operationId'] = operationId
+      result[operationId]['operationId'] = operationId;
       result[operationId]['method'] = _.clone(method);
       result[operationId]['path'] = _.clone(key);
       result[operationId]['sanitizedOperationId'] = OpenAPISanitizers.sanitize(operationId);
@@ -70,10 +70,10 @@ function extractParametersOrganizedByIn(operation, language) {
 }
 
 function buildOpenAPIBaseMetadata(oldOpenAPI, language, failOnMissingOperationId) {
-  var openapi = {
+  const openapi = {
     refs: oldOpenAPI.refs,
     original: _.cloneDeep(oldOpenAPI.original)
-  }
+  };
 
   // This foreach tries to generate models for all definitions in components
   let modelsCache = new ModelsCache(openapi);
@@ -82,7 +82,7 @@ function buildOpenAPIBaseMetadata(oldOpenAPI, language, failOnMissingOperationId
       modelsCache.handleJustDiscoveredSchema(schema, "#/components/schemas/" + name, name);
     });
 
-  openapi.operations = getOperations(openapi, failOnMissingOperationId)
+  openapi.operations = getOperations(openapi, failOnMissingOperationId);
 
   _.forOwn(openapi.operations, (operation, key) => {
     // Load $ref
@@ -123,7 +123,7 @@ function buildOpenAPIBaseMetadata(oldOpenAPI, language, failOnMissingOperationId
     // Remap parameters in object organized by parameter location
     operation.parsedParameters = extractParametersOrganizedByIn(
       operation, language
-    )
+    );
 
     // Solve responses models
     _.each(operation.responses, (response, responseCode) => {
@@ -147,8 +147,8 @@ function buildOpenAPIBaseMetadata(oldOpenAPI, language, failOnMissingOperationId
 }
 
 function generateApiClientOpenapiMetadata(project) {
-  var openapi = cloneOpenAPIMetadataContainer(project.metadata.openapi);
-  let language = project.language.id
+  const openapi = cloneOpenAPIMetadataContainer(project.metadata.openapi);
+  let language = project.language.id;
 
   // Generate method names
   _.forOwn(openapi.operations, (operation, key) => {
@@ -181,13 +181,13 @@ function generateApiClientOpenapiMetadata(project) {
             contentType: contentType,
             schema: content.schema
           });
-        } else if (contentType == "multipart/form-data")
+        } else if (contentType === "multipart/form-data")
           operation.functions.push({
             name: baseFunctionName + "WithMultipartForm",
             form: true,
             contentType: contentType
           });
-        else if (contentType == "application/x-www-form-urlencoded")
+        else if (contentType === "application/x-www-form-urlencoded")
           operation.functions.push({
             name: baseFunctionName + "WithForm",
             form: true,
@@ -225,7 +225,7 @@ function generateApiClient(project, openapi, zip, clientTemplatePath, operations
     }),
     false,
     zip
-  )
+  );
 
   // Render Operations.md if there is the template
   if (operationsMdTemplatePath) {

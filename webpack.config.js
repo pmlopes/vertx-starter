@@ -1,5 +1,6 @@
 const path = require('path');
 var webpack = require("webpack");
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   entry: './src/web_entrypoint.js',
@@ -40,5 +41,10 @@ module.exports = {
       context: __dirname,
       manifest: require("./docs/js/vendor-manifest.json")
     })
-  ]
+  ],
+  optimization: {
+    minimizer: [new TerserPlugin({
+      cache: true
+    })]
+  }
 };
