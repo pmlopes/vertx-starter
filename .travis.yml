@@ -8,9 +8,6 @@ before_script:
 - npm install -g npm
 - npm install -g gulp-cli
 script: gulp
-before_deploy:
-- npm config set git-tag-version false
-- npm version "0.0.$TRAVIS_JOB_NUMBER"
 deploy:
 - provider: npm
   email: "$NPM_EMAIL_ADDRESS"
