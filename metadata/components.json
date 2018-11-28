@@ -663,7 +663,7 @@
     "groupId": "io.reactiverse",
     "artifactId": "reactive-pg-client",
     "npm": "@reactiverse/reactive-pg-client",
-    "version": "0.10.5",
+    "version": "0.10.7",
     "description": "High performance reactive Postgres Client."
   }
 

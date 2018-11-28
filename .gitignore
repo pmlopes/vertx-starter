@@ -5,14 +5,5 @@
 node_modules
 package-lock.json
 # build artifacts
-src/gen
-dist/js
-dist/css
-dist/metadata.json
-dist/sw.js
-dist/index.html
-dist/blobs
-# deployment
-.publish
 # test specs
 specs

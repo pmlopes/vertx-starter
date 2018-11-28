@@ -8,7 +8,7 @@
   <link rel="shortcut icon" type="image/svg" href="img/stack.svg" />
   <link rel="manifest" href="manifest.json">
 
-  <title>Vert.x Starter ($version$)</title>
+  <title>Vert.x Starter ({{version}})</title>
 
   <link rel="stylesheet" href="css/bundle.min.css">
   <style>
@@ -32,10 +32,11 @@
   <div class="site-wrap" data-is="main"></div>
 
   <!-- the app -->
-  <script src="js/bundle.js"></script>
+  <script src="js/vendor.dll.js?{{version}}"></script>
+  <script src="js/main.bundle.js?{{version}}"></script>
   <script>
       if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js?$version$');
+      navigator.serviceWorker.register('sw.js?{{version}}');
     }
   </script>
   <!-- Google Analytics script -->

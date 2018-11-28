@@ -16,83 +16,31 @@
 
   <properties>
     <main.verticle>{{metadata.main}}</main.verticle>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.testSource>1.8</maven.compiler.testSource>
+    <maven.compiler.testTarget>1.8</maven.compiler.testTarget>
     {{#if metadata.kotlin}}
     <kotlin.compiler.jvmTarget>1.8</kotlin.compiler.jvmTarget>
     {{/if}}
     {{#if dependenciesGAV.[io.vertx:vertx-grpc]}}
     <vertx.grpc.version>1.13.2</vertx.grpc.version>
     {{/if}}
+    {{#if metadata.graalNativeImage}}
+    <graal.version>1.0.0-rc9</graal.version>
+    {{/if}}
   </properties>
 
-  {{#if metadata.graalNativeImage}}
-  <profiles>
-    <profile>
-      <id>native-image</id>
-      <dependencies>
-        <dependency>
-          <groupId>com.oracle</groupId>
-          <artifactId>substrate</artifactId>
-          <version>1.0.0-rc7</version>
-          <scope>system</scope>
-          <systemPath>${java.home}/lib/svm/builder/svm.jar</systemPath>
-        </dependency>
-      </dependencies>
-      <build>
-        <defaultGoal>package exec:exec</defaultGoal>
-        <plugins>
-          <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>build-helper-maven-plugin</artifactId>
-            <version>3.0.0</version>
-            <executions>
-              <execution>
-                <phase>generate-sources</phase>
-                <goals>
-                  <goal>add-source</goal>
-                </goals>
-                <configuration>
-                  <sources>
-                    <source>src/main/svm</source>
-                  </sources>
-                </configuration>
-              </execution>
-            </executions>
-          </plugin>
-          <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>exec-maven-plugin</artifactId>
-            <version>1.6.0</version>
-            <executions>
-              <execution>
-                <goals>
-                  <goal>exec</goal>
-                </goals>
-              </execution>
-            </executions>
-            <configuration>
-              <executable>${java.home}/bin/native-image</executable>
-              <arguments>
-                <argument>--no-server</argument>
-                <argument>--enable-all-security-services</argument>
-                <argument>--delay-class-initialization-to-runtime=io.netty.handler.codec.http.HttpObjectEncoder,io.netty.handler.codec.http2.Http2CodecUtil,io.netty.handler.codec.http2.DefaultHttp2FrameWriter,io.netty.handler.codec.http.websocketx.WebSocket00FrameEncoder,io.netty.handler.ssl.JdkNpnApplicationProtocolNegotiator,io.netty.handler.ssl.ReferenceCountedOpenSslEngine</argument>
-                <argument>-Dvertx.disableDnsResolver=true</argument>
-                <argument>-H:Name=${project.name}</argument>
-                <argument>-H:Path=${project.build.directory}</argument>
-                <argument>-H:IncludeResources=(META-INF/vertx|META-INF/services|static|webroot|template)/.*</argument>
-                <argument>-H:+ReportUnsupportedElementsAtRuntime</argument>
-                <argument>-H:ReflectionConfigurationFiles=${project.basedir}/src/main/svm/reflection.json</argument>
-                <argument>-jar</argument>
-                <argument>${project.build.directory}/${project.artifactId}-${project.version}-fat.jar</argument>
-              </arguments>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-  </profiles>
-  {{/if}}
-
   <dependencies>
+    {{#if metadata.graalNativeImage}}
+    <dependency>
+      <groupId>com.oracle.substratevm</groupId>
+      <artifactId>svm-driver</artifactId>
+      <version>${graal.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    {{/if}}
     {{#each dependencies}}
     <dependency>
       <groupId>{{groupId}}</groupId>
@@ -122,14 +70,6 @@
     {{/if}}
     <pluginManagement>
       <plugins>
-        <plugin>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <version>3.1</version>
-          <configuration>
-            <source>1.8</source>
-            <target>1.8</target>
-          </configuration>
-        </plugin>
         {{#if dependenciesGAV.[io.vertx:vertx-grpc]}}
         <plugin>
           <groupId>org.xolstice.maven.plugins</groupId>
@@ -229,6 +169,34 @@
         </executions>
       </plugin>
       {{/if}}
+      {{#if metadata.graalNativeImage}}
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>3.0.2</version>
+        <configuration>
+          <archive>
+            <manifest>
+              <mainClass>${main.verticle}</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>com.oracle.substratevm</groupId>
+        <artifactId>native-image-maven-plugin</artifactId>
+        <version>${graal.version}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>native-image</goal>
+            </goals>
+            <phase>package</phase>
+          </execution>
+        </executions>
+      </plugin>
+      {{/if}}
+      {{#unless metadata.graalNativeImage}}
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-shade-plugin</artifactId>
@@ -271,6 +239,7 @@
           </execution>
         </executions>
       </plugin>
+      {{/unless}}
     </plugins>
   </build>
 </project>

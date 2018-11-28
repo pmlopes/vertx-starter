@@ -6,7 +6,6 @@ var PluginError = require('plugin-error');
 var concat = require('gulp-concat');
 var rename = require('gulp-rename');
 var wrap = require('gulp-wrap');
-var ghPages = require('gulp-gh-pages-gift');
 var jsoncombine = require("gulp-jsoncombine");
 var minify = require('gulp-minify-css');
 var webpack = require('webpack-stream');
@@ -55,7 +54,7 @@ function handlebarsPlugin() {
       return callback();
     }
 
-    file.contents = new Buffer(compiled);
+    file.contents = Buffer.from(compiled);
     file.templatePath = file.relative;
     file.path = gutil.replaceExtension(file.path, '.js');
 
@@ -86,24 +85,10 @@ gulp.task('handlebars', function () {
 gulp.task('metadata', function () {
   return gulp.src("metadata/*.json")
     .pipe(jsoncombine("metadata.json", function (data) {
-      return new Buffer(JSON.stringify(data));
+      return Buffer.from(JSON.stringify(data));
     }))
     .pipe(gulp.dest("src/gen"));
 });
-
-gulp.task('blobs', function () {
-  return gulp.src('blobs/**/*')
-    .pipe(gulp.dest('dist/blobs'))
-});
-
-gulp.task('build', gulp.series('css', 'handlebars', 'metadata', 'blobs', function () {
-  return gulp.src('src/web_entrypoint.js')
-    .pipe(webpack(require('./webpack.config.js')))
-    .pipe(gulp.dest('dist/js'));
-}));
-
-// Default Task
-gulp.task('default', gulp.series('build'));
 
 gulp.task('build-cli', gulp.series('handlebars', 'metadata'));
 
@@ -111,14 +96,23 @@ gulp.task('kill-cache', function() {
   var packageJson = require('./package.json');
 
   return gulp.src(['src/sw.js', 'src/index.html'])
-    .pipe(replace('$version$', 'v' + packageJson.version))
+    .pipe(replace('{{version}}', 'v' + packageJson.version))
     .pipe(gulp.dest('dist'));
 });
 
-// Deploy to gh-pages
-gulp.task('deploy', gulp.series('kill-cache', 'build', function () {
-  return gulp.src('dist/**/*')
-    .pipe(ghPages({
-      push: true
-    }));
-}));
+gulp.task('webpack', function() {
+  return gulp.src('src/web_entrypoint.js')
+    .pipe(webpack(require('./webpack.config.js')))
+    .pipe(gulp.dest('dist/js'));
+});
+
+gulp.task('webpack-vendor', function() {
+  return gulp.src('src/web_entrypoint.js')
+    .pipe(webpack(require('./vendor.webpack.config.js')))
+    .pipe(gulp.dest('dist/js'));
+});
+
+gulp.task('build', gulp.series('css', 'handlebars', 'metadata', 'kill-cache', 'webpack'));
+
+// Default Task
+gulp.task('default', gulp.series('build'));

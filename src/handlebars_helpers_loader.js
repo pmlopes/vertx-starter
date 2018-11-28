@@ -52,6 +52,7 @@ exports.load = Handlebars => {
   Handlebars.registerHelper('sanitize', OpenAPISanitizers.sanitize)
 
   Handlebars.registerHelper('capitalize', s => s.charAt(0).toUpperCase() + s.slice(1));
+  Handlebars.registerHelper('lowerCase', s => s.toLowerCase());
 
   Handlebars.registerHelper('not', (condition, options) => {
     return utils.value(!condition, this, options);

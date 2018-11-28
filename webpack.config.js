@@ -1,10 +1,11 @@
-var path = require('path');
+const path = require('path');
+var webpack = require("webpack");
 
 module.exports = {
   entry: './src/web_entrypoint.js',
   output: {
     path: path.resolve(__dirname, 'dist', 'js'),
-    filename: 'bundle.js'
+    filename: "[name].bundle.js"
   },
   mode: "production",
   devtool: 'source-map',
@@ -33,5 +34,11 @@ module.exports = {
         }
       }
     ]
-  }
+  },
+  plugins: [
+    new webpack.DllReferencePlugin({
+      context: __dirname,
+      manifest: require("./dist/js/vendor-manifest.json")
+    })
+  ]
 };

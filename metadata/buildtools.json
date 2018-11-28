@@ -9,7 +9,7 @@
       { "key": "groupId", "label": "Maven Group Id", "prefill": "com.example" },
       { "key": "artifactId", "label": "Maven Artifact Id", "prefill": "myapp" },
       { "key": "version", "label": "Project Version", "prefill": "0.0.1-SNAPSHOT" },
-      { "key": "graalNativeImage", "label": "(Experimental!) native image support (requires: GraalVM)", "type": "checkbox" }
+      { "key": "graalNativeImage", "label": "GraalVM native-image", "type": "checkbox" }
     ],
     "languages": [
       {
@@ -58,8 +58,11 @@
       "maven/pom.xml"
     ],
     "graalNativeImageTemplates": [
-      "graal-nativeimage/src/main/svm/reflection.json",
-      "graal-nativeimage/src/main/svm/substitutions.java"
+      "graal-nativeimage/Dockerfile",
+      "graal-nativeimage/README.md",
+      "graal-nativeimage/src/main/java/SVMSubstitutions.java",
+      "graal-nativeimage/src/main/resources/META-INF/native-image/io.vertx/vertx-core/native-image.properties",
+      "graal-nativeimage/src/main/resources/META-INF/native-image/io.vertx/vertx-core/reflection.json"
     ],
     "blob": "mvnw.zip",
     "executables": [

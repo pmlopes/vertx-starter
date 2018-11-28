@@ -2,9 +2,8 @@ package {{ metadata.package }};
 
 {{#if metadata.graalNativeImage}}
 import io.vertx.core.Vertx;
-{{else}}
-import io.vertx.core.AbstractVerticle;
 {{/if}}
+import io.vertx.core.AbstractVerticle;
 {{#if dependenciesGAV.[io.vertx:vertx-web]}}
 import io.vertx.core.json.*;
 
@@ -23,14 +22,15 @@ import xyz.jetdrone.vertx.hot.reload.HotReload;
 import static java.time.temporal.ChronoUnit.DAYS;
 {{/if}}
 
-public class MainVerticle{{#unless metadata.graalNativeImage}} extends AbstractVerticle{{/unless}} {
+public class MainVerticle extends AbstractVerticle {
 
   {{#if metadata.graalNativeImage}}
   public static void main(String[] args) {
-    final Vertx vertx = Vertx.vertx();
-    // your code goes here...
+    // TODO: configure your vertx options here
+    Vertx.vertx().deployVerticle(new MainVerticle());
   }
-  {{else}}
+  {{/if}}
+
   @Override
   public void start() {
     // your code goes here...
@@ -106,5 +106,4 @@ public class MainVerticle{{#unless metadata.graalNativeImage}} extends AbstractV
       }
     });
   }
-  {{/if}}
 }
