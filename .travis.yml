@@ -10,7 +10,7 @@ script: gulp
 before_deploy:
 - git -c user.name="pmlopes" -c user.email="$NPM_EMAIL_ADDRESS" commit -a -m "Release webapp %s [skip ci]"
 - npm version patch -m "Release npm %s [skip ci]"
-- git push -f -q https://$GITHUB_API_KEY:@github.com/pmlopes/vertx-starter master
+- git push "https://$GITHUB_API_KEY:@github.com/pmlopes/vertx-starter"
 deploy:
 - provider: npm
   email: "$NPM_EMAIL_ADDRESS"
