@@ -9,6 +9,7 @@ before_script:
 script:
 - npm run build
 before_deploy:
+- export
 - npm version --no-git-tag-version 0.1.$TRAVIS_JOB_NUMBER
 deploy:
 - provider: npm
