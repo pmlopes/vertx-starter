@@ -96,7 +96,7 @@ gulp.task('kill-cache', function() {
   const packageJson = require('./package.json');
 
   return gulp.src(['src/sw.js', 'src/index.html'])
-    .pipe(replace('{{version}}', 'v' + packageJson.version))
+    .pipe(replace('{{version}}', process.env['TRAVIS_COMMIT'] || 'v' + packageJson.version))
     .pipe(gulp.dest('dist'));
 });
 
