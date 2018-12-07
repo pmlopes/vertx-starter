@@ -5,7 +5,7 @@
     "start": "cd dist && python3 -m http.server 8000",
     "cli": "node src/cli_entrypoint.js",
     "build:web": "gulp build",
-    "build:cli": "gulp build-cli",
+    "build:cli": "npm version --no-git-tag-version 0.1.${TRAVIS_JOB_NUMBER:-0} && gulp build-cli",
     "build": "gulp build && gulp build-cli"
   },
   "bin": {
