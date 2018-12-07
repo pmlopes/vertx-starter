@@ -7,9 +7,8 @@ cache:
 before_script:
 - npm install -g gulp-cli
 script:
-- npm run build
-before_deploy:
 - npm version --no-git-tag-version 0.1.$TRAVIS_BUILD_NUMBER
+- npm run build
 deploy:
 - provider: npm
   email: "$NPM_EMAIL_ADDRESS"
