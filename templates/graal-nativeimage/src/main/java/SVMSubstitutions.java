@@ -1,9 +1,7 @@
 import com.oracle.svm.core.annotate.*;
 import org.graalvm.nativeimage.*;
 
-import io.netty.handler.codec.compression.*;
-import io.netty.util.internal.logging.InternalLoggerFactory;
-import io.netty.util.internal.logging.JdkLoggerFactory;
+import io.netty.util.internal.logging.*;
 import io.vertx.core.Vertx;
 import io.vertx.core.dns.AddressResolverOptions;
 import io.vertx.core.impl.resolver.DefaultResolverProvider;
@@ -48,63 +46,6 @@ final class TargetUnsafeRefArrayAccess {
   @Alias
   @RecomputeFieldValue(kind = RecomputeFieldValue.Kind.ArrayIndexShift, declClass = Object[].class)
   public static int REF_ELEMENT_SHIFT;
-}
-
-/**
- * This substitution avoid having jcraft zlib added to the build
- */
-@TargetClass(className = "io.netty.handler.codec.compression.ZlibCodecFactory")
-final class TargetZlibCodecFactory {
-
-  @Substitute
-  public static ZlibEncoder newZlibEncoder(int compressionLevel) {
-    return new JdkZlibEncoder(compressionLevel);
-  }
-
-  @Substitute
-  public static ZlibEncoder newZlibEncoder(ZlibWrapper wrapper) {
-    return new JdkZlibEncoder(wrapper);
-  }
-
-  @Substitute
-  public static ZlibEncoder newZlibEncoder(ZlibWrapper wrapper, int compressionLevel) {
-    return new JdkZlibEncoder(wrapper, compressionLevel);
-  }
-
-  @Substitute
-  public static ZlibEncoder newZlibEncoder(ZlibWrapper wrapper, int compressionLevel, int windowBits, int memLevel) {
-    return new JdkZlibEncoder(wrapper, compressionLevel);
-  }
-
-  @Substitute
-  public static ZlibEncoder newZlibEncoder(byte[] dictionary) {
-    return new JdkZlibEncoder(dictionary);
-  }
-
-  @Substitute
-  public static ZlibEncoder newZlibEncoder(int compressionLevel, byte[] dictionary) {
-    return new JdkZlibEncoder(compressionLevel, dictionary);
-  }
-
-  @Substitute
-  public static ZlibEncoder newZlibEncoder(int compressionLevel, int windowBits, int memLevel, byte[] dictionary) {
-    return new JdkZlibEncoder(compressionLevel, dictionary);
-  }
-
-  @Substitute
-  public static ZlibDecoder newZlibDecoder() {
-    return new JdkZlibDecoder(true);
-  }
-
-  @Substitute
-  public static ZlibDecoder newZlibDecoder(ZlibWrapper wrapper) {
-    return new JdkZlibDecoder(wrapper, true);
-  }
-
-  @Substitute
-  public static ZlibDecoder newZlibDecoder(byte[] dictionary) {
-    return new JdkZlibDecoder(dictionary);
-  }
 }
 
 /**
