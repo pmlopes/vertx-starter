@@ -1,10 +1,10 @@
 # OpenAPI Server with Event Bus Services
 
-This generator creates a web server using an OpenAPI specification and generates service interfaces for [vertx-web-api-contract](https://vertx.io/docs/vertx-web-api-contract/java/). Please look at the documentation of [vertx-web-api-codegen](https://vertx.io/docs/vertx-web-api-codegen/java/)
+This generator creates a web server using an OpenAPI specification and generates service interfaces for [vertx-web-api-contract](https://vertx.io/docs/vertx-web-api-contract/java/). Please look at the documentation of [vertx-web-api-service](https://vertx.io/docs/vertx-web-api-service/java/)
 
 ## Specify service names
 
-To Specify service names you have two alternatives:
+To specify service names you have two alternatives:
 
 * In every operation fill the `x-vertx-event-bus.class` with service interface name. For example:
 
