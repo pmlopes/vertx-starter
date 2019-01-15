@@ -82,6 +82,12 @@ gulp.task('handlebars', function () {
 });
 
 // Assemble the metadata and put in js directory
+gulp.task('copy-blobs', function () {
+  return gulp.src("blobs/*")
+    .pipe(gulp.dest("dist/blobs"));
+});
+
+// Assemble the metadata and put in js directory
 gulp.task('metadata', function () {
   return gulp.src("metadata/*.json")
     .pipe(jsoncombine("metadata.json", function (data) {
@@ -112,7 +118,7 @@ gulp.task('webpack-vendor', function() {
     .pipe(gulp.dest('dist/js'));
 });
 
-gulp.task('build', gulp.series('css', 'handlebars', 'metadata', 'kill-cache', 'webpack'));
+gulp.task('build', gulp.series('css', 'handlebars', 'metadata', 'kill-cache', 'copy-blobs', 'webpack'));
 
 // Default Task
 gulp.task('default', gulp.series('build'));
