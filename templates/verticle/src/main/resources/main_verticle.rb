@@ -70,7 +70,7 @@ router.get("/api/weather-forecasts").handler() { |ctx|
 }
 
 # Serve the static resources
-router.route().handler({{#containsDep dependencies "xyz.jetdrone" "hot-reload"}}&Hotreload::HotReload.create_static_handler().method(:handle){{else}}&VertxWeb::StaticHandler.create().method(:handle){{/if}})
+router.route().handler({{#containsDep dependencies "xyz.jetdrone" "hot-reload"}}&Hotreload::HotReload.create_static_handler().method(:handle){{else}}&VertxWeb::StaticHandler.create().method(:handle){{/containsDep}})
 {{/containsDep}}
 
 http_server = $vertx.create_http_server()
