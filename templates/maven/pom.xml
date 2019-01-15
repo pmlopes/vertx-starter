@@ -24,9 +24,9 @@
     {{#if metadata.kotlin}}
     <kotlin.compiler.jvmTarget>1.8</kotlin.compiler.jvmTarget>
     {{/if}}
-    {{#if dependenciesGAV.[io.vertx:vertx-grpc]}}
+    {{#containsDep dependencies "io.vertx" "vertx-grpc"}}
     <vertx.grpc.version>1.13.2</vertx.grpc.version>
-    {{/if}}
+    {{/containsDep}}
     {{#if metadata.graalNativeImage}}
     <graal.version>1.0.0-rc9</graal.version>
     {{/if}}
@@ -59,7 +59,7 @@
   </dependencies>
 
   <build>
-    {{#if dependenciesGAV.[io.vertx:vertx-grpc]}}
+    {{#containsDep dependencies "io.vertx" "vertx-grpc"}}
     <extensions>
       <extension>
         <groupId>kr.motd.maven</groupId>
@@ -67,10 +67,10 @@
         <version>1.4.1.Final</version>
       </extension>
     </extensions>
-    {{/if}}
+    {{/containsDep}}
     <pluginManagement>
       <plugins>
-        {{#if dependenciesGAV.[io.vertx:vertx-grpc]}}
+        {{#containsDep dependencies "io.vertx" "vertx-grpc"}}
         <plugin>
           <groupId>org.xolstice.maven.plugins</groupId>
           <artifactId>protobuf-maven-plugin</artifactId>
@@ -95,7 +95,7 @@
             </execution>
           </executions>
         </plugin>
-        {{/if}}
+        {{/containsDep}}
         {{#if metadata.kotlin}}
         <plugin>
           <artifactId>kotlin-maven-plugin</artifactId>
@@ -139,7 +139,7 @@
         <groupId>org.jetbrains.kotlin</groupId>
       </plugin>
       {{/if}}
-      {{#if dependenciesGAV.[io.vertx:vertx-service-proxy]}}
+      {{#containsDep dependencies "io.vertx" "vertx-service-proxy"}}
       <plugin>
         <artifactId>maven-jar-plugin</artifactId>
         <version>2.4</version>
@@ -168,7 +168,7 @@
           </execution>
         </executions>
       </plugin>
-      {{/if}}
+      {{/containsDep}}
       {{#if metadata.graalNativeImage}}
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>

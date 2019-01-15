@@ -58,6 +58,10 @@ exports.load = Handlebars => {
     return utils.value(!condition, this, options);
   });
 
+  Handlebars.registerHelper('containsDep', (deps, groupId, artifactId, options) => {
+    return utils.value(!!_.find(deps, el => el.groupId === groupId && el.artifactId === artifactId), this, options);
+  });
+
   Handlebars.registerHelper('eq', (a, b, options) => {
     if (arguments.length === 2) {
       options = b;

@@ -1,29 +1,29 @@
-{{#if dependenciesGAV.[io.vertx:vertx-web]}}
+{{#containsDep dependencies "io.vertx" "vertx-web"}}
 var Router = require("vertx-web-js/router");
 var StaticHandler = require("vertx-web-js/static_handler");
-{{#if dependenciesGAV.[io.vertx:vertx-web-templ-handlebars]}}
+{{#containsDep dependencies "io.vertx" "vertx-web-templ-handlebars"}}
 var HandlebarsTemplateEngine = require("vertx-web-js/handlebars_template_engine");
-{{/if}}
-{{#if dependenciesGAV.[xyz.jetdrone:hot-reload]}}
+{{/containsDep}}
+{{#containsDep dependencies "xyz.jetdrone" "hot-reload"}}
 var HotReload = require("hotreload-js/hot_reload");
-{{/if}}
-{{/if}}
+{{/containsDep}}
+{{/containsDep}}
 
 // your code goes here...
 
-{{#if dependenciesGAV.[io.vertx:vertx-web]}}
-{{#if dependenciesGAV.[io.vertx:vertx-web-templ-handlebars]}}
+{{#containsDep dependencies "io.vertx" "vertx-web"}}
+{{#containsDep dependencies "io.vertx" "vertx-web-templ-handlebars"}}
 var engine = HandlebarsTemplateEngine.create();
-{{/if}}
+{{/containsDep}}
 var router = Router.router(vertx);
 
-{{#if dependenciesGAV.[xyz.jetdrone:hot-reload]}}
+{{#containsDep dependencies "xyz.jetdrone" "hot-reload"}}
 // development hot reload
 router.get().handler(HotReload.create().handle);
-{{/if}}
+{{/containsDep}}
 
 router.get("/").handler(function (ctx) {
-{{#if dependenciesGAV.[io.vertx:vertx-web-templ-handlebars]}}
+{{#containsDep dependencies "io.vertx" "vertx-web-templ-handlebars"}}
   // we define a hardcoded title for our application
   ctx.put("title", "Home Page");
   ctx.put("hotreload", process.env["VERTX_HOT_RELOAD"]);
@@ -39,7 +39,7 @@ router.get("/").handler(function (ctx) {
   ctx.response()
     .putHeader("content-type", "text/plain")
     .end("Hello from Vert.x!");
-{{/if}}
+{{/containsDep}}
 });
 
 // the example weather API
@@ -70,13 +70,13 @@ router.get("/api/weather-forecasts").handler(function (ctx) {
 });
 
 // Serve the static resources
-router.route().handler({{#if dependenciesGAV.[xyz.jetdrone:hot-reload]}}HotReload.createStaticHandler().handle{{else}}StaticHandler.create().handle{{/if}});
-{{/if}}
-vertx.createHttpServer().requestHandler({{#if dependenciesGAV.[io.vertx:vertx-web]}}router.accept{{else}}function (req) {
+router.route().handler({{#containsDep dependencies "xyz.jetdrone" "hot-reload"}}HotReload.createStaticHandler().handle{{else}}StaticHandler.create().handle{{/if}});
+{{/containsDep}}
+vertx.createHttpServer().requestHandler({{#containsDep dependencies "io.vertx" "vertx-web"}}router.accept{{else}}function (req) {
   req.response()
     .putHeader("content-type", "text/plain")
     .end("Hello from Vert.x!")
-}{{/if}}).listen(8080, function (res, res_err) {
+}{{/containsDep}}).listen(8080, function (res, res_err) {
   if (res_err != null) {
     res_err.printStackTrace();
   } else {
