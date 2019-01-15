@@ -123,6 +123,13 @@
   },
   {
     "groupId": "io.vertx",
+    "artifactId": "vertx-micrometer-metrics",
+    "npm": "@vertx/micrometer-metrics",
+    "version": "3.6.2",
+    "stack": true
+  },
+  {
+    "groupId": "io.vertx",
     "artifactId": "vertx-reactive-streams",
     "version": "3.6.2",
     "stack": true
