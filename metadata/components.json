@@ -53,6 +53,13 @@
   },
   {
     "groupId": "io.vertx",
+    "artifactId": "vertx-lang-kotlin-coroutines",
+    "version": "3.6.2",
+    "stack": true,
+    "description": "Vert.x Kotlin coroutines support."
+  },
+  {
+    "groupId": "io.vertx",
     "artifactId": "vertx-lang-ceylon",
     "version": "3.6.2",
     "stack": true,

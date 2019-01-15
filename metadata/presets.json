@@ -489,5 +489,27 @@
       "web+react-redux/webpack.config.vendor.js",
       "web+react-redux/webpack.config.js"
     ]
+  },
+  {
+    "id": "Kotlin coroutines",
+    "group": "coroutines",
+    "description": "A simple coroutines webapp",
+    "dependencies": [
+      "io.vertx:vertx-lang-kotlin",
+      "io.vertx:vertx-lang-kotlin-coroutines",
+      "io.vertx:vertx-web",
+      "io.vertx:vertx-jdbc-client",
+      "org.hsqldb:hsqldb"
+    ],
+    "buildtool": "maven",
+    "languages": [
+      {
+        "id": "kotlin"
+      }
+    ],
+    "templates": [
+      "kotlin+coroutines/README.md",
+      "kotlin+coroutines/src/main/kotlin/{packageDir}/MainVerticle.kt"
+    ]
   }
 ]

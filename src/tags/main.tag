@@ -294,7 +294,7 @@
         });
       }
 
-      const filteredPresets = this.filterPresets(this.tool.id, e.target.value);
+      const filteredPresets = this.filterPresets(e.target.value, this.tool.id);
       const filteredPresetsGroups = {};
       filteredPresets.forEach(function (el) {
         if (!filteredPresetsGroups[el.group]) {
