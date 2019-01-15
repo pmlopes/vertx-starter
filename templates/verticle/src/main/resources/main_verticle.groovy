@@ -1,33 +1,33 @@
-{{#if dependenciesGAV.[io.vertx:vertx-web]}}
+{{#containsDep dependencies "io.vertx" "vertx-web"}}
 import java.time.Instant
 
 import io.vertx.ext.web.Router
 import io.vertx.ext.web.handler.StaticHandler
-{{#if dependenciesGAV.[io.vertx:vertx-web-templ-handlebars]}}
+{{#containsDep dependencies "io.vertx" "vertx-web-templ-handlebars"}}
 import io.vertx.ext.web.templ.HandlebarsTemplateEngine
-{{/if}}
-{{#if dependenciesGAV.[xyz.jetdrone:hot-reload]}}
+{{/containsDep}}
+{{#containsDep dependencies "xyz.jetdrone" "hot-reload"}}
 import xyz.jetdrone.vertx.hot.reload.HotReload
-{{/if}}
+{{/containsDep}}
 
 import static java.time.temporal.ChronoUnit.DAYS
-{{/if}}
+{{/containsDep}}
 
 // your code goes here...
 
-{{#if dependenciesGAV.[io.vertx:vertx-web]}}
-{{#if dependenciesGAV.[io.vertx:vertx-web-templ-handlebars]}}
+{{#containsDep dependencies "io.vertx" "vertx-web"}}
+{{#containsDep dependencies "io.vertx" "vertx-web-templ-handlebars"}}
 def engine = HandlebarsTemplateEngine.create()
-{{/if}}
+{{/containsDep}}
 def router = Router.router(vertx)
 
-{{#if dependenciesGAV.[xyz.jetdrone:hot-reload]}}
+{{#containsDep dependencies "xyz.jetdrone" "hot-reload"}}
 // development hot reload
 router.get().handler(HotReload.create())
-{{/if}}
+{{/containsDep}}
 
 router.get("/").handler({ ctx ->
-{{#if dependenciesGAV.[io.vertx:vertx-web-templ-handlebars]}}
+{{#containsDep dependencies "io.vertx" "vertx-web-templ-handlebars"}}
   // we define a hardcoded title for our application
   ctx.put("title", "Home Page")
   ctx.put("hotreload", System.getenv("VERTX_HOT_RELOAD"))
@@ -43,7 +43,7 @@ router.get("/").handler({ ctx ->
   ctx.response()
     .putHeader("content-type", "text/plain")
     .end("Hello from Vert.x!")
-{{/if}}
+{{/containsDep}}
 })
 
 // the example weather API
@@ -72,14 +72,14 @@ router.get("/api/weather-forecasts").handler({ ctx ->
 })
 
 // Serve the static resources
-router.route().handler({{#if dependenciesGAV.[xyz.jetdrone:hot-reload]}}HotReload.createStaticHandler(){{else}}StaticHandler.create(){{/if}})
-{{/if}}
+router.route().handler({{#containsDep dependencies "xyz.jetdrone" "hot-reload"}}HotReload.createStaticHandler(){{else}}StaticHandler.create(){{/containsDep}})
+{{/containsDep}}
 
-vertx.createHttpServer().requestHandler({{#if dependenciesGAV.[io.vertx:vertx-web]}}router.&accept{{else}}{ req ->
+vertx.createHttpServer().requestHandler({{#containsDep dependencies "io.vertx" "vertx-web"}}router.&accept{{else}}{ req ->
   req.response()
     .putHeader("content-type", "text/plain")
     .end("Hello from Vert.x!")
-}{{/if}}).listen(8080, { res ->
+}{{/containsDep}}).listen(8080, { res ->
   if (res.failed()) {
     res.cause().printStackTrace()
   } else {

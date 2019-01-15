@@ -48,14 +48,8 @@ function compileProject(project, trackFn, trackExceptionFn, loadBlob) {
     );
 
     // alias for selected dependencies
-    project.dependenciesGAV = {};
-
     project.dependencies.forEach(function (el) {
-      project.dependenciesGAV[el.groupId + ':' + el.artifactId] = el.version;
-      if (el.classifier) {
-        project.dependenciesGAV[el.groupId + ':' + el.artifactId + ':' + el.classifier] = el.version;
-      }
-
+      el.alias = (!!el.classifier) ? el.groupId + ':' + el.artifactId + ':' + el.classifier : el.groupId + ':' + el.artifactId;
       // track what dependencies are being selected
       trackFn(project.buildtool.id + ':dependency', project.buildtool.id + '/' + el.groupId + ':' + el.artifactId + ':' + el.version, 'dependency');
     });

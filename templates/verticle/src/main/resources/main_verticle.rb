@@ -1,31 +1,31 @@
-{{#if dependenciesGAV.[io.vertx:vertx-web]}}
+{{#containsDep dependencies "io.vertx" "vertx-web"}}
 require 'date'
 
 require 'vertx-web/router'
 require 'vertx-web/static_handler'
-{{#if dependenciesGAV.[io.vertx:vertx-web-templ-handlebars]}}
+{{#containsDep dependencies "io.vertx" "vertx-web-templ-handlebars"}}
 require 'vertx-web/handlebars_template_engine'
-{{/if}}
-{{#if dependenciesGAV.[xyz.jetdrone:hot-reload]}}
+{{/containsDep}}
+{{#containsDep dependencies "xyz.jetdrone" "hot-reload"}}
 require 'hotreload/hot_reload'
-{{/if}}
-{{/if}}
+{{/containsDep}}
+{{/containsDep}}
 
 # your code goes here...
 
-{{#if dependenciesGAV.[io.vertx:vertx-web]}}
-{{#if dependenciesGAV.[io.vertx:vertx-web-templ-handlebars]}}
+{{#containsDep dependencies "io.vertx" "vertx-web"}}
+{{#containsDep dependencies "io.vertx" "vertx-web-templ-handlebars"}}
 engine = VertxWeb::HandlebarsTemplateEngine.create()
-{{/if}}
+{{/containsDep}}
 router = VertxWeb::Router.router($vertx)
 
-{{#if dependenciesGAV.[xyz.jetdrone:hot-reload]}}
+{{#containsDep dependencies "xyz.jetdrone" "hot-reload"}}
 # development hot reload
 router.get().handler(&Hotreload::HotReload.create().method(:handle))
-{{/if}}
+{{/containsDep}}
 
 router.get("/").handler() { |ctx|
-{{#if dependenciesGAV.[io.vertx:vertx-web-templ-handlebars]}}
+{{#containsDep dependencies "io.vertx" "vertx-web-templ-handlebars"}}
   # we define a hardcoded title for our application
   ctx.put("title", "Home Page")
   ctx.put("hotreload", System.getenv("VERTX_HOT_RELOAD"))
@@ -41,7 +41,7 @@ router.get("/").handler() { |ctx|
   ctx.response()
     .putHeader("content-type", "text/plain")
     .end("Hello from Vert.x!")
-{{/if}}
+{{/containsDep}}
 }
 
 # the example weather API
@@ -70,16 +70,16 @@ router.get("/api/weather-forecasts").handler() { |ctx|
 }
 
 # Serve the static resources
-router.route().handler({{#if dependenciesGAV.[xyz.jetdrone:hot-reload]}}&Hotreload::HotReload.create_static_handler().method(:handle){{else}}&VertxWeb::StaticHandler.create().method(:handle){{/if}})
-{{/if}}
+router.route().handler({{#containsDep dependencies "xyz.jetdrone" "hot-reload"}}&Hotreload::HotReload.create_static_handler().method(:handle){{else}}&VertxWeb::StaticHandler.create().method(:handle){{/containsDep}})
+{{/containsDep}}
 
 http_server = $vertx.create_http_server()
 
-http_server.request_handler({{#if dependenciesGAV.[io.vertx:vertx-web]}}&router.method(:accept)){{else}}) { |req|
+http_server.request_handler({{#containsDep dependencies "io.vertx" "vertx-web"}}&router.method(:accept)){{else}}) { |req|
   req.response()
     .putHeader("content-type", "text/plain")
     .end("Hello from Vert.x!")
-}{{/if}}
+}{{/containsDep}}
 
 http_server.listen(8080) { |res_err,res|
   if (res_err != nil)
