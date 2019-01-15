@@ -136,7 +136,7 @@ inquirer.prompt([
             (ex) => console.error(ex.message),
             (blobName) => {
                 return new Promise((resolve, reject) => {
-                    fs.readFile(path.join(__dirname, "..", "dist", "blobs", blobName), (err, buffer) => {
+                    fs.readFile(path.join(__dirname, "..", "blobs", blobName), (err, buffer) => {
                         if (err) reject(err);
                         else resolve(buffer)
                     });
