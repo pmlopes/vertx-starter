@@ -11,6 +11,9 @@
       { "key": "version", "label": "Project Version", "prefill": "0.0.1-SNAPSHOT" },
       { "key": "graalNativeImage", "label": "GraalVM native-image", "type": "checkbox" }
     ],
+    "meta": [
+      { "key": "bom", "value": "3.6.2" }
+    ],
     "languages": [
       {
         "id": "java",

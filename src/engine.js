@@ -102,7 +102,9 @@ function compileProject(project, trackFn, trackExceptionFn, loadBlob) {
     // Load responses into metadata
     let promises = _.concat(
       _.get(project, "buildtool.fields", []),
-      _.get(project, "preset.fields", [])
+      _.get(project, "preset.fields", []),
+      _.get(project, "buildtool.meta", []),
+      _.get(project, "preset.meta", [])
     ).map(function (el) {
       project.metadata[el.key] = el.value;
       if (fieldsCallbacks.hasOwnProperty(el.key)) return fieldsCallbacks[el.key](project, el.value, templates, trackFn, trackExceptionFn);

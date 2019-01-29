@@ -42,16 +42,27 @@ function handlebarsPlugin() {
 
     const contents = file.contents.toString();
     let compiled = null;
-    try {
-      compiled = handlebars.precompile(
-        handlebars.parse(contents),
-        compilerOptions
-      ).toString();
-    } catch (err) {
-      this.emit('error', new PluginError("Handlebars plugin", err, {
-        fileName: file.path
-      }));
-      return callback();
+
+    // binary files
+    if (['favicon.ico'].indexOf(file.path.substr(file.path.lastIndexOf('/') + 1)) !== -1) {
+      // binary file are stored as is
+      compiled =
+        "{\"compiler\":[7,\">= 4.0.0\"],\"main\":function(container,depth0,helpers,partials,data) {\n" +
+        "    return " + JSON.stringify(contents) + ";\n" +
+        "},\"useData\":false}\n";
+    } else {
+      try {
+        compiled = handlebars.precompile(
+          handlebars.parse(contents),
+          compilerOptions
+        ).toString();
+      } catch (err) {
+        console.log(err);
+        this.emit('error', new PluginError("Handlebars plugin", err, {
+          fileName: file.path
+        }));
+        return callback();
+      }
     }
 
     file.contents = Buffer.from(compiled);

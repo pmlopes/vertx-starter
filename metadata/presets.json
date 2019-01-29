@@ -1,29 +1,5 @@
 [
   {
-    "id": "MongoDB backend",
-    "group": "webapp",
-    "description": "A simple webapp backed by mongoDB",
-    "dependencies": [
-      "io.vertx:vertx-core",
-      "io.vertx:vertx-web",
-      "io.vertx:vertx-web-templ-jade",
-      "io.vertx:vertx-mongo-client"
-    ],
-    "buildtool": "maven",
-    "languages": [
-      {
-        "id": "java",
-        "templates": [
-          "web+mongo/src/main/java/{packageDir}/MainVerticle.java",
-          "web+mongo/src/main/resources/templates/index.jade",
-          "web+mongo/src/main/resources/templates/layout.jade",
-          "web+mongo/src/main/resources/webroot/css/style.css",
-          "web+mongo/src/main/resources/webroot/js/app.js"
-        ]
-      }
-    ]
-  },
-  {
     "id": "Service Proxy Template",
     "group": "service proxy",
     "description": "A bare bones service proxy application",
@@ -147,350 +123,6 @@
     ]
   },
   {
-    "id": "AngularJS",
-    "group": "webapp",
-    "description": "A simple webapp with a AngularJS",
-    "dependencies": [
-      "io.vertx:vertx-core",
-      "io.vertx:vertx-web",
-      "io.vertx:vertx-web-templ-handlebars",
-      "xyz.jetdrone:hot-reload"
-    ],
-    "buildtool": "maven",
-    "languages": [
-      {
-        "id": "java"
-      },
-      {
-        "id": "kotlin"
-      },
-      {
-        "id": "groovy"
-      },
-      {
-        "id": "ruby"
-      },
-      {
-        "id": "js"
-      }
-    ],
-    "templates": [
-      "verticle/src/main/resources/templates/index.hbs",
-
-      "web+angular4/src/main/ts/app/app.module.server.ts",
-      "web+angular4/src/main/ts/app/app.module.browser.ts",
-      "web+angular4/src/main/ts/app/app.module.shared.ts",
-      "web+angular4/src/main/ts/app/components/app/app.component.ts",
-      "web+angular4/src/main/ts/app/components/app/app.component.css",
-      "web+angular4/src/main/ts/app/components/app/app.component.html",
-      "web+angular4/src/main/ts/app/components/counter/counter.component.spec.ts",
-      "web+angular4/src/main/ts/app/components/counter/counter.component.ts",
-      "web+angular4/src/main/ts/app/components/counter/counter.component.html",
-      "web+angular4/src/main/ts/app/components/navmenu/navmenu.component.css",
-      "web+angular4/src/main/ts/app/components/navmenu/navmenu.component.ts",
-      "web+angular4/src/main/ts/app/components/navmenu/navmenu.component.html",
-      "web+angular4/src/main/ts/app/components/fetchdata/fetchdata.component.ts",
-      "web+angular4/src/main/ts/app/components/fetchdata/fetchdata.component.html",
-      "web+angular4/src/main/ts/app/components/home/home.component.ts",
-      "web+angular4/src/main/ts/app/components/home/home.component.html",
-      "web+angular4/src/main/ts/boot.browser.ts",
-      "web+angular4/package.json",
-      "web+angular4/tsconfig.json",
-      "web+angular4/webpack.config.js",
-      "web+angular4/webpack.config.vendor.js",
-      "web+angular4/src/test/ts/boot-tests.ts",
-      "web+angular4/src/test/ts/karma.conf.js"
-    ]
-  },
-  {
-    "id": "ReactJS",
-    "group": "webapp",
-    "description": "A simple webapp with a react.js frontend",
-    "dependencies": [
-      "io.vertx:vertx-core",
-      "io.vertx:vertx-web",
-      "io.vertx:vertx-web-templ-handlebars",
-      "xyz.jetdrone:hot-reload"
-    ],
-    "buildtool": "maven",
-    "languages": [
-      {
-        "id": "java"
-      },
-      {
-        "id": "kotlin"
-      },
-      {
-        "id": "groovy"
-      },
-      {
-        "id": "ruby"
-      },
-      {
-        "id": "js"
-      }
-    ],
-    "templates": [
-      "verticle/src/main/resources/templates/index.hbs",
-
-      "web+react/.babelrc",
-      "web+react/src/main/js/routes.jsx",
-      "web+react/src/main/js/css/site.css",
-      "web+react/src/main/js/components/Layout.jsx",
-      "web+react/src/main/js/components/NavMenu.jsx",
-      "web+react/src/main/js/components/Home.jsx",
-      "web+react/src/main/js/components/Counter.jsx",
-      "web+react/src/main/js/components/FetchData.jsx",
-      "web+react/src/main/js/boot.jsx",
-      "web+react/package.json",
-      "web+react/webpack.config.vendor.js",
-      "web+react/webpack.config.js"
-    ]
-  },
-  {
-    "id": "ReactJS in TypeScript",
-    "group": "webapp",
-    "description": "A simple webapp with a react.js frontend using TypeScript",
-    "dependencies": [
-      "io.vertx:vertx-core",
-      "io.vertx:vertx-web",
-      "io.vertx:vertx-web-templ-handlebars",
-      "xyz.jetdrone:hot-reload"
-    ],
-    "buildtool": "maven",
-    "languages": [
-      {
-        "id": "java"
-      },
-      {
-        "id": "kotlin"
-      },
-      {
-        "id": "groovy"
-      },
-      {
-        "id": "ruby"
-      },
-      {
-        "id": "js"
-      }
-    ],
-    "templates": [
-      "verticle/src/main/resources/templates/index.hbs",
-
-      "web+react+typescript/tsconfig.json",
-      "web+react+typescript/src/main/ts/boot.tsx",
-      "web+react+typescript/src/main/ts/css/site.css",
-      "web+react+typescript/src/main/ts/components/Counter.tsx",
-      "web+react+typescript/src/main/ts/components/Layout.tsx",
-      "web+react+typescript/src/main/ts/components/NavMenu.tsx",
-      "web+react+typescript/src/main/ts/components/FetchData.tsx",
-      "web+react+typescript/src/main/ts/components/Home.tsx",
-      "web+react+typescript/src/main/ts/routes.tsx",
-      "web+react+typescript/package.json",
-      "web+react+typescript/webpack.config.vendor.js",
-      "web+react+typescript/webpack.config.js"
-    ]
-  },
-  {
-    "id": "VueJS",
-    "group": "webapp",
-    "description": "A simple webapp with a vue.js frontend",
-    "dependencies": [
-      "io.vertx:vertx-core",
-      "io.vertx:vertx-web",
-      "io.vertx:vertx-web-templ-handlebars",
-      "xyz.jetdrone:hot-reload"
-    ],
-    "buildtool": "maven",
-    "languages": [
-      {
-        "id": "java"
-      },
-      {
-        "id": "kotlin"
-      },
-      {
-        "id": "groovy"
-      },
-      {
-        "id": "ruby"
-      },
-      {
-        "id": "js"
-      }
-    ],
-    "templates": [
-      "verticle/src/main/resources/templates/index.hbs",
-
-      "web+vue/.babelrc",
-      "web+vue/src/main/js/css/site.css",
-      "web+vue/src/main/js/components/app/app.js",
-      "web+vue/src/main/js/components/app/app.vue.html",
-      "web+vue/src/main/js/components/counter/counter.js",
-      "web+vue/src/main/js/components/counter/counter.vue.html",
-      "web+vue/src/main/js/components/navmenu/navmenu.css",
-      "web+vue/src/main/js/components/navmenu/navmenu.vue.html",
-      "web+vue/src/main/js/components/fetchdata/fetchdata.js",
-      "web+vue/src/main/js/components/fetchdata/fetchdata.vue.html",
-      "web+vue/src/main/js/components/home/home.vue.html",
-      "web+vue/src/main/js/boot.js",
-      "web+vue/package.json",
-      "web+vue/webpack.config.vendor.js",
-      "web+vue/webpack.config.js"
-    ]
-  },
-  {
-    "id": "AureliaJS",
-    "group": "webapp",
-    "description": "A simple webapp with a aurelia.js frontend",
-    "dependencies": [
-      "io.vertx:vertx-core",
-      "io.vertx:vertx-web",
-      "io.vertx:vertx-web-templ-handlebars",
-      "xyz.jetdrone:hot-reload"
-    ],
-    "buildtool": "maven",
-    "languages": [
-      {
-        "id": "java"
-      },
-      {
-        "id": "kotlin"
-      },
-      {
-        "id": "groovy"
-      },
-      {
-        "id": "ruby"
-      },
-      {
-        "id": "js"
-      }
-    ],
-    "templates": [
-      "verticle/src/main/resources/templates/index.hbs",
-
-      "web+aurelia/.babelrc",
-      "web+aurelia/src/main/js/app/components/app/app.js",
-      "web+aurelia/src/main/js/app/components/app/app.css",
-      "web+aurelia/src/main/js/app/components/app/app.html",
-      "web+aurelia/src/main/js/app/components/counter/counter.js",
-      "web+aurelia/src/main/js/app/components/counter/counter.html",
-      "web+aurelia/src/main/js/app/components/navmenu/navmenu.html",
-      "web+aurelia/src/main/js/app/components/navmenu/navmenu.css",
-      "web+aurelia/src/main/js/app/components/fetchdata/fetchdata.js",
-      "web+aurelia/src/main/js/app/components/fetchdata/fetchdata.html",
-      "web+aurelia/src/main/js/app/components/home/home.js",
-      "web+aurelia/src/main/js/app/components/home/home.html",
-      "web+aurelia/src/main/js/boot.js",
-      "web+aurelia/package.json",
-      "web+aurelia/webpack.config.vendor.js",
-      "web+aurelia/webpack.config.js"
-    ]
-  },
-  {
-    "id": "KnockoutJS",
-    "group": "webapp",
-    "description": "A simple webapp with a knockout.js frontend",
-    "dependencies": [
-      "io.vertx:vertx-core",
-      "io.vertx:vertx-web",
-      "io.vertx:vertx-web-templ-handlebars",
-      "xyz.jetdrone:hot-reload"
-    ],
-    "buildtool": "maven",
-    "languages": [
-      {
-        "id": "java"
-      },
-      {
-        "id": "kotlin"
-      },
-      {
-        "id": "groovy"
-      },
-      {
-        "id": "ruby"
-      },
-      {
-        "id": "js"
-      }
-    ],
-    "templates": [
-      "verticle/src/main/resources/templates/index.hbs",
-
-      "web+knockout/.babelrc",
-      "web+knockout/src/main/js/router.js",
-      "web+knockout/src/main/js/css/site.css",
-      "web+knockout/src/main/js/components/home-page/home-page.js",
-      "web+knockout/src/main/js/components/home-page/home-page.html",
-      "web+knockout/src/main/js/components/fetch-data/fetch-data.html",
-      "web+knockout/src/main/js/components/fetch-data/fetch-data.js",
-      "web+knockout/src/main/js/components/app-root/app-root.js",
-      "web+knockout/src/main/js/components/app-root/app-root.html",
-      "web+knockout/src/main/js/components/nav-menu/nav-menu.html",
-      "web+knockout/src/main/js/components/nav-menu/nav-menu.js",
-      "web+knockout/src/main/js/components/counter-example/counter-example.js",
-      "web+knockout/src/main/js/components/counter-example/counter-example.html",
-      "web+knockout/src/main/js/webpack-component-loader.js",
-      "web+knockout/src/main/js/boot.js",
-      "web+knockout/package.json",
-      "web+knockout/webpack.config.vendor.js",
-      "web+knockout/webpack.config.js"
-    ]
-  },
-  {
-    "id": "React-Redux",
-    "group": "webapp",
-    "description": "A simple webapp with a react redux frontend",
-    "dependencies": [
-      "io.vertx:vertx-core",
-      "io.vertx:vertx-web",
-      "io.vertx:vertx-web-templ-handlebars",
-      "xyz.jetdrone:hot-reload"
-    ],
-    "buildtool": "maven",
-    "languages": [
-      {
-        "id": "java"
-      },
-      {
-        "id": "kotlin"
-      },
-      {
-        "id": "groovy"
-      },
-      {
-        "id": "ruby"
-      },
-      {
-        "id": "js"
-      }
-    ],
-    "templates": [
-      "verticle/src/main/resources/templates/index.hbs",
-
-      "web+react-redux/.babelrc",
-      "web+react-redux/src/main/js/configureStore.js",
-      "web+react-redux/src/main/js/routes.jsx",
-      "web+react-redux/src/main/js/store/WeatherForecasts.js",
-      "web+react-redux/src/main/js/store/index.js",
-      "web+react-redux/src/main/js/store/Counter.js",
-      "web+react-redux/src/main/js/css/site.css",
-      "web+react-redux/src/main/js/boot-client.jsx",
-      "web+react-redux/src/main/js/components/Layout.jsx",
-      "web+react-redux/src/main/js/components/NavMenu.jsx",
-      "web+react-redux/src/main/js/components/Home.jsx",
-      "web+react-redux/src/main/js/components/Counter.jsx",
-      "web+react-redux/src/main/js/components/FetchData.jsx",
-      "web+react-redux/src/main/js/boot-server.jsx",
-      "web+react-redux/package.json",
-      "web+react-redux/webpack.config.vendor.js",
-      "web+react-redux/webpack.config.js"
-    ]
-  },
-  {
     "id": "Kotlin coroutines",
     "group": "coroutines",
     "description": "A simple coroutines webapp",
@@ -510,6 +142,223 @@
     "templates": [
       "kotlin+coroutines/README.md",
       "kotlin+coroutines/src/main/kotlin/{packageDir}/MainVerticle.kt"
+    ]
+  },
+  {
+    "id": "React.js SPA blueprint",
+    "group": "webapp",
+    "description": "A simple webapp with a react.js frontend",
+    "dependencies": [
+      "io.vertx:vertx-core",
+      "io.vertx:vertx-web",
+      "xyz.jetdrone:vertx-spa-services"
+    ],
+    "meta": [
+      {"key": "clientapp", "value": "react-clientapp"},
+      {"key": "resources", "value": "react-clientapp/build"}
+    ],
+    "buildtool": "maven",
+    "languages": [
+      {
+        "id": "java"
+      }
+    ],
+    "templates": [
+      "spa+blueprint/README.md",
+      "spa+blueprint/pom.xml",
+
+      "spa+blueprint/src/main/resources/webroot/.gitkeep",
+      "spa+blueprint/src/main/resources/error-template.html",
+      "spa+blueprint/src/main/resources/favicon.ico",
+
+      "spa+blueprint/src/main/java/{packageDir}/MainVerticle.java",
+      "spa+blueprint/src/main/java/{packageDir}/WeatherAPI.java",
+
+      "spa+blueprint/react-clientapp/package.json",
+      "spa+blueprint/react-clientapp/src/registerServiceWorker.js",
+      "spa+blueprint/react-clientapp/src/App.js",
+      "spa+blueprint/react-clientapp/src/index.js",
+      "spa+blueprint/react-clientapp/src/App.test.js",
+      "spa+blueprint/react-clientapp/src/components/Counter.js",
+      "spa+blueprint/react-clientapp/src/components/NavMenu.css",
+      "spa+blueprint/react-clientapp/src/components/FetchData.js",
+      "spa+blueprint/react-clientapp/src/components/NavMenu.js",
+      "spa+blueprint/react-clientapp/src/components/Home.js",
+      "spa+blueprint/react-clientapp/src/components/Layout.js",
+      "spa+blueprint/react-clientapp/public/manifest.json",
+      "spa+blueprint/react-clientapp/public/index.html",
+      "spa+blueprint/react-clientapp/public/favicon.ico",
+      "spa+blueprint/react-clientapp/.gitignore",
+      "spa+blueprint/react-clientapp/scss/custom.scss",
+      "spa+blueprint/react-clientapp/README.md"
+    ]
+  },
+  {
+    "id": "React-Redux SPA blueprint",
+    "group": "webapp",
+    "description": "A simple webapp with a react-redux frontend",
+    "dependencies": [
+      "io.vertx:vertx-core",
+      "io.vertx:vertx-web",
+      "xyz.jetdrone:vertx-spa-services"
+    ],
+    "meta": [
+      {"key": "clientapp", "value": "react-redux-clientapp"},
+      {"key": "resources", "value": "react-redux-clientapp/build"}
+    ],
+    "buildtool": "maven",
+    "languages": [
+      {
+        "id": "java"
+      }
+    ],
+    "templates": [
+      "spa+blueprint/README.md",
+      "spa+blueprint/pom.xml",
+
+      "spa+blueprint/src/main/resources/webroot/.gitkeep",
+      "spa+blueprint/src/main/resources/error-template.html",
+      "spa+blueprint/src/main/resources/favicon.ico",
+
+      "spa+blueprint/src/main/java/{packageDir}/MainVerticle.java",
+      "spa+blueprint/src/main/java/{packageDir}/WeatherAPI.java",
+
+      "spa+blueprint/react-redux-clientapp/package.json",
+      "spa+blueprint/react-redux-clientapp/src/registerServiceWorker.js",
+      "spa+blueprint/react-redux-clientapp/src/store/Counter.js",
+      "spa+blueprint/react-redux-clientapp/src/store/WeatherForecasts.js",
+      "spa+blueprint/react-redux-clientapp/src/store/configureStore.js",
+      "spa+blueprint/react-redux-clientapp/src/App.js",
+      "spa+blueprint/react-redux-clientapp/src/index.js",
+      "spa+blueprint/react-redux-clientapp/src/App.test.js",
+      "spa+blueprint/react-redux-clientapp/src/components/Counter.js",
+      "spa+blueprint/react-redux-clientapp/src/components/NavMenu.css",
+      "spa+blueprint/react-redux-clientapp/src/components/FetchData.js",
+      "spa+blueprint/react-redux-clientapp/src/components/NavMenu.js",
+      "spa+blueprint/react-redux-clientapp/src/components/Home.js",
+      "spa+blueprint/react-redux-clientapp/src/components/Layout.js",
+      "spa+blueprint/react-redux-clientapp/public/manifest.json",
+      "spa+blueprint/react-redux-clientapp/public/index.html",
+      "spa+blueprint/react-redux-clientapp/public/favicon.ico",
+      "spa+blueprint/react-redux-clientapp/.gitignore",
+      "spa+blueprint/react-redux-clientapp/README.md"
+    ]
+  },
+  {
+    "id": "Angular SPA blueprint",
+    "group": "webapp",
+    "description": "A simple webapp with a angular.js frontend",
+    "dependencies": [
+      "io.vertx:vertx-core",
+      "io.vertx:vertx-web",
+      "xyz.jetdrone:vertx-spa-services"
+    ],
+    "meta": [
+      {"key": "clientapp", "value": "angular-clientapp"},
+      {"key": "resources", "value": "angular-clientapp/dist"}
+    ],
+    "buildtool": "maven",
+    "languages": [
+      {
+        "id": "java"
+      }
+    ],
+    "templates": [
+      "spa+blueprint/README.md",
+      "spa+blueprint/pom.xml",
+
+      "spa+blueprint/src/main/resources/webroot/.gitkeep",
+      "spa+blueprint/src/main/resources/error-template.html",
+      "spa+blueprint/src/main/resources/favicon.ico",
+
+      "spa+blueprint/src/main/java/{packageDir}/MainVerticle.java",
+      "spa+blueprint/src/main/java/{packageDir}/WeatherAPI.java",
+
+      "spa+blueprint/angular-clientapp/package.json",
+      "spa+blueprint/angular-clientapp/.editorconfig",
+      "spa+blueprint/angular-clientapp/tsconfig.json",
+      "spa+blueprint/angular-clientapp/src/tsconfig.server.json",
+      "spa+blueprint/angular-clientapp/src/main.ts",
+      "spa+blueprint/angular-clientapp/src/app/home/home.component.html",
+      "spa+blueprint/angular-clientapp/src/app/home/home.component.ts",
+      "spa+blueprint/angular-clientapp/src/app/nav-menu/nav-menu.component.ts",
+      "spa+blueprint/angular-clientapp/src/app/nav-menu/nav-menu.component.html",
+      "spa+blueprint/angular-clientapp/src/app/nav-menu/nav-menu.component.css",
+      "spa+blueprint/angular-clientapp/src/app/app.module.ts",
+      "spa+blueprint/angular-clientapp/src/app/fetch-data/fetch-data.component.html",
+      "spa+blueprint/angular-clientapp/src/app/fetch-data/fetch-data.component.ts",
+      "spa+blueprint/angular-clientapp/src/app/app.server.module.ts",
+      "spa+blueprint/angular-clientapp/src/app/app.component.html",
+      "spa+blueprint/angular-clientapp/src/app/counter/counter.component.ts",
+      "spa+blueprint/angular-clientapp/src/app/counter/counter.component.html",
+      "spa+blueprint/angular-clientapp/src/app/counter/counter.component.spec.ts",
+      "spa+blueprint/angular-clientapp/src/app/app.component.ts",
+      "spa+blueprint/angular-clientapp/src/app/app.component.css",
+      "spa+blueprint/angular-clientapp/src/tsconfig.app.json",
+      "spa+blueprint/angular-clientapp/src/index.html",
+      "spa+blueprint/angular-clientapp/src/assets/.gitkeep",
+      "spa+blueprint/angular-clientapp/src/karma.conf.js",
+      "spa+blueprint/angular-clientapp/src/test.ts",
+      "spa+blueprint/angular-clientapp/src/polyfills.ts",
+      "spa+blueprint/angular-clientapp/src/tsconfig.spec.json",
+      "spa+blueprint/angular-clientapp/src/environments/environment.prod.ts",
+      "spa+blueprint/angular-clientapp/src/environments/environment.ts",
+      "spa+blueprint/angular-clientapp/src/browserslist",
+      "spa+blueprint/angular-clientapp/src/styles.css",
+      "spa+blueprint/angular-clientapp/src/tslint.json",
+      "spa+blueprint/angular-clientapp/proxy.conf.json",
+      "spa+blueprint/angular-clientapp/angular.json",
+      "spa+blueprint/angular-clientapp/.gitignore",
+      "spa+blueprint/angular-clientapp/e2e/src/app.e2e-spec.ts",
+      "spa+blueprint/angular-clientapp/e2e/src/app.po.ts",
+      "spa+blueprint/angular-clientapp/e2e/tsconfig.e2e.json",
+      "spa+blueprint/angular-clientapp/e2e/protractor.conf.js",
+      "spa+blueprint/angular-clientapp/tslint.json",
+      "spa+blueprint/angular-clientapp/README.md"
+    ]
+  },
+  {
+    "id": "Reactive Wiki blueprint",
+    "group": "guides",
+    "description": "A simple reactive wiki application",
+    "dependencies": [
+      "io.vertx:vertx-core",
+      "io.vertx:vertx-rx-java2",
+      "io.vertx:vertx-rx-java2-gen",
+      "io.vertx:vertx-service-proxy",
+      "io.vertx:vertx-web",
+      "io.vertx:vertx-web-client",
+      "io.vertx:vertx-web-templ-freemarker",
+      "com.github.rjeschke:txtmark",
+      "io.vertx:vertx-jdbc-client",
+      "ch.qos.logback:logback-classic",
+      "org.hsqldb:hsqldb",
+      "io.vertx:vertx-codegen",
+      "junit:junit",
+      "io.vertx:vertx-unit"
+    ],
+    "buildtool": "maven",
+    "languages": [
+      {
+        "id": "java"
+      }
+    ],
+    "templates": [
+      "wiki+blueprint/README.md",
+      "wiki+blueprint/pom.xml",
+
+      "wiki+blueprint/src/main/resources/db-queries.properties",
+      "wiki+blueprint/src/main/resources/webroot/index.html",
+      "wiki+blueprint/src/main/resources/webroot/wiki.js",
+      "wiki+blueprint/src/main/resources/logback.xml",
+      "wiki+blueprint/src/main/java/{packageDir}/MainVerticle.java",
+      "wiki+blueprint/src/main/java/{packageDir}/http/HttpServerVerticle.java",
+      "wiki+blueprint/src/main/java/{packageDir}/database/WikiDatabaseService.java",
+      "wiki+blueprint/src/main/java/{packageDir}/database/ErrorCodes.java",
+      "wiki+blueprint/src/main/java/{packageDir}/database/WikiDatabaseServiceImpl.java",
+      "wiki+blueprint/src/main/java/{packageDir}/database/SqlQuery.java",
+      "wiki+blueprint/src/main/java/{packageDir}/database/package-info.java",
+      "wiki+blueprint/src/main/java/{packageDir}/database/WikiDatabaseVerticle.java"
     ]
   }
 ]

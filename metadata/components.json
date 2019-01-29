@@ -150,6 +150,12 @@
   },
   {
     "groupId": "io.vertx",
+    "artifactId": "vertx-rx-java2-gen",
+    "version": "3.6.2",
+    "description": "Reactive Extensions code generation for Vert.x."
+  },
+  {
+    "groupId": "io.vertx",
     "artifactId": "vertx-rx-js",
     "version": "3.6.2",
     "stack": true,
@@ -677,8 +683,26 @@
     "groupId": "io.reactiverse",
     "artifactId": "reactive-pg-client",
     "npm": "@reactiverse/reactive-pg-client",
-    "version": "0.10.7",
+    "version": "0.11.2",
     "description": "High performance reactive Postgres Client."
+  },
+  {
+    "groupId": "xyz.jetdrone",
+    "artifactId": "vertx-spa-services",
+    "npm": "vertx-spa-services",
+    "version": "0.0.1",
+    "description": "Utilities to develop SPA applications."
+  },
+  {
+    "groupId": "com.github.rjeschke",
+    "artifactId": "txtmark",
+    "version": "0.13",
+    "description": "TXTMark."
+  },
+  {
+    "groupId": "ch.qos.logback",
+    "artifactId": "logback-classic",
+    "version": "1.2.3",
+    "description": "Logback."
   }
-
 ]

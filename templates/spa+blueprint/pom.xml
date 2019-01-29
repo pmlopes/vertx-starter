@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>{{metadata.groupId}}</groupId>
+  <artifactId>{{metadata.artifactId}}</artifactId>
+  <version>{{metadata.version}}</version>
+
+  <name>{{metadata.name}}</name>
+  {{#if metadata.description}}
+  <description>{{metadata.description}}</description>
+  {{/if}}
+
+  <properties>
+    <vertx.verticle>{{metadata.main}}</vertx.verticle>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>io.vertx</groupId>
+        <artifactId>vertx-stack-depchain</artifactId>
+        <version>{{metadata.bom}}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    {{#each dependencies}}
+    <dependency>
+      <groupId>{{groupId}}</groupId>
+      <artifactId>{{artifactId}}</artifactId>
+      {{#unless stack}}
+      {{#if version}}
+      <version>{{version}}</version>
+      {{/if}}
+      {{/unless}}
+      {{#if scope}}
+      <scope>{{scope}}</scope>
+      {{/if}}
+      {{#if classifier}}
+      <classifier>{{classifier}}</classifier>
+      {{/if}}
+    </dependency>
+    {{/each}}
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.5.1</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+      {{#if metadata.resources}}
+      <plugin>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>3.1.0</version>
+        <executions>
+          <execution>
+            <id>copy-webapp-dist</id>
+            <phase>prepare-package</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${basedir}/target/classes/webroot</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>${basedir}/{{metadata.resources}}</directory>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      {{/if}}
+      <plugin>
+        <groupId>io.reactiverse</groupId>
+        <artifactId>vertx-maven-plugin</artifactId>
+        <version>1.0.18</version>
+        <executions>
+          <execution>
+            <id>vmp</id>
+            <goals>
+              <goal>initialize</goal>
+              <goal>package</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <redeploy>true</redeploy>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
