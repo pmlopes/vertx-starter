@@ -11,21 +11,18 @@ class MainVerticle : AbstractVerticle() {
 
   override fun start() {
     // your code goes here...
-    val router = Router.router(vertx)
-
-    router.route().handler(FaviconHandler.create("favicon.ico"))
-
-    // mount the weather API
-    router
-      .get("/api/weather-forecast")
-      .handler(WeatherAPI.get())
-      .failureHandler(ErrorHandler.create("error-template.html"))
-
-    // will redirect to ng-serve while in development time
-    router.route().handler(SPA.serve("{{metadata.clientapp}}", 8081))
-    // Serve the static resources
-    router.route().handler(StaticHandler.create())
-
+    val router = Router.router(vertx).apply {
+      // Favicon
+      route().handler(FaviconHandler.create("favicon.ico"))
+      // mount the weather API
+      get("/api/weather-forecast")
+        .handler(WeatherAPI.get())
+        .failureHandler(ErrorHandler.create("error-template.html"))
+      // will redirect to ng-serve while in development time
+      route().handler(SPA.serve("{{metadata.clientapp}}", 8081))
+      // Serve the static resources
+      route().handler(StaticHandler.create())
+    }
     vertx.createHttpServer().requestHandler(router).listen(8080) { res ->
       if (res.failed()) {
         res.cause().printStackTrace()
