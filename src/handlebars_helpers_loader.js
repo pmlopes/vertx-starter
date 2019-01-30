@@ -62,6 +62,11 @@ exports.load = Handlebars => {
     return utils.value(!!_.find(deps, el => el.groupId === groupId && el.artifactId === artifactId), this, options);
   });
 
+  Handlebars.registerHelper('getDepValue', (deps, groupId, artifactId, needle, options) => {
+    var dep = _.find(deps, el => el.groupId === groupId && el.artifactId === artifactId);
+    return utils.value(dep ? dep[needle] : '', this, options);
+  });
+
   Handlebars.registerHelper('eq', (a, b, options) => {
     if (arguments.length === 2) {
       options = b;

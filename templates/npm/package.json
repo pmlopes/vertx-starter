@@ -4,14 +4,19 @@
   "description": "{{ metadata.description }}",
   "private": true,
 
-  "main": "{{ metadata.main }}",
+  "main": "{{#if metadata.typescript}}dist/{{/if}}index.js",
 
   "scripts": {
-    "postinstall": "vertx-scripts init",
-    "test": "vertx-scripts launcher test",
-    "start": "vertx-scripts launcher run",
-    "package": "vertx-scripts package",
-    "repl": "vertx-scripts repl"
+{{#if metadata.typescript}}
+    "prestart": "tsc",
+{{/if}}
+    "start": "{{ metadata.name }}",
+{{#if metadata.typescript}}
+    "pretest": "tsc",
+{{/if}}
+    "test": "{{ metadata.name }} test {{#if metadata.typescript}}dist/{{/if}}index.test.js",
+    "postinstall": "es4x install",
+    "dockerfile": "es4x dockerfile"
   },
 
   "keywords": [],
@@ -20,12 +25,12 @@
 
   "devDependencies": {
   {{#if metadata.typescript}}
-    "typescript": "^3.0.3",
+    "typescript": "^3.2.2",
   {{/if}}
   {{#each npmDevDependencies}}
     "{{ npm }}": "^{{ version }}",
   {{/each}}
-    "vertx-scripts": "^1.1.4"
+    "es4x-pm": "^0.7.1"
   },
 
   "dependencies": {

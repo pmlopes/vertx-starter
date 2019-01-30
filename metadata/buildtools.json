@@ -12,7 +12,8 @@
       { "key": "graalNativeImage", "label": "GraalVM native-image", "type": "checkbox" }
     ],
     "meta": [
-      { "key": "bom", "value": "3.6.2" }
+      { "key": "bom", "value": "3.6.2" },
+      { "key": "graalVersion", "value": "1.0.0-rc10" }
     ],
     "languages": [
       {
@@ -172,14 +173,12 @@
     "templates": [
       "git/.gitignore",
       "editorconfig/.editorconfig",
-      "npm/package.json"
-    ],
-    "blob": "mvnw.zip",
-    "executables": [
-      "mvnw"
+      "npm/package.json",
+      "npm/README.md"
     ],
     "defaults": [
-      "io.vertx:vertx-core"
+      "io.vertx:vertx-core",
+      "io.vertx:vertx-unit"
     ]
   },
   {

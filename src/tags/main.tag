@@ -83,13 +83,13 @@
 
       <div class="row">
         <div class="col-6">
-          <h1>Dependencies</h1>
+          <h1>Your Dependencies</h1>
         </div>
         <div class="col-6">
           <div id="not-found-tip" class="help-tip hide-phone">
             <p>Use this box to search for dependencies to add to your application, if a dependency is not present, please <a href="https://github.com/pmlopes/vertx-starter/issues/new">open an issue</a> so we can add the missing metadata!</p>
           </div>
-          <input type="text" class="pull-right" placeholder="Filter dependency..." onkeyup={ search }>
+          <input type="text" class="pull-right" placeholder="Search dependency or 'group:artifact:version<space>' to add..." onkeyup={ search }>
         </div>
       </div>
 
@@ -568,6 +568,28 @@
         });
 
         if (cnt === 0) {
+
+          var gavRegexp = /([a-zA-Z0-9._\-]+):([a-zA-Z0-9._\-]+):([a-zA-Z0-9._\-]+) /g;
+          var match = gavRegexp.exec(needle);
+          if (match) {
+            let c = {
+              groupId: match[1],
+              artifactId: match[2],
+              version: match[3],
+              description: needle
+            };
+            // add it to the default list
+            opts.components.push(c);
+
+            idx[match[1] + ':' + match[2]] = true;
+
+            c = _.cloneDeep(c);
+            c.checked = false;
+            c.id = opts.components.length;
+            found.push(c);
+            cnt++;
+          }
+
           // track misses so we can improve metadata
           ga('send', {
             hitType: 'event',

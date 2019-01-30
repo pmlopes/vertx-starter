@@ -334,6 +334,9 @@
     "description": "Async polyglot unit testing for Vert.x.",
     "jsTemplates": [
       "npm/index.test.js"
+    ],
+    "typescriptTemplates": [
+      "npm/index.test.ts"
     ]
   },
   {
