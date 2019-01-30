@@ -160,7 +160,18 @@
     "buildtool": "maven",
     "languages": [
       {
-        "id": "java"
+        "id": "java",
+        "templates": [
+          "spa+blueprint/src/main/java/{packageDir}/MainVerticle.java",
+          "spa+blueprint/src/main/java/{packageDir}/WeatherAPI.java"
+        ]
+      },
+      {
+        "id": "kotlin",
+        "templates": [
+          "spa+blueprint/src/main/kotlin/{packageDir}/MainVerticle.kt",
+          "spa+blueprint/src/main/kotlin/{packageDir}/WeatherAPI.kt"
+        ]
       }
     ],
     "templates": [
@@ -170,9 +181,6 @@
       "spa+blueprint/src/main/resources/webroot/.gitkeep",
       "spa+blueprint/src/main/resources/error-template.html",
       "spa+blueprint/src/main/resources/favicon.ico",
-
-      "spa+blueprint/src/main/java/{packageDir}/MainVerticle.java",
-      "spa+blueprint/src/main/java/{packageDir}/WeatherAPI.java",
 
       "spa+blueprint/react-clientapp/package.json",
       "spa+blueprint/react-clientapp/src/registerServiceWorker.js",
@@ -209,7 +217,18 @@
     "buildtool": "maven",
     "languages": [
       {
-        "id": "java"
+        "id": "java",
+        "templates": [
+          "spa+blueprint/src/main/java/{packageDir}/MainVerticle.java",
+          "spa+blueprint/src/main/java/{packageDir}/WeatherAPI.java"
+        ]
+      },
+      {
+        "id": "kotlin",
+        "templates": [
+          "spa+blueprint/src/main/kotlin/{packageDir}/MainVerticle.kt",
+          "spa+blueprint/src/main/kotlin/{packageDir}/WeatherAPI.kt"
+        ]
       }
     ],
     "templates": [
@@ -219,9 +238,6 @@
       "spa+blueprint/src/main/resources/webroot/.gitkeep",
       "spa+blueprint/src/main/resources/error-template.html",
       "spa+blueprint/src/main/resources/favicon.ico",
-
-      "spa+blueprint/src/main/java/{packageDir}/MainVerticle.java",
-      "spa+blueprint/src/main/java/{packageDir}/WeatherAPI.java",
 
       "spa+blueprint/react-redux-clientapp/package.json",
       "spa+blueprint/react-redux-clientapp/src/registerServiceWorker.js",
@@ -260,7 +276,18 @@
     "buildtool": "maven",
     "languages": [
       {
-        "id": "java"
+        "id": "java",
+        "templates": [
+          "spa+blueprint/src/main/java/{packageDir}/MainVerticle.java",
+          "spa+blueprint/src/main/java/{packageDir}/WeatherAPI.java"
+        ]
+      },
+      {
+        "id": "kotlin",
+        "templates": [
+          "spa+blueprint/src/main/kotlin/{packageDir}/MainVerticle.kt",
+          "spa+blueprint/src/main/kotlin/{packageDir}/WeatherAPI.kt"
+        ]
       }
     ],
     "templates": [
@@ -270,9 +297,6 @@
       "spa+blueprint/src/main/resources/webroot/.gitkeep",
       "spa+blueprint/src/main/resources/error-template.html",
       "spa+blueprint/src/main/resources/favicon.ico",
-
-      "spa+blueprint/src/main/java/{packageDir}/MainVerticle.java",
-      "spa+blueprint/src/main/java/{packageDir}/WeatherAPI.java",
 
       "spa+blueprint/angular-clientapp/package.json",
       "spa+blueprint/angular-clientapp/.editorconfig",
