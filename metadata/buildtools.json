@@ -12,8 +12,8 @@
       { "key": "graalNativeImage", "label": "GraalVM native-image", "type": "checkbox" }
     ],
     "meta": [
-      { "key": "bom", "value": "3.6.2" },
-      { "key": "graalVersion", "value": "1.0.0-rc10" }
+      { "key": "bom", "value": "3.6.3" },
+      { "key": "graalVersion", "value": "1.0.0-rc11" }
     ],
     "languages": [
       {
@@ -150,6 +150,9 @@
       { "key": "name", "label": "Project Name", "required": true },
       { "key": "description", "label": "Project Description" },
       { "key": "version", "label": "Project Version", "prefill": "0.0.1" }
+    ],
+    "meta": [
+      { "key": "es4x", "value": "0.7.2" }
     ],
     "languages": [
       {

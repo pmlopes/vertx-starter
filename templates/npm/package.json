@@ -30,7 +30,7 @@
   {{#each npmDevDependencies}}
     "{{ npm }}": "^{{ version }}",
   {{/each}}
-    "es4x-pm": "^0.7.1"
+    "es4x-pm": "^{{ metadata.es4x }}"
   },
 
   "dependencies": {
