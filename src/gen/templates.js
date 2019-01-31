@@ -23,6 +23,55 @@ exports['graal-nativeimage/README.md'] = Handlebars.template({"compiler":[7,">= 
     + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.name : stack1), depth0)) != null ? stack1 : "")
     + "`\n";
 },"useData":true})
+exports['gradle/build.gradle'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
+    return "    classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.1.0'\n";
+},"3":function(container,depth0,helpers,partials,data) {
+    return "apply plugin: 'kotlin'\n";
+},"5":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "description = '"
+    + ((stack1 = container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.description : stack1), depth0)) != null ? stack1 : "")
+    + "'\n";
+},"7":function(container,depth0,helpers,partials,data) {
+    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function";
+
+  return "  // TODO use compileOnly instead compile for codegen\n  compile '"
+    + ((stack1 = ((helper = (helper = helpers.groupId || (depth0 != null ? depth0.groupId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"groupId","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + ":"
+    + ((stack1 = ((helper = (helper = helpers.artifactId || (depth0 != null ? depth0.artifactId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"artifactId","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + ":"
+    + ((stack1 = ((helper = (helper = helpers.version || (depth0 != null ? depth0.version : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"version","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.classifier : depth0),{"name":"if","hash":{},"fn":container.program(8, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "'\n";
+},"8":function(container,depth0,helpers,partials,data) {
+    var stack1, helper;
+
+  return ":"
+    + ((stack1 = ((helper = (helper = helpers.classifier || (depth0 != null ? depth0.classifier : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"classifier","hash":{},"data":data}) : helper))) != null ? stack1 : "");
+},"10":function(container,depth0,helpers,partials,data) {
+    return "compileKotlin {\n  kotlinOptions {\n    jvmTarget = '1.8'\n  }\n}\n";
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=container.lambda;
+
+  return "buildscript {\n  repositories {\n    mavenCentral()\n    jcenter()\n  }\n\n  dependencies {\n"
+    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.kotlin : stack1),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "    classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.4'\n  }\n}\n\n"
+    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.kotlin : stack1),{"name":"if","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "apply plugin: 'java'\napply plugin: 'eclipse'\napply plugin: 'application'\napply plugin: 'com.github.johnrengelman.shadow'\n\nrepositories {\n  mavenCentral()\n}\n\nversion = '"
+    + ((stack1 = alias2(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.version : stack1), depth0)) != null ? stack1 : "")
+    + "'\ngroup = '"
+    + ((stack1 = alias2(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.groupId : stack1), depth0)) != null ? stack1 : "")
+    + "'\n"
+    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.description : stack1),{"name":"if","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "sourceCompatibility = '1.8'\nmainClassName = 'io.vertx.core.Launcher'\n\ndependencies {\n"
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.dependencies : depth0),{"name":"each","hash":{},"fn":container.program(7, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "}\n\n"
+    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.kotlin : stack1),{"name":"if","hash":{},"fn":container.program(10, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "\nshadowJar {\n  classifier = 'fat'\n  manifest {\n    attributes 'Main-Verticle': '"
+    + ((stack1 = alias2(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
+    + ".MainVerticle'\n  }\n  mergeServiceFiles {\n    include 'META-INF/services/io.vertx.core.spi.VerticleFactory'\n  }\n}\n\ntask wrapper(type: Wrapper) {\n  gradleVersion = '2.13'\n}\n\neclipse {\n  classpath {\n    file.beforeMerged { cp ->\n      cp.entries.add( new org.gradle.plugins.ide.eclipse.model.SourceFolder('build/classes/java/main', null) )\n    }\n  }\n}\n";
+},"useData":true})
 exports['kotlin+coroutines/README.md'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
@@ -131,161 +180,6 @@ exports['maven/pom.xml'] = Handlebars.template({"1":function(container,depth0,he
     + ((stack1 = (helpers.containsDep || (depth0 && depth0.containsDep) || alias3).call(alias2,(depth0 != null ? depth0.dependencies : depth0),"io.vertx","vertx-service-proxy",{"name":"containsDep","hash":{},"fn":container.program(27, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + ((stack1 = helpers.unless.call(alias2,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.graalNativeImage : stack1),{"name":"unless","hash":{},"fn":container.program(29, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "    </plugins>\n  </build>\n</project>\n";
-},"useData":true})
-exports['npm/README.md'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return "# "
-    + ((stack1 = container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.name : stack1), depth0)) != null ? stack1 : "")
-    + "\n\nThis is your SPA blueprint project. Ensure you have [node](https://www.nodejs.org) installed\non your path. And optionally [GraalVM](https://www.graalvm.org).\n\n## Build\n\nRun your package manager tool to install the required dependencies:\n\n```sh\nnpm install\n```\n\nor\n\n```sh\nyarn install\n```\n\nFrom now on will assume you're using `NPM`.\n\n### Run\n\n```sh\nnpm start\n```\n\nIn case you need to use `>ES5.1` features you **MUST** run on GraalVM.\n\n### Packaging\n\nThe project can be packaged into a container. For this run:\n\n```sh\nnpm run dockerfile\n```\n\nThis step will create the basic `Dockerfile` required to run your application. By default it will use the GraalVM image\nbut you're not required to. The best options are either `GraalVM` or `JDK >=11`.\n\n\n```sh\ndocker build -t yourtag:your-version .\n```\n\nAnd run the container as:\n\n```sh\ndocker run --rm --net=host yourtag:your-version\n```\n\nAny arguments after the image name will be passed to the application, this allows the customization of the start command, for example `--cluster` will start the application in a `vert.x` cluster.\n";
-},"useData":true})
-exports['npm/index.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "/// <reference types=\"@vertx/core/runtime\" />\n// @ts-check\n\n// your code goes here...\n\nvertx\n  .createHttpServer()\n  .requestHandler(function (req) {\n    req.response()\n      .putHeader(\"content-type\", \"text/plain\")\n      .end(\"Hello!\");\n  })\n  .listen(8080);\n\nconsole.log('Server listening at: http://localhost:8080/');\n";
-},"useData":true})
-exports['npm/index.test.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "import { TestSuite } from '@vertx/unit';\n\nconst suite = TestSuite.create(\"the_test_suite\");\n\nsuite.test(\"my_test_case\", function (should) {\n  var s = \"value\";\n  should.assertEquals(\"value\", s);\n});\n\nsuite.run();\n";
-},"useData":true})
-exports['npm/index.test.ts'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "import { TestSuite, TestContext } from '@vertx/unit';\n\nconst suite = TestSuite.create(\"the_test_suite\");\n\nsuite.test(\"my_test_case\", (should: TestContext) => {\n  let s : string = \"value\";\n  should.assertEquals(\"value\", s);\n});\n\nsuite.run();\n";
-},"useData":true})
-exports['npm/index.ts'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "/// <reference types=\"@vertx/core/runtime\" />\n// @ts-check\n\n// your code goes here...\n\nvertx\n  .createHttpServer()\n  .requestHandler(function (req: any) {\n    req.response()\n      .putHeader(\"content-type\", \"text/plain\")\n      .end(\"Hello!\");\n  }).listen(8080);\n\nconsole.log('Listening at http://127.0.0.1:8080');\n";
-},"useData":true})
-exports['npm/package.json'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
-    return "dist/";
-},"3":function(container,depth0,helpers,partials,data) {
-    return "    \"prestart\": \"tsc\",\n";
-},"5":function(container,depth0,helpers,partials,data) {
-    return "    \"pretest\": \"tsc\",\n";
-},"7":function(container,depth0,helpers,partials,data) {
-    return "    \"typescript\": \"^3.2.2\",\n";
-},"9":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function";
-
-  return "    \""
-    + ((stack1 = ((helper = (helper = helpers.npm || (depth0 != null ? depth0.npm : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"npm","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "\": \"^"
-    + ((stack1 = ((helper = (helper = helpers.version || (depth0 != null ? depth0.version : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"version","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "\",\n";
-},"11":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function";
-
-  return "    \""
-    + ((stack1 = ((helper = (helper = helpers.npm || (depth0 != null ? depth0.npm : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"npm","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "\": \"^"
-    + ((stack1 = ((helper = (helper = helpers.version || (depth0 != null ? depth0.version : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"version","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "\""
-    + ((stack1 = helpers.unless.call(alias1,(data && data.last),{"name":"unless","hash":{},"fn":container.program(12, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "\n";
-},"12":function(container,depth0,helpers,partials,data) {
-    return ",";
-},"14":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function";
-
-  return "    \""
-    + ((stack1 = ((helper = (helper = helpers.groupId || (depth0 != null ? depth0.groupId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"groupId","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + ":"
-    + ((stack1 = ((helper = (helper = helpers.artifactId || (depth0 != null ? depth0.artifactId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"artifactId","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "\": \""
-    + ((stack1 = ((helper = (helper = helpers.version || (depth0 != null ? depth0.version : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"version","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.scope : depth0),{"name":"if","hash":{},"fn":container.program(15, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.classifier : depth0),{"name":"if","hash":{},"fn":container.program(17, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "\""
-    + ((stack1 = helpers.unless.call(alias1,(data && data.last),{"name":"unless","hash":{},"fn":container.program(12, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "\n";
-},"15":function(container,depth0,helpers,partials,data) {
-    var stack1, helper;
-
-  return ":"
-    + ((stack1 = ((helper = (helper = helpers.scope || (depth0 != null ? depth0.scope : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"scope","hash":{},"data":data}) : helper))) != null ? stack1 : "");
-},"17":function(container,depth0,helpers,partials,data) {
-    var stack1, helper;
-
-  return ":"
-    + ((stack1 = ((helper = (helper = helpers.classifier || (depth0 != null ? depth0.classifier : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"classifier","hash":{},"data":data}) : helper))) != null ? stack1 : "");
-},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=container.lambda, alias2=depth0 != null ? depth0 : (container.nullContext || {});
-
-  return "{\n  \"name\": \""
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.name : stack1), depth0)) != null ? stack1 : "")
-    + "\",\n  \"version\": \""
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.version : stack1), depth0)) != null ? stack1 : "")
-    + "\",\n  \"description\": \""
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.description : stack1), depth0)) != null ? stack1 : "")
-    + "\",\n  \"private\": true,\n\n  \"main\": \""
-    + ((stack1 = helpers["if"].call(alias2,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.typescript : stack1),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "index.js\",\n\n  \"scripts\": {\n"
-    + ((stack1 = helpers["if"].call(alias2,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.typescript : stack1),{"name":"if","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "    \"start\": \""
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.name : stack1), depth0)) != null ? stack1 : "")
-    + "\",\n"
-    + ((stack1 = helpers["if"].call(alias2,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.typescript : stack1),{"name":"if","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "    \"test\": \""
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.name : stack1), depth0)) != null ? stack1 : "")
-    + " test "
-    + ((stack1 = helpers["if"].call(alias2,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.typescript : stack1),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "index.test.js\",\n    \"postinstall\": \"es4x install\",\n    \"dockerfile\": \"es4x dockerfile\"\n  },\n\n  \"keywords\": [],\n  \"author\": \"\",\n  \"license\": \"ISC\",\n\n  \"devDependencies\": {\n"
-    + ((stack1 = helpers["if"].call(alias2,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.typescript : stack1),{"name":"if","hash":{},"fn":container.program(7, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ((stack1 = helpers.each.call(alias2,(depth0 != null ? depth0.npmDevDependencies : depth0),{"name":"each","hash":{},"fn":container.program(9, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "    \"es4x-pm\": \"^"
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.es4x : stack1), depth0)) != null ? stack1 : "")
-    + "\"\n  },\n\n  \"dependencies\": {\n"
-    + ((stack1 = helpers.each.call(alias2,(depth0 != null ? depth0.npmProdDependencies : depth0),{"name":"each","hash":{},"fn":container.program(11, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "  },\n\n  \"mvnDependencies\": {\n"
-    + ((stack1 = helpers.each.call(alias2,(depth0 != null ? depth0.npmMavenDependencies : depth0),{"name":"each","hash":{},"fn":container.program(14, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "  }\n}\n";
-},"useData":true})
-exports['npm/tsconfig.json'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "{\n  \"compilerOptions\": {\n    \"outDir\": \"dist\",\n    \"sourceMap\": true,\n    \"noImplicitAny\": true,\n    \"module\": \"commonjs\",\n    \"target\": \"es5\",\n    \"allowJs\": true\n  }\n}\n";
-},"useData":true})
-exports['gradle/build.gradle'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
-    return "    classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.1.0'\n";
-},"3":function(container,depth0,helpers,partials,data) {
-    return "apply plugin: 'kotlin'\n";
-},"5":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return "description = '"
-    + ((stack1 = container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.description : stack1), depth0)) != null ? stack1 : "")
-    + "'\n";
-},"7":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function";
-
-  return "  // TODO use compileOnly instead compile for codegen\n  compile '"
-    + ((stack1 = ((helper = (helper = helpers.groupId || (depth0 != null ? depth0.groupId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"groupId","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + ":"
-    + ((stack1 = ((helper = (helper = helpers.artifactId || (depth0 != null ? depth0.artifactId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"artifactId","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + ":"
-    + ((stack1 = ((helper = (helper = helpers.version || (depth0 != null ? depth0.version : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"version","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.classifier : depth0),{"name":"if","hash":{},"fn":container.program(8, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "'\n";
-},"8":function(container,depth0,helpers,partials,data) {
-    var stack1, helper;
-
-  return ":"
-    + ((stack1 = ((helper = (helper = helpers.classifier || (depth0 != null ? depth0.classifier : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"classifier","hash":{},"data":data}) : helper))) != null ? stack1 : "");
-},"10":function(container,depth0,helpers,partials,data) {
-    return "compileKotlin {\n  kotlinOptions {\n    jvmTarget = '1.8'\n  }\n}\n";
-},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=container.lambda;
-
-  return "buildscript {\n  repositories {\n    mavenCentral()\n    jcenter()\n  }\n\n  dependencies {\n"
-    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.kotlin : stack1),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "    classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.4'\n  }\n}\n\n"
-    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.kotlin : stack1),{"name":"if","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "apply plugin: 'java'\napply plugin: 'eclipse'\napply plugin: 'application'\napply plugin: 'com.github.johnrengelman.shadow'\n\nrepositories {\n  mavenCentral()\n}\n\nversion = '"
-    + ((stack1 = alias2(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.version : stack1), depth0)) != null ? stack1 : "")
-    + "'\ngroup = '"
-    + ((stack1 = alias2(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.groupId : stack1), depth0)) != null ? stack1 : "")
-    + "'\n"
-    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.description : stack1),{"name":"if","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "sourceCompatibility = '1.8'\nmainClassName = 'io.vertx.core.Launcher'\n\ndependencies {\n"
-    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.dependencies : depth0),{"name":"each","hash":{},"fn":container.program(7, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "}\n\n"
-    + ((stack1 = helpers["if"].call(alias1,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.kotlin : stack1),{"name":"if","hash":{},"fn":container.program(10, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "\nshadowJar {\n  classifier = 'fat'\n  manifest {\n    attributes 'Main-Verticle': '"
-    + ((stack1 = alias2(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
-    + ".MainVerticle'\n  }\n  mergeServiceFiles {\n    include 'META-INF/services/io.vertx.core.spi.VerticleFactory'\n  }\n}\n\ntask wrapper(type: Wrapper) {\n  gradleVersion = '2.13'\n}\n\neclipse {\n  classpath {\n    file.beforeMerged { cp ->\n      cp.entries.add( new org.gradle.plugins.ide.eclipse.model.SourceFolder('build/classes/java/main', null) )\n    }\n  }\n}\n";
 },"useData":true})
 exports['openapi-client/Operations.md'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing;
@@ -454,6 +348,112 @@ exports['openapi-client/README.md'] = Handlebars.template({"compiler":[7,">= 4.0
     + ".models`\n\n## How to do a request\nTo call an API operation you have to call the equivalent function in `"
     + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
     + ".ApiClient`. For more informations give a look at [operations documentation](./Operations.md).\n\nDepending on request body declarations, you can have multiple functions for every operation:\n\n* `[operationId]WithEmptyBody`: Function that sends an empty body\n* `[operationId]WithJson`: Function that sends a Json body. You can pass to it a [`JsonObject`](http://vertx.io/docs/apidocs/io/vertx/core/json/JsonObject.html) or a POJO. Give a look to [WebClient documentation](http://vertx.io/docs/vertx-web-client/java/#_json_bodies) for more informations\n* `[operationId]WithForm`: Function that sends a form body encoded as `application/x-www-form-urlencoded`\n* `[operationId]WithMultipartForm`: Function that sends a form body encoded as `multipart/form-data`\n* `[operationId]WithContentTypeBuffer`: Function that sends a buffer with the defined content type\n* `[operationId]WithContentTypeStream`: Function that sends a stream with the defined content type\n\nIn every case, the `Content-Type` header is automatically configured\n\nEvery operation function also attach automatically the required headers/query/cookie parameters for the required security schemes through the `attach[SecurityScheme]Security` functions.\n\nFor handling the responses, give a look at [WebClient documentation](http://vertx.io/docs/vertx-web-client/java/#_handling_http_responses).\n\n## Info\nThis project was generated by [vertx-starter](https://vertx-starter.jetdrone.xyz/) generator";
+},"useData":true})
+exports['npm/README.md'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "# "
+    + ((stack1 = container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.name : stack1), depth0)) != null ? stack1 : "")
+    + "\n\nThis is your SPA blueprint project. Ensure you have [node](https://www.nodejs.org) installed\non your path. And optionally [GraalVM](https://www.graalvm.org).\n\n## Build\n\nRun your package manager tool to install the required dependencies:\n\n```sh\nnpm install\n```\n\nor\n\n```sh\nyarn install\n```\n\nFrom now on will assume you're using `NPM`.\n\n### Run\n\n```sh\nnpm start\n```\n\nIn case you need to use `>ES5.1` features you **MUST** run on GraalVM.\n\n### Packaging\n\nThe project can be packaged into a container. For this run:\n\n```sh\nnpm run dockerfile\n```\n\nThis step will create the basic `Dockerfile` required to run your application. By default it will use the GraalVM image\nbut you're not required to. The best options are either `GraalVM` or `JDK >=11`.\n\n\n```sh\ndocker build -t yourtag:your-version .\n```\n\nAnd run the container as:\n\n```sh\ndocker run --rm --net=host yourtag:your-version\n```\n\nAny arguments after the image name will be passed to the application, this allows the customization of the start command, for example `--cluster` will start the application in a `vert.x` cluster.\n";
+},"useData":true})
+exports['npm/index.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "/// <reference types=\"@vertx/core/runtime\" />\n// @ts-check\n\n// your code goes here...\n\nvertx\n  .createHttpServer()\n  .requestHandler(function (req) {\n    req.response()\n      .putHeader(\"content-type\", \"text/plain\")\n      .end(\"Hello!\");\n  })\n  .listen(8080);\n\nconsole.log('Server listening at: http://localhost:8080/');\n";
+},"useData":true})
+exports['npm/index.test.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "import { TestSuite } from '@vertx/unit';\n\nconst suite = TestSuite.create(\"the_test_suite\");\n\nsuite.test(\"my_test_case\", function (should) {\n  var s = \"value\";\n  should.assertEquals(\"value\", s);\n});\n\nsuite.run();\n";
+},"useData":true})
+exports['npm/index.test.ts'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "import { TestSuite, TestContext } from '@vertx/unit';\n\nconst suite = TestSuite.create(\"the_test_suite\");\n\nsuite.test(\"my_test_case\", (should: TestContext) => {\n  let s : string = \"value\";\n  should.assertEquals(\"value\", s);\n});\n\nsuite.run();\n";
+},"useData":true})
+exports['npm/index.ts'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "/// <reference types=\"@vertx/core/runtime\" />\n// @ts-check\n\n// your code goes here...\n\nvertx\n  .createHttpServer()\n  .requestHandler(function (req: any) {\n    req.response()\n      .putHeader(\"content-type\", \"text/plain\")\n      .end(\"Hello!\");\n  }).listen(8080);\n\nconsole.log('Listening at http://127.0.0.1:8080');\n";
+},"useData":true})
+exports['npm/package.json'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
+    return "dist/";
+},"3":function(container,depth0,helpers,partials,data) {
+    return "    \"prestart\": \"tsc\",\n";
+},"5":function(container,depth0,helpers,partials,data) {
+    return "    \"pretest\": \"tsc\",\n";
+},"7":function(container,depth0,helpers,partials,data) {
+    return "    \"typescript\": \"^3.2.2\",\n";
+},"9":function(container,depth0,helpers,partials,data) {
+    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function";
+
+  return "    \""
+    + ((stack1 = ((helper = (helper = helpers.npm || (depth0 != null ? depth0.npm : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"npm","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "\": \"^"
+    + ((stack1 = ((helper = (helper = helpers.version || (depth0 != null ? depth0.version : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"version","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "\",\n";
+},"11":function(container,depth0,helpers,partials,data) {
+    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function";
+
+  return "    \""
+    + ((stack1 = ((helper = (helper = helpers.npm || (depth0 != null ? depth0.npm : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"npm","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "\": \"^"
+    + ((stack1 = ((helper = (helper = helpers.version || (depth0 != null ? depth0.version : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"version","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "\""
+    + ((stack1 = helpers.unless.call(alias1,(data && data.last),{"name":"unless","hash":{},"fn":container.program(12, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "\n";
+},"12":function(container,depth0,helpers,partials,data) {
+    return ",";
+},"14":function(container,depth0,helpers,partials,data) {
+    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function";
+
+  return "    \""
+    + ((stack1 = ((helper = (helper = helpers.groupId || (depth0 != null ? depth0.groupId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"groupId","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + ":"
+    + ((stack1 = ((helper = (helper = helpers.artifactId || (depth0 != null ? depth0.artifactId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"artifactId","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "\": \""
+    + ((stack1 = ((helper = (helper = helpers.version || (depth0 != null ? depth0.version : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"version","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.scope : depth0),{"name":"if","hash":{},"fn":container.program(15, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.classifier : depth0),{"name":"if","hash":{},"fn":container.program(17, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "\""
+    + ((stack1 = helpers.unless.call(alias1,(data && data.last),{"name":"unless","hash":{},"fn":container.program(12, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "\n";
+},"15":function(container,depth0,helpers,partials,data) {
+    var stack1, helper;
+
+  return ":"
+    + ((stack1 = ((helper = (helper = helpers.scope || (depth0 != null ? depth0.scope : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"scope","hash":{},"data":data}) : helper))) != null ? stack1 : "");
+},"17":function(container,depth0,helpers,partials,data) {
+    var stack1, helper;
+
+  return ":"
+    + ((stack1 = ((helper = (helper = helpers.classifier || (depth0 != null ? depth0.classifier : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"classifier","hash":{},"data":data}) : helper))) != null ? stack1 : "");
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=container.lambda, alias2=depth0 != null ? depth0 : (container.nullContext || {});
+
+  return "{\n  \"name\": \""
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.name : stack1), depth0)) != null ? stack1 : "")
+    + "\",\n  \"version\": \""
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.version : stack1), depth0)) != null ? stack1 : "")
+    + "\",\n  \"description\": \""
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.description : stack1), depth0)) != null ? stack1 : "")
+    + "\",\n  \"private\": true,\n\n  \"main\": \""
+    + ((stack1 = helpers["if"].call(alias2,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.typescript : stack1),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "index.js\",\n\n  \"scripts\": {\n"
+    + ((stack1 = helpers["if"].call(alias2,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.typescript : stack1),{"name":"if","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "    \"start\": \""
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.name : stack1), depth0)) != null ? stack1 : "")
+    + "\",\n"
+    + ((stack1 = helpers["if"].call(alias2,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.typescript : stack1),{"name":"if","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "    \"test\": \""
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.name : stack1), depth0)) != null ? stack1 : "")
+    + " test "
+    + ((stack1 = helpers["if"].call(alias2,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.typescript : stack1),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "index.test.js\",\n    \"postinstall\": \"es4x install\",\n    \"dockerfile\": \"es4x dockerfile\"\n  },\n\n  \"keywords\": [],\n  \"author\": \"\",\n  \"license\": \"ISC\",\n\n  \"devDependencies\": {\n"
+    + ((stack1 = helpers["if"].call(alias2,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.typescript : stack1),{"name":"if","hash":{},"fn":container.program(7, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers.each.call(alias2,(depth0 != null ? depth0.npmDevDependencies : depth0),{"name":"each","hash":{},"fn":container.program(9, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "    \"es4x-pm\": \"^"
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.es4x : stack1), depth0)) != null ? stack1 : "")
+    + "\"\n  },\n\n  \"dependencies\": {\n"
+    + ((stack1 = helpers.each.call(alias2,(depth0 != null ? depth0.npmProdDependencies : depth0),{"name":"each","hash":{},"fn":container.program(11, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "  },\n\n  \"mvnDependencies\": {\n"
+    + ((stack1 = helpers.each.call(alias2,(depth0 != null ? depth0.npmMavenDependencies : depth0),{"name":"each","hash":{},"fn":container.program(14, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "  }\n}\n";
+},"useData":true})
+exports['npm/tsconfig.json'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "{\n  \"compilerOptions\": {\n    \"outDir\": \"dist\",\n    \"sourceMap\": true,\n    \"noImplicitAny\": true,\n    \"module\": \"commonjs\",\n    \"target\": \"es5\",\n    \"allowJs\": true\n  }\n}\n";
 },"useData":true})
 exports['sbt/build.sbt'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var stack1;
@@ -1634,17 +1634,6 @@ exports['openapi-server/src/test/java/{packageDir}/{operationId}Test.java'] = Ha
     + ((stack1 = helpers.each.call(alias1,((stack1 = (depth0 != null ? depth0.operation : depth0)) != null ? stack1.responses : stack1),{"name":"each","hash":{},"fn":container.program(1, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "\n}";
 },"useData":true,"useDepths":true})
-exports['package-info/src/main/java/{packageDir}/package-info.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=container.lambda;
-
-  return "@ModuleGen(name=\""
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.artifactId : stack1), depth0)) != null ? stack1 : "")
-    + "\", groupPackage = \""
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
-    + "\")\npackage "
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
-    + ";\n\nimport io.vertx.codegen.annotations.ModuleGen;\n";
-},"useData":true})
 exports['openapi-server-sp/src/main/java/{packageDir}/MainVerticle.java'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     var stack1;
 
@@ -1709,6 +1698,17 @@ exports['openapi-server-sp/src/main/java/{packageDir}/MainVerticle.java'] = Hand
     + ((stack1 = (helpers.nonEmpty || (depth0 && depth0.nonEmpty) || alias2).call(alias1,(depth0 != null ? depth0.securitySchemes : depth0),{"name":"nonEmpty","hash":{},"fn":container.program(7, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "\n\n\n        // Generate the router\n        Router router = routerFactory.getRouter();\n        server = vertx.createHttpServer(new HttpServerOptions().setPort(8080).setHost(\"localhost\"));\n        server.requestHandler(router).listen();\n        future.complete();\n      } else {\n        // Something went wrong during router factory initialization\n        future.fail(openAPI3RouterFactoryAsyncResult.cause());\n      }\n    });\n    return future;\n  }\n\n  @Override\n  public void start(Future<Void> future) {\n    startServices();\n    startHttpServer().setHandler(future.completer());\n  }\n\n  /**\n   * This method closes the http server and unregister all services loaded to Event Bus\n   */\n  @Override\n  public void stop(){\n    this.server.close();\n    registeredConsumers.forEach(c -> serviceBinder.unregister(c));\n  }\n\n}\n";
 },"useData":true})
+exports['package-info/src/main/java/{packageDir}/package-info.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=container.lambda;
+
+  return "@ModuleGen(name=\""
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.artifactId : stack1), depth0)) != null ? stack1 : "")
+    + "\", groupPackage = \""
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
+    + "\")\npackage "
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
+    + ";\n\nimport io.vertx.codegen.annotations.ModuleGen;\n";
+},"useData":true})
 exports['sbt/src/main/scala/{packageDir}/MainVerticle.scala'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
@@ -1752,6 +1752,12 @@ exports['service-proxy/src/main/java/{packageDir}/{Service}.java'] = Handlebars.
     + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0)) != null ? stack1 : "")
     + ".class);\n  }\n}\n";
 },"useData":true})
+exports['spa+blueprint/angular-clientapp/src/app/fetch-data/fetch-data.component.html'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<h1>Weather forecast</h1>\n\n<p>This component demonstrates fetching data from the server.</p>\n\n<p *ngIf=\"!forecasts\"><em>Loading...</em></p>\n\n<table class='table table-striped' *ngIf=\"forecasts\">\n  <thead>\n    <tr>\n      <th>Date</th>\n      <th>Temp. (C)</th>\n      <th>Temp. (F)</th>\n      <th>Summary</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr *ngFor=\"let forecast of forecasts\">\n      <td>{{ forecast.dateFormatted }}</td>\n      <td>{{ forecast.temperatureC }}</td>\n      <td>{{ forecast.temperatureF }}</td>\n      <td>{{ forecast.summary }}</td>\n    </tr>\n  </tbody>\n</table>\n";
+},"useData":true})
+exports['spa+blueprint/angular-clientapp/src/app/fetch-data/fetch-data.component.ts'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "import { Component, Inject } from '@angular/core';\nimport { HttpClient } from '@angular/common/http';\n\n@Component({\n  selector: 'app-fetch-data',\n  templateUrl: './fetch-data.component.html'\n})\nexport class FetchDataComponent {\n  public forecasts: WeatherForecast[];\n\n  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {\n    http.get<WeatherForecast[]>(baseUrl + 'api/weather-forecast').subscribe(result => {\n      this.forecasts = result;\n    }, error => console.error(error));\n  }\n}\n\ninterface WeatherForecast {\n  dateFormatted: string;\n  temperatureC: number;\n  temperatureF: number;\n  summary: string;\n}\n";
+},"useData":true})
 exports['spa+blueprint/angular-clientapp/src/app/counter/counter.component.html'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "<h1>Counter</h1>\n\n<p>This is a simple example of an Angular component.</p>\n\n<p>Current count: <strong>{{ currentCount }}</strong></p>\n\n<button class=\"btn btn-primary\" (click)=\"incrementCounter()\">Increment</button>\n";
 },"useData":true})
@@ -1761,11 +1767,11 @@ exports['spa+blueprint/angular-clientapp/src/app/counter/counter.component.spec.
 exports['spa+blueprint/angular-clientapp/src/app/counter/counter.component.ts'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-counter-component',\n  templateUrl: './counter.component.html'\n})\nexport class CounterComponent {\n  public currentCount = 0;\n\n  public incrementCounter() {\n    this.currentCount++;\n  }\n}\n";
 },"useData":true})
-exports['spa+blueprint/angular-clientapp/src/app/fetch-data/fetch-data.component.html'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<h1>Weather forecast</h1>\n\n<p>This component demonstrates fetching data from the server.</p>\n\n<p *ngIf=\"!forecasts\"><em>Loading...</em></p>\n\n<table class='table table-striped' *ngIf=\"forecasts\">\n  <thead>\n    <tr>\n      <th>Date</th>\n      <th>Temp. (C)</th>\n      <th>Temp. (F)</th>\n      <th>Summary</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr *ngFor=\"let forecast of forecasts\">\n      <td>{{ forecast.dateFormatted }}</td>\n      <td>{{ forecast.temperatureC }}</td>\n      <td>{{ forecast.temperatureF }}</td>\n      <td>{{ forecast.summary }}</td>\n    </tr>\n  </tbody>\n</table>\n";
+exports['spa+blueprint/angular-clientapp/src/app/home/home.component.html'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<h1>Hello, world!</h1>\n<p>Welcome to your new single-page application, built with:</p>\n<ul>\n  <li><a href='https://vertx.io/'>Eclipse Vert.x</a> for cross-platform server-side code</li>\n  <li><a href='https://angular.io/'>Angular</a> and <a href='http://www.typescriptlang.org/'>TypeScript</a> for client-side code</li>\n  <li><a href='http://getbootstrap.com/'>Bootstrap</a> for layout and styling</li>\n</ul>\n<p>To help you get started, we've also set up:</p>\n<ul>\n  <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.</li>\n  <li><strong>Angular CLI integration</strong>. In development mode, there's no need to run <code>ng serve</code>. It runs in the background automatically, so your client-side resources are dynamically built on demand and the page refreshes when you modify any file.</li>\n  <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and your <code>dotnet publish</code> configuration automatically invokes <code>ng build</code> to produce minified, ahead-of-time compiled JavaScript files.</li>\n</ul>\n<p>The <code>ClientApp</code> subdirectory is a standard Angular CLI application. If you open a command prompt in that directory, you can run any <code>ng</code> command (e.g., <code>ng test</code>), or use <code>npm</code> to install extra packages into it.</p>\n";
 },"useData":true})
-exports['spa+blueprint/angular-clientapp/src/app/fetch-data/fetch-data.component.ts'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "import { Component, Inject } from '@angular/core';\nimport { HttpClient } from '@angular/common/http';\n\n@Component({\n  selector: 'app-fetch-data',\n  templateUrl: './fetch-data.component.html'\n})\nexport class FetchDataComponent {\n  public forecasts: WeatherForecast[];\n\n  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {\n    http.get<WeatherForecast[]>(baseUrl + 'api/weather-forecast').subscribe(result => {\n      this.forecasts = result;\n    }, error => console.error(error));\n  }\n}\n\ninterface WeatherForecast {\n  dateFormatted: string;\n  temperatureC: number;\n  temperatureF: number;\n  summary: string;\n}\n";
+exports['spa+blueprint/angular-clientapp/src/app/home/home.component.ts'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-home',\n  templateUrl: './home.component.html',\n})\nexport class HomeComponent {\n}\n";
 },"useData":true})
 exports['spa+blueprint/angular-clientapp/src/app/nav-menu/nav-menu.component.css'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "a.navbar-brand {\n  white-space: normal;\n  text-align: center;\n  word-break: break-all;\n}\n\nhtml {\n  font-size: 14px;\n}\n@media (min-width: 768px) {\n  html {\n    font-size: 16px;\n  }\n}\n\n.box-shadow {\n  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);\n}\n";
@@ -1779,12 +1785,6 @@ exports['spa+blueprint/angular-clientapp/src/app/nav-menu/nav-menu.component.htm
 },"useData":true})
 exports['spa+blueprint/angular-clientapp/src/app/nav-menu/nav-menu.component.ts'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-nav-menu',\n  templateUrl: './nav-menu.component.html',\n  styleUrls: ['./nav-menu.component.css']\n})\nexport class NavMenuComponent {\n  isExpanded = false;\n\n  collapse() {\n    this.isExpanded = false;\n  }\n\n  toggle() {\n    this.isExpanded = !this.isExpanded;\n  }\n}\n";
-},"useData":true})
-exports['spa+blueprint/angular-clientapp/src/app/home/home.component.html'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<h1>Hello, world!</h1>\n<p>Welcome to your new single-page application, built with:</p>\n<ul>\n  <li><a href='https://vertx.io/'>Eclipse Vert.x</a> for cross-platform server-side code</li>\n  <li><a href='https://angular.io/'>Angular</a> and <a href='http://www.typescriptlang.org/'>TypeScript</a> for client-side code</li>\n  <li><a href='http://getbootstrap.com/'>Bootstrap</a> for layout and styling</li>\n</ul>\n<p>To help you get started, we've also set up:</p>\n<ul>\n  <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.</li>\n  <li><strong>Angular CLI integration</strong>. In development mode, there's no need to run <code>ng serve</code>. It runs in the background automatically, so your client-side resources are dynamically built on demand and the page refreshes when you modify any file.</li>\n  <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and your <code>dotnet publish</code> configuration automatically invokes <code>ng build</code> to produce minified, ahead-of-time compiled JavaScript files.</li>\n</ul>\n<p>The <code>ClientApp</code> subdirectory is a standard Angular CLI application. If you open a command prompt in that directory, you can run any <code>ng</code> command (e.g., <code>ng test</code>), or use <code>npm</code> to install extra packages into it.</p>\n";
-},"useData":true})
-exports['spa+blueprint/angular-clientapp/src/app/home/home.component.ts'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-home',\n  templateUrl: './home.component.html',\n})\nexport class HomeComponent {\n}\n";
 },"useData":true})
 exports['spa+blueprint/src/main/java/{packageDir}/MainVerticle.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=container.lambda;
@@ -2007,19 +2007,6 @@ exports['openapi/src/main/java/{packageDir}/models/{modelName}.java'] = Handleba
   }
 
 ,"useDecorators":true,"usePartial":true,"useData":true,"useDepths":true})
-exports['openapi-server/src/main/java/{packageDir}/security/{securitySchemaId}Handler.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=container.lambda;
-
-  return "package "
-    + ((stack1 = ((helper = (helper = helpers["package"] || (depth0 != null ? depth0["package"] : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"package","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + ".security;\n\nimport io.vertx.core.Handler;\nimport io.vertx.ext.web.RoutingContext;\n\npublic class "
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.securitySchema : depth0)) != null ? stack1.className : stack1), depth0)) != null ? stack1 : "")
-    + "Handler implements Handler<RoutingContext> {\n\n    public "
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.securitySchema : depth0)) != null ? stack1.className : stack1), depth0)) != null ? stack1 : "")
-    + "Handler(){\n\n    }\n\n    @Override\n    public void handle(RoutingContext routingContext) {\n        // Handle "
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.securitySchema : depth0)) != null ? stack1.name : stack1), depth0)) != null ? stack1 : "")
-    + " security schema\n        routingContext.next();\n    }\n\n}";
-},"useData":true})
 exports['openapi-server/src/main/java/{packageDir}/handlers/{operationId}Handler.java'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     return "RequestParameters params = routingContext.get(\"parsedParameters\");\n        ";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
@@ -2036,6 +2023,19 @@ exports['openapi-server/src/main/java/{packageDir}/handlers/{operationId}Handler
     + "// Handle "
     + ((stack1 = alias3(((stack1 = (depth0 != null ? depth0.operation : depth0)) != null ? stack1.operationId : stack1), depth0)) != null ? stack1 : "")
     + "\n        routingContext.response().setStatusCode(501).setStatusMessage(\"Not Implemented\").end();\n    }\n\n}";
+},"useData":true})
+exports['openapi-server/src/main/java/{packageDir}/security/{securitySchemaId}Handler.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, helper, alias1=container.lambda;
+
+  return "package "
+    + ((stack1 = ((helper = (helper = helpers["package"] || (depth0 != null ? depth0["package"] : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"package","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + ".security;\n\nimport io.vertx.core.Handler;\nimport io.vertx.ext.web.RoutingContext;\n\npublic class "
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.securitySchema : depth0)) != null ? stack1.className : stack1), depth0)) != null ? stack1 : "")
+    + "Handler implements Handler<RoutingContext> {\n\n    public "
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.securitySchema : depth0)) != null ? stack1.className : stack1), depth0)) != null ? stack1 : "")
+    + "Handler(){\n\n    }\n\n    @Override\n    public void handle(RoutingContext routingContext) {\n        // Handle "
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.securitySchema : depth0)) != null ? stack1.name : stack1), depth0)) != null ? stack1 : "")
+    + " security schema\n        routingContext.next();\n    }\n\n}";
 },"useData":true})
 exports['openapi-server-sp/src/main/java/{packageDir}/services/package-info.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=container.lambda;

@@ -607,13 +607,19 @@
     };
 
     const r = route.create();
+    const hash = window.location.hash.substr(1);
+    let defTool = undefined;
+
     // bind to the right route
     for (let bt of opts.buildtools) {
-      r(bt.id + '..', () => this.show(bt))
+      r(bt.id + '..', () => this.show(bt));
+      if (bt.id === hash) {
+        defTool = bt.id;
+      }
     }
 
     // show default route
-    route(opts.buildtools[0].id);
+    route(defTool || opts.buildtools[0].id);
 
     route.start(true)
   </script>
