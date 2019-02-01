@@ -65,7 +65,7 @@ function compileProject(project, trackFn, trackExceptionFn, loadBlob) {
     }
 
     // Suffix for artifacts
-    if (project.buildtool.id === "sbt") {
+    if (project.buildtool.id === "SBT") {
       project.metadata.artifactSuffix = project.buildtool['non-core-suffix'] || '';
     }
 

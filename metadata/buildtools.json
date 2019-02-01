@@ -192,11 +192,15 @@
     "url": "http://www.scala-sbt.org",
     "non-core-suffix": "-scala_2.12",
     "file": "build.sbt",
+    "icon": "scala.png",
     "fields" :[
       { "key": "name", "label": "Project Name", "required": true },
       { "key": "description", "label": "Project Description" },
       { "key": "groupId", "label": "Project Group", "prefill": "com.example" },
       { "key": "version", "label": "Project Version", "prefill": "0.0.1-SNAPSHOT" }
+    ],
+    "meta": [
+      { "key": "bom", "value": "3.6.3" }
     ],
     "languages": [
       {
@@ -205,22 +209,26 @@
           "main": "{package}.MainVerticle"
         },
         "templates": [
-          "sbt/src/main/scala/{packageDir}/MainVerticle.scala"
+          "sbt/src/main/scala/{packageDir}/MainVerticle.scala",
+          "sbt/src/test/scala/{packageDir}/VerticleTesting.scala",
+          "sbt/src/test/scala/{packageDir}/MainVerticleSpec.scala"
         ]
       }
     ],
     "templates": [
       "git/.gitignore",
       "editorconfig/.editorconfig",
-      "sbt/.scalafmt",
+      "sbt/README.md",
       "sbt/build.sbt",
       "sbt/project/build.properties",
       "sbt/project/Build.scala",
+      "sbt/project/Docker.scala",
       "sbt/project/plugins.sbt"
     ],
     "defaults": [
       "io.vertx:vertx-core",
-      "io.vertx:vertx-lang-scala_2.12"
+      "io.vertx:vertx-lang-scala_2.12",
+      "io.vertx:vertx-web"
     ]
   },
 

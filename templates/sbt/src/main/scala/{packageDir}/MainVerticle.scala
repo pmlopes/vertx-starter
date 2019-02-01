@@ -1,17 +1,22 @@
 package {{ metadata.package }}
 
 import io.vertx.lang.scala.ScalaVerticle
+import io.vertx.scala.ext.web.Router
+
+import scala.concurrent.Future
 
 class MainVerticle extends ScalaVerticle {
 
-  override def start(): Unit = {
+  override def startFuture(): Future[_] = {
     // your code goes here...
-    vertx
-      .createHttpServer()
-      .requestHandler(_.response()
-        .putHeader("content-type", "text/plain")
-        .end("Hello from Vert.x!"))
-      .listenFuture(8080, "0.0.0.0")
-        .map(_ => ())
+    val router = Router.router(vertx)
+        val route = router
+          .get("/hello")
+          .handler(_.response().end("world"))
+
+        vertx
+          .createHttpServer()
+          .requestHandler(router.accept _)
+          .listenFuture(8666, "0.0.0.0")
   }
 }

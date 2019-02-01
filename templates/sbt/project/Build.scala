@@ -1,5 +1,7 @@
-import sbt.Keys._
-import sbt._
+import sbt.{Def, _}
+import sbtassembly.AssemblyPlugin.autoImport.{MergeStrategy, assembly, assemblyMergeStrategy}
+import sbtassembly.{AssemblyPlugin, PathList}
+import Keys._
 
 object Build extends AutoPlugin {
 
@@ -7,7 +9,16 @@ object Build extends AutoPlugin {
 
   override def projectSettings =
     Vector(
-      scalaVersion := "2.12.1",
+      scalaVersion := "2.12.7",
+      assemblyMergeStrategy in assembly := {
+        case PathList("META-INF", "MANIFEST.MF") => MergeStrategy.discard
+        case PathList("META-INF", xs @ _*) => MergeStrategy.last
+        case PathList("META-INF", "io.netty.versions.properties") => MergeStrategy.last
+        case PathList("codegen.json") => MergeStrategy.discard
+        case x =>
+          val oldStrategy = (assemblyMergeStrategy in assembly).value
+          oldStrategy(x)
+      },
       scalacOptions ++= Vector(
         "-unchecked",
         "-deprecation",
@@ -19,8 +30,8 @@ object Build extends AutoPlugin {
       unmanagedSourceDirectories in Compile := Vector(scalaSource.in(Compile).value),
       unmanagedSourceDirectories in Test := Vector(scalaSource.in(Test).value),
       initialCommands in console := """|import io.vertx.lang.scala._
+                                       |import io.vertx.lang.scala.ScalaVerticle.nameForVerticle
                                        |import io.vertx.scala.core._
-                                       |import io.vertx.scala.sbt._
                                        |import scala.concurrent.Future
                                        |import scala.concurrent.Promise
                                        |import scala.util.Success
