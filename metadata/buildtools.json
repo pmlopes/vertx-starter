@@ -3,6 +3,7 @@
     "id": "maven",
     "file": "pom.xml",
     "url": "https://maven.apache.org",
+    "icon": "apache.png",
     "fields" :[
       { "key": "name", "label": "Project Name", "required": true },
       { "key": "description", "label": "Project Description" },
@@ -81,6 +82,7 @@
     "id": "gradle",
     "url": "https://gradle.org",
     "file": "build.gradle",
+    "icon": "gradle.svg",
     "fields" :[
       { "key": "name", "label": "Project Name", "required": true },
       { "key": "description", "label": "Project Description" },
@@ -146,6 +148,7 @@
     "id": "npm",
     "url": "https://npmjs.com",
     "file": "package.json",
+    "icon": "npm.svg",
     "fields": [
       { "key": "name", "label": "Project Name", "required": true },
       { "key": "description", "label": "Project Description" },
@@ -225,6 +228,7 @@
     "id": "stack",
     "url": "http://vertx.io/docs/#advanced",
     "file": "vertx-stack.json",
+    "icon": "stack.svg",
     "fields": [
       { "key": "name", "label": "Project Name", "required": true }
     ],

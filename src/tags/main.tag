@@ -7,7 +7,7 @@
         This is a progressive webapp, meaning that you can add it to your desktop and it can even run offline. You can boostrap your project even on the go without internet!
       </p>
     </div>
-    <h1>{ tool.id }: { tool.file }</h1>
+    <h1 class="box">{ tool.id }<img if={ tool.icon } src="img/{ tool.icon }" width="32px" />&nbsp;{ tool.file }</h1>
     <form onsubmit={ generate }>
       <!-- Basic fields -->
       <div each={ f, i in tool.fields } class="row">

@@ -23,6 +23,7 @@ label[for=nav-trigger]{position:fixed;left:15px;top:15px;z-index:2;height:30px;w
 .nav-trigger+label,.site-wrap{transition:left .2s}
 .nav-trigger:checked+label{left:215px}
 .nav-trigger:checked~.site-wrap{left:200px;box-shadow:0 0 5px 5px rgba(0,0,0,.5)}
+.box{display:flex;align-items:center}
 *,:after,:before{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;margin:0;padding:0}
 .spinner{margin:auto;width:50px;height:40px;text-align:center;font-size:10px}
 .spinner>div{background-color:#333;height:100%;width:6px;display:inline-block;-webkit-animation:sk-stretchdelay 1.2s infinite ease-in-out;animation:sk-stretchdelay 1.2s infinite ease-in-out}

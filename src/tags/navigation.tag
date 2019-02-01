@@ -1,6 +1,9 @@
 <navigation>
-  <li each={ opts.buildtools } class="nav-item"><a href="#{ id }" onclick={closeMenu}>&nbsp;&nbsp;{ id }</a></li>
-  <li class="nav-item">&nbsp;</li>
+  <li class="nav-item" style="color: #fff"><b>Build tool</b></li>
+  <li each={ opts.buildtools } class="nav-item">
+    <a href="#{ id }" onclick={closeMenu}>&nbsp;&nbsp;<img if={ icon } src="img/{ icon }" width="16px"> { id }</a>
+  </li>
+  <li class="nav-item" style="color: #fff"><b>Docs</b></li>
   <li class="nav-item"><a href="https://github.com/pmlopes/vertx-starter/blob/master/dist/webdocs/OpenAPI_Server_With_Services.md" target="_blank"><i>&nbsp;&nbsp;OpenAPI docs</i></a></li>
   <script>
   this.closeMenu = function (e) {

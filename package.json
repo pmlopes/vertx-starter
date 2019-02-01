@@ -13,16 +13,16 @@
     "commander": "^2.19.0",
     "handlebars": "^4.0.12",
     "handlebars-utils": "^1.0.6",
-    "inquirer": "^6.2.0",
+    "inquirer": "^6.2.2",
     "jszip": "^3.1.5",
     "jszip-utils": "^0.0.2",
+    "lodash": "^4.17.11",
     "mkdirp": "^0.5.1",
-    "swagger-parser": "^6.0.2",
-    "lodash": "latest"
+    "swagger-parser": "^6.0.5"
   },
   "devDependencies": {
     "@babel/core": "^7.1.6",
-    "@babel/preset-env": "^7.1.6",
+    "@babel/preset-env": "^7.3.1",
     "babel-loader": "^8.0.4",
     "gulp": "^4.0.0",
     "gulp-concat": "^2.6.1",
@@ -38,10 +38,10 @@
     "riot-compiler": "^3.5.2",
     "riot-route": "^3.1.4",
     "riot-tag-loader": "^2.1.0",
+    "terser-webpack-plugin": "^1.1.0",
     "through2": "^3.0.0",
-    "webpack": "^4.26.1",
+    "webpack": "^4.29.0",
     "webpack-stream": "^5.1.1",
-    "wingcss": "^1.0.0-beta",
-    "terser-webpack-plugin": "^1.1.0"
+    "wingcss": "^1.0.0-beta"
   }
 }
