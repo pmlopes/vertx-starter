@@ -1,27 +1,13 @@
-buildscript {
-  repositories {
-    mavenCentral()
-    jcenter()
-  }
-
-  dependencies {
-    {{#if metadata.kotlin}}
-    classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.1.0'
-    {{/if}}
-    classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.4'
-  }
-}
-
+plugins {
+  id 'io.vertx.vertx-plugin' version '{{metadata.plugin}}'
 {{#if metadata.kotlin}}
-apply plugin: 'kotlin'
+  id 'org.jetbrains.kotlin.jvm' version '1.3.20'
 {{/if}}
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'application'
-apply plugin: 'com.github.johnrengelman.shadow'
+}
 
 repositories {
   mavenCentral()
+  jcenter()
 }
 
 version = '{{metadata.version}}'
@@ -29,42 +15,25 @@ group = '{{metadata.groupId}}'
 {{#if metadata.description}}
 description = '{{metadata.description}}'
 {{/if}}
-sourceCompatibility = '1.8'
-mainClassName = 'io.vertx.core.Launcher'
 
 dependencies {
-{{#each dependencies}}
-  // TODO use compileOnly instead compile for codegen
-  compile '{{groupId}}:{{artifactId}}:{{version}}{{#if classifier}}:{{classifier}}{{/if}}'
-{{/each}}
+  {{#if metadata.kotlin}}
+  compile 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
+  {{/if}}
+  {{#each dependencies}}
+  compile '{{groupId}}:{{artifactId}}{{#unless stack}}:{{version}}{{/unless}}{{#if classifier}}:{{classifier}}{{/if}}'
+  {{/each}}
+}
+
+vertx {
+  mainVerticle = "{{metadata.main}}"
+  vertxVersion = "{{metadata.bom}}"
 }
 
 {{#if metadata.kotlin}}
-compileKotlin {
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
   kotlinOptions {
-    jvmTarget = '1.8'
+    jvmTarget = "1.8"
   }
 }
 {{/if}}
-
-shadowJar {
-  classifier = 'fat'
-  manifest {
-    attributes 'Main-Verticle': '{{metadata.package}}.MainVerticle'
-  }
-  mergeServiceFiles {
-    include 'META-INF/services/io.vertx.core.spi.VerticleFactory'
-  }
-}
-
-task wrapper(type: Wrapper) {
-  gradleVersion = '2.13'
-}
-
-eclipse {
-  classpath {
-    file.beforeMerged { cp ->
-      cp.entries.add( new org.gradle.plugins.ide.eclipse.model.SourceFolder('build/classes/java/main', null) )
-    }
-  }
-}

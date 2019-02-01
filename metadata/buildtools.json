@@ -82,6 +82,10 @@
       { "key": "groupId", "label": "Project Group", "prefill": "com.example" },
       { "key": "version", "label": "Project Version", "prefill": "0.0.1-SNAPSHOT" }
     ],
+    "meta": [
+      { "key": "plugin", "value": "0.3.1" },
+      { "key": "bom", "value": "3.6.3" }
+    ],
     "languages": [
       {
         "id": "java",
