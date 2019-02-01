@@ -181,6 +181,112 @@ exports['maven/pom.xml'] = Handlebars.template({"1":function(container,depth0,he
     + ((stack1 = helpers.unless.call(alias2,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.graalNativeImage : stack1),{"name":"unless","hash":{},"fn":container.program(29, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "    </plugins>\n  </build>\n</project>\n";
 },"useData":true})
+exports['npm/README.md'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "# "
+    + ((stack1 = container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.name : stack1), depth0)) != null ? stack1 : "")
+    + "\n\nThis is your SPA blueprint project. Ensure you have [node](https://www.nodejs.org) installed\non your path. And optionally [GraalVM](https://www.graalvm.org).\n\n## Build\n\nRun your package manager tool to install the required dependencies:\n\n```sh\nnpm install\n```\n\nor\n\n```sh\nyarn install\n```\n\nFrom now on will assume you're using `NPM`.\n\n### Run\n\n```sh\nnpm start\n```\n\nIn case you need to use `>ES5.1` features you **MUST** run on GraalVM.\n\n### Packaging\n\nThe project can be packaged into a container. For this run:\n\n```sh\nnpm run dockerfile\n```\n\nThis step will create the basic `Dockerfile` required to run your application. By default it will use the GraalVM image\nbut you're not required to. The best options are either `GraalVM` or `JDK >=11`.\n\n\n```sh\ndocker build -t yourtag:your-version .\n```\n\nAnd run the container as:\n\n```sh\ndocker run --rm --net=host yourtag:your-version\n```\n\nAny arguments after the image name will be passed to the application, this allows the customization of the start command, for example `--cluster` will start the application in a `vert.x` cluster.\n";
+},"useData":true})
+exports['npm/index.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "/// <reference types=\"@vertx/core/runtime\" />\n// @ts-check\n\n// your code goes here...\n\nvertx\n  .createHttpServer()\n  .requestHandler(function (req) {\n    req.response()\n      .putHeader(\"content-type\", \"text/plain\")\n      .end(\"Hello!\");\n  })\n  .listen(8080);\n\nconsole.log('Server listening at: http://localhost:8080/');\n";
+},"useData":true})
+exports['npm/index.test.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "import { TestSuite } from '@vertx/unit';\n\nconst suite = TestSuite.create(\"the_test_suite\");\n\nsuite.test(\"my_test_case\", function (should) {\n  var s = \"value\";\n  should.assertEquals(\"value\", s);\n});\n\nsuite.run();\n";
+},"useData":true})
+exports['npm/index.test.ts'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "import { TestSuite, TestContext } from '@vertx/unit';\n\nconst suite = TestSuite.create(\"the_test_suite\");\n\nsuite.test(\"my_test_case\", (should: TestContext) => {\n  let s : string = \"value\";\n  should.assertEquals(\"value\", s);\n});\n\nsuite.run();\n";
+},"useData":true})
+exports['npm/index.ts'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "/// <reference types=\"@vertx/core/runtime\" />\n// @ts-check\n\n// your code goes here...\n\nvertx\n  .createHttpServer()\n  .requestHandler(function (req: any) {\n    req.response()\n      .putHeader(\"content-type\", \"text/plain\")\n      .end(\"Hello!\");\n  }).listen(8080);\n\nconsole.log('Listening at http://127.0.0.1:8080');\n";
+},"useData":true})
+exports['npm/package.json'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
+    return "dist/";
+},"3":function(container,depth0,helpers,partials,data) {
+    return "    \"prestart\": \"tsc\",\n";
+},"5":function(container,depth0,helpers,partials,data) {
+    return "    \"pretest\": \"tsc\",\n";
+},"7":function(container,depth0,helpers,partials,data) {
+    return "    \"typescript\": \"^3.2.2\",\n";
+},"9":function(container,depth0,helpers,partials,data) {
+    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function";
+
+  return "    \""
+    + ((stack1 = ((helper = (helper = helpers.npm || (depth0 != null ? depth0.npm : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"npm","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "\": \"^"
+    + ((stack1 = ((helper = (helper = helpers.version || (depth0 != null ? depth0.version : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"version","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "\",\n";
+},"11":function(container,depth0,helpers,partials,data) {
+    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function";
+
+  return "    \""
+    + ((stack1 = ((helper = (helper = helpers.npm || (depth0 != null ? depth0.npm : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"npm","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "\": \"^"
+    + ((stack1 = ((helper = (helper = helpers.version || (depth0 != null ? depth0.version : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"version","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "\""
+    + ((stack1 = helpers.unless.call(alias1,(data && data.last),{"name":"unless","hash":{},"fn":container.program(12, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "\n";
+},"12":function(container,depth0,helpers,partials,data) {
+    return ",";
+},"14":function(container,depth0,helpers,partials,data) {
+    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function";
+
+  return "    \""
+    + ((stack1 = ((helper = (helper = helpers.groupId || (depth0 != null ? depth0.groupId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"groupId","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + ":"
+    + ((stack1 = ((helper = (helper = helpers.artifactId || (depth0 != null ? depth0.artifactId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"artifactId","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "\": \""
+    + ((stack1 = ((helper = (helper = helpers.version || (depth0 != null ? depth0.version : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"version","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.scope : depth0),{"name":"if","hash":{},"fn":container.program(15, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.classifier : depth0),{"name":"if","hash":{},"fn":container.program(17, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "\""
+    + ((stack1 = helpers.unless.call(alias1,(data && data.last),{"name":"unless","hash":{},"fn":container.program(12, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "\n";
+},"15":function(container,depth0,helpers,partials,data) {
+    var stack1, helper;
+
+  return ":"
+    + ((stack1 = ((helper = (helper = helpers.scope || (depth0 != null ? depth0.scope : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"scope","hash":{},"data":data}) : helper))) != null ? stack1 : "");
+},"17":function(container,depth0,helpers,partials,data) {
+    var stack1, helper;
+
+  return ":"
+    + ((stack1 = ((helper = (helper = helpers.classifier || (depth0 != null ? depth0.classifier : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"classifier","hash":{},"data":data}) : helper))) != null ? stack1 : "");
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=container.lambda, alias2=depth0 != null ? depth0 : (container.nullContext || {});
+
+  return "{\n  \"name\": \""
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.name : stack1), depth0)) != null ? stack1 : "")
+    + "\",\n  \"version\": \""
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.version : stack1), depth0)) != null ? stack1 : "")
+    + "\",\n  \"description\": \""
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.description : stack1), depth0)) != null ? stack1 : "")
+    + "\",\n  \"private\": true,\n\n  \"main\": \""
+    + ((stack1 = helpers["if"].call(alias2,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.typescript : stack1),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "index.js\",\n\n  \"scripts\": {\n"
+    + ((stack1 = helpers["if"].call(alias2,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.typescript : stack1),{"name":"if","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "    \"start\": \""
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.name : stack1), depth0)) != null ? stack1 : "")
+    + "\",\n"
+    + ((stack1 = helpers["if"].call(alias2,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.typescript : stack1),{"name":"if","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "    \"test\": \""
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.name : stack1), depth0)) != null ? stack1 : "")
+    + " test "
+    + ((stack1 = helpers["if"].call(alias2,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.typescript : stack1),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "index.test.js\",\n    \"postinstall\": \"es4x install\",\n    \"dockerfile\": \"es4x dockerfile\"\n  },\n\n  \"keywords\": [],\n  \"author\": \"\",\n  \"license\": \"ISC\",\n\n  \"devDependencies\": {\n"
+    + ((stack1 = helpers["if"].call(alias2,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.typescript : stack1),{"name":"if","hash":{},"fn":container.program(7, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers.each.call(alias2,(depth0 != null ? depth0.npmDevDependencies : depth0),{"name":"each","hash":{},"fn":container.program(9, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "    \"es4x-pm\": \"^"
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.es4x : stack1), depth0)) != null ? stack1 : "")
+    + "\"\n  },\n\n  \"dependencies\": {\n"
+    + ((stack1 = helpers.each.call(alias2,(depth0 != null ? depth0.npmProdDependencies : depth0),{"name":"each","hash":{},"fn":container.program(11, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "  },\n\n  \"mvnDependencies\": {\n"
+    + ((stack1 = helpers.each.call(alias2,(depth0 != null ? depth0.npmMavenDependencies : depth0),{"name":"each","hash":{},"fn":container.program(14, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "  }\n}\n";
+},"useData":true})
+exports['npm/tsconfig.json'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "{\n  \"compilerOptions\": {\n    \"outDir\": \"dist\",\n    \"sourceMap\": true,\n    \"noImplicitAny\": true,\n    \"module\": \"commonjs\",\n    \"target\": \"es5\",\n    \"allowJs\": true\n  }\n}\n";
+},"useData":true})
 exports['openapi-client/Operations.md'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing;
 
@@ -349,112 +455,6 @@ exports['openapi-client/README.md'] = Handlebars.template({"compiler":[7,">= 4.0
     + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
     + ".ApiClient`. For more informations give a look at [operations documentation](./Operations.md).\n\nDepending on request body declarations, you can have multiple functions for every operation:\n\n* `[operationId]WithEmptyBody`: Function that sends an empty body\n* `[operationId]WithJson`: Function that sends a Json body. You can pass to it a [`JsonObject`](http://vertx.io/docs/apidocs/io/vertx/core/json/JsonObject.html) or a POJO. Give a look to [WebClient documentation](http://vertx.io/docs/vertx-web-client/java/#_json_bodies) for more informations\n* `[operationId]WithForm`: Function that sends a form body encoded as `application/x-www-form-urlencoded`\n* `[operationId]WithMultipartForm`: Function that sends a form body encoded as `multipart/form-data`\n* `[operationId]WithContentTypeBuffer`: Function that sends a buffer with the defined content type\n* `[operationId]WithContentTypeStream`: Function that sends a stream with the defined content type\n\nIn every case, the `Content-Type` header is automatically configured\n\nEvery operation function also attach automatically the required headers/query/cookie parameters for the required security schemes through the `attach[SecurityScheme]Security` functions.\n\nFor handling the responses, give a look at [WebClient documentation](http://vertx.io/docs/vertx-web-client/java/#_handling_http_responses).\n\n## Info\nThis project was generated by [vertx-starter](https://vertx-starter.jetdrone.xyz/) generator";
 },"useData":true})
-exports['npm/README.md'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return "# "
-    + ((stack1 = container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.name : stack1), depth0)) != null ? stack1 : "")
-    + "\n\nThis is your SPA blueprint project. Ensure you have [node](https://www.nodejs.org) installed\non your path. And optionally [GraalVM](https://www.graalvm.org).\n\n## Build\n\nRun your package manager tool to install the required dependencies:\n\n```sh\nnpm install\n```\n\nor\n\n```sh\nyarn install\n```\n\nFrom now on will assume you're using `NPM`.\n\n### Run\n\n```sh\nnpm start\n```\n\nIn case you need to use `>ES5.1` features you **MUST** run on GraalVM.\n\n### Packaging\n\nThe project can be packaged into a container. For this run:\n\n```sh\nnpm run dockerfile\n```\n\nThis step will create the basic `Dockerfile` required to run your application. By default it will use the GraalVM image\nbut you're not required to. The best options are either `GraalVM` or `JDK >=11`.\n\n\n```sh\ndocker build -t yourtag:your-version .\n```\n\nAnd run the container as:\n\n```sh\ndocker run --rm --net=host yourtag:your-version\n```\n\nAny arguments after the image name will be passed to the application, this allows the customization of the start command, for example `--cluster` will start the application in a `vert.x` cluster.\n";
-},"useData":true})
-exports['npm/index.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "/// <reference types=\"@vertx/core/runtime\" />\n// @ts-check\n\n// your code goes here...\n\nvertx\n  .createHttpServer()\n  .requestHandler(function (req) {\n    req.response()\n      .putHeader(\"content-type\", \"text/plain\")\n      .end(\"Hello!\");\n  })\n  .listen(8080);\n\nconsole.log('Server listening at: http://localhost:8080/');\n";
-},"useData":true})
-exports['npm/index.test.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "import { TestSuite } from '@vertx/unit';\n\nconst suite = TestSuite.create(\"the_test_suite\");\n\nsuite.test(\"my_test_case\", function (should) {\n  var s = \"value\";\n  should.assertEquals(\"value\", s);\n});\n\nsuite.run();\n";
-},"useData":true})
-exports['npm/index.test.ts'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "import { TestSuite, TestContext } from '@vertx/unit';\n\nconst suite = TestSuite.create(\"the_test_suite\");\n\nsuite.test(\"my_test_case\", (should: TestContext) => {\n  let s : string = \"value\";\n  should.assertEquals(\"value\", s);\n});\n\nsuite.run();\n";
-},"useData":true})
-exports['npm/index.ts'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "/// <reference types=\"@vertx/core/runtime\" />\n// @ts-check\n\n// your code goes here...\n\nvertx\n  .createHttpServer()\n  .requestHandler(function (req: any) {\n    req.response()\n      .putHeader(\"content-type\", \"text/plain\")\n      .end(\"Hello!\");\n  }).listen(8080);\n\nconsole.log('Listening at http://127.0.0.1:8080');\n";
-},"useData":true})
-exports['npm/package.json'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
-    return "dist/";
-},"3":function(container,depth0,helpers,partials,data) {
-    return "    \"prestart\": \"tsc\",\n";
-},"5":function(container,depth0,helpers,partials,data) {
-    return "    \"pretest\": \"tsc\",\n";
-},"7":function(container,depth0,helpers,partials,data) {
-    return "    \"typescript\": \"^3.2.2\",\n";
-},"9":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function";
-
-  return "    \""
-    + ((stack1 = ((helper = (helper = helpers.npm || (depth0 != null ? depth0.npm : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"npm","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "\": \"^"
-    + ((stack1 = ((helper = (helper = helpers.version || (depth0 != null ? depth0.version : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"version","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "\",\n";
-},"11":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function";
-
-  return "    \""
-    + ((stack1 = ((helper = (helper = helpers.npm || (depth0 != null ? depth0.npm : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"npm","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "\": \"^"
-    + ((stack1 = ((helper = (helper = helpers.version || (depth0 != null ? depth0.version : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"version","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "\""
-    + ((stack1 = helpers.unless.call(alias1,(data && data.last),{"name":"unless","hash":{},"fn":container.program(12, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "\n";
-},"12":function(container,depth0,helpers,partials,data) {
-    return ",";
-},"14":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function";
-
-  return "    \""
-    + ((stack1 = ((helper = (helper = helpers.groupId || (depth0 != null ? depth0.groupId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"groupId","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + ":"
-    + ((stack1 = ((helper = (helper = helpers.artifactId || (depth0 != null ? depth0.artifactId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"artifactId","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "\": \""
-    + ((stack1 = ((helper = (helper = helpers.version || (depth0 != null ? depth0.version : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"version","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.scope : depth0),{"name":"if","hash":{},"fn":container.program(15, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.classifier : depth0),{"name":"if","hash":{},"fn":container.program(17, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "\""
-    + ((stack1 = helpers.unless.call(alias1,(data && data.last),{"name":"unless","hash":{},"fn":container.program(12, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "\n";
-},"15":function(container,depth0,helpers,partials,data) {
-    var stack1, helper;
-
-  return ":"
-    + ((stack1 = ((helper = (helper = helpers.scope || (depth0 != null ? depth0.scope : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"scope","hash":{},"data":data}) : helper))) != null ? stack1 : "");
-},"17":function(container,depth0,helpers,partials,data) {
-    var stack1, helper;
-
-  return ":"
-    + ((stack1 = ((helper = (helper = helpers.classifier || (depth0 != null ? depth0.classifier : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"classifier","hash":{},"data":data}) : helper))) != null ? stack1 : "");
-},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=container.lambda, alias2=depth0 != null ? depth0 : (container.nullContext || {});
-
-  return "{\n  \"name\": \""
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.name : stack1), depth0)) != null ? stack1 : "")
-    + "\",\n  \"version\": \""
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.version : stack1), depth0)) != null ? stack1 : "")
-    + "\",\n  \"description\": \""
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.description : stack1), depth0)) != null ? stack1 : "")
-    + "\",\n  \"private\": true,\n\n  \"main\": \""
-    + ((stack1 = helpers["if"].call(alias2,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.typescript : stack1),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "index.js\",\n\n  \"scripts\": {\n"
-    + ((stack1 = helpers["if"].call(alias2,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.typescript : stack1),{"name":"if","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "    \"start\": \""
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.name : stack1), depth0)) != null ? stack1 : "")
-    + "\",\n"
-    + ((stack1 = helpers["if"].call(alias2,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.typescript : stack1),{"name":"if","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "    \"test\": \""
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.name : stack1), depth0)) != null ? stack1 : "")
-    + " test "
-    + ((stack1 = helpers["if"].call(alias2,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.typescript : stack1),{"name":"if","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "index.test.js\",\n    \"postinstall\": \"es4x install\",\n    \"dockerfile\": \"es4x dockerfile\"\n  },\n\n  \"keywords\": [],\n  \"author\": \"\",\n  \"license\": \"ISC\",\n\n  \"devDependencies\": {\n"
-    + ((stack1 = helpers["if"].call(alias2,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.typescript : stack1),{"name":"if","hash":{},"fn":container.program(7, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ((stack1 = helpers.each.call(alias2,(depth0 != null ? depth0.npmDevDependencies : depth0),{"name":"each","hash":{},"fn":container.program(9, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "    \"es4x-pm\": \"^"
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.es4x : stack1), depth0)) != null ? stack1 : "")
-    + "\"\n  },\n\n  \"dependencies\": {\n"
-    + ((stack1 = helpers.each.call(alias2,(depth0 != null ? depth0.npmProdDependencies : depth0),{"name":"each","hash":{},"fn":container.program(11, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "  },\n\n  \"mvnDependencies\": {\n"
-    + ((stack1 = helpers.each.call(alias2,(depth0 != null ? depth0.npmMavenDependencies : depth0),{"name":"each","hash":{},"fn":container.program(14, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "  }\n}\n";
-},"useData":true})
-exports['npm/tsconfig.json'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "{\n  \"compilerOptions\": {\n    \"outDir\": \"dist\",\n    \"sourceMap\": true,\n    \"noImplicitAny\": true,\n    \"module\": \"commonjs\",\n    \"target\": \"es5\",\n    \"allowJs\": true\n  }\n}\n";
-},"useData":true})
 exports['sbt/README.md'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
@@ -591,44 +591,6 @@ exports['spa+blueprint/pom.xml'] = Handlebars.template({"1":function(container,d
     + ((stack1 = helpers["if"].call(alias2,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.resources : stack1),{"name":"if","hash":{},"fn":container.program(13, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "      <plugin>\n        <groupId>io.reactiverse</groupId>\n        <artifactId>vertx-maven-plugin</artifactId>\n        <version>1.0.18</version>\n        <executions>\n          <execution>\n            <id>vmp</id>\n            <goals>\n              <goal>initialize</goal>\n              <goal>package</goal>\n            </goals>\n          </execution>\n        </executions>\n        <configuration>\n          <redeploy>true</redeploy>\n        </configuration>\n      </plugin>\n    </plugins>\n  </build>\n</project>\n";
 },"useData":true})
-exports['stack/vertx-stack.json'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function";
-
-  return "    {\n      \"groupId\": \""
-    + ((stack1 = ((helper = (helper = helpers.groupId || (depth0 != null ? depth0.groupId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"groupId","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "\",\n      \"artifactId\": \""
-    + ((stack1 = ((helper = (helper = helpers.artifactId || (depth0 != null ? depth0.artifactId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"artifactId","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "\",\n      \"version\": \""
-    + ((stack1 = ((helper = (helper = helpers.version || (depth0 != null ? depth0.version : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"version","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "\",\n"
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.classifier : depth0),{"name":"if","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.transitive : depth0),{"name":"if","hash":{},"fn":container.program(4, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "      \"included\": "
-    + ((stack1 = ((helper = (helper = helpers.included || (depth0 != null ? depth0.included : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"included","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "\n    }"
-    + ((stack1 = helpers.unless.call(alias1,(data && data.last),{"name":"unless","hash":{},"fn":container.program(6, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "\n";
-},"2":function(container,depth0,helpers,partials,data) {
-    var stack1, helper;
-
-  return "      \"classifier\": \""
-    + ((stack1 = ((helper = (helper = helpers.classifier || (depth0 != null ? depth0.classifier : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"classifier","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "\",\n";
-},"4":function(container,depth0,helpers,partials,data) {
-    var stack1, helper;
-
-  return "      \"transitive\": "
-    + ((stack1 = ((helper = (helper = helpers.transitive || (depth0 != null ? depth0.transitive : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"transitive","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + ",\n";
-},"6":function(container,depth0,helpers,partials,data) {
-    return ",";
-},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return "{\n  \"dependencies\": [\n"
-    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.bom : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "  ]\n}\n";
-},"useData":true})
 exports['wiki+blueprint/README.md'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
@@ -696,6 +658,44 @@ exports['wiki+blueprint/pom.xml'] = Handlebars.template({"1":function(container,
     + "</version>\n        <type>pom</type>\n        <scope>import</scope>\n      </dependency>\n    </dependencies>\n  </dependencyManagement>\n\n  <dependencies>\n"
     + ((stack1 = helpers.each.call(alias2,(depth0 != null ? depth0.dependencies : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "  </dependencies>\n\n  <build>\n    <pluginManagement>\n      <plugins>\n\n        <plugin>\n          <artifactId>maven-compiler-plugin</artifactId>\n          <version>3.5.1</version>\n          <configuration>\n            <source>1.8</source>\n            <target>1.8</target>\n            <useIncrementalCompilation>false</useIncrementalCompilation>\n            <!-- Codegen -->\n            <annotationProcessors>\n              <annotationProcessor>io.vertx.codegen.CodeGenProcessor</annotationProcessor>\n            </annotationProcessors>\n            <generatedSourcesDirectory>${project.basedir}/src/main/generated</generatedSourcesDirectory>\n            <compilerArgs>\n              <arg>-AoutputDirectory=${project.basedir}/src/main</arg>\n            </compilerArgs>\n          </configuration>\n        </plugin>\n\n        <plugin>\n          <artifactId>maven-clean-plugin</artifactId>\n          <version>3.0.0</version>\n          <configuration>\n            <filesets>\n              <fileset>\n                <directory>${project.basedir}/src/main/generated</directory>\n              </fileset>\n            </filesets>\n          </configuration>\n        </plugin>\n      </plugins>\n    </pluginManagement>\n\n    <plugins>\n      <plugin>\n        <groupId>io.reactiverse</groupId>\n        <artifactId>vertx-maven-plugin</artifactId>\n        <version>1.0.18</version>\n        <executions>\n          <execution>\n            <id>vmp</id>\n            <goals>\n              <goal>initialize</goal>\n              <goal>package</goal>\n            </goals>\n          </execution>\n        </executions>\n        <configuration>\n          <redeploy>true</redeploy>\n          <runArgs>-Dhsqldb.reconfig_logging=false</runArgs>\n        </configuration>\n      </plugin>\n    </plugins>\n  </build>\n\n</project>\n";
+},"useData":true})
+exports['stack/vertx-stack.json'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
+    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function";
+
+  return "    {\n      \"groupId\": \""
+    + ((stack1 = ((helper = (helper = helpers.groupId || (depth0 != null ? depth0.groupId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"groupId","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "\",\n      \"artifactId\": \""
+    + ((stack1 = ((helper = (helper = helpers.artifactId || (depth0 != null ? depth0.artifactId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"artifactId","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "\",\n      \"version\": \""
+    + ((stack1 = ((helper = (helper = helpers.version || (depth0 != null ? depth0.version : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"version","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "\",\n"
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.classifier : depth0),{"name":"if","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.transitive : depth0),{"name":"if","hash":{},"fn":container.program(4, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "      \"included\": "
+    + ((stack1 = ((helper = (helper = helpers.included || (depth0 != null ? depth0.included : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"included","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "\n    }"
+    + ((stack1 = helpers.unless.call(alias1,(data && data.last),{"name":"unless","hash":{},"fn":container.program(6, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "\n";
+},"2":function(container,depth0,helpers,partials,data) {
+    var stack1, helper;
+
+  return "      \"classifier\": \""
+    + ((stack1 = ((helper = (helper = helpers.classifier || (depth0 != null ? depth0.classifier : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"classifier","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "\",\n";
+},"4":function(container,depth0,helpers,partials,data) {
+    var stack1, helper;
+
+  return "      \"transitive\": "
+    + ((stack1 = ((helper = (helper = helpers.transitive || (depth0 != null ? depth0.transitive : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"transitive","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + ",\n";
+},"6":function(container,depth0,helpers,partials,data) {
+    return ",";
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "{\n  \"dependencies\": [\n"
+    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.bom : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "  ]\n}\n";
 },"useData":true})
 exports['sbt/project/Build.scala'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "import sbt.{Def, _}\nimport sbtassembly.AssemblyPlugin.autoImport.{MergeStrategy, assembly, assemblyMergeStrategy}\nimport sbtassembly.{AssemblyPlugin, PathList}\nimport Keys._\n\nobject Build extends AutoPlugin {\n\n  override def trigger = allRequirements\n\n  override def projectSettings =\n    Vector(\n      scalaVersion := \"2.12.7\",\n      assemblyMergeStrategy in assembly := {\n        case PathList(\"META-INF\", \"MANIFEST.MF\") => MergeStrategy.discard\n        case PathList(\"META-INF\", xs @ _*) => MergeStrategy.last\n        case PathList(\"META-INF\", \"io.netty.versions.properties\") => MergeStrategy.last\n        case PathList(\"codegen.json\") => MergeStrategy.discard\n        case x =>\n          val oldStrategy = (assemblyMergeStrategy in assembly).value\n          oldStrategy(x)\n      },\n      scalacOptions ++= Vector(\n        \"-unchecked\",\n        \"-deprecation\",\n        \"-language:_\",\n        \"-target:jvm-1.8\",\n        \"-encoding\", \"UTF-8\"\n      ),\n      mainClass := Some(\"io.vertx.core.Launcher\"),\n      unmanagedSourceDirectories in Compile := Vector(scalaSource.in(Compile).value),\n      unmanagedSourceDirectories in Test := Vector(scalaSource.in(Test).value),\n      initialCommands in console := \"\"\"|import io.vertx.lang.scala._\n                                       |import io.vertx.lang.scala.ScalaVerticle.nameForVerticle\n                                       |import io.vertx.scala.core._\n                                       |import scala.concurrent.Future\n                                       |import scala.concurrent.Promise\n                                       |import scala.util.Success\n                                       |import scala.util.Failure\n                                       |val vertx = Vertx.vertx\n                                       |implicit val executionContext = io.vertx.lang.scala.VertxExecutionContext(vertx.getOrCreateContext)\n                                       |\"\"\".stripMargin\n    )\n}\n";
@@ -822,6 +822,9 @@ exports['spa+blueprint/angular-clientapp/src/tsconfig.spec.json'] = Handlebars.t
 exports['spa+blueprint/angular-clientapp/src/tslint.json'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "{\n    \"extends\": \"../tslint.json\",\n    \"rules\": {\n        \"directive-selector\": [\n            true,\n            \"attribute\",\n            \"app\",\n            \"camelCase\"\n        ],\n        \"component-selector\": [\n            true,\n            \"element\",\n            \"app\",\n            \"kebab-case\"\n        ]\n    }\n}\n";
 },"useData":true})
+exports['spa+blueprint/react-clientapp/scss/custom.scss'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "";
+},"useData":true})
 exports['spa+blueprint/react-clientapp/public/favicon.ico'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000 \u0000\u0000\u0000 \b\u0003\u0000\u0000\u0000D���\u0000\u0000\u0000\u0004gAMA\u0000\u0000��\u000b�a\u0005\u0000\u0000\u0000\u0001sRGB\u0000��\u001c�\u0000\u0000\u0000<PLTEy%�������1�Liqy$����y%�y%�y%����@����a���ƒP�αצq�ġ�����Ӑb\u0000\u0000\u0000\ntRNS����\u0000��2��i�O�\u0000\u0000\u0000\tpHYs\u0000\u00001�\u0000\u00001�\u0001���/\u0000\u0000\u00017IDAT8˅S[\u0012� \bD��5\u001a\u001f��]�C�t:i��\u0004Y`Y\u0005\u001e\u000b<Å=ay��\n�\u0000��\u0006���K��{�FV����֓\u0003��\u0019��(>��ŁD\u001fg%�ģ���r$&��\u001b\u001a�Y\u00011׀\u0002�\u0005\u0004����l)��$FOSl��E�@�H˓\f�qbZ\fuE�\u001c�X\u0007)�'�\u001d'�y�\u0000�F\u0001oger\u001d�d�Ҙ��Ҋi5��3D\u0017!��\\�����t$���鲼іC%�#z4���L�\u001a6Q\u001c>M'm\u0011�b4\u000b�P����z�GӪ�i>�!\u0004���\u0002�C5'�:��\u0005jH��i\u0005�K\u0018����Re\u0018l�,\u001b��*R�T��\u0012+l�G�٤W�\u001aG��ϫ�Z\u001c��Ź]���[�7>�\u00193�\u0004]�\u0000\u0000\u0000WzTXtRaw profile type iptc\u0000\u0000x���\f\bqV((�O��I�R\u0000\u0003#\u000b.c\u000b\u0013#\u0013K�\u0014\u0003\u0013 D�4�d\u0003#�T �������\u001c�\u0007ˀH�J.\u0000�\u0017\u0011t�B5�\u0000\u0000\u0000\u0000IEND�B`�\u0000";
 },"useData":false}
@@ -842,9 +845,6 @@ exports['spa+blueprint/react-clientapp/public/manifest.json'] = Handlebars.templ
     + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.description : stack1), depth0)) != null ? stack1 : "")
     + "\",\n  \"icons\": [\n    {\n      \"src\": \"favicon.ico\",\n      \"sizes\": \"64x64 32x32 24x24 16x16\",\n      \"type\": \"image/x-icon\"\n    }\n  ],\n  \"start_url\": \"./index.html\",\n  \"display\": \"standalone\",\n  \"theme_color\": \"#000000\",\n  \"background_color\": \"#ffffff\"\n}\n";
 },"useData":true})
-exports['spa+blueprint/react-clientapp/scss/custom.scss'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "";
-},"useData":true})
 exports['spa+blueprint/react-clientapp/src/App.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "import React, { Component } from 'react';\nimport { Route } from 'react-router';\nimport { Layout } from './components/Layout';\nimport { Home } from './components/Home';\nimport { FetchData } from './components/FetchData';\nimport { Counter } from './components/Counter';\n\nexport default class App extends Component {\n  static displayName = App.name;\n\n  render () {\n    return (\n      <Layout>\n        <Route exact path='/' component={Home} />\n        <Route path='/counter' component={Counter} />\n        <Route path='/fetch-data' component={FetchData} />\n      </Layout>\n    );\n  }\n}\n";
 },"useData":true})
@@ -856,18 +856,6 @@ exports['spa+blueprint/react-clientapp/src/index.js'] = Handlebars.template({"co
 },"useData":true})
 exports['spa+blueprint/react-clientapp/src/registerServiceWorker.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "// In production, we register a service worker to serve assets from local cache.\n\n// This lets the app load faster on subsequent visits in production, and gives\n// it offline capabilities. However, it also means that developers (and users)\n// will only see deployed updates on the \"N+1\" visit to a page, since previously\n// cached resources are updated in the background.\n\n// To learn more about the benefits of this model, read https://goo.gl/KwvDNy.\n// This link also includes instructions on opting out of this behavior.\n\nconst isLocalhost = Boolean(\n  window.location.hostname === 'localhost' ||\n  // [::1] is the IPv6 localhost address.\n  window.location.hostname === '[::1]' ||\n  // 127.0.0.1/8 is considered localhost for IPv4.\n  window.location.hostname.match(\n    /^127(?:\\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/\n  )\n);\n\nexport default function register () {\n  if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {\n    // The URL constructor is available in all browsers that support SW.\n    const publicUrl = new URL(process.env.PUBLIC_URL, window.location);\n    if (publicUrl.origin !== window.location.origin) {\n      // Our service worker won't work if PUBLIC_URL is on a different origin\n      // from what our page is served on. This might happen if a CDN is used to\n      // serve assets; see https://github.com/facebookincubator/create-react-app/issues/2374\n      return;\n    }\n\n    window.addEventListener('load', () => {\n      const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;\n\n      if (isLocalhost) {\n        // This is running on localhost. Lets check if a service worker still exists or not.\n        checkValidServiceWorker(swUrl);\n      } else {\n        // Is not local host. Just register service worker\n        registerValidSW(swUrl);\n      }\n    });\n  }\n}\n\nfunction registerValidSW (swUrl) {\n  navigator.serviceWorker\n    .register(swUrl)\n    .then(registration => {\n      registration.onupdatefound = () => {\n        const installingWorker = registration.installing;\n        installingWorker.onstatechange = () => {\n          if (installingWorker.state === 'installed') {\n            if (navigator.serviceWorker.controller) {\n              // At this point, the old content will have been purged and\n              // the fresh content will have been added to the cache.\n              // It's the perfect time to display a \"New content is\n              // available; please refresh.\" message in your web app.\n              console.log('New content is available; please refresh.');\n            } else {\n              // At this point, everything has been precached.\n              // It's the perfect time to display a\n              // \"Content is cached for offline use.\" message.\n              console.log('Content is cached for offline use.');\n            }\n          }\n        };\n      };\n    })\n    .catch(error => {\n      console.error('Error during service worker registration:', error);\n    });\n}\n\nfunction checkValidServiceWorker (swUrl) {\n  // Check if the service worker can be found. If it can't reload the page.\n  fetch(swUrl)\n    .then(response => {\n      // Ensure service worker exists, and that we really are getting a JS file.\n      if (\n        response.status === 404 ||\n        response.headers.get('content-type').indexOf('javascript') === -1\n      ) {\n        // No service worker found. Probably a different app. Reload the page.\n        navigator.serviceWorker.ready.then(registration => {\n          registration.unregister().then(() => {\n            window.location.reload();\n          });\n        });\n      } else {\n        // Service worker found. Proceed as normal.\n        registerValidSW(swUrl);\n      }\n    })\n    .catch(() => {\n      console.log(\n        'No internet connection found. App is running in offline mode.'\n      );\n    });\n}\n\nexport function unregister () {\n  if ('serviceWorker' in navigator) {\n    navigator.serviceWorker.ready.then(registration => {\n      registration.unregister();\n    });\n  }\n}\n";
-},"useData":true})
-exports['spa+blueprint/react-redux-clientapp/src/App.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "import React from 'react';\nimport { Route } from 'react-router';\nimport Layout from './components/Layout';\nimport Home from './components/Home';\nimport Counter from './components/Counter';\nimport FetchData from './components/FetchData';\n\nexport default () => (\n  <Layout>\n    <Route exact path='/' component={Home} />\n    <Route path='/counter' component={Counter} />\n    <Route path='/fetch-data/:startDateIndex?' component={FetchData} />\n  </Layout>\n);\n";
-},"useData":true})
-exports['spa+blueprint/react-redux-clientapp/src/App.test.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "import React from 'react';\nimport ReactDOM from 'react-dom';\nimport { Provider } from 'react-redux';\nimport { MemoryRouter } from 'react-router-dom';\nimport App from './App';\n\nit('renders without crashing', () => {\n  const storeFake = (state) => ({\n    default: () => { },\n    subscribe: () => { },\n    dispatch: () => { },\n    getState: () => ({ ...state })\n  });\n  const store = storeFake({});\n\n  const div = document.createElement('div');\n  ReactDOM.render(\n    <Provider store={store}>\n      <MemoryRouter>\n        <App />\n      </MemoryRouter>\n    </Provider>, div);\n});";
-},"useData":true})
-exports['spa+blueprint/react-redux-clientapp/src/index.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "import 'bootstrap/dist/css/bootstrap.css';\nimport React from 'react';\nimport ReactDOM from 'react-dom';\nimport { Provider } from 'react-redux';\nimport { ConnectedRouter } from 'react-router-redux';\nimport { createBrowserHistory } from 'history';\nimport configureStore from './store/configureStore';\nimport App from './App';\nimport registerServiceWorker from './registerServiceWorker';\n\n// Create browser history to use in the Redux store\nconst baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');\nconst history = createBrowserHistory({ basename: baseUrl });\n\n// Get the application-wide store instance, prepopulating with state from the server where available.\nconst initialState = window.initialReduxState;\nconst store = configureStore(history, initialState);\n\nconst rootElement = document.getElementById('root');\n\nReactDOM.render(\n  <Provider store={store}>\n    <ConnectedRouter history={history}>\n      <App />\n    </ConnectedRouter>\n  </Provider>,\n  rootElement);\n\nregisterServiceWorker();\n";
-},"useData":true})
-exports['spa+blueprint/react-redux-clientapp/src/registerServiceWorker.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "// In production, we register a service worker to serve assets from local cache.\n\n// This lets the app load faster on subsequent visits in production, and gives\n// it offline capabilities. However, it also means that developers (and users)\n// will only see deployed updates on the \"N+1\" visit to a page, since previously\n// cached resources are updated in the background.\n\n// To learn more about the benefits of this model, read https://goo.gl/KwvDNy.\n// This link also includes instructions on opting out of this behavior.\n\nconst isLocalhost = Boolean(\n  window.location.hostname === 'localhost' ||\n    // [::1] is the IPv6 localhost address.\n    window.location.hostname === '[::1]' ||\n    // 127.0.0.1/8 is considered localhost for IPv4.\n    window.location.hostname.match(\n      /^127(?:\\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/\n    )\n);\n\nexport default function register() {\n  if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {\n    // The URL constructor is available in all browsers that support SW.\n    const publicUrl = new URL(process.env.PUBLIC_URL, window.location);\n    if (publicUrl.origin !== window.location.origin) {\n      // Our service worker won't work if PUBLIC_URL is on a different origin\n      // from what our page is served on. This might happen if a CDN is used to\n      // serve assets; see https://github.com/facebookincubator/create-react-app/issues/2374\n      return;\n    }\n\n    window.addEventListener('load', () => {\n      const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;\n\n      if (isLocalhost) {\n        // This is running on localhost. Lets check if a service worker still exists or not.\n        checkValidServiceWorker(swUrl);\n      } else {\n        // Is not local host. Just register service worker\n        registerValidSW(swUrl);\n      }\n    });\n  }\n}\n\nfunction registerValidSW(swUrl) {\n  navigator.serviceWorker\n    .register(swUrl)\n    .then(registration => {\n      registration.onupdatefound = () => {\n        const installingWorker = registration.installing;\n        installingWorker.onstatechange = () => {\n          if (installingWorker.state === 'installed') {\n            if (navigator.serviceWorker.controller) {\n              // At this point, the old content will have been purged and\n              // the fresh content will have been added to the cache.\n              // It's the perfect time to display a \"New content is\n              // available; please refresh.\" message in your web app.\n              console.log('New content is available; please refresh.');\n            } else {\n              // At this point, everything has been precached.\n              // It's the perfect time to display a\n              // \"Content is cached for offline use.\" message.\n              console.log('Content is cached for offline use.');\n            }\n          }\n        };\n      };\n    })\n    .catch(error => {\n      console.error('Error during service worker registration:', error);\n    });\n}\n\nfunction checkValidServiceWorker(swUrl) {\n  // Check if the service worker can be found. If it can't reload the page.\n  fetch(swUrl)\n    .then(response => {\n      // Ensure service worker exists, and that we really are getting a JS file.\n      if (\n        response.status === 404 ||\n        response.headers.get('content-type').indexOf('javascript') === -1\n      ) {\n        // No service worker found. Probably a different app. Reload the page.\n        navigator.serviceWorker.ready.then(registration => {\n          registration.unregister().then(() => {\n            window.location.reload();\n          });\n        });\n      } else {\n        // Service worker found. Proceed as normal.\n        registerValidSW(swUrl);\n      }\n    })\n    .catch(() => {\n      console.log(\n        'No internet connection found. App is running in offline mode.'\n      );\n    });\n}\n\nexport function unregister() {\n  if ('serviceWorker' in navigator) {\n    navigator.serviceWorker.ready.then(registration => {\n      registration.unregister();\n    });\n  }\n}\n";
 },"useData":true})
 exports['spa+blueprint/react-redux-clientapp/public/favicon.ico'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000 \u0000\u0000\u0000 \b\u0003\u0000\u0000\u0000D���\u0000\u0000\u0000\u0004gAMA\u0000\u0000��\u000b�a\u0005\u0000\u0000\u0000\u0001sRGB\u0000��\u001c�\u0000\u0000\u0000<PLTEy%�������1�Liqy$����y%�y%�y%����@����a���ƒP�αצq�ġ�����Ӑb\u0000\u0000\u0000\ntRNS����\u0000��2��i�O�\u0000\u0000\u0000\tpHYs\u0000\u00001�\u0000\u00001�\u0001���/\u0000\u0000\u00017IDAT8˅S[\u0012� \bD��5\u001a\u001f��]�C�t:i��\u0004Y`Y\u0005\u001e\u000b<Å=ay��\n�\u0000��\u0006���K��{�FV����֓\u0003��\u0019��(>��ŁD\u001fg%�ģ���r$&��\u001b\u001a�Y\u00011׀\u0002�\u0005\u0004����l)��$FOSl��E�@�H˓\f�qbZ\fuE�\u001c�X\u0007)�'�\u001d'�y�\u0000�F\u0001oger\u001d�d�Ҙ��Ҋi5��3D\u0017!��\\�����t$���鲼іC%�#z4���L�\u001a6Q\u001c>M'm\u0011�b4\u000b�P����z�GӪ�i>�!\u0004���\u0002�C5'�:��\u0005jH��i\u0005�K\u0018����Re\u0018l�,\u001b��*R�T��\u0012+l�G�٤W�\u001aG��ϫ�Z\u001c��Ź]���[�7>�\u00193�\u0004]�\u0000\u0000\u0000WzTXtRaw profile type iptc\u0000\u0000x���\f\bqV((�O��I�R\u0000\u0003#\u000b.c\u000b\u0013#\u0013K�\u0014\u0003\u0013 D�4�d\u0003#�T �������\u001c�\u0007ˀH�J.\u0000�\u0017\u0011t�B5�\u0000\u0000\u0000\u0000IEND�B`�\u0000";
@@ -888,6 +876,18 @@ exports['spa+blueprint/react-redux-clientapp/public/manifest.json'] = Handlebars
     + "\",\n  \"name\": \""
     + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.description : stack1), depth0)) != null ? stack1 : "")
     + "\",\n  \"icons\": [\n    {\n      \"src\": \"favicon.ico\",\n      \"sizes\": \"64x64 32x32 24x24 16x16\",\n      \"type\": \"image/x-icon\"\n    }\n  ],\n  \"start_url\": \"./index.html\",\n  \"display\": \"standalone\",\n  \"theme_color\": \"#000000\",\n  \"background_color\": \"#ffffff\"\n}\n";
+},"useData":true})
+exports['spa+blueprint/react-redux-clientapp/src/App.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "import React from 'react';\nimport { Route } from 'react-router';\nimport Layout from './components/Layout';\nimport Home from './components/Home';\nimport Counter from './components/Counter';\nimport FetchData from './components/FetchData';\n\nexport default () => (\n  <Layout>\n    <Route exact path='/' component={Home} />\n    <Route path='/counter' component={Counter} />\n    <Route path='/fetch-data/:startDateIndex?' component={FetchData} />\n  </Layout>\n);\n";
+},"useData":true})
+exports['spa+blueprint/react-redux-clientapp/src/App.test.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "import React from 'react';\nimport ReactDOM from 'react-dom';\nimport { Provider } from 'react-redux';\nimport { MemoryRouter } from 'react-router-dom';\nimport App from './App';\n\nit('renders without crashing', () => {\n  const storeFake = (state) => ({\n    default: () => { },\n    subscribe: () => { },\n    dispatch: () => { },\n    getState: () => ({ ...state })\n  });\n  const store = storeFake({});\n\n  const div = document.createElement('div');\n  ReactDOM.render(\n    <Provider store={store}>\n      <MemoryRouter>\n        <App />\n      </MemoryRouter>\n    </Provider>, div);\n});";
+},"useData":true})
+exports['spa+blueprint/react-redux-clientapp/src/index.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "import 'bootstrap/dist/css/bootstrap.css';\nimport React from 'react';\nimport ReactDOM from 'react-dom';\nimport { Provider } from 'react-redux';\nimport { ConnectedRouter } from 'react-router-redux';\nimport { createBrowserHistory } from 'history';\nimport configureStore from './store/configureStore';\nimport App from './App';\nimport registerServiceWorker from './registerServiceWorker';\n\n// Create browser history to use in the Redux store\nconst baseUrl = document.getElementsByTagName('base')[0].getAttribute('href');\nconst history = createBrowserHistory({ basename: baseUrl });\n\n// Get the application-wide store instance, prepopulating with state from the server where available.\nconst initialState = window.initialReduxState;\nconst store = configureStore(history, initialState);\n\nconst rootElement = document.getElementById('root');\n\nReactDOM.render(\n  <Provider store={store}>\n    <ConnectedRouter history={history}>\n      <App />\n    </ConnectedRouter>\n  </Provider>,\n  rootElement);\n\nregisterServiceWorker();\n";
+},"useData":true})
+exports['spa+blueprint/react-redux-clientapp/src/registerServiceWorker.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "// In production, we register a service worker to serve assets from local cache.\n\n// This lets the app load faster on subsequent visits in production, and gives\n// it offline capabilities. However, it also means that developers (and users)\n// will only see deployed updates on the \"N+1\" visit to a page, since previously\n// cached resources are updated in the background.\n\n// To learn more about the benefits of this model, read https://goo.gl/KwvDNy.\n// This link also includes instructions on opting out of this behavior.\n\nconst isLocalhost = Boolean(\n  window.location.hostname === 'localhost' ||\n    // [::1] is the IPv6 localhost address.\n    window.location.hostname === '[::1]' ||\n    // 127.0.0.1/8 is considered localhost for IPv4.\n    window.location.hostname.match(\n      /^127(?:\\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/\n    )\n);\n\nexport default function register() {\n  if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {\n    // The URL constructor is available in all browsers that support SW.\n    const publicUrl = new URL(process.env.PUBLIC_URL, window.location);\n    if (publicUrl.origin !== window.location.origin) {\n      // Our service worker won't work if PUBLIC_URL is on a different origin\n      // from what our page is served on. This might happen if a CDN is used to\n      // serve assets; see https://github.com/facebookincubator/create-react-app/issues/2374\n      return;\n    }\n\n    window.addEventListener('load', () => {\n      const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;\n\n      if (isLocalhost) {\n        // This is running on localhost. Lets check if a service worker still exists or not.\n        checkValidServiceWorker(swUrl);\n      } else {\n        // Is not local host. Just register service worker\n        registerValidSW(swUrl);\n      }\n    });\n  }\n}\n\nfunction registerValidSW(swUrl) {\n  navigator.serviceWorker\n    .register(swUrl)\n    .then(registration => {\n      registration.onupdatefound = () => {\n        const installingWorker = registration.installing;\n        installingWorker.onstatechange = () => {\n          if (installingWorker.state === 'installed') {\n            if (navigator.serviceWorker.controller) {\n              // At this point, the old content will have been purged and\n              // the fresh content will have been added to the cache.\n              // It's the perfect time to display a \"New content is\n              // available; please refresh.\" message in your web app.\n              console.log('New content is available; please refresh.');\n            } else {\n              // At this point, everything has been precached.\n              // It's the perfect time to display a\n              // \"Content is cached for offline use.\" message.\n              console.log('Content is cached for offline use.');\n            }\n          }\n        };\n      };\n    })\n    .catch(error => {\n      console.error('Error during service worker registration:', error);\n    });\n}\n\nfunction checkValidServiceWorker(swUrl) {\n  // Check if the service worker can be found. If it can't reload the page.\n  fetch(swUrl)\n    .then(response => {\n      // Ensure service worker exists, and that we really are getting a JS file.\n      if (\n        response.status === 404 ||\n        response.headers.get('content-type').indexOf('javascript') === -1\n      ) {\n        // No service worker found. Probably a different app. Reload the page.\n        navigator.serviceWorker.ready.then(registration => {\n          registration.unregister().then(() => {\n            window.location.reload();\n          });\n        });\n      } else {\n        // Service worker found. Proceed as normal.\n        registerValidSW(swUrl);\n      }\n    })\n    .catch(() => {\n      console.log(\n        'No internet connection found. App is running in offline mode.'\n      );\n    });\n}\n\nexport function unregister() {\n  if ('serviceWorker' in navigator) {\n    navigator.serviceWorker.ready.then(registration => {\n      registration.unregister();\n    });\n  }\n}\n";
 },"useData":true})
 exports['graal-nativeimage/src/main/java/SVMSubstitutions.java'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     return "      RuntimeReflection.register(io.netty.channel.socket.nio.NioServerSocketChannel.class.getDeclaredConstructor());\n";
@@ -1008,24 +1008,6 @@ exports['verticle/src/main/resources/main_verticle.groovy'] = Handlebars.templat
     + "\nvertx.createHttpServer().requestHandler("
     + ((stack1 = (helpers.containsDep || (depth0 && depth0.containsDep) || alias2).call(alias1,(depth0 != null ? depth0.dependencies : depth0),"io.vertx","vertx-web",{"name":"containsDep","hash":{},"fn":container.program(5, data, 0),"inverse":container.program(7, data, 0),"data":data})) != null ? stack1 : "")
     + ").listen(8080, { res ->\n  if (res.failed()) {\n    res.cause().printStackTrace()\n  } else {\n    println(\"Server listening at: http://localhost:8080/\")\n  }\n})\n";
-},"useData":true})
-exports['verticle/src/main/resources/main_verticle.js'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
-    return "var Router = require(\"vertx-web-js/router\");\n";
-},"3":function(container,depth0,helpers,partials,data) {
-    return "var router = Router.router(vertx);\n\nrouter.get(\"/\").handler(function (ctx) {\n  ctx.response()\n    .putHeader(\"content-type\", \"text/plain\")\n    .end(\"Hello from Vert.x!\");\n});\n";
-},"5":function(container,depth0,helpers,partials,data) {
-    return "router";
-},"7":function(container,depth0,helpers,partials,data) {
-    return "function (req) {\n  req.response()\n    .putHeader(\"content-type\", \"text/plain\")\n    .end(\"Hello from Vert.x!\")\n}";
-},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing;
-
-  return ((stack1 = (helpers.containsDep || (depth0 && depth0.containsDep) || alias2).call(alias1,(depth0 != null ? depth0.dependencies : depth0),"io.vertx","vertx-web",{"name":"containsDep","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "\n// your code goes here...\n\n"
-    + ((stack1 = (helpers.containsDep || (depth0 && depth0.containsDep) || alias2).call(alias1,(depth0 != null ? depth0.dependencies : depth0),"io.vertx","vertx-web",{"name":"containsDep","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "\nvertx.createHttpServer().requestHandler("
-    + ((stack1 = (helpers.containsDep || (depth0 && depth0.containsDep) || alias2).call(alias1,(depth0 != null ? depth0.dependencies : depth0),"io.vertx","vertx-web",{"name":"containsDep","hash":{},"fn":container.program(5, data, 0),"inverse":container.program(7, data, 0),"data":data})) != null ? stack1 : "")
-    + ").listen(8080, function (res, res_err) {\n  if (res_err != null) {\n    res_err.printStackTrace();\n  } else {\n    console.log(\"Server listening at: http://localhost:8080/\");\n  }\n});\n";
 },"useData":true})
 exports['verticle/src/main/resources/main_verticle.rb'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     return "require 'vertx-web/router'\n";
@@ -1483,114 +1465,6 @@ exports['openapi/src/main/java/{packageDir}/ApiClient.java'] = Handlebars.templa
     + ((stack1 = helpers["if"].call(alias1,((stack1 = ((stack1 = (depth0 != null ? depth0.openapiSpec : depth0)) != null ? stack1.components : stack1)) != null ? stack1.securitySchemes : stack1),{"name":"if","hash":{},"fn":container.program(106, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "\n\n    // Parameters functions\n\n    /**\n     * Remove a cookie parameter from the cookie cache\n     *\n     * @param paramName name of cookie parameter\n     */\n    public void removeCookie(String paramName) {\n        cookieParams.remove(paramName);\n    }\n\n    private void addQueryParam(String paramName, Object value, HttpRequest request) {\n        request.addQueryParam(paramName, String.valueOf(value));\n    }\n\n    /**\n     * Add a cookie param in cookie cache\n     *\n     * @param paramName name of cookie parameter\n     * @param value value of cookie parameter\n     */\n    public void addCookieParam(String paramName, Object value) {\n        renderCookieParam(paramName, value, cookieParams);\n    }\n\n    private void addHeaderParam(String headerName, Object value, HttpRequest request) {\n        request.putHeader(headerName, String.valueOf(value));\n    }\n\n    private String renderPathParam(String paramName, Object value) {\n        return String.valueOf(value);\n    }\n\n    private void renderCookieParam(String paramName, Object value, MultiMap map) {\n        map.remove(paramName);\n        map.add(paramName, String.valueOf(value));\n    }\n\n    /**\n     * Following this table to implement parsedParameters serialization\n     *\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     | style          | explode | in            | array                               | object                                 |\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     | matrix         | false   | path          | ;color=blue,black,brown             | ;color=R,100,G,200,B,150               |\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     | matrix         | true    | path          | ;color=blue;color=black;color=brown | ;R=100;G=200;B=150                     |\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     | label          | false   | path          | .blue.black.brown                   | .R.100.G.200.B.150                     |\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     | label          | true    | path          | .blue.black.brown                   | .R=100.G=200.B=150                     |\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     | form           | false   | query, cookie | color=blue,black,brown              | color=R,100,G,200,B,150                |\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     | form           | true    | query, cookie | color=blue&color=black&color=brown  | R=100&G=200&B=150                      |\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     | simple         | false   | path, header  | blue,black,brown                    | R,100,G,200,B,150                      |\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     | simple         | true    | path, header  | blue,black,brown                    | R=100,G=200,B=150                      |\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     | spaceDelimited | false   | query         | blue%20black%20brown                | R%20100%20G%20200%20B%20150            |\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     | pipeDelimited  | false   | query         | blue|black|brown                    | R|100|G|200                            |\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     | deepObject     | true    | query         | n/a                                 | color[R]=100&color[G]=200&color[B]=150 |\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     */\n\n    /**\n     * Render path value with matrix style exploded/not exploded\n     *\n     * @param paramName\n     * @param value\n     * @return\n     */\n    private String renderPathMatrix(String paramName, Object value) {\n        return \";\" + paramName + \"=\" + String.valueOf(value);\n    }\n\n    /**\n     * Render path array with matrix style and not exploded\n     *\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     | matrix         | false   | path          | ;color=blue,black,brown             | ;color=R,100,G,200,B,150               |\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     *\n     * @param paramName\n     * @param values\n     * @return\n     */\n    private String renderPathArrayMatrix(String paramName, List<Object> values) {\n        String serialized = String.join(\",\", values.stream().map(object -> encode(String.valueOf(object))).collect(Collectors.toList()));\n        return \";\" + paramName + \"=\" + serialized;\n    }\n\n    /**\n     * Render path object with matrix style and not exploded\n     *\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     | matrix         | false   | path          | ;color=blue,black,brown             | ;color=R,100,G,200,B,150               |\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     *\n     * @param paramName\n     * @param values\n     * @return\n     */\n    private String renderPathObjectMatrix(String paramName, Map<String, Object> values) {\n        List<String> listToSerialize = new ArrayList<>();\n        for (Map.Entry<String, Object> entry : values.entrySet()) {\n            listToSerialize.add(entry.getKey());\n            listToSerialize.add(encode(String.valueOf(entry.getValue())));\n        }\n        String serialized = String.join(\",\", listToSerialize);\n        return \";\" + paramName + \"=\" + serialized;\n    }\n\n    /**\n     * Render path array with matrix style and exploded\n     *\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     | matrix         | true    | path          | ;color=blue;color=black;color=brown | ;R=100;G=200;B=150                     |\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     *\n     * @param paramName\n     * @param values\n     * @return\n     */\n    private String renderPathArrayMatrixExplode(String paramName, List<Object> values) {\n        return String.join(\"\", values.stream().map(object -> \";\" + paramName + \"=\" + encode(String.valueOf(object))).collect(Collectors.toList()));\n    }\n\n    /**\n     * Render path object with matrix style and exploded\n     *\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     | matrix         | true    | path          | ;color=blue;color=black;color=brown | ;R=100;G=200;B=150                     |\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     *\n     * @param paramName\n     * @param values\n     * @return\n     */\n    private String renderPathObjectMatrixExplode(String paramName, Map<String, Object> values) {\n      return String.join(\"\", values.entrySet().stream().map(\n        entry -> \";\" + entry.getKey() + \"=\" + encode(String.valueOf(entry.getValue()))\n      ).collect(Collectors.toList()));\n    }\n\n    /**\n     * Render path value with label style exploded/not exploded\n     *\n     * @param paramName\n     * @param value\n     * @return\n     */\n    private String renderPathLabel(String paramName, Object value) {\n        return \".\" + String.valueOf(value);\n    }\n\n    /**\n     * Render path array with label style and not exploded\n     *\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     | label          | false   | path          | .blue.black.brown                   | .R.100.G.200.B.150                     |\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     *\n     * @param paramName\n     * @param values\n     * @return\n     */\n    private String renderPathArrayLabel(String paramName, List<Object> values) {\n        return \".\" + String.join(\".\", values.stream().map(object -> encode(String.valueOf(object))).collect(Collectors.toList()));\n    }\n\n    /**\n     * Render path object with label style and not exploded\n     *\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     | label          | false   | path          | .blue.black.brown                   | .R.100.G.200.B.150                     |\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     *\n     * @param paramName\n     * @param values\n     * @return\n     */\n    private String renderPathObjectLabel(String paramName, Map<String, Object> values) {\n        List<String> listToSerialize = new ArrayList<>();\n        for (Map.Entry<String, Object> entry : values.entrySet()) {\n            listToSerialize.add(entry.getKey());\n            listToSerialize.add(encode(String.valueOf(entry.getValue())));\n        }\n        return \".\" + String.join(\".\", listToSerialize);\n    }\n\n    /**\n     * Render path array with label style and exploded\n     *\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     | label          | true    | path          | .blue.black.brown                   | .R=100.G=200.B=150                     |\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     *\n     * @param paramName\n     * @param values\n     * @return\n     */\n    private String renderPathArrayLabelExplode(String paramName, List<Object> values) {\n        return renderPathArrayLabel(paramName, values);\n    }\n\n    /**\n     * Render path object with label style and exploded\n     *\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     | label          | true    | path          | .blue.black.brown                   | .R=100.G=200.B=150                     |\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     *\n     * @param paramName\n     * @param values\n     * @return\n     */\n    private String renderPathObjectLabelExplode(String paramName, Map<String, Object> values) {\n        String result = \"\";\n        for (Map.Entry<String, Object> value : values.entrySet())\n            result = result.concat(\".\" + value.getKey() + \"=\" + encode(String.valueOf(value.getValue())));\n        return result;\n    }\n\n    /**\n     * Render path array with simple style and not exploded\n     *\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     | simple         | false   | path, header  | blue,black,brown                    | R,100,G,200,B,150                      |\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     *\n     * @param paramName\n     * @param values\n     * @return\n     */\n    private String renderPathArraySimple(String paramName, List<Object> values) {\n        return String.join(\",\", values.stream().map(object -> encode(String.valueOf(object))).collect(Collectors.toList()));\n    }\n\n    /**\n     * Render path object with simple style and not exploded\n     *\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     | simple         | false   | path, header  | blue,black,brown                    | R,100,G,200,B,150                      |\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     *\n     * @param paramName\n     * @param values\n     * @return\n     */\n    private String renderPathObjectSimple(String paramName, Map<String, Object> values) {\n        List<String> listToSerialize = new ArrayList<>();\n        for (Map.Entry<String, Object> entry : values.entrySet()) {\n            listToSerialize.add(entry.getKey());\n            listToSerialize.add(encode(String.valueOf(entry.getValue())));\n        }\n        return String.join(\",\", listToSerialize);\n    }\n\n    /**\n     * Render path array with simple style and exploded\n     *\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     | simple         | true    | path, header  | blue,black,brown                    | R=100,G=200,B=150                      |\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     *\n     * @param paramName\n     * @param values\n     * @return\n     */\n    private String renderPathArraySimpleExplode(String paramName, List<Object> values) {\n        return renderPathArraySimple(paramName, values);\n    }\n\n    /**\n     * Render path object with simple style and exploded\n     *\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     | simple         | true    | path, header  | blue,black,brown                    | R=100,G=200,B=150                      |\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     *\n     * @param paramName\n     * @param values\n     * @return\n     */\n    private String renderPathObjectSimpleExplode(String paramName, Map<String, Object> values) {\n        return String.join(\",\",\n          values.entrySet().stream().map((entry) -> entry.getKey() + \"=\" + encode(String.valueOf(entry.getValue()))).collect(Collectors.toList()));\n    }\n\n    /**\n     * Add query array with form style and not exploded\n     *\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     | form           | false   | query, cookie | color=blue,black,brown              | color=R,100,G,200,B,150                |\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     *\n     * @param paramName\n     * @param values\n     * @param request\n     */\n    private void addQueryArrayForm(String paramName, List<Object> values, HttpRequest request) {\n        String serialized = String.join(\",\", values.stream().map(object -> String.valueOf(object)).collect(Collectors.toList()));\n        this.addQueryParam(paramName, serialized, request); // Encoding is done by WebClient\n    }\n\n    /**\n     * Add query object with form style and not exploded\n     *\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     | form           | false   | query, cookie | color=blue,black,brown              | color=R,100,G,200,B,150                |\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     *\n     * @param paramName\n     * @param values\n     * @param request\n     */\n    private void addQueryObjectForm(String paramName, Map<String, Object> values, HttpRequest request) {\n        List<String> listToSerialize = new ArrayList<>();\n        for (Map.Entry<String, Object> entry : values.entrySet()) {\n            listToSerialize.add(entry.getKey());\n            listToSerialize.add(String.valueOf(entry.getValue()));\n        }\n        String serialized = String.join(\",\", listToSerialize);\n        this.addQueryParam(paramName, serialized, request); // Encoding is done by WebClient\n    }\n\n    /**\n     * Add cookie array with form style and not exploded\n     *\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     | form           | false   | query, cookie | color=blue,black,brown              | color=R,100,G,200,B,150                |\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     *\n     * @param paramName\n     * @param values\n     */\n    private void renderCookieArrayForm(String paramName, List<Object> values, MultiMap map) {\n        String value = String.join(\",\", values.stream().map(object -> String.valueOf(object)).collect(Collectors.toList()));\n        map.remove(paramName);\n        map.add(paramName, value);\n    }\n\n    /**\n     * Add a cookie array parameter in cookie cache\n     *\n     * @param paramName name of cookie parameter\n     * @param values list of values of cookie parameter\n     */\n    public void addCookieArrayForm(String paramName, List<Object> values) {\n        renderCookieArrayForm(paramName, values, cookieParams);\n    }\n\n    /**\n     * Add cookie object with form style and not exploded\n     *\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     | form           | false   | query, cookie | color=blue,black,brown              | color=R,100,G,200,B,150                |\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     *\n     * @param paramName\n     * @param values\n     */\n    private void renderCookieObjectForm(String paramName, Map<String, Object> values, MultiMap map) {\n        List<String> listToSerialize = new ArrayList<>();\n        for (Map.Entry<String, Object> entry : values.entrySet()) {\n            listToSerialize.add(entry.getKey());\n            listToSerialize.add(String.valueOf(entry.getValue()));\n        }\n        String value = String.join(\",\", listToSerialize);\n        map.remove(paramName);\n        map.add(paramName, value);\n    }\n\n    /**\n     * Add a cookie object parameter in cookie cache\n     *\n     * @param paramName name of cookie parameter\n     * @param values map of values of cookie parameter\n     */\n    public void addCookieObjectForm(String paramName, Map<String, Object> values) {\n        renderCookieObjectForm(paramName, values, cookieParams);\n    }\n\n    /**\n     * Add query array with form style and exploded\n     *\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     | form           | true    | query, cookie | color=blue&color=black&color=brown  | R=100&G=200&B=150                      |\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     *\n     * @param paramName\n     * @param values\n     * @param request\n     */\n    private void addQueryArrayFormExplode(String paramName, List<Object> values, HttpRequest request) {\n        for (Object value : values)\n            this.addQueryParam(paramName, String.valueOf(value), request);\n    }\n\n    /**\n     * Add query object with form style and exploded\n     *\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     | form           | true    | query, cookie | color=blue&color=black&color=brown  | R=100&G=200&B=150                      |\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     *\n     * @param paramName\n     * @param values\n     * @param request\n     */\n    private void addQueryObjectFormExplode(String paramName, Map<String, Object> values, HttpRequest request) {\n        for (Map.Entry<String, Object> value : values.entrySet())\n            this.addQueryParam(value.getKey(), String.valueOf(value.getValue()), request);\n    }\n\n    /**\n     * Add cookie array with form style and exploded\n     *\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     | form           | true    | query, cookie | color=blue&color=black&color=brown  | R=100&G=200&B=150                      |\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     *\n     * @param paramName\n     * @param values\n     */\n    private void renderCookieArrayFormExplode(String paramName, List<Object> values, MultiMap map) {\n        map.remove(paramName);\n        for (Object value : values)\n            map.add(paramName, String.valueOf(value));\n    }\n\n    public void addCookieArrayFormExplode(String paramName, List<Object> values) {\n        renderCookieArrayFormExplode(paramName, values, cookieParams);\n    }\n\n    /**\n     * Add cookie object with form style and exploded\n     *\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     | form           | true    | query, cookie | color=blue&color=black&color=brown  | R=100&G=200&B=150                      |\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     *\n     * @param paramName\n     * @param values\n     */\n    private void renderCookieObjectFormExplode(String paramName, Map<String, Object> values, MultiMap map) {\n        for (Map.Entry<String, Object> value : values.entrySet()) {\n            map.remove(value.getKey());\n            map.add(value.getKey(), String.valueOf(value.getValue()));\n        }\n    }\n\n    public void addCookieObjectFormExplode(String paramName, Map<String, Object> values) {\n        renderCookieObjectFormExplode(paramName, values, cookieParams);\n    }\n\n    /**\n     * Add header array with simple style and not exploded\n     *\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     | simple         | false   | path, header  | blue,black,brown                    | R,100,G,200,B,150                      |\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     *\n     * @param headerName\n     * @param values\n     * @param request\n     */\n    private void addHeaderArraySimple(String headerName, List<Object> values, HttpRequest request) {\n        String serialized = String.join(\",\", values.stream().map(object -> String.valueOf(object)).collect(Collectors.toList()));\n        this.addHeaderParam(headerName, serialized, request);\n    }\n\n    /**\n     * Add header object with simple style and not exploded\n     *\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     | simple         | false   | path, header  | blue,black,brown                    | R,100,G,200,B,150                      |\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     *\n     * @param headerName\n     * @param values\n     * @param request\n     */\n    private void addHeaderObjectSimple(String headerName, Map<String, Object> values, HttpRequest request) {\n        List<String> listToSerialize = new ArrayList<>();\n        for (Map.Entry<String, Object> entry : values.entrySet()) {\n            listToSerialize.add(entry.getKey());\n            listToSerialize.add(String.valueOf(entry.getValue()));\n        }\n        String serialized = String.join(\",\", listToSerialize);\n        this.addHeaderParam(headerName, serialized, request);\n    }\n\n    /**\n     * Add header array with simple style and exploded\n     *\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     | simple         | true    | path, header  | blue,black,brown                    | R=100,G=200,B=150                      |\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     *\n     * @param headerName\n     * @param values\n     * @param request\n     */\n    private void addHeaderArraySimpleExplode(String headerName, List<Object> values, HttpRequest request) {\n        this.addHeaderArraySimple(headerName, values, request);\n    }\n\n    /**\n     * Add header object with simple style and exploded\n     *\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     | simple         | true    | path, header  | blue,black,brown                    | R=100,G=200,B=150                      |\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     *\n     * @param headerName\n     * @param values\n     * @param request\n     */\n    private void addHeaderObjectSimpleExplode(String headerName, Map<String, Object> values, HttpRequest request) {\n        List<String> listToSerialize = new ArrayList<>();\n        for (Map.Entry<String, Object> entry : values.entrySet()) {\n            listToSerialize.add(entry.getKey() + \"=\" + String.valueOf(entry.getValue()));\n        }\n        String serialized = String.join(\",\", listToSerialize);\n        this.addHeaderParam(headerName, serialized, request);\n    }\n\n    /**\n     * Add query array with spaceDelimited style and not exploded\n     *\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     | spaceDelimited | false   | query         | blue%20black%20brown                | R%20100%20G%20200%20B%20150            |\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     *\n     * @param paramName\n     * @param values\n     * @param request\n     */\n    private void addQueryArraySpaceDelimited(String paramName, List<Object> values, HttpRequest request) {\n        String serialized = String.join(\" \", values.stream().map(object -> String.valueOf(object)).collect(Collectors.toList()));\n        this.addQueryParam(paramName, serialized, request); // Encoding is done by WebClient\n    }\n\n    /**\n     * Add query object with spaceDelimited style and not exploded\n     *\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     | spaceDelimited | false   | query         | blue%20black%20brown                | R%20100%20G%20200%20B%20150            |\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     *\n     * @param paramName\n     * @param values\n     * @param request\n     */\n    private void addQueryObjectSpaceDelimited(String paramName, Map<String, Object> values, HttpRequest request) {\n        List<String> listToSerialize = new ArrayList<>();\n        for (Map.Entry<String, Object> entry : values.entrySet()) {\n            listToSerialize.add(entry.getKey());\n            listToSerialize.add(String.valueOf(entry.getValue()));\n        }\n        String serialized = String.join(\" \", listToSerialize);\n        this.addQueryParam(paramName, serialized, request); // Encoding is done by WebClient\n    }\n\n    /**\n     * Add query array with pipeDelimited style and not exploded\n     *\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     | pipeDelimited  | false   | query         | blue|black|brown                    | R|100|G|200                            |\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     *\n     * @param paramName\n     * @param values\n     * @param request\n     */\n    private void addQueryArrayPipeDelimited(String paramName, List<Object> values, HttpRequest request) {\n        String serialized = String.join(\"|\", values.stream().map(object -> String.valueOf(object)).collect(Collectors.toList()));\n        this.addQueryParam(paramName, serialized, request); // Encoding is done by WebClient\n    }\n\n    /**\n     * Add query object with pipeDelimited style and not exploded\n     *\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     | pipeDelimited  | false   | query         | blue|black|brown                    | R|100|G|200                            |\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     *\n     * @param paramName\n     * @param values\n     * @param request\n     */\n    private void addQueryObjectPipeDelimited(String paramName, Map<String, Object> values, HttpRequest request) {\n        List<String> listToSerialize = new ArrayList<>();\n        for (Map.Entry<String, Object> entry : values.entrySet()) {\n            listToSerialize.add(entry.getKey());\n            listToSerialize.add(String.valueOf(entry.getValue()));\n        }\n        String serialized = String.join(\"|\", listToSerialize);\n        this.addQueryParam(paramName, serialized, request); // Encoding is done by WebClient\n    }\n\n    /**\n     * Add query object with deepObject style and exploded\n     *\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     | deepObject     | true    | query         | n/a                                 | color[R]=100&color[G]=200&color[B]=150 |\n     +----------------+---------+---------------+-------------------------------------+----------------------------------------+\n     *\n     * @param paramName\n     * @param values\n     * @param request\n     */\n    private void addQueryObjectDeepObjectExplode(String paramName, Map<String, Object> values, HttpRequest request) {\n        for (Map.Entry<String, Object> entry : values.entrySet()) {\n            this.addQueryParam(paramName + \"[\" + entry.getKey() + \"]\", String.valueOf(entry.getValue()), request);\n        }\n    }\n\n\n    private void renderAndAttachCookieHeader(HttpRequest request, MultiMap otherCookies) {\n        if ((otherCookies == null || otherCookies.isEmpty()) && cookieParams.isEmpty())\n            return;\n        List<String> listToSerialize = new ArrayList<>();\n        for (Map.Entry<String, String> e : cookieParams.entries()) {\n            if (otherCookies!= null && !otherCookies.contains(e.getKey())) {\n                try {\n                    listToSerialize.add(URLEncoder.encode(e.getKey(), \"UTF-8\") + \"=\" + URLEncoder.encode(e.getValue(), \"UTF-8\"));\n                } catch (UnsupportedEncodingException e1) {\n                }\n            }\n        }\n        if (otherCookies != null) {\n            for (Map.Entry<String, String> e : otherCookies.entries()) {\n                try {\n                    listToSerialize.add(URLEncoder.encode(e.getKey(), \"UTF-8\") + \"=\" + URLEncoder.encode(e.getValue(), \"UTF-8\"));\n                } catch (UnsupportedEncodingException e1) {\n                }\n            }\n        }\n        request.putHeader(\"Cookie\", String.join(\"; \", listToSerialize));\n    }\n\n    // Other functions\n\n    private String encode(String s) {\n        try {\n            return URLEncoder.encode(s, \"UTF-8\");\n        } catch (Exception e) {\n            return null;\n        }\n    }\n\n    /**\n     * Close the connection with server\n     *\n     */\n    public void close() {\n        client.close();\n    }\n\n}\n";
 },"useData":true,"useDepths":true})
-exports['openapi-server-sp/src/main/java/{packageDir}/MainVerticle.java'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return "import "
-    + ((stack1 = container.lambda(((stack1 = (data && data.root)) && stack1["package"]), depth0)) != null ? stack1 : "")
-    + ".security.*;\n";
-},"3":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function";
-
-  return "    "
-    + ((stack1 = ((helper = (helper = helpers.key || (data && data.key)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"key","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + " "
-    + ((stack1 = (helpers.toVariableName || (depth0 && depth0.toVariableName) || alias2).call(alias1,(data && data.key),{"name":"toVariableName","hash":{},"data":data})) != null ? stack1 : "")
-    + " = "
-    + ((stack1 = ((helper = (helper = helpers.key || (data && data.key)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"key","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + ".create(vertx);\n    registeredConsumers.add(\n      serviceBinder\n        .setAddress(\""
-    + ((stack1 = ((helper = (helper = helpers.address || (depth0 != null ? depth0.address : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"address","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "\")\n        .register("
-    + ((stack1 = ((helper = (helper = helpers.key || (data && data.key)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"key","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + ".class, "
-    + ((stack1 = (helpers.toVariableName || (depth0 && depth0.toVariableName) || alias2).call(alias1,(data && data.key),{"name":"toVariableName","hash":{},"data":data})) != null ? stack1 : "")
-    + ")\n    );\n";
-},"5":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing;
-
-  return "        routerFactory.addHandlerByOperationId(\""
-    + ((stack1 = ((helper = (helper = helpers.operationId || (depth0 != null ? depth0.operationId : depth0)) != null ? helper : alias2),(typeof helper === "function" ? helper.call(alias1,{"name":"operationId","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "\", new "
-    + ((stack1 = (helpers.toClassName || (depth0 && depth0.toClassName) || alias2).call(alias1,(depth0 != null ? depth0.operationId : depth0),{"name":"toClassName","hash":{},"data":data})) != null ? stack1 : "")
-    + "Handler());\n";
-},"7":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return "        // Add security handlers\n"
-    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),((stack1 = (data && data.root)) && stack1.securitySchemes),{"name":"each","hash":{},"fn":container.program(8, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
-},"8":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing;
-
-  return "        routerFactory.addSecurityHandler(\""
-    + ((stack1 = ((helper = (helper = helpers.key || (data && data.key)) != null ? helper : alias2),(typeof helper === "function" ? helper.call(alias1,{"name":"key","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "\", new "
-    + ((stack1 = (helpers.toClassName || (depth0 && depth0.toClassName) || alias2).call(alias1,(data && data.key),{"name":"toClassName","hash":{},"data":data})) != null ? stack1 : "")
-    + "Handler());\n";
-},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function";
-
-  return "package "
-    + ((stack1 = ((helper = (helper = helpers["package"] || (depth0 != null ? depth0["package"] : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"package","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + ";\n\nimport io.vertx.core.AbstractVerticle;\nimport io.vertx.core.eventbus.MessageConsumer;\nimport io.vertx.core.http.HttpServer;\nimport io.vertx.core.http.HttpServerOptions;\nimport io.vertx.core.json.JsonObject;\nimport io.vertx.ext.web.api.contract.openapi3.OpenAPI3RouterFactory;\nimport io.vertx.ext.web.Router;\nimport io.vertx.core.Future;\nimport io.vertx.serviceproxy.ServiceBinder;\n\nimport "
-    + ((stack1 = ((helper = (helper = helpers["package"] || (depth0 != null ? depth0["package"] : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"package","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + ".services.*;\nimport "
-    + ((stack1 = ((helper = (helper = helpers["package"] || (depth0 != null ? depth0["package"] : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"package","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + ".handlers.*;\nimport "
-    + ((stack1 = ((helper = (helper = helpers["package"] || (depth0 != null ? depth0["package"] : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"package","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + ".models.*;\n"
-    + ((stack1 = (helpers.nonEmpty || (depth0 && depth0.nonEmpty) || alias2).call(alias1,(depth0 != null ? depth0.securitySchemes : depth0),{"name":"nonEmpty","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "\nimport java.util.List;\n\npublic class MainVerticle extends AbstractVerticle {\n\n  HttpServer server;\n  ServiceBinder serviceBinder;\n\n  List<MessageConsumer<JsonObject>> registeredConsumers;\n\n  /**\n   * This method starts all services\n   */\n  private void startServices() {\n    this.serviceBinder = new ServiceBinder(vertx);\n    this.registeredConsumers = new ArrayList<>();\n\n"
-    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.services : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "  }\n\n  /**\n   * This method constructs the router factory, mounts services and handlers and starts the http server with built router\n   * @return\n   */\n  private Future<Void> startHttpServer() {\n    Future<Void> future = Future.future();\n    OpenAPI3RouterFactory.create(this.vertx, getClass().getResource(\"/openapi.yaml\").getFile(), openAPI3RouterFactoryAsyncResult -> {\n      if (openAPI3RouterFactoryAsyncResult.succeeded()) {\n        OpenAPI3RouterFactory routerFactory = openAPI3RouterFactoryAsyncResult.result();\n\n        // Enable automatic response when ValidationException is thrown\n        routerFactory.setOptions(new RouterFactoryOptions().setMountValidationFailureHandler(true));\n\n        // Mount services on event bus based on extensions\n        routerFactory.mountServicesFromExtensions();\n\n"
-    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.operations : depth0),{"name":"each","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "\n"
-    + ((stack1 = (helpers.nonEmpty || (depth0 && depth0.nonEmpty) || alias2).call(alias1,(depth0 != null ? depth0.securitySchemes : depth0),{"name":"nonEmpty","hash":{},"fn":container.program(7, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "\n\n\n        // Generate the router\n        Router router = routerFactory.getRouter();\n        server = vertx.createHttpServer(new HttpServerOptions().setPort(8080).setHost(\"localhost\"));\n        server.requestHandler(router).listen();\n        future.complete();\n      } else {\n        // Something went wrong during router factory initialization\n        future.fail(openAPI3RouterFactoryAsyncResult.cause());\n      }\n    });\n    return future;\n  }\n\n  @Override\n  public void start(Future<Void> future) {\n    startServices();\n    startHttpServer().setHandler(future.completer());\n  }\n\n  /**\n   * This method closes the http server and unregister all services loaded to Event Bus\n   */\n  @Override\n  public void stop(){\n    this.server.close();\n    registeredConsumers.forEach(c -> serviceBinder.unregister(c));\n  }\n\n}\n";
-},"useData":true})
-exports['openapi-server/src/main/java/{packageDir}/MainVerticle.java'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return "import "
-    + ((stack1 = container.lambda(((stack1 = ((stack1 = (data && data.root)) && stack1.metadata)) && stack1["package"]), depth0)) != null ? stack1 : "")
-    + ".security.*;\n";
-},"3":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing;
-
-  return "        routerFactory.addHandlerByOperationId(\""
-    + ((stack1 = ((helper = (helper = helpers.operationId || (depth0 != null ? depth0.operationId : depth0)) != null ? helper : alias2),(typeof helper === "function" ? helper.call(alias1,{"name":"operationId","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "\", new "
-    + ((stack1 = (helpers.toClassName || (depth0 && depth0.toClassName) || alias2).call(alias1,(depth0 != null ? depth0.operationId : depth0),{"name":"toClassName","hash":{},"data":data})) != null ? stack1 : "")
-    + "Handler());\n";
-},"5":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return "        // Add security handlers\n"
-    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),((stack1 = ((stack1 = ((stack1 = ((stack1 = ((stack1 = (data && data.root)) && stack1.metadata)) && stack1.openapi)) && stack1.original)) && stack1.components)) && stack1.securitySchemes),{"name":"each","hash":{},"fn":container.program(6, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
-},"6":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing;
-
-  return "        routerFactory.addSecurityHandler(\""
-    + ((stack1 = ((helper = (helper = helpers.key || (data && data.key)) != null ? helper : alias2),(typeof helper === "function" ? helper.call(alias1,{"name":"key","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "\", new "
-    + ((stack1 = (helpers.toClassName || (depth0 && depth0.toClassName) || alias2).call(alias1,(data && data.key),{"name":"toClassName","hash":{},"data":data})) != null ? stack1 : "")
-    + "Handler());\n";
-},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=container.lambda, alias2=depth0 != null ? depth0 : (container.nullContext || {}), alias3=helpers.helperMissing;
-
-  return "package "
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
-    + ";\n\nimport io.vertx.core.AbstractVerticle;\nimport io.vertx.core.http.HttpServer;\nimport io.vertx.core.http.HttpServerOptions;\nimport io.vertx.ext.web.api.contract.openapi3.OpenAPI3RouterFactory;\nimport io.vertx.ext.web.Router;\nimport io.vertx.core.Future;\n\nimport "
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
-    + ".handlers.*;\nimport "
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
-    + ".models.*;\n"
-    + ((stack1 = (helpers.nonEmpty || (depth0 && depth0.nonEmpty) || alias3).call(alias2,((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.openapi : stack1)) != null ? stack1.original : stack1)) != null ? stack1.components : stack1)) != null ? stack1.securitySchemes : stack1),{"name":"nonEmpty","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "\npublic class MainVerticle extends AbstractVerticle {\n\n  HttpServer server;\n\n  @Override\n  public void start(Future future) {\n    OpenAPI3RouterFactory.create(this.vertx, getClass().getResource(\"/openapi.json\").getFile(), openAPI3RouterFactoryAsyncResult -> {\n      if (openAPI3RouterFactoryAsyncResult.succeeded()) {\n        OpenAPI3RouterFactory routerFactory = openAPI3RouterFactoryAsyncResult.result();\n\n        // Enable automatic response when ValidationException is thrown\n        routerFactory.setOptions(new RouterFactoryOptions().setMountValidationFailureHandler(true));\n\n        // Add routes handlers\n"
-    + ((stack1 = helpers.each.call(alias2,((stack1 = ((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.openapi : stack1)) != null ? stack1.operations : stack1),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "\n"
-    + ((stack1 = (helpers.nonEmpty || (depth0 && depth0.nonEmpty) || alias3).call(alias2,((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.openapi : stack1)) != null ? stack1.original : stack1)) != null ? stack1.components : stack1)) != null ? stack1.securitySchemes : stack1),{"name":"nonEmpty","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "\n\n        // Generate the router\n        Router router = routerFactory.getRouter();\n        server = vertx.createHttpServer(new HttpServerOptions().setPort(8080).setHost(\"localhost\"));\n        server.requestHandler(router).listen();\n        future.complete();\n      } else {\n          // Something went wrong during router factory initialization\n          Throwable exception = openAPI3RouterFactoryAsyncResult.cause();\n      }\n    });\n  }\n\n  @Override\n  public void stop(){\n    this.server.close();\n  }\n\n}\n";
-},"useData":true})
 exports['openapi-server/src/test/java/{packageDir}/BaseTest.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
@@ -1718,6 +1592,114 @@ exports['openapi-server/src/test/java/{packageDir}/{operationId}Test.java'] = Ha
     + ((stack1 = helpers.each.call(alias1,((stack1 = (depth0 != null ? depth0.operation : depth0)) != null ? stack1.responses : stack1),{"name":"each","hash":{},"fn":container.program(1, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "\n}";
 },"useData":true,"useDepths":true})
+exports['openapi-server/src/main/java/{packageDir}/MainVerticle.java'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "import "
+    + ((stack1 = container.lambda(((stack1 = ((stack1 = (data && data.root)) && stack1.metadata)) && stack1["package"]), depth0)) != null ? stack1 : "")
+    + ".security.*;\n";
+},"3":function(container,depth0,helpers,partials,data) {
+    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing;
+
+  return "        routerFactory.addHandlerByOperationId(\""
+    + ((stack1 = ((helper = (helper = helpers.operationId || (depth0 != null ? depth0.operationId : depth0)) != null ? helper : alias2),(typeof helper === "function" ? helper.call(alias1,{"name":"operationId","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "\", new "
+    + ((stack1 = (helpers.toClassName || (depth0 && depth0.toClassName) || alias2).call(alias1,(depth0 != null ? depth0.operationId : depth0),{"name":"toClassName","hash":{},"data":data})) != null ? stack1 : "")
+    + "Handler());\n";
+},"5":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "        // Add security handlers\n"
+    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),((stack1 = ((stack1 = ((stack1 = ((stack1 = ((stack1 = (data && data.root)) && stack1.metadata)) && stack1.openapi)) && stack1.original)) && stack1.components)) && stack1.securitySchemes),{"name":"each","hash":{},"fn":container.program(6, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
+},"6":function(container,depth0,helpers,partials,data) {
+    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing;
+
+  return "        routerFactory.addSecurityHandler(\""
+    + ((stack1 = ((helper = (helper = helpers.key || (data && data.key)) != null ? helper : alias2),(typeof helper === "function" ? helper.call(alias1,{"name":"key","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "\", new "
+    + ((stack1 = (helpers.toClassName || (depth0 && depth0.toClassName) || alias2).call(alias1,(data && data.key),{"name":"toClassName","hash":{},"data":data})) != null ? stack1 : "")
+    + "Handler());\n";
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=container.lambda, alias2=depth0 != null ? depth0 : (container.nullContext || {}), alias3=helpers.helperMissing;
+
+  return "package "
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
+    + ";\n\nimport io.vertx.core.AbstractVerticle;\nimport io.vertx.core.http.HttpServer;\nimport io.vertx.core.http.HttpServerOptions;\nimport io.vertx.ext.web.api.contract.openapi3.OpenAPI3RouterFactory;\nimport io.vertx.ext.web.Router;\nimport io.vertx.core.Future;\n\nimport "
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
+    + ".handlers.*;\nimport "
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
+    + ".models.*;\n"
+    + ((stack1 = (helpers.nonEmpty || (depth0 && depth0.nonEmpty) || alias3).call(alias2,((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.openapi : stack1)) != null ? stack1.original : stack1)) != null ? stack1.components : stack1)) != null ? stack1.securitySchemes : stack1),{"name":"nonEmpty","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "\npublic class MainVerticle extends AbstractVerticle {\n\n  HttpServer server;\n\n  @Override\n  public void start(Future future) {\n    OpenAPI3RouterFactory.create(this.vertx, getClass().getResource(\"/openapi.json\").getFile(), openAPI3RouterFactoryAsyncResult -> {\n      if (openAPI3RouterFactoryAsyncResult.succeeded()) {\n        OpenAPI3RouterFactory routerFactory = openAPI3RouterFactoryAsyncResult.result();\n\n        // Enable automatic response when ValidationException is thrown\n        routerFactory.setOptions(new RouterFactoryOptions().setMountValidationFailureHandler(true));\n\n        // Add routes handlers\n"
+    + ((stack1 = helpers.each.call(alias2,((stack1 = ((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.openapi : stack1)) != null ? stack1.operations : stack1),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "\n"
+    + ((stack1 = (helpers.nonEmpty || (depth0 && depth0.nonEmpty) || alias3).call(alias2,((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.openapi : stack1)) != null ? stack1.original : stack1)) != null ? stack1.components : stack1)) != null ? stack1.securitySchemes : stack1),{"name":"nonEmpty","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "\n\n        // Generate the router\n        Router router = routerFactory.getRouter();\n        server = vertx.createHttpServer(new HttpServerOptions().setPort(8080).setHost(\"localhost\"));\n        server.requestHandler(router).listen();\n        future.complete();\n      } else {\n          // Something went wrong during router factory initialization\n          Throwable exception = openAPI3RouterFactoryAsyncResult.cause();\n      }\n    });\n  }\n\n  @Override\n  public void stop(){\n    this.server.close();\n  }\n\n}\n";
+},"useData":true})
+exports['openapi-server-sp/src/main/java/{packageDir}/MainVerticle.java'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "import "
+    + ((stack1 = container.lambda(((stack1 = (data && data.root)) && stack1["package"]), depth0)) != null ? stack1 : "")
+    + ".security.*;\n";
+},"3":function(container,depth0,helpers,partials,data) {
+    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function";
+
+  return "    "
+    + ((stack1 = ((helper = (helper = helpers.key || (data && data.key)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"key","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + " "
+    + ((stack1 = (helpers.toVariableName || (depth0 && depth0.toVariableName) || alias2).call(alias1,(data && data.key),{"name":"toVariableName","hash":{},"data":data})) != null ? stack1 : "")
+    + " = "
+    + ((stack1 = ((helper = (helper = helpers.key || (data && data.key)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"key","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + ".create(vertx);\n    registeredConsumers.add(\n      serviceBinder\n        .setAddress(\""
+    + ((stack1 = ((helper = (helper = helpers.address || (depth0 != null ? depth0.address : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"address","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "\")\n        .register("
+    + ((stack1 = ((helper = (helper = helpers.key || (data && data.key)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"key","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + ".class, "
+    + ((stack1 = (helpers.toVariableName || (depth0 && depth0.toVariableName) || alias2).call(alias1,(data && data.key),{"name":"toVariableName","hash":{},"data":data})) != null ? stack1 : "")
+    + ")\n    );\n";
+},"5":function(container,depth0,helpers,partials,data) {
+    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing;
+
+  return "        routerFactory.addHandlerByOperationId(\""
+    + ((stack1 = ((helper = (helper = helpers.operationId || (depth0 != null ? depth0.operationId : depth0)) != null ? helper : alias2),(typeof helper === "function" ? helper.call(alias1,{"name":"operationId","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "\", new "
+    + ((stack1 = (helpers.toClassName || (depth0 && depth0.toClassName) || alias2).call(alias1,(depth0 != null ? depth0.operationId : depth0),{"name":"toClassName","hash":{},"data":data})) != null ? stack1 : "")
+    + "Handler());\n";
+},"7":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "        // Add security handlers\n"
+    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),((stack1 = (data && data.root)) && stack1.securitySchemes),{"name":"each","hash":{},"fn":container.program(8, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
+},"8":function(container,depth0,helpers,partials,data) {
+    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing;
+
+  return "        routerFactory.addSecurityHandler(\""
+    + ((stack1 = ((helper = (helper = helpers.key || (data && data.key)) != null ? helper : alias2),(typeof helper === "function" ? helper.call(alias1,{"name":"key","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "\", new "
+    + ((stack1 = (helpers.toClassName || (depth0 && depth0.toClassName) || alias2).call(alias1,(data && data.key),{"name":"toClassName","hash":{},"data":data})) != null ? stack1 : "")
+    + "Handler());\n";
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function";
+
+  return "package "
+    + ((stack1 = ((helper = (helper = helpers["package"] || (depth0 != null ? depth0["package"] : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"package","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + ";\n\nimport io.vertx.core.AbstractVerticle;\nimport io.vertx.core.eventbus.MessageConsumer;\nimport io.vertx.core.http.HttpServer;\nimport io.vertx.core.http.HttpServerOptions;\nimport io.vertx.core.json.JsonObject;\nimport io.vertx.ext.web.api.contract.openapi3.OpenAPI3RouterFactory;\nimport io.vertx.ext.web.Router;\nimport io.vertx.core.Future;\nimport io.vertx.serviceproxy.ServiceBinder;\n\nimport "
+    + ((stack1 = ((helper = (helper = helpers["package"] || (depth0 != null ? depth0["package"] : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"package","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + ".services.*;\nimport "
+    + ((stack1 = ((helper = (helper = helpers["package"] || (depth0 != null ? depth0["package"] : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"package","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + ".handlers.*;\nimport "
+    + ((stack1 = ((helper = (helper = helpers["package"] || (depth0 != null ? depth0["package"] : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"package","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + ".models.*;\n"
+    + ((stack1 = (helpers.nonEmpty || (depth0 && depth0.nonEmpty) || alias2).call(alias1,(depth0 != null ? depth0.securitySchemes : depth0),{"name":"nonEmpty","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "\nimport java.util.List;\n\npublic class MainVerticle extends AbstractVerticle {\n\n  HttpServer server;\n  ServiceBinder serviceBinder;\n\n  List<MessageConsumer<JsonObject>> registeredConsumers;\n\n  /**\n   * This method starts all services\n   */\n  private void startServices() {\n    this.serviceBinder = new ServiceBinder(vertx);\n    this.registeredConsumers = new ArrayList<>();\n\n"
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.services : depth0),{"name":"each","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "  }\n\n  /**\n   * This method constructs the router factory, mounts services and handlers and starts the http server with built router\n   * @return\n   */\n  private Future<Void> startHttpServer() {\n    Future<Void> future = Future.future();\n    OpenAPI3RouterFactory.create(this.vertx, getClass().getResource(\"/openapi.yaml\").getFile(), openAPI3RouterFactoryAsyncResult -> {\n      if (openAPI3RouterFactoryAsyncResult.succeeded()) {\n        OpenAPI3RouterFactory routerFactory = openAPI3RouterFactoryAsyncResult.result();\n\n        // Enable automatic response when ValidationException is thrown\n        routerFactory.setOptions(new RouterFactoryOptions().setMountValidationFailureHandler(true));\n\n        // Mount services on event bus based on extensions\n        routerFactory.mountServicesFromExtensions();\n\n"
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.operations : depth0),{"name":"each","hash":{},"fn":container.program(5, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "\n"
+    + ((stack1 = (helpers.nonEmpty || (depth0 && depth0.nonEmpty) || alias2).call(alias1,(depth0 != null ? depth0.securitySchemes : depth0),{"name":"nonEmpty","hash":{},"fn":container.program(7, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "\n\n\n        // Generate the router\n        Router router = routerFactory.getRouter();\n        server = vertx.createHttpServer(new HttpServerOptions().setPort(8080).setHost(\"localhost\"));\n        server.requestHandler(router).listen();\n        future.complete();\n      } else {\n        // Something went wrong during router factory initialization\n        future.fail(openAPI3RouterFactoryAsyncResult.cause());\n      }\n    });\n    return future;\n  }\n\n  @Override\n  public void start(Future<Void> future) {\n    startServices();\n    startHttpServer().setHandler(future.completer());\n  }\n\n  /**\n   * This method closes the http server and unregister all services loaded to Event Bus\n   */\n  @Override\n  public void stop(){\n    this.server.close();\n    registeredConsumers.forEach(c -> serviceBinder.unregister(c));\n  }\n\n}\n";
+},"useData":true})
 exports['package-info/src/main/java/{packageDir}/package-info.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=container.lambda;
 
@@ -1728,6 +1710,27 @@ exports['package-info/src/main/java/{packageDir}/package-info.java'] = Handlebar
     + "\")\npackage "
     + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
     + ";\n\nimport io.vertx.codegen.annotations.ModuleGen;\n";
+},"useData":true})
+exports['sbt/src/test/scala/{packageDir}/MainVerticleSpec.scala'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "package "
+    + ((stack1 = container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
+    + "\n\nimport org.scalatest.Matchers\n\nimport scala.concurrent.Promise\n\nclass MainVerticleSpec extends VerticleTesting[MainVerticle] with Matchers {\n\n  \"MainVerticle\" should \"bind to 8666 and answer with 'world'\" in {\n    val promise = Promise[String]\n\n    vertx.createHttpClient()\n      .getNow(8666, \"127.0.0.1\", \"/hello\",\n        r => {\n          r.exceptionHandler(promise.failure)\n          r.bodyHandler(b => promise.success(b.toString))\n        })\n\n    promise.future.map(res => res should equal(\"world\"))\n  }\n\n}\n";
+},"useData":true})
+exports['sbt/src/test/scala/{packageDir}/VerticleTesting.scala'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "package "
+    + ((stack1 = container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
+    + "\n\nimport io.vertx.lang.scala.json.{Json, JsonObject}\nimport io.vertx.lang.scala.{ScalaVerticle, VertxExecutionContext}\nimport io.vertx.scala.core.{DeploymentOptions, Vertx}\nimport org.scalatest.{AsyncFlatSpec, BeforeAndAfter}\n\nimport scala.concurrent.Await\nimport scala.concurrent.duration._\nimport scala.reflect.runtime.universe._\nimport scala.util.{Failure, Success}\n\nabstract class VerticleTesting[A <: ScalaVerticle: TypeTag] extends AsyncFlatSpec with BeforeAndAfter{\n  val vertx = Vertx.vertx\n  implicit val vertxExecutionContext = VertxExecutionContext(\n    vertx.getOrCreateContext()\n  )\n\n  private var deploymentId = \"\"\n\n  def config(): JsonObject = Json.emptyObj()\n\n  before {\n    deploymentId = Await.result(\n      vertx\n        .deployVerticleFuture(\"scala:\" + implicitly[TypeTag[A]].tpe.typeSymbol.fullName,\n          DeploymentOptions().setConfig(config()))\n        .andThen {\n          case Success(d) => d\n          case Failure(t) => throw new RuntimeException(t)\n        },\n      10000 millis\n    )\n  }\n\n  after {\n    Await.result(\n      vertx.undeployFuture(deploymentId)\n        .andThen {\n          case Success(d) => d\n          case Failure(t) => throw new RuntimeException(t)\n        },\n      10000 millis\n    )\n  }\n\n}\n";
+},"useData":true})
+exports['sbt/src/main/scala/{packageDir}/MainVerticle.scala'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "package "
+    + ((stack1 = container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
+    + "\n\nimport io.vertx.lang.scala.ScalaVerticle\nimport io.vertx.scala.ext.web.Router\n\nimport scala.concurrent.Future\n\nclass MainVerticle extends ScalaVerticle {\n\n  override def startFuture(): Future[_] = {\n    // your code goes here...\n    val router = Router.router(vertx)\n        val route = router\n          .get(\"/hello\")\n          .handler(_.response().end(\"world\"))\n\n        vertx\n          .createHttpServer()\n          .requestHandler(router.accept _)\n          .listenFuture(8666, \"0.0.0.0\")\n  }\n}\n";
 },"useData":true})
 exports['service-proxy/src/main/java/{packageDir}/MainVerticle.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=container.lambda;
@@ -1764,27 +1767,6 @@ exports['service-proxy/src/main/java/{packageDir}/{Service}.java'] = Handlebars.
     + " createProxy(Vertx vertx, String address) {\n    return new ServiceProxyBuilder(vertx)\n      .setAddress(address)\n      .build("
     + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.Service : stack1), depth0)) != null ? stack1 : "")
     + ".class);\n  }\n}\n";
-},"useData":true})
-exports['sbt/src/main/scala/{packageDir}/MainVerticle.scala'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return "package "
-    + ((stack1 = container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
-    + "\n\nimport io.vertx.lang.scala.ScalaVerticle\nimport io.vertx.scala.ext.web.Router\n\nimport scala.concurrent.Future\n\nclass MainVerticle extends ScalaVerticle {\n\n  override def startFuture(): Future[_] = {\n    // your code goes here...\n    val router = Router.router(vertx)\n        val route = router\n          .get(\"/hello\")\n          .handler(_.response().end(\"world\"))\n\n        vertx\n          .createHttpServer()\n          .requestHandler(router.accept _)\n          .listenFuture(8666, \"0.0.0.0\")\n  }\n}\n";
-},"useData":true})
-exports['sbt/src/test/scala/{packageDir}/MainVerticleSpec.scala'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return "package "
-    + ((stack1 = container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
-    + "\n\nimport org.scalatest.Matchers\n\nimport scala.concurrent.Promise\n\nclass MainVerticleSpec extends VerticleTesting[MainVerticle] with Matchers {\n\n  \"MainVerticle\" should \"bind to 8666 and answer with 'world'\" in {\n    val promise = Promise[String]\n\n    vertx.createHttpClient()\n      .getNow(8666, \"127.0.0.1\", \"/hello\",\n        r => {\n          r.exceptionHandler(promise.failure)\n          r.bodyHandler(b => promise.success(b.toString))\n        })\n\n    promise.future.map(res => res should equal(\"world\"))\n  }\n\n}\n";
-},"useData":true})
-exports['sbt/src/test/scala/{packageDir}/VerticleTesting.scala'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return "package "
-    + ((stack1 = container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
-    + "\n\nimport io.vertx.lang.scala.json.{Json, JsonObject}\nimport io.vertx.lang.scala.{ScalaVerticle, VertxExecutionContext}\nimport io.vertx.scala.core.{DeploymentOptions, Vertx}\nimport org.scalatest.{AsyncFlatSpec, BeforeAndAfter}\n\nimport scala.concurrent.Await\nimport scala.concurrent.duration._\nimport scala.reflect.runtime.universe._\nimport scala.util.{Failure, Success}\n\nabstract class VerticleTesting[A <: ScalaVerticle: TypeTag] extends AsyncFlatSpec with BeforeAndAfter{\n  val vertx = Vertx.vertx\n  implicit val vertxExecutionContext = VertxExecutionContext(\n    vertx.getOrCreateContext()\n  )\n\n  private var deploymentId = \"\"\n\n  def config(): JsonObject = Json.emptyObj()\n\n  before {\n    deploymentId = Await.result(\n      vertx\n        .deployVerticleFuture(\"scala:\" + implicitly[TypeTag[A]].tpe.typeSymbol.fullName,\n          DeploymentOptions().setConfig(config()))\n        .andThen {\n          case Success(d) => d\n          case Failure(t) => throw new RuntimeException(t)\n        },\n      10000 millis\n    )\n  }\n\n  after {\n    Await.result(\n      vertx.undeployFuture(deploymentId)\n        .andThen {\n          case Success(d) => d\n          case Failure(t) => throw new RuntimeException(t)\n        },\n      10000 millis\n    )\n  }\n\n}\n";
 },"useData":true})
 exports['spa+blueprint/angular-clientapp/src/app/counter/counter.component.html'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "<h1>Counter</h1>\n\n<p>This is a simple example of an Angular component.</p>\n\n<p>Current count: <strong>{{ currentCount }}</strong></p>\n\n<button class=\"btn btn-primary\" (click)=\"incrementCounter()\">Increment</button>\n";
@@ -2041,63 +2023,35 @@ exports['openapi/src/main/java/{packageDir}/models/{modelName}.java'] = Handleba
   }
 
 ,"useDecorators":true,"usePartial":true,"useData":true,"useDepths":true})
-exports['openapi-server-sp/src/main/java/{packageDir}/services/package-info.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=container.lambda;
-
-  return "@ModuleGen(name = \""
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.artifactId : stack1), depth0)) != null ? stack1 : "")
-    + "\", groupPackage = \""
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.groupId : stack1), depth0)) != null ? stack1 : "")
-    + "\")\npackage "
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
-    + ".services;\n\nimport io.vertx.codegen.annotations.ModuleGen;";
-},"useData":true})
-exports['openapi-server-sp/src/main/java/{packageDir}/services/{serviceName}.java'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {});
-
-  return "  void "
-    + ((stack1 = ((helper = (helper = helpers.serviceMethodName || (depth0 != null ? depth0.serviceMethodName : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(alias1,{"name":"serviceMethodName","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "(\n"
-    + ((stack1 = helpers.each.call(alias1,((stack1 = (depth0 != null ? depth0.parsedParameters : depth0)) != null ? stack1.path : stack1),{"name":"each","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ((stack1 = helpers.each.call(alias1,((stack1 = (depth0 != null ? depth0.parsedParameters : depth0)) != null ? stack1.cookie : stack1),{"name":"each","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ((stack1 = helpers.each.call(alias1,((stack1 = (depth0 != null ? depth0.parsedParameters : depth0)) != null ? stack1.query : stack1),{"name":"each","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ((stack1 = helpers.each.call(alias1,((stack1 = (depth0 != null ? depth0.parsedParameters : depth0)) != null ? stack1.header : stack1),{"name":"each","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.bodySchema : depth0),{"name":"if","hash":{},"fn":container.program(4, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "    OperationRequest context, Handler<AsyncResult<OperationResponse>> resultHandler);\n\n";
-},"2":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing;
-
-  return "    "
-    + ((stack1 = (helpers.solveOasTypeForService || (depth0 && depth0.solveOasTypeForService) || alias2).call(alias1,"java",(depth0 != null ? depth0.schema : depth0),((stack1 = (data && data.root)) && stack1.modelsCache),{"name":"solveOasTypeForService","hash":{},"data":data})) != null ? stack1 : "")
-    + " "
-    + ((stack1 = ((helper = (helper = helpers.sanitizedName || (depth0 != null ? depth0.sanitizedName : depth0)) != null ? helper : alias2),(typeof helper === "function" ? helper.call(alias1,{"name":"sanitizedName","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + ",\n";
-},"4":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return "    "
-    + ((stack1 = (helpers.solveOasTypeForService || (depth0 && depth0.solveOasTypeForService) || helpers.helperMissing).call(depth0 != null ? depth0 : (container.nullContext || {}),"java",(depth0 != null ? depth0.bodySchema : depth0),((stack1 = (data && data.root)) && stack1.modelsCache),{"name":"solveOasTypeForService","hash":{},"data":data})) != null ? stack1 : "")
-    + " body,\n";
+exports['openapi-server/src/main/java/{packageDir}/handlers/{operationId}Handler.java'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
+    return "RequestParameters params = routingContext.get(\"parsedParameters\");\n        ";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function";
+    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3=container.lambda;
 
   return "package "
-    + ((stack1 = ((helper = (helper = helpers["package"] || (depth0 != null ? depth0["package"] : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"package","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + ".services;\n\nimport io.vertx.core.AsyncResult;\nimport io.vertx.core.Handler;\nimport io.vertx.core.Vertx;\nimport io.vertx.ext.web.api.*;\nimport io.vertx.ext.web.api.generator.WebApiServiceGen;\n\nimport java.util.List;\nimport java.util.Map;\n\nimport "
-    + ((stack1 = ((helper = (helper = helpers["package"] || (depth0 != null ? depth0["package"] : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"package","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + ".models.*;\nimport "
-    + ((stack1 = ((helper = (helper = helpers["package"] || (depth0 != null ? depth0["package"] : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"package","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + ".services.impl."
-    + ((stack1 = ((helper = (helper = helpers.serviceName || (depth0 != null ? depth0.serviceName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"serviceName","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "Impl;\n\n@WebApiServiceGen\npublic interface "
-    + ((stack1 = ((helper = (helper = helpers.serviceName || (depth0 != null ? depth0.serviceName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"serviceName","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + " {\n\n  static "
-    + ((stack1 = ((helper = (helper = helpers.serviceName || (depth0 != null ? depth0.serviceName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"serviceName","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + " create(Vertx vertx) {\n    return new "
-    + ((stack1 = ((helper = (helper = helpers.serviceName || (depth0 != null ? depth0.serviceName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"serviceName","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "Impl(vertx);\n  }\n\n"
-    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.operations : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "}\n";
+    + ((stack1 = ((helper = (helper = helpers["package"] || (depth0 != null ? depth0["package"] : depth0)) != null ? helper : alias2),(typeof helper === "function" ? helper.call(alias1,{"name":"package","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + ".handlers;\n\nimport io.vertx.core.Handler;\nimport io.vertx.ext.web.api.RequestParameters;\nimport io.vertx.ext.web.RoutingContext;\n\npublic class "
+    + ((stack1 = alias3(((stack1 = (depth0 != null ? depth0.operation : depth0)) != null ? stack1.className : stack1), depth0)) != null ? stack1 : "")
+    + "Handler implements Handler<RoutingContext> {\n\n    public "
+    + ((stack1 = alias3(((stack1 = (depth0 != null ? depth0.operation : depth0)) != null ? stack1.className : stack1), depth0)) != null ? stack1 : "")
+    + "Handler(){\n\n    }\n\n    @Override\n    public void handle(RoutingContext routingContext) {\n        "
+    + ((stack1 = (helpers.or || (depth0 && depth0.or) || alias2).call(alias1,(helpers.nonEmpty || (depth0 && depth0.nonEmpty) || alias2).call(alias1,((stack1 = ((stack1 = (depth0 != null ? depth0.operation : depth0)) != null ? stack1.parsedParameters : stack1)) != null ? stack1.path : stack1),{"name":"nonEmpty","hash":{},"data":data}),(helpers.nonEmpty || (depth0 && depth0.nonEmpty) || alias2).call(alias1,((stack1 = ((stack1 = (depth0 != null ? depth0.operation : depth0)) != null ? stack1.parsedParameters : stack1)) != null ? stack1.cookie : stack1),{"name":"nonEmpty","hash":{},"data":data}),(helpers.nonEmpty || (depth0 && depth0.nonEmpty) || alias2).call(alias1,((stack1 = ((stack1 = (depth0 != null ? depth0.operation : depth0)) != null ? stack1.parsedParameters : stack1)) != null ? stack1.query : stack1),{"name":"nonEmpty","hash":{},"data":data}),(helpers.nonEmpty || (depth0 && depth0.nonEmpty) || alias2).call(alias1,((stack1 = ((stack1 = (depth0 != null ? depth0.operation : depth0)) != null ? stack1.parsedParameters : stack1)) != null ? stack1.header : stack1),{"name":"nonEmpty","hash":{},"data":data}),{"name":"or","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "// Handle "
+    + ((stack1 = alias3(((stack1 = (depth0 != null ? depth0.operation : depth0)) != null ? stack1.operationId : stack1), depth0)) != null ? stack1 : "")
+    + "\n        routingContext.response().setStatusCode(501).setStatusMessage(\"Not Implemented\").end();\n    }\n\n}";
+},"useData":true})
+exports['openapi-server/src/main/java/{packageDir}/security/{securitySchemaId}Handler.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, helper, alias1=container.lambda;
+
+  return "package "
+    + ((stack1 = ((helper = (helper = helpers["package"] || (depth0 != null ? depth0["package"] : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"package","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + ".security;\n\nimport io.vertx.core.Handler;\nimport io.vertx.ext.web.RoutingContext;\n\npublic class "
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.securitySchema : depth0)) != null ? stack1.className : stack1), depth0)) != null ? stack1 : "")
+    + "Handler implements Handler<RoutingContext> {\n\n    public "
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.securitySchema : depth0)) != null ? stack1.className : stack1), depth0)) != null ? stack1 : "")
+    + "Handler(){\n\n    }\n\n    @Override\n    public void handle(RoutingContext routingContext) {\n        // Handle "
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.securitySchema : depth0)) != null ? stack1.name : stack1), depth0)) != null ? stack1 : "")
+    + " security schema\n        routingContext.next();\n    }\n\n}";
 },"useData":true})
 exports['openapi-server-sp/src/test/java/{packageDir}/services/{serviceName}Test.java'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing;
@@ -2190,35 +2144,63 @@ exports['openapi-server-sp/src/test/java/{packageDir}/services/{serviceName}Test
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.operations : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "\n}";
 },"useData":true,"useDepths":true})
-exports['openapi-server/src/main/java/{packageDir}/handlers/{operationId}Handler.java'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
-    return "RequestParameters params = routingContext.get(\"parsedParameters\");\n        ";
-},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3=container.lambda;
+exports['openapi-server-sp/src/main/java/{packageDir}/services/package-info.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=container.lambda;
 
-  return "package "
-    + ((stack1 = ((helper = (helper = helpers["package"] || (depth0 != null ? depth0["package"] : depth0)) != null ? helper : alias2),(typeof helper === "function" ? helper.call(alias1,{"name":"package","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + ".handlers;\n\nimport io.vertx.core.Handler;\nimport io.vertx.ext.web.api.RequestParameters;\nimport io.vertx.ext.web.RoutingContext;\n\npublic class "
-    + ((stack1 = alias3(((stack1 = (depth0 != null ? depth0.operation : depth0)) != null ? stack1.className : stack1), depth0)) != null ? stack1 : "")
-    + "Handler implements Handler<RoutingContext> {\n\n    public "
-    + ((stack1 = alias3(((stack1 = (depth0 != null ? depth0.operation : depth0)) != null ? stack1.className : stack1), depth0)) != null ? stack1 : "")
-    + "Handler(){\n\n    }\n\n    @Override\n    public void handle(RoutingContext routingContext) {\n        "
-    + ((stack1 = (helpers.or || (depth0 && depth0.or) || alias2).call(alias1,(helpers.nonEmpty || (depth0 && depth0.nonEmpty) || alias2).call(alias1,((stack1 = ((stack1 = (depth0 != null ? depth0.operation : depth0)) != null ? stack1.parsedParameters : stack1)) != null ? stack1.path : stack1),{"name":"nonEmpty","hash":{},"data":data}),(helpers.nonEmpty || (depth0 && depth0.nonEmpty) || alias2).call(alias1,((stack1 = ((stack1 = (depth0 != null ? depth0.operation : depth0)) != null ? stack1.parsedParameters : stack1)) != null ? stack1.cookie : stack1),{"name":"nonEmpty","hash":{},"data":data}),(helpers.nonEmpty || (depth0 && depth0.nonEmpty) || alias2).call(alias1,((stack1 = ((stack1 = (depth0 != null ? depth0.operation : depth0)) != null ? stack1.parsedParameters : stack1)) != null ? stack1.query : stack1),{"name":"nonEmpty","hash":{},"data":data}),(helpers.nonEmpty || (depth0 && depth0.nonEmpty) || alias2).call(alias1,((stack1 = ((stack1 = (depth0 != null ? depth0.operation : depth0)) != null ? stack1.parsedParameters : stack1)) != null ? stack1.header : stack1),{"name":"nonEmpty","hash":{},"data":data}),{"name":"or","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "// Handle "
-    + ((stack1 = alias3(((stack1 = (depth0 != null ? depth0.operation : depth0)) != null ? stack1.operationId : stack1), depth0)) != null ? stack1 : "")
-    + "\n        routingContext.response().setStatusCode(501).setStatusMessage(\"Not Implemented\").end();\n    }\n\n}";
+  return "@ModuleGen(name = \""
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.artifactId : stack1), depth0)) != null ? stack1 : "")
+    + "\", groupPackage = \""
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.groupId : stack1), depth0)) != null ? stack1 : "")
+    + "\")\npackage "
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
+    + ".services;\n\nimport io.vertx.codegen.annotations.ModuleGen;";
 },"useData":true})
-exports['openapi-server/src/main/java/{packageDir}/security/{securitySchemaId}Handler.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=container.lambda;
+exports['openapi-server-sp/src/main/java/{packageDir}/services/{serviceName}.java'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
+    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {});
+
+  return "  void "
+    + ((stack1 = ((helper = (helper = helpers.serviceMethodName || (depth0 != null ? depth0.serviceMethodName : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(alias1,{"name":"serviceMethodName","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "(\n"
+    + ((stack1 = helpers.each.call(alias1,((stack1 = (depth0 != null ? depth0.parsedParameters : depth0)) != null ? stack1.path : stack1),{"name":"each","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers.each.call(alias1,((stack1 = (depth0 != null ? depth0.parsedParameters : depth0)) != null ? stack1.cookie : stack1),{"name":"each","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers.each.call(alias1,((stack1 = (depth0 != null ? depth0.parsedParameters : depth0)) != null ? stack1.query : stack1),{"name":"each","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers.each.call(alias1,((stack1 = (depth0 != null ? depth0.parsedParameters : depth0)) != null ? stack1.header : stack1),{"name":"each","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.bodySchema : depth0),{"name":"if","hash":{},"fn":container.program(4, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "    OperationRequest context, Handler<AsyncResult<OperationResponse>> resultHandler);\n\n";
+},"2":function(container,depth0,helpers,partials,data) {
+    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing;
+
+  return "    "
+    + ((stack1 = (helpers.solveOasTypeForService || (depth0 && depth0.solveOasTypeForService) || alias2).call(alias1,"java",(depth0 != null ? depth0.schema : depth0),((stack1 = (data && data.root)) && stack1.modelsCache),{"name":"solveOasTypeForService","hash":{},"data":data})) != null ? stack1 : "")
+    + " "
+    + ((stack1 = ((helper = (helper = helpers.sanitizedName || (depth0 != null ? depth0.sanitizedName : depth0)) != null ? helper : alias2),(typeof helper === "function" ? helper.call(alias1,{"name":"sanitizedName","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + ",\n";
+},"4":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "    "
+    + ((stack1 = (helpers.solveOasTypeForService || (depth0 && depth0.solveOasTypeForService) || helpers.helperMissing).call(depth0 != null ? depth0 : (container.nullContext || {}),"java",(depth0 != null ? depth0.bodySchema : depth0),((stack1 = (data && data.root)) && stack1.modelsCache),{"name":"solveOasTypeForService","hash":{},"data":data})) != null ? stack1 : "")
+    + " body,\n";
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function";
 
   return "package "
-    + ((stack1 = ((helper = (helper = helpers["package"] || (depth0 != null ? depth0["package"] : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"package","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + ".security;\n\nimport io.vertx.core.Handler;\nimport io.vertx.ext.web.RoutingContext;\n\npublic class "
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.securitySchema : depth0)) != null ? stack1.className : stack1), depth0)) != null ? stack1 : "")
-    + "Handler implements Handler<RoutingContext> {\n\n    public "
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.securitySchema : depth0)) != null ? stack1.className : stack1), depth0)) != null ? stack1 : "")
-    + "Handler(){\n\n    }\n\n    @Override\n    public void handle(RoutingContext routingContext) {\n        // Handle "
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.securitySchema : depth0)) != null ? stack1.name : stack1), depth0)) != null ? stack1 : "")
-    + " security schema\n        routingContext.next();\n    }\n\n}";
+    + ((stack1 = ((helper = (helper = helpers["package"] || (depth0 != null ? depth0["package"] : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"package","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + ".services;\n\nimport io.vertx.core.AsyncResult;\nimport io.vertx.core.Handler;\nimport io.vertx.core.Vertx;\nimport io.vertx.ext.web.api.*;\nimport io.vertx.ext.web.api.generator.WebApiServiceGen;\n\nimport java.util.List;\nimport java.util.Map;\n\nimport "
+    + ((stack1 = ((helper = (helper = helpers["package"] || (depth0 != null ? depth0["package"] : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"package","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + ".models.*;\nimport "
+    + ((stack1 = ((helper = (helper = helpers["package"] || (depth0 != null ? depth0["package"] : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"package","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + ".services.impl."
+    + ((stack1 = ((helper = (helper = helpers.serviceName || (depth0 != null ? depth0.serviceName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"serviceName","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "Impl;\n\n@WebApiServiceGen\npublic interface "
+    + ((stack1 = ((helper = (helper = helpers.serviceName || (depth0 != null ? depth0.serviceName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"serviceName","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + " {\n\n  static "
+    + ((stack1 = ((helper = (helper = helpers.serviceName || (depth0 != null ? depth0.serviceName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"serviceName","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + " create(Vertx vertx) {\n    return new "
+    + ((stack1 = ((helper = (helper = helpers.serviceName || (depth0 != null ? depth0.serviceName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"serviceName","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "Impl(vertx);\n  }\n\n"
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.operations : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "}\n";
 },"useData":true})
 exports['service-proxy/src/main/java/{packageDir}/impl/{Service}Impl.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=container.lambda;

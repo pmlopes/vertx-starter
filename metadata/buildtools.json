@@ -114,13 +114,6 @@
         "templates": [
           "verticle/src/main/kotlin/{packageDir}/MainVerticle.kt"
         ]
-      },
-      {
-        "id": "js",
-        "main": "main_verticle.js",
-        "templates": [
-          "verticle/src/main/resources/main_verticle.js"
-        ]
       }
     ],
     "templates": [
