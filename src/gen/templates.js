@@ -23,13 +23,6 @@ exports['graal-nativeimage/README.md'] = Handlebars.template({"compiler":[7,">= 
     + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.name : stack1), depth0)) != null ? stack1 : "")
     + "`\n";
 },"useData":true})
-exports['kotlin+coroutines/README.md'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return "# "
-    + ((stack1 = container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.name : stack1), depth0)) != null ? stack1 : "")
-    + "\n\nA movie getRating REST application written in [Kotlin](https://kotlinlang.org/) to demonstrate how it can Kotlin\ncoroutines can be used with Vert.x.  \n\nCoroutines enables to write asynchronous code with sequential statements, the function `rateMovie` is the best example\nshowing two SQL client operations wrapped in a `use` block managing the SQL connection.\n\n## Running from the IDE\n\nRun the main function from the IDE\n\n## Running as a far jar\n\n```\n> mvn package\n> java -jar target/kotlin-coroutines-examples.jar\n```\n\n## Running from the CLI\n\nCopy hsqldb jar to $VERTX_HOME/lib\n\n```\n> cp $HOME/.m2/repository/org/hsqldb/hsqldb/2.4.0/hsqldb-2.4.0.jar $VERTX_HOME/lib/\n> vertx run src/main/kotlin/movierating/App.kt\n```\n\n## API\n\nThe application exposes a REST API for getRating movies:\n\nYou can know more about a movie\n\n```\n> curl http://localhost:8080/movie/starwars\n{\"id\":\"starwars\",\"title\":\"Star Wars\"}\n```\n\nYou can get the current getRating of a movie:\n\n```\n> curl http://localhost:8080/getRating/indianajones\n{\"id\":\"indianajones\",\"getRating\":5}\n```\n\nFinally you can rateMovie a movie\n\n```\n> curl -X POST http://localhost:8080/rateMovie/starwars?getRating=4\n```\n";
-},"useData":true})
 exports['gradle/build.gradle'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     return "  id 'org.jetbrains.kotlin.jvm' version '1.3.20'\n";
 },"3":function(container,depth0,helpers,partials,data) {
@@ -84,6 +77,13 @@ exports['gradle/build.gradle'] = Handlebars.template({"1":function(container,dep
     + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.bom : stack1), depth0)) != null ? stack1 : "")
     + "\"\n}\n\n"
     + ((stack1 = helpers["if"].call(alias2,((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.kotlin : stack1),{"name":"if","hash":{},"fn":container.program(12, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "");
+},"useData":true})
+exports['kotlin+coroutines/README.md'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "# "
+    + ((stack1 = container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.name : stack1), depth0)) != null ? stack1 : "")
+    + "\n\nA movie getRating REST application written in [Kotlin](https://kotlinlang.org/) to demonstrate how it can Kotlin\ncoroutines can be used with Vert.x.  \n\nCoroutines enables to write asynchronous code with sequential statements, the function `rateMovie` is the best example\nshowing two SQL client operations wrapped in a `use` block managing the SQL connection.\n\n## Running from the IDE\n\nRun the main function from the IDE\n\n## Running as a far jar\n\n```\n> mvn package\n> java -jar target/kotlin-coroutines-examples.jar\n```\n\n## Running from the CLI\n\nCopy hsqldb jar to $VERTX_HOME/lib\n\n```\n> cp $HOME/.m2/repository/org/hsqldb/hsqldb/2.4.0/hsqldb-2.4.0.jar $VERTX_HOME/lib/\n> vertx run src/main/kotlin/movierating/App.kt\n```\n\n## API\n\nThe application exposes a REST API for getRating movies:\n\nYou can know more about a movie\n\n```\n> curl http://localhost:8080/movie/starwars\n{\"id\":\"starwars\",\"title\":\"Star Wars\"}\n```\n\nYou can get the current getRating of a movie:\n\n```\n> curl http://localhost:8080/getRating/indianajones\n{\"id\":\"indianajones\",\"getRating\":5}\n```\n\nFinally you can rateMovie a movie\n\n```\n> curl -X POST http://localhost:8080/rateMovie/starwars?getRating=4\n```\n";
 },"useData":true})
 exports['maven/pom.xml'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     var stack1;
@@ -293,6 +293,63 @@ exports['npm/package.json'] = Handlebars.template({"1":function(container,depth0
 exports['npm/tsconfig.json'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "{\n  \"compilerOptions\": {\n    \"outDir\": \"dist\",\n    \"sourceMap\": true,\n    \"noImplicitAny\": true,\n    \"module\": \"commonjs\",\n    \"target\": \"es5\",\n    \"allowJs\": true\n  }\n}\n";
 },"useData":true})
+exports['sbt/README.md'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "# "
+    + ((stack1 = container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.name : stack1), depth0)) != null ? stack1 : "")
+    + "\n\nThis is a quickstart for a Vert.x Scala project. It provides a few examples for doing \nunit-tests.\n\nIt comes with `vertx-core` and `vertx-web` so you are good to go for a little REST-project.\nTake your time and take a look.\n\n## Scala console\n\nAfter launching `sbt` you can switch to the _scala-console_. There we took care that you\nget an already initialized Vert.x-instance and the necessary imports to start playing around.\n\n```\nsbt\n> console\nscala> vertx.deployVerticle(nameForVerticle[vertx.scala.myapp.HttpVerticle])\nscala> vertx.deploymentIDs\n```\n\nFrom here you can freely interact with the Vert.x API inside the sbt-scala-shell.\n\n\n## Fat-jar\n\nTake a look at the _build.sbt_ and search for the entry _packageOptions_. Enter the fully qualified class name \nof your primary verticle. This will be used as entry point for a generated fat-jar.\n\nTo create the runnable fat-jar use:\n```\nsbt assembly\n```\n\n\n## Dockerize\n\nThe project also contains everything you need to create a Docker-container. Simply run the following command to package your fat-jar inside a Docker-container\n\n```\nsbt docker\n```\n\nTo run use\n\n```\ndocker run -p 8666:8666 default/vertx-scala-sbt\n```\n\nPoint your browser to [http://127.0.0.1:8666/hello](http://127.0.0.1:8666/hello) and enjoy :)\n";
+},"useData":true})
+exports['sbt/build.sbt'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data,blockParams,depths) {
+    var stack1;
+
+  return ((stack1 = helpers["if"].call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.core : depth0),{"name":"if","hash":{},"fn":container.program(2, data, 0, blockParams, depths),"inverse":container.program(5, data, 0, blockParams, depths),"data":data})) != null ? stack1 : "");
+},"2":function(container,depth0,helpers,partials,data) {
+    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function";
+
+  return "  \""
+    + ((stack1 = ((helper = (helper = helpers.groupId || (depth0 != null ? depth0.groupId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"groupId","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "\" % \""
+    + ((stack1 = ((helper = (helper = helpers.artifactId || (depth0 != null ? depth0.artifactId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"artifactId","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "\" % \""
+    + ((stack1 = ((helper = (helper = helpers.version || (depth0 != null ? depth0.version : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"version","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "\""
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.classifier : depth0),{"name":"if","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ",\n";
+},"3":function(container,depth0,helpers,partials,data) {
+    var stack1, helper;
+
+  return " % \""
+    + ((stack1 = ((helper = (helper = helpers.classifier || (depth0 != null ? depth0.classifier : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"classifier","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "\"";
+},"5":function(container,depth0,helpers,partials,data,blockParams,depths) {
+    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function";
+
+  return "  \""
+    + ((stack1 = ((helper = (helper = helpers.groupId || (depth0 != null ? depth0.groupId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"groupId","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "\" % \""
+    + ((stack1 = ((helper = (helper = helpers.artifactId || (depth0 != null ? depth0.artifactId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"artifactId","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.stack : depth0),{"name":"if","hash":{},"fn":container.program(6, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "\" % \""
+    + ((stack1 = ((helper = (helper = helpers.version || (depth0 != null ? depth0.version : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"version","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "\""
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.classifier : depth0),{"name":"if","hash":{},"fn":container.program(3, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ",\n";
+},"6":function(container,depth0,helpers,partials,data,blockParams,depths) {
+    var stack1;
+
+  return ((stack1 = container.lambda(((stack1 = (depths[1] != null ? depths[1].metadata : depths[1])) != null ? stack1.artifactSuffix : stack1), depth0)) != null ? stack1 : "");
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data,blockParams,depths) {
+    var stack1, alias1=container.lambda;
+
+  return "import sbt.Package._\nimport sbt._\nimport Docker.autoImport.exposedPorts\n\nscalaVersion := \"2.12.7\"\n\nenablePlugins(DockerPlugin)\nexposedPorts := Seq(8666)\n\nlibraryDependencies ++= Vector (\n"
+    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.dependencies : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "  \"io.vertx\" % \"vertx-codegen\" % \""
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.bom : stack1), depth0)) != null ? stack1 : "")
+    + "\" % \"provided\",\n  \"org.scalatest\" %% \"scalatest\" % \"3.0.1\"\n)\n\npackageOptions += ManifestAttributes(\n  (\"Main-Verticle\", \"scala:"
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
+    + ".MainVerticle\"))\n";
+},"useData":true,"useDepths":true})
 exports['openapi-client/Operations.md'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing;
 
@@ -461,63 +518,6 @@ exports['openapi-client/README.md'] = Handlebars.template({"compiler":[7,">= 4.0
     + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
     + ".ApiClient`. For more informations give a look at [operations documentation](./Operations.md).\n\nDepending on request body declarations, you can have multiple functions for every operation:\n\n* `[operationId]WithEmptyBody`: Function that sends an empty body\n* `[operationId]WithJson`: Function that sends a Json body. You can pass to it a [`JsonObject`](http://vertx.io/docs/apidocs/io/vertx/core/json/JsonObject.html) or a POJO. Give a look to [WebClient documentation](http://vertx.io/docs/vertx-web-client/java/#_json_bodies) for more informations\n* `[operationId]WithForm`: Function that sends a form body encoded as `application/x-www-form-urlencoded`\n* `[operationId]WithMultipartForm`: Function that sends a form body encoded as `multipart/form-data`\n* `[operationId]WithContentTypeBuffer`: Function that sends a buffer with the defined content type\n* `[operationId]WithContentTypeStream`: Function that sends a stream with the defined content type\n\nIn every case, the `Content-Type` header is automatically configured\n\nEvery operation function also attach automatically the required headers/query/cookie parameters for the required security schemes through the `attach[SecurityScheme]Security` functions.\n\nFor handling the responses, give a look at [WebClient documentation](http://vertx.io/docs/vertx-web-client/java/#_handling_http_responses).\n\n## Info\nThis project was generated by [vertx-starter](https://vertx-starter.jetdrone.xyz/) generator";
 },"useData":true})
-exports['sbt/README.md'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return "# "
-    + ((stack1 = container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.name : stack1), depth0)) != null ? stack1 : "")
-    + "\n\nThis is a quickstart for a Vert.x Scala project. It provides a few examples for doing \nunit-tests.\n\nIt comes with `vertx-core` and `vertx-web` so you are good to go for a little REST-project.\nTake your time and take a look.\n\n## Scala console\n\nAfter launching `sbt` you can switch to the _scala-console_. There we took care that you\nget an already initialized Vert.x-instance and the necessary imports to start playing around.\n\n```\nsbt\n> console\nscala> vertx.deployVerticle(nameForVerticle[vertx.scala.myapp.HttpVerticle])\nscala> vertx.deploymentIDs\n```\n\nFrom here you can freely interact with the Vert.x API inside the sbt-scala-shell.\n\n\n## Fat-jar\n\nTake a look at the _build.sbt_ and search for the entry _packageOptions_. Enter the fully qualified class name \nof your primary verticle. This will be used as entry point for a generated fat-jar.\n\nTo create the runnable fat-jar use:\n```\nsbt assembly\n```\n\n\n## Dockerize\n\nThe project also contains everything you need to create a Docker-container. Simply run the following command to package your fat-jar inside a Docker-container\n\n```\nsbt docker\n```\n\nTo run use\n\n```\ndocker run -p 8666:8666 default/vertx-scala-sbt\n```\n\nPoint your browser to [http://127.0.0.1:8666/hello](http://127.0.0.1:8666/hello) and enjoy :)\n";
-},"useData":true})
-exports['sbt/build.sbt'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data,blockParams,depths) {
-    var stack1;
-
-  return ((stack1 = helpers["if"].call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.core : depth0),{"name":"if","hash":{},"fn":container.program(2, data, 0, blockParams, depths),"inverse":container.program(5, data, 0, blockParams, depths),"data":data})) != null ? stack1 : "");
-},"2":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function";
-
-  return "  \""
-    + ((stack1 = ((helper = (helper = helpers.groupId || (depth0 != null ? depth0.groupId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"groupId","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "\" % \""
-    + ((stack1 = ((helper = (helper = helpers.artifactId || (depth0 != null ? depth0.artifactId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"artifactId","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "\" % \""
-    + ((stack1 = ((helper = (helper = helpers.version || (depth0 != null ? depth0.version : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"version","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "\""
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.classifier : depth0),{"name":"if","hash":{},"fn":container.program(3, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ",\n";
-},"3":function(container,depth0,helpers,partials,data) {
-    var stack1, helper;
-
-  return " % \""
-    + ((stack1 = ((helper = (helper = helpers.classifier || (depth0 != null ? depth0.classifier : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : (container.nullContext || {}),{"name":"classifier","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "\"";
-},"5":function(container,depth0,helpers,partials,data,blockParams,depths) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function";
-
-  return "  \""
-    + ((stack1 = ((helper = (helper = helpers.groupId || (depth0 != null ? depth0.groupId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"groupId","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "\" % \""
-    + ((stack1 = ((helper = (helper = helpers.artifactId || (depth0 != null ? depth0.artifactId : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"artifactId","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.stack : depth0),{"name":"if","hash":{},"fn":container.program(6, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "\" % \""
-    + ((stack1 = ((helper = (helper = helpers.version || (depth0 != null ? depth0.version : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"version","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "\""
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.classifier : depth0),{"name":"if","hash":{},"fn":container.program(3, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ",\n";
-},"6":function(container,depth0,helpers,partials,data,blockParams,depths) {
-    var stack1;
-
-  return ((stack1 = container.lambda(((stack1 = (depths[1] != null ? depths[1].metadata : depths[1])) != null ? stack1.artifactSuffix : stack1), depth0)) != null ? stack1 : "");
-},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data,blockParams,depths) {
-    var stack1, alias1=container.lambda;
-
-  return "import sbt.Package._\nimport sbt._\nimport Docker.autoImport.exposedPorts\n\nscalaVersion := \"2.12.7\"\n\nenablePlugins(DockerPlugin)\nexposedPorts := Seq(8666)\n\nlibraryDependencies ++= Vector (\n"
-    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.dependencies : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "  \"io.vertx\" % \"vertx-codegen\" % \""
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.bom : stack1), depth0)) != null ? stack1 : "")
-    + "\" % \"provided\",\n  \"org.scalatest\" %% \"scalatest\" % \"3.0.1\"\n)\n\npackageOptions += ManifestAttributes(\n  (\"Main-Verticle\", \"scala:"
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
-    + ".MainVerticle\"))\n";
-},"useData":true,"useDepths":true})
 exports['spa+blueprint/README.md'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
@@ -828,9 +828,6 @@ exports['spa+blueprint/angular-clientapp/src/tsconfig.spec.json'] = Handlebars.t
 exports['spa+blueprint/angular-clientapp/src/tslint.json'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "{\n    \"extends\": \"../tslint.json\",\n    \"rules\": {\n        \"directive-selector\": [\n            true,\n            \"attribute\",\n            \"app\",\n            \"camelCase\"\n        ],\n        \"component-selector\": [\n            true,\n            \"element\",\n            \"app\",\n            \"kebab-case\"\n        ]\n    }\n}\n";
 },"useData":true})
-exports['spa+blueprint/react-clientapp/scss/custom.scss'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "";
-},"useData":true})
 exports['spa+blueprint/react-clientapp/public/favicon.ico'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000 \u0000\u0000\u0000 \b\u0003\u0000\u0000\u0000D���\u0000\u0000\u0000\u0004gAMA\u0000\u0000��\u000b�a\u0005\u0000\u0000\u0000\u0001sRGB\u0000��\u001c�\u0000\u0000\u0000<PLTEy%�������1�Liqy$����y%�y%�y%����@����a���ƒP�αצq�ġ�����Ӑb\u0000\u0000\u0000\ntRNS����\u0000��2��i�O�\u0000\u0000\u0000\tpHYs\u0000\u00001�\u0000\u00001�\u0001���/\u0000\u0000\u00017IDAT8˅S[\u0012� \bD��5\u001a\u001f��]�C�t:i��\u0004Y`Y\u0005\u001e\u000b<Å=ay��\n�\u0000��\u0006���K��{�FV����֓\u0003��\u0019��(>��ŁD\u001fg%�ģ���r$&��\u001b\u001a�Y\u00011׀\u0002�\u0005\u0004����l)��$FOSl��E�@�H˓\f�qbZ\fuE�\u001c�X\u0007)�'�\u001d'�y�\u0000�F\u0001oger\u001d�d�Ҙ��Ҋi5��3D\u0017!��\\�����t$���鲼іC%�#z4���L�\u001a6Q\u001c>M'm\u0011�b4\u000b�P����z�GӪ�i>�!\u0004���\u0002�C5'�:��\u0005jH��i\u0005�K\u0018����Re\u0018l�,\u001b��*R�T��\u0012+l�G�٤W�\u001aG��ϫ�Z\u001c��Ź]���[�7>�\u00193�\u0004]�\u0000\u0000\u0000WzTXtRaw profile type iptc\u0000\u0000x���\f\bqV((�O��I�R\u0000\u0003#\u000b.c\u000b\u0013#\u0013K�\u0014\u0003\u0013 D�4�d\u0003#�T �������\u001c�\u0007ˀH�J.\u0000�\u0017\u0011t�B5�\u0000\u0000\u0000\u0000IEND�B`�\u0000";
 },"useData":false}
@@ -850,6 +847,9 @@ exports['spa+blueprint/react-clientapp/public/manifest.json'] = Handlebars.templ
     + "\",\n  \"name\": \""
     + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.description : stack1), depth0)) != null ? stack1 : "")
     + "\",\n  \"icons\": [\n    {\n      \"src\": \"favicon.ico\",\n      \"sizes\": \"64x64 32x32 24x24 16x16\",\n      \"type\": \"image/x-icon\"\n    }\n  ],\n  \"start_url\": \"./index.html\",\n  \"display\": \"standalone\",\n  \"theme_color\": \"#000000\",\n  \"background_color\": \"#ffffff\"\n}\n";
+},"useData":true})
+exports['spa+blueprint/react-clientapp/scss/custom.scss'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "";
 },"useData":true})
 exports['spa+blueprint/react-clientapp/src/App.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "import React, { Component } from 'react';\nimport { Route } from 'react-router';\nimport { Layout } from './components/Layout';\nimport { Home } from './components/Home';\nimport { FetchData } from './components/FetchData';\nimport { Counter } from './components/Counter';\n\nexport default class App extends Component {\n  static displayName = App.name;\n\n  render () {\n    return (\n      <Layout>\n        <Route exact path='/' component={Home} />\n        <Route path='/counter' component={Counter} />\n        <Route path='/fetch-data' component={FetchData} />\n      </Layout>\n    );\n  }\n}\n";
@@ -959,6 +959,13 @@ exports['spa+blueprint/react-clientapp/src/components/NavMenu.js'] = Handlebars.
     + ((stack1 = container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.name : stack1), depth0)) != null ? stack1 : "")
     + "</NavbarBrand>\n            <NavbarToggler onClick={this.toggleNavbar} className=\"mr-2\" />\n            <Collapse className=\"d-sm-inline-flex flex-sm-row-reverse\" isOpen={!this.state.collapsed} navbar>\n              <ul className=\"navbar-nav flex-grow\">\n                <NavItem>\n                  <NavLink tag={Link} className=\"text-dark\" to=\"/\">Home</NavLink>\n                </NavItem>\n                <NavItem>\n                  <NavLink tag={Link} className=\"text-dark\" to=\"/counter\">Counter</NavLink>\n                </NavItem>\n                <NavItem>\n                  <NavLink tag={Link} className=\"text-dark\" to=\"/fetch-data\">Fetch data</NavLink>\n                </NavItem>\n              </ul>\n            </Collapse>\n          </Container>\n        </Navbar>\n      </header>\n    );\n  }\n}\n";
 },"useData":true})
+exports['spa+blueprint/src/main/resources/error-template.html'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "<html>\n\n<head>\n  <title>{errorMessage}</title>\n  <style>\n    body {\n      margin: 0;\n      padding: 80px 100px;\n      font: 13px \"Helvetica Neue\", \"Lucida Grande\", \"Arial\";\n      background: #ECE9E9 -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff), to(#ECE9E9));\n      background: #ECE9E9 -moz-linear-gradient(top, #fff, #ECE9E9);\n      background-repeat: no-repeat;\n      color: #555;\n      -webkit-font-smoothing: antialiased;\n    }\n\n    h1,\n    h2,\n    h3 {\n      margin: 0;\n      font-size: 22px;\n      color: #343434;\n    }\n\n    h1 em,\n    h2 em {\n      padding: 0 5px;\n      font-weight: normal;\n    }\n\n    h1 {\n      font-size: 60px;\n    }\n\n    h2 {\n      margin-top: 10px;\n    }\n\n    h3 {\n      margin: 5px 0 10px 0;\n      padding-top: 25px;\n      padding-bottom: 5px;\n      border-bottom: 1px solid #eee;\n      font-size: 18px;\n    }\n\n    ul {\n      margin: 0;\n      padding: 0;\n    }\n\n    ul li {\n      margin: 5px 0;\n      padding: 3px 8px;\n      list-style: none;\n    }\n\n    ul li:hover {\n      cursor: pointer;\n      color: #2e2e2e;\n    }\n\n    p {\n      line-height: 1.5;\n    }\n\n    a {\n      color: #555;\n      text-decoration: none;\n    }\n\n    a:hover {\n      color: #303030;\n    }\n\n    #stacktrace {\n      margin-top: 15px;\n    }\n\n    .directory h1 {\n      margin-bottom: 15px;\n      font-size: 18px;\n    }\n  </style>\n</head>\n\n<body>\n  <div id=\"wrapper\">\n    <h1>{title}</h1>\n    <h2><em>{errorCode}</em> {errorMessage}</h2>\n\n    <h3>Development Mode</h3>\n    <p>\n      Swapping to the <strong>Development</strong> environment displays detailed information about the error that\n      occurred.\n    </p>\n    <p>\n      <strong>The Development environment shouldn't be enabled for deployed applications.</strong>\n      It can result in displaying sensitive information from exceptions to end users.\n      For local debugging, enable the <strong>Development</strong> environment by setting the <strong>VERTX_ENVIRONMENT</strong>\n      environment variable to <strong>DEV</strong>\n      and restarting the app.\n    </p>\n\n    <ul id=\"stacktrace\">{stackTrace}</ul>\n  </div>\n</body>\n\n</html>\n";
+},"useData":true})
+exports['spa+blueprint/src/main/resources/favicon.ico'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    return "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000 \u0000\u0000\u0000 \b\u0003\u0000\u0000\u0000D���\u0000\u0000\u0000\u0004gAMA\u0000\u0000��\u000b�a\u0005\u0000\u0000\u0000\u0001sRGB\u0000��\u001c�\u0000\u0000\u0000<PLTEy%�������1�Liqy$����y%�y%�y%����@����a���ƒP�αצq�ġ�����Ӑb\u0000\u0000\u0000\ntRNS����\u0000��2��i�O�\u0000\u0000\u0000\tpHYs\u0000\u00001�\u0000\u00001�\u0001���/\u0000\u0000\u00017IDAT8˅S[\u0012� \bD��5\u001a\u001f��]�C�t:i��\u0004Y`Y\u0005\u001e\u000b<Å=ay��\n�\u0000��\u0006���K��{�FV����֓\u0003��\u0019��(>��ŁD\u001fg%�ģ���r$&��\u001b\u001a�Y\u00011׀\u0002�\u0005\u0004����l)��$FOSl��E�@�H˓\f�qbZ\fuE�\u001c�X\u0007)�'�\u001d'�y�\u0000�F\u0001oger\u001d�d�Ҙ��Ҋi5��3D\u0017!��\\�����t$���鲼іC%�#z4���L�\u001a6Q\u001c>M'm\u0011�b4\u000b�P����z�GӪ�i>�!\u0004���\u0002�C5'�:��\u0005jH��i\u0005�K\u0018����Re\u0018l�,\u001b��*R�T��\u0012+l�G�٤W�\u001aG��ϫ�Z\u001c��Ź]���[�7>�\u00193�\u0004]�\u0000\u0000\u0000WzTXtRaw profile type iptc\u0000\u0000x���\f\bqV((�O��I�R\u0000\u0003#\u000b.c\u000b\u0013#\u0013K�\u0014\u0003\u0013 D�4�d\u0003#�T �������\u001c�\u0007ˀH�J.\u0000�\u0017\u0011t�B5�\u0000\u0000\u0000\u0000IEND�B`�\u0000";
+},"useData":false}
+)
 exports['spa+blueprint/react-redux-clientapp/src/components/Counter.js'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "import React from 'react';\nimport { bindActionCreators } from 'redux';\nimport { connect } from 'react-redux';\nimport { actionCreators } from '../store/Counter';\n\nconst Counter = props => (\n  <div>\n    <h1>Counter</h1>\n\n    <p>This is a simple example of a React component.</p>\n\n    <p>Current count: <strong>{props.count}</strong></p>\n\n    <button className=\"btn btn-primary\" onClick={props.increment}>Increment</button>\n  </div>\n);\n\nexport default connect(\n  state => state.counter,\n  dispatch => bindActionCreators(actionCreators, dispatch)\n)(Counter);\n";
 },"useData":true})
@@ -1026,13 +1033,6 @@ exports['verticle/src/main/resources/main_verticle.rb'] = Handlebars.template({"
     + ((stack1 = (helpers.containsDep || (depth0 && depth0.containsDep) || alias2).call(alias1,(depth0 != null ? depth0.dependencies : depth0),"io.vertx","vertx-web",{"name":"containsDep","hash":{},"fn":container.program(5, data, 0),"inverse":container.program(7, data, 0),"data":data})) != null ? stack1 : "")
     + "\n\nhttp_server.listen(8080) { |res_err,res|\n  if (res_err != nil)\n    res_err.print_stack_trace()\n  else\n    puts \"Server listening at: http://localhost:8080/\"\n  end\n}\n";
 },"useData":true})
-exports['spa+blueprint/src/main/resources/error-template.html'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "<html>\n\n<head>\n  <title>{errorMessage}</title>\n  <style>\n    body {\n      margin: 0;\n      padding: 80px 100px;\n      font: 13px \"Helvetica Neue\", \"Lucida Grande\", \"Arial\";\n      background: #ECE9E9 -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff), to(#ECE9E9));\n      background: #ECE9E9 -moz-linear-gradient(top, #fff, #ECE9E9);\n      background-repeat: no-repeat;\n      color: #555;\n      -webkit-font-smoothing: antialiased;\n    }\n\n    h1,\n    h2,\n    h3 {\n      margin: 0;\n      font-size: 22px;\n      color: #343434;\n    }\n\n    h1 em,\n    h2 em {\n      padding: 0 5px;\n      font-weight: normal;\n    }\n\n    h1 {\n      font-size: 60px;\n    }\n\n    h2 {\n      margin-top: 10px;\n    }\n\n    h3 {\n      margin: 5px 0 10px 0;\n      padding-top: 25px;\n      padding-bottom: 5px;\n      border-bottom: 1px solid #eee;\n      font-size: 18px;\n    }\n\n    ul {\n      margin: 0;\n      padding: 0;\n    }\n\n    ul li {\n      margin: 5px 0;\n      padding: 3px 8px;\n      list-style: none;\n    }\n\n    ul li:hover {\n      cursor: pointer;\n      color: #2e2e2e;\n    }\n\n    p {\n      line-height: 1.5;\n    }\n\n    a {\n      color: #555;\n      text-decoration: none;\n    }\n\n    a:hover {\n      color: #303030;\n    }\n\n    #stacktrace {\n      margin-top: 15px;\n    }\n\n    .directory h1 {\n      margin-bottom: 15px;\n      font-size: 18px;\n    }\n  </style>\n</head>\n\n<body>\n  <div id=\"wrapper\">\n    <h1>{title}</h1>\n    <h2><em>{errorCode}</em> {errorMessage}</h2>\n\n    <h3>Development Mode</h3>\n    <p>\n      Swapping to the <strong>Development</strong> environment displays detailed information about the error that\n      occurred.\n    </p>\n    <p>\n      <strong>The Development environment shouldn't be enabled for deployed applications.</strong>\n      It can result in displaying sensitive information from exceptions to end users.\n      For local debugging, enable the <strong>Development</strong> environment by setting the <strong>VERTX_ENVIRONMENT</strong>\n      environment variable to <strong>DEV</strong>\n      and restarting the app.\n    </p>\n\n    <ul id=\"stacktrace\">{stackTrace}</ul>\n  </div>\n</body>\n\n</html>\n";
-},"useData":true})
-exports['spa+blueprint/src/main/resources/favicon.ico'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    return "�PNG\r\n\u001a\n\u0000\u0000\u0000\rIHDR\u0000\u0000\u0000 \u0000\u0000\u0000 \b\u0003\u0000\u0000\u0000D���\u0000\u0000\u0000\u0004gAMA\u0000\u0000��\u000b�a\u0005\u0000\u0000\u0000\u0001sRGB\u0000��\u001c�\u0000\u0000\u0000<PLTEy%�������1�Liqy$����y%�y%�y%����@����a���ƒP�αצq�ġ�����Ӑb\u0000\u0000\u0000\ntRNS����\u0000��2��i�O�\u0000\u0000\u0000\tpHYs\u0000\u00001�\u0000\u00001�\u0001���/\u0000\u0000\u00017IDAT8˅S[\u0012� \bD��5\u001a\u001f��]�C�t:i��\u0004Y`Y\u0005\u001e\u000b<Å=ay��\n�\u0000��\u0006���K��{�FV����֓\u0003��\u0019��(>��ŁD\u001fg%�ģ���r$&��\u001b\u001a�Y\u00011׀\u0002�\u0005\u0004����l)��$FOSl��E�@�H˓\f�qbZ\fuE�\u001c�X\u0007)�'�\u001d'�y�\u0000�F\u0001oger\u001d�d�Ҙ��Ҋi5��3D\u0017!��\\�����t$���鲼іC%�#z4���L�\u001a6Q\u001c>M'm\u0011�b4\u000b�P����z�GӪ�i>�!\u0004���\u0002�C5'�:��\u0005jH��i\u0005�K\u0018����Re\u0018l�,\u001b��*R�T��\u0012+l�G�٤W�\u001aG��ϫ�Z\u001c��Ź]���[�7>�\u00193�\u0004]�\u0000\u0000\u0000WzTXtRaw profile type iptc\u0000\u0000x���\f\bqV((�O��I�R\u0000\u0003#\u000b.c\u000b\u0013#\u0013K�\u0014\u0003\u0013 D�4�d\u0003#�T �������\u001c�\u0007ˀH�J.\u0000�\u0017\u0011t�B5�\u0000\u0000\u0000\u0000IEND�B`�\u0000";
-},"useData":false}
-)
 exports['wiki+blueprint/src/main/resources/db-queries.properties'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "#\n#  Copyright (c) 2017 Red Hat, Inc. and/or its affiliates.\n#  Copyright (c) 2017 INSA Lyon, CITI Laboratory.\n#\n#  Licensed under the Apache License, Version 2.0 (the \"License\");\n#  you may not use this file except in compliance with the License.\n#  You may obtain a copy of the License at\n#\n#      http://www.apache.org/licenses/LICENSE-2.0\n#\n# Unless required by applicable law or agreed to in writing, software\n# distributed under the License is distributed on an \"AS IS\" BASIS,\n# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n# See the License for the specific language governing permissions and\n# limitations under the License.\n#\ncreate-pages-table=create table if not exists Pages (Id integer identity primary key, Name varchar(255) unique, Content clob)\nget-page=select Id, Content from Pages where Name = ?\nget-page-by-id=select * from Pages where Id = ?\ncreate-page=insert into Pages values (NULL, ?, ?)\nsave-page=update Pages set Content = ? where Id = ?\nall-pages=select Name from Pages\ndelete-page=delete from Pages where Id = ?\nall-pages-data=select * from Pages\n";
 },"useData":true})
@@ -1717,13 +1717,6 @@ exports['package-info/src/main/java/{packageDir}/package-info.java'] = Handlebar
     + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
     + ";\n\nimport io.vertx.codegen.annotations.ModuleGen;\n";
 },"useData":true})
-exports['sbt/src/main/scala/{packageDir}/MainVerticle.scala'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return "package "
-    + ((stack1 = container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
-    + "\n\nimport io.vertx.lang.scala.ScalaVerticle\nimport io.vertx.scala.ext.web.Router\n\nimport scala.concurrent.Future\n\nclass MainVerticle extends ScalaVerticle {\n\n  override def startFuture(): Future[_] = {\n    // your code goes here...\n    val router = Router.router(vertx)\n        val route = router\n          .get(\"/hello\")\n          .handler(_.response().end(\"world\"))\n\n        vertx\n          .createHttpServer()\n          .requestHandler(router.accept _)\n          .listenFuture(8666, \"0.0.0.0\")\n  }\n}\n";
-},"useData":true})
 exports['sbt/src/test/scala/{packageDir}/MainVerticleSpec.scala'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 
@@ -1737,6 +1730,13 @@ exports['sbt/src/test/scala/{packageDir}/VerticleTesting.scala'] = Handlebars.te
   return "package "
     + ((stack1 = container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
     + "\n\nimport io.vertx.lang.scala.json.{Json, JsonObject}\nimport io.vertx.lang.scala.{ScalaVerticle, VertxExecutionContext}\nimport io.vertx.scala.core.{DeploymentOptions, Vertx}\nimport org.scalatest.{AsyncFlatSpec, BeforeAndAfter}\n\nimport scala.concurrent.Await\nimport scala.concurrent.duration._\nimport scala.reflect.runtime.universe._\nimport scala.util.{Failure, Success}\n\nabstract class VerticleTesting[A <: ScalaVerticle: TypeTag] extends AsyncFlatSpec with BeforeAndAfter{\n  val vertx = Vertx.vertx\n  implicit val vertxExecutionContext = VertxExecutionContext(\n    vertx.getOrCreateContext()\n  )\n\n  private var deploymentId = \"\"\n\n  def config(): JsonObject = Json.emptyObj()\n\n  before {\n    deploymentId = Await.result(\n      vertx\n        .deployVerticleFuture(\"scala:\" + implicitly[TypeTag[A]].tpe.typeSymbol.fullName,\n          DeploymentOptions().setConfig(config()))\n        .andThen {\n          case Success(d) => d\n          case Failure(t) => throw new RuntimeException(t)\n        },\n      10000 millis\n    )\n  }\n\n  after {\n    Await.result(\n      vertx.undeployFuture(deploymentId)\n        .andThen {\n          case Success(d) => d\n          case Failure(t) => throw new RuntimeException(t)\n        },\n      10000 millis\n    )\n  }\n\n}\n";
+},"useData":true})
+exports['sbt/src/main/scala/{packageDir}/MainVerticle.scala'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "package "
+    + ((stack1 = container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
+    + "\n\nimport io.vertx.lang.scala.ScalaVerticle\nimport io.vertx.scala.ext.web.Router\n\nimport scala.concurrent.Future\n\nclass MainVerticle extends ScalaVerticle {\n\n  override def startFuture(): Future[_] = {\n    // your code goes here...\n    val router = Router.router(vertx)\n        val route = router\n          .get(\"/hello\")\n          .handler(_.response().end(\"world\"))\n\n        vertx\n          .createHttpServer()\n          .requestHandler(router.accept _)\n          .listenFuture(8666, \"0.0.0.0\")\n  }\n}\n";
 },"useData":true})
 exports['service-proxy/src/main/java/{packageDir}/MainVerticle.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=container.lambda;
@@ -1808,6 +1808,38 @@ exports['spa+blueprint/angular-clientapp/src/app/nav-menu/nav-menu.component.htm
 exports['spa+blueprint/angular-clientapp/src/app/nav-menu/nav-menu.component.ts'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     return "import { Component } from '@angular/core';\n\n@Component({\n  selector: 'app-nav-menu',\n  templateUrl: './nav-menu.component.html',\n  styleUrls: ['./nav-menu.component.css']\n})\nexport class NavMenuComponent {\n  isExpanded = false;\n\n  collapse() {\n    this.isExpanded = false;\n  }\n\n  toggle() {\n    this.isExpanded = !this.isExpanded;\n  }\n}\n";
 },"useData":true})
+exports['spa+blueprint/src/main/java/{packageDir}/MainVerticle.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=container.lambda;
+
+  return "package "
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
+    + ";\n\nimport io.vertx.core.AbstractVerticle;\nimport io.vertx.ext.web.Router;\nimport io.vertx.ext.web.handler.ErrorHandler;\nimport io.vertx.ext.web.handler.FaviconHandler;\nimport io.vertx.ext.web.handler.StaticHandler;\nimport xyz.jetdrone.vertx.spa.services.SPA;\n\npublic class MainVerticle extends AbstractVerticle {\n\n  @Override\n  public void start() {\n    // your code goes here...\n    final Router router = Router.router(vertx);\n\n    router.route().handler(FaviconHandler.create(\"favicon.ico\"));\n\n    // mount the weather API\n    router\n      .get(\"/api/weather-forecast\")\n      .handler(WeatherAPI.get())\n      .failureHandler(ErrorHandler.create(\"error-template.html\"));\n\n    // will redirect to ng-serve while in development time\n    router.route().handler(SPA.serve(\""
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.clientapp : stack1), depth0)) != null ? stack1 : "")
+    + "\", 8081));\n    // Serve the static resources\n    router.route().handler(StaticHandler.create());\n\n    vertx.createHttpServer().requestHandler(router).listen(8080, res -> {\n      if (res.failed()) {\n        res.cause().printStackTrace();\n      } else {\n        System.out.println(\"Server listening at: http://localhost:8080/\");\n      }\n    });\n  }\n\n  @Override\n  public void stop() {\n    // will stop any SPA running processes\n    SPA.stop();\n  }\n}\n";
+},"useData":true})
+exports['spa+blueprint/src/main/java/{packageDir}/WeatherAPI.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "package "
+    + ((stack1 = container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
+    + ";\n\nimport java.time.Instant;\nimport java.util.Arrays;\nimport java.util.List;\nimport java.util.Random;\n\nimport io.vertx.core.Handler;\nimport io.vertx.core.json.JsonArray;\nimport io.vertx.core.json.JsonObject;\nimport io.vertx.ext.web.RoutingContext;\n\nimport static java.time.temporal.ChronoUnit.DAYS;\n\npublic class WeatherAPI {\n\n  // the example weather API\n  private static final List<String> SUMMARIES = Arrays.asList(\n    \"Freezing\", \"Bracing\", \"Chilly\", \"Cool\", \"Mild\", \"Warm\", \"Balmy\", \"Hot\", \"Sweltering\", \"Scorching\");\n\n  public static Handler<RoutingContext> get() {\n\n    final Random rnd = new Random();\n\n    return ctx -> {\n      final JsonArray response = new JsonArray();\n      final Instant now = Instant.now();\n\n      for (int i = 1; i <= 5; i++) {\n        JsonObject forecast = new JsonObject()\n            .put(\"dateFormatted\", now.plus(i, DAYS))\n            .put(\"temperatureC\", -20 + rnd.nextInt(35))\n            .put(\"summary\", SUMMARIES.get(rnd.nextInt(SUMMARIES.size())));\n\n        forecast.put(\"temperatureF\", 32 + (int) (forecast.getInteger(\"temperatureC\") / 0.5556));\n\n        response.add(forecast);\n      }\n\n      ctx.response().putHeader(\"Content-Type\", \"application/json\").end(response.encode());\n    };\n  }\n}\n";
+},"useData":true})
+exports['spa+blueprint/src/main/kotlin/{packageDir}/MainVerticle.kt'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=container.lambda;
+
+  return "package "
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
+    + "\n\nimport io.vertx.core.AbstractVerticle\nimport io.vertx.ext.web.Router\nimport io.vertx.ext.web.handler.ErrorHandler\nimport io.vertx.ext.web.handler.FaviconHandler\nimport io.vertx.ext.web.handler.StaticHandler\nimport xyz.jetdrone.vertx.spa.services.SPA\n\nclass MainVerticle : AbstractVerticle() {\n\n  override fun start() {\n    // your code goes here...\n    val router = Router.router(vertx).apply {\n      // Favicon\n      route().handler(FaviconHandler.create(\"favicon.ico\"))\n      // mount the weather API\n      get(\"/api/weather-forecast\")\n        .handler(WeatherAPI.get())\n        .failureHandler(ErrorHandler.create(\"error-template.html\"))\n      // will redirect to ng-serve while in development time\n      route().handler(SPA.serve(\""
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.clientapp : stack1), depth0)) != null ? stack1 : "")
+    + "\", 8081))\n      // Serve the static resources\n      route().handler(StaticHandler.create())\n    }\n    vertx.createHttpServer().requestHandler(router).listen(8080) { res ->\n      if (res.failed()) {\n        res.cause().printStackTrace()\n      } else {\n        println(\"Server listening at: http://localhost:8080/\")\n      }\n    }\n  }\n\n  override fun stop() {\n    // will stop any SPA running processes\n    SPA.stop()\n  }\n}\n";
+},"useData":true})
+exports['spa+blueprint/src/main/kotlin/{packageDir}/WeatherAPI.kt'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "package "
+    + ((stack1 = container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
+    + "\n\nimport java.time.Instant\nimport java.util.Random\n\nimport io.vertx.core.json.JsonArray\nimport io.vertx.ext.web.RoutingContext\nimport io.vertx.kotlin.core.json.json\nimport io.vertx.kotlin.core.json.obj\n\nimport java.time.temporal.ChronoUnit.DAYS\n\nobject WeatherAPI {\n\n  // the example weather API\n  private val SUMMARIES = listOf(\n    \"Freezing\", \"Bracing\", \"Chilly\", \"Cool\", \"Mild\", \"Warm\", \"Balmy\", \"Hot\", \"Sweltering\", \"Scorching\")\n\n  fun get(): (RoutingContext) -> Unit {\n\n    val rnd = Random()\n\n    return { ctx ->\n      val response = JsonArray()\n      val now = Instant.now()\n\n      for (i in 1..5) {\n        val forecast = json {\n          obj(\n            \"dateFormatted\" to now.plus(i.toLong(), DAYS),\n            \"temperatureC\" to -20 + rnd.nextInt(35),\n            \"summary\" to SUMMARIES[rnd.nextInt(SUMMARIES.size)]\n          )\n        }\n\n        forecast.put(\"temperatureF\", 32 + (forecast.getInteger(\"temperatureC\")!! / 0.5556).toInt())\n\n        response.add(forecast)\n      }\n\n      ctx.response().putHeader(\"Content-Type\", \"application/json\").end(response.encode())\n    }\n  }\n}\n";
+},"useData":true})
 exports['verticle/src/main/java/{packageDir}/MainVerticle.java'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
     return "import io.vertx.core.Vertx;\n";
 },"3":function(container,depth0,helpers,partials,data) {
@@ -1857,38 +1889,6 @@ exports['verticle/src/main/kotlin/{packageDir}/MainVerticle.kt'] = Handlebars.te
     + "\n    vertx.createHttpServer().requestHandler("
     + ((stack1 = (helpers.containsDep || (depth0 && depth0.containsDep) || alias2).call(alias1,(depth0 != null ? depth0.dependencies : depth0),"io.vertx","vertx-web",{"name":"containsDep","hash":{},"fn":container.program(5, data, 0),"inverse":container.program(7, data, 0),"data":data})) != null ? stack1 : "")
     + ").listen(8080, { res ->\n      if (res.failed()) {\n        res.cause().printStackTrace()\n      } else {\n        System.out.println(\"Server listening at: http://localhost:8080/\")\n      }\n    })\n  }\n}\n";
-},"useData":true})
-exports['spa+blueprint/src/main/java/{packageDir}/MainVerticle.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=container.lambda;
-
-  return "package "
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
-    + ";\n\nimport io.vertx.core.AbstractVerticle;\nimport io.vertx.ext.web.Router;\nimport io.vertx.ext.web.handler.ErrorHandler;\nimport io.vertx.ext.web.handler.FaviconHandler;\nimport io.vertx.ext.web.handler.StaticHandler;\nimport xyz.jetdrone.vertx.spa.services.SPA;\n\npublic class MainVerticle extends AbstractVerticle {\n\n  @Override\n  public void start() {\n    // your code goes here...\n    final Router router = Router.router(vertx);\n\n    router.route().handler(FaviconHandler.create(\"favicon.ico\"));\n\n    // mount the weather API\n    router\n      .get(\"/api/weather-forecast\")\n      .handler(WeatherAPI.get())\n      .failureHandler(ErrorHandler.create(\"error-template.html\"));\n\n    // will redirect to ng-serve while in development time\n    router.route().handler(SPA.serve(\""
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.clientapp : stack1), depth0)) != null ? stack1 : "")
-    + "\", 8081));\n    // Serve the static resources\n    router.route().handler(StaticHandler.create());\n\n    vertx.createHttpServer().requestHandler(router).listen(8080, res -> {\n      if (res.failed()) {\n        res.cause().printStackTrace();\n      } else {\n        System.out.println(\"Server listening at: http://localhost:8080/\");\n      }\n    });\n  }\n\n  @Override\n  public void stop() {\n    // will stop any SPA running processes\n    SPA.stop();\n  }\n}\n";
-},"useData":true})
-exports['spa+blueprint/src/main/java/{packageDir}/WeatherAPI.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return "package "
-    + ((stack1 = container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
-    + ";\n\nimport java.time.Instant;\nimport java.util.Arrays;\nimport java.util.List;\nimport java.util.Random;\n\nimport io.vertx.core.Handler;\nimport io.vertx.core.json.JsonArray;\nimport io.vertx.core.json.JsonObject;\nimport io.vertx.ext.web.RoutingContext;\n\nimport static java.time.temporal.ChronoUnit.DAYS;\n\npublic class WeatherAPI {\n\n  // the example weather API\n  private static final List<String> SUMMARIES = Arrays.asList(\n    \"Freezing\", \"Bracing\", \"Chilly\", \"Cool\", \"Mild\", \"Warm\", \"Balmy\", \"Hot\", \"Sweltering\", \"Scorching\");\n\n  public static Handler<RoutingContext> get() {\n\n    final Random rnd = new Random();\n\n    return ctx -> {\n      final JsonArray response = new JsonArray();\n      final Instant now = Instant.now();\n\n      for (int i = 1; i <= 5; i++) {\n        JsonObject forecast = new JsonObject()\n            .put(\"dateFormatted\", now.plus(i, DAYS))\n            .put(\"temperatureC\", -20 + rnd.nextInt(35))\n            .put(\"summary\", SUMMARIES.get(rnd.nextInt(SUMMARIES.size())));\n\n        forecast.put(\"temperatureF\", 32 + (int) (forecast.getInteger(\"temperatureC\") / 0.5556));\n\n        response.add(forecast);\n      }\n\n      ctx.response().putHeader(\"Content-Type\", \"application/json\").end(response.encode());\n    };\n  }\n}\n";
-},"useData":true})
-exports['spa+blueprint/src/main/kotlin/{packageDir}/MainVerticle.kt'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=container.lambda;
-
-  return "package "
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
-    + "\n\nimport io.vertx.core.AbstractVerticle\nimport io.vertx.ext.web.Router\nimport io.vertx.ext.web.handler.ErrorHandler\nimport io.vertx.ext.web.handler.FaviconHandler\nimport io.vertx.ext.web.handler.StaticHandler\nimport xyz.jetdrone.vertx.spa.services.SPA\n\nclass MainVerticle : AbstractVerticle() {\n\n  override fun start() {\n    // your code goes here...\n    val router = Router.router(vertx).apply {\n      // Favicon\n      route().handler(FaviconHandler.create(\"favicon.ico\"))\n      // mount the weather API\n      get(\"/api/weather-forecast\")\n        .handler(WeatherAPI.get())\n        .failureHandler(ErrorHandler.create(\"error-template.html\"))\n      // will redirect to ng-serve while in development time\n      route().handler(SPA.serve(\""
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.clientapp : stack1), depth0)) != null ? stack1 : "")
-    + "\", 8081))\n      // Serve the static resources\n      route().handler(StaticHandler.create())\n    }\n    vertx.createHttpServer().requestHandler(router).listen(8080) { res ->\n      if (res.failed()) {\n        res.cause().printStackTrace()\n      } else {\n        println(\"Server listening at: http://localhost:8080/\")\n      }\n    }\n  }\n\n  override fun stop() {\n    // will stop any SPA running processes\n    SPA.stop()\n  }\n}\n";
-},"useData":true})
-exports['spa+blueprint/src/main/kotlin/{packageDir}/WeatherAPI.kt'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return "package "
-    + ((stack1 = container.lambda(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
-    + "\n\nimport java.time.Instant\nimport java.util.Random\n\nimport io.vertx.core.json.JsonArray\nimport io.vertx.ext.web.RoutingContext\nimport io.vertx.kotlin.core.json.json\nimport io.vertx.kotlin.core.json.obj\n\nimport java.time.temporal.ChronoUnit.DAYS\n\nobject WeatherAPI {\n\n  // the example weather API\n  private val SUMMARIES = listOf(\n    \"Freezing\", \"Bracing\", \"Chilly\", \"Cool\", \"Mild\", \"Warm\", \"Balmy\", \"Hot\", \"Sweltering\", \"Scorching\")\n\n  fun get(): (RoutingContext) -> Unit {\n\n    val rnd = Random()\n\n    return { ctx ->\n      val response = JsonArray()\n      val now = Instant.now()\n\n      for (i in 1..5) {\n        val forecast = json {\n          obj(\n            \"dateFormatted\" to now.plus(i.toLong(), DAYS),\n            \"temperatureC\" to -20 + rnd.nextInt(35),\n            \"summary\" to SUMMARIES[rnd.nextInt(SUMMARIES.size)]\n          )\n        }\n\n        forecast.put(\"temperatureF\", 32 + (forecast.getInteger(\"temperatureC\")!! / 0.5556).toInt())\n\n        response.add(forecast)\n      }\n\n      ctx.response().putHeader(\"Content-Type\", \"application/json\").end(response.encode())\n    }\n  }\n}\n";
 },"useData":true})
 exports['wiki+blueprint/src/main/java/{packageDir}/MainVerticle.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=container.lambda;
@@ -2059,64 +2059,6 @@ exports['openapi-server/src/main/java/{packageDir}/security/{securitySchemaId}Ha
     + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.securitySchema : depth0)) != null ? stack1.name : stack1), depth0)) != null ? stack1 : "")
     + " security schema\n        routingContext.next();\n    }\n\n}";
 },"useData":true})
-exports['openapi-server-sp/src/main/java/{packageDir}/services/package-info.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, alias1=container.lambda;
-
-  return "@ModuleGen(name = \""
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.artifactId : stack1), depth0)) != null ? stack1 : "")
-    + "\", groupPackage = \""
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.groupId : stack1), depth0)) != null ? stack1 : "")
-    + "\")\npackage "
-    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
-    + ".services;\n\nimport io.vertx.codegen.annotations.ModuleGen;";
-},"useData":true})
-exports['openapi-server-sp/src/main/java/{packageDir}/services/{serviceName}.java'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {});
-
-  return "  void "
-    + ((stack1 = ((helper = (helper = helpers.serviceMethodName || (depth0 != null ? depth0.serviceMethodName : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(alias1,{"name":"serviceMethodName","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "(\n"
-    + ((stack1 = helpers.each.call(alias1,((stack1 = (depth0 != null ? depth0.parsedParameters : depth0)) != null ? stack1.path : stack1),{"name":"each","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ((stack1 = helpers.each.call(alias1,((stack1 = (depth0 != null ? depth0.parsedParameters : depth0)) != null ? stack1.cookie : stack1),{"name":"each","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ((stack1 = helpers.each.call(alias1,((stack1 = (depth0 != null ? depth0.parsedParameters : depth0)) != null ? stack1.query : stack1),{"name":"each","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ((stack1 = helpers.each.call(alias1,((stack1 = (depth0 != null ? depth0.parsedParameters : depth0)) != null ? stack1.header : stack1),{"name":"each","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.bodySchema : depth0),{"name":"if","hash":{},"fn":container.program(4, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "    OperationRequest context, Handler<AsyncResult<OperationResponse>> resultHandler);\n\n";
-},"2":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing;
-
-  return "    "
-    + ((stack1 = (helpers.solveOasTypeForService || (depth0 && depth0.solveOasTypeForService) || alias2).call(alias1,"java",(depth0 != null ? depth0.schema : depth0),((stack1 = (data && data.root)) && stack1.modelsCache),{"name":"solveOasTypeForService","hash":{},"data":data})) != null ? stack1 : "")
-    + " "
-    + ((stack1 = ((helper = (helper = helpers.sanitizedName || (depth0 != null ? depth0.sanitizedName : depth0)) != null ? helper : alias2),(typeof helper === "function" ? helper.call(alias1,{"name":"sanitizedName","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + ",\n";
-},"4":function(container,depth0,helpers,partials,data) {
-    var stack1;
-
-  return "    "
-    + ((stack1 = (helpers.solveOasTypeForService || (depth0 && depth0.solveOasTypeForService) || helpers.helperMissing).call(depth0 != null ? depth0 : (container.nullContext || {}),"java",(depth0 != null ? depth0.bodySchema : depth0),((stack1 = (data && data.root)) && stack1.modelsCache),{"name":"solveOasTypeForService","hash":{},"data":data})) != null ? stack1 : "")
-    + " body,\n";
-},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
-    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function";
-
-  return "package "
-    + ((stack1 = ((helper = (helper = helpers["package"] || (depth0 != null ? depth0["package"] : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"package","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + ".services;\n\nimport io.vertx.core.AsyncResult;\nimport io.vertx.core.Handler;\nimport io.vertx.core.Vertx;\nimport io.vertx.ext.web.api.*;\nimport io.vertx.ext.web.api.generator.WebApiServiceGen;\n\nimport java.util.List;\nimport java.util.Map;\n\nimport "
-    + ((stack1 = ((helper = (helper = helpers["package"] || (depth0 != null ? depth0["package"] : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"package","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + ".models.*;\nimport "
-    + ((stack1 = ((helper = (helper = helpers["package"] || (depth0 != null ? depth0["package"] : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"package","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + ".services.impl."
-    + ((stack1 = ((helper = (helper = helpers.serviceName || (depth0 != null ? depth0.serviceName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"serviceName","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "Impl;\n\n@WebApiServiceGen\npublic interface "
-    + ((stack1 = ((helper = (helper = helpers.serviceName || (depth0 != null ? depth0.serviceName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"serviceName","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + " {\n\n  static "
-    + ((stack1 = ((helper = (helper = helpers.serviceName || (depth0 != null ? depth0.serviceName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"serviceName","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + " create(Vertx vertx) {\n    return new "
-    + ((stack1 = ((helper = (helper = helpers.serviceName || (depth0 != null ? depth0.serviceName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"serviceName","hash":{},"data":data}) : helper))) != null ? stack1 : "")
-    + "Impl(vertx);\n  }\n\n"
-    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.operations : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
-    + "}\n";
-},"useData":true})
 exports['openapi-server-sp/src/test/java/{packageDir}/services/{serviceName}Test.java'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data,blockParams,depths) {
     var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing;
 
@@ -2208,6 +2150,64 @@ exports['openapi-server-sp/src/test/java/{packageDir}/services/{serviceName}Test
     + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.operations : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0, blockParams, depths),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + "\n}";
 },"useData":true,"useDepths":true})
+exports['openapi-server-sp/src/main/java/{packageDir}/services/package-info.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, alias1=container.lambda;
+
+  return "@ModuleGen(name = \""
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.artifactId : stack1), depth0)) != null ? stack1 : "")
+    + "\", groupPackage = \""
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1.groupId : stack1), depth0)) != null ? stack1 : "")
+    + "\")\npackage "
+    + ((stack1 = alias1(((stack1 = (depth0 != null ? depth0.metadata : depth0)) != null ? stack1["package"] : stack1), depth0)) != null ? stack1 : "")
+    + ".services;\n\nimport io.vertx.codegen.annotations.ModuleGen;";
+},"useData":true})
+exports['openapi-server-sp/src/main/java/{packageDir}/services/{serviceName}.java'] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
+    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {});
+
+  return "  void "
+    + ((stack1 = ((helper = (helper = helpers.serviceMethodName || (depth0 != null ? depth0.serviceMethodName : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(alias1,{"name":"serviceMethodName","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "(\n"
+    + ((stack1 = helpers.each.call(alias1,((stack1 = (depth0 != null ? depth0.parsedParameters : depth0)) != null ? stack1.path : stack1),{"name":"each","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers.each.call(alias1,((stack1 = (depth0 != null ? depth0.parsedParameters : depth0)) != null ? stack1.cookie : stack1),{"name":"each","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers.each.call(alias1,((stack1 = (depth0 != null ? depth0.parsedParameters : depth0)) != null ? stack1.query : stack1),{"name":"each","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers.each.call(alias1,((stack1 = (depth0 != null ? depth0.parsedParameters : depth0)) != null ? stack1.header : stack1),{"name":"each","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + ((stack1 = helpers["if"].call(alias1,(depth0 != null ? depth0.bodySchema : depth0),{"name":"if","hash":{},"fn":container.program(4, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "    OperationRequest context, Handler<AsyncResult<OperationResponse>> resultHandler);\n\n";
+},"2":function(container,depth0,helpers,partials,data) {
+    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing;
+
+  return "    "
+    + ((stack1 = (helpers.solveOasTypeForService || (depth0 && depth0.solveOasTypeForService) || alias2).call(alias1,"java",(depth0 != null ? depth0.schema : depth0),((stack1 = (data && data.root)) && stack1.modelsCache),{"name":"solveOasTypeForService","hash":{},"data":data})) != null ? stack1 : "")
+    + " "
+    + ((stack1 = ((helper = (helper = helpers.sanitizedName || (depth0 != null ? depth0.sanitizedName : depth0)) != null ? helper : alias2),(typeof helper === "function" ? helper.call(alias1,{"name":"sanitizedName","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + ",\n";
+},"4":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "    "
+    + ((stack1 = (helpers.solveOasTypeForService || (depth0 && depth0.solveOasTypeForService) || helpers.helperMissing).call(depth0 != null ? depth0 : (container.nullContext || {}),"java",(depth0 != null ? depth0.bodySchema : depth0),((stack1 = (data && data.root)) && stack1.modelsCache),{"name":"solveOasTypeForService","hash":{},"data":data})) != null ? stack1 : "")
+    + " body,\n";
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1, helper, alias1=depth0 != null ? depth0 : (container.nullContext || {}), alias2=helpers.helperMissing, alias3="function";
+
+  return "package "
+    + ((stack1 = ((helper = (helper = helpers["package"] || (depth0 != null ? depth0["package"] : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"package","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + ".services;\n\nimport io.vertx.core.AsyncResult;\nimport io.vertx.core.Handler;\nimport io.vertx.core.Vertx;\nimport io.vertx.ext.web.api.*;\nimport io.vertx.ext.web.api.generator.WebApiServiceGen;\n\nimport java.util.List;\nimport java.util.Map;\n\nimport "
+    + ((stack1 = ((helper = (helper = helpers["package"] || (depth0 != null ? depth0["package"] : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"package","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + ".models.*;\nimport "
+    + ((stack1 = ((helper = (helper = helpers["package"] || (depth0 != null ? depth0["package"] : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"package","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + ".services.impl."
+    + ((stack1 = ((helper = (helper = helpers.serviceName || (depth0 != null ? depth0.serviceName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"serviceName","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "Impl;\n\n@WebApiServiceGen\npublic interface "
+    + ((stack1 = ((helper = (helper = helpers.serviceName || (depth0 != null ? depth0.serviceName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"serviceName","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + " {\n\n  static "
+    + ((stack1 = ((helper = (helper = helpers.serviceName || (depth0 != null ? depth0.serviceName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"serviceName","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + " create(Vertx vertx) {\n    return new "
+    + ((stack1 = ((helper = (helper = helpers.serviceName || (depth0 != null ? depth0.serviceName : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"serviceName","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "Impl(vertx);\n  }\n\n"
+    + ((stack1 = helpers.each.call(alias1,(depth0 != null ? depth0.operations : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "}\n";
+},"useData":true})
 exports['service-proxy/src/main/java/{packageDir}/impl/{Service}Impl.java'] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, alias1=container.lambda;
 
