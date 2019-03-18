@@ -8,7 +8,7 @@
   <link rel="shortcut icon" type="image/svg" href="img/stack.svg" />
   <link rel="manifest" href="manifest.json">
 
-  <title>Vert.x Starter (v0.1.63)</title>
+  <title>Vert.x Starter PWA (v0.1.64)</title>
 
   <link rel="stylesheet" href="css/bundle.min.css">
   <style>
@@ -22,6 +22,70 @@
   </style>
 
   <script src="https://www.google-analytics.com/analytics.js"></script>
+
+  <meta property="og:site_name" content="vertx-starter.jetdrone.xyz"/>
+  <meta property="og:title" content="Vert.x Starter PWA"/>
+  <meta property="og:type" content="Eclipse Vert.x PWA Project Generator"/>
+  <meta property="og:url" content="https://vertx-starter.jetdrone.xyz"/>
+  <meta property="og:description" content="Quickly start your Vert.x Project"/>
+  <meta property="og:image" content="https://vertx-starter.jetdrone.xyz/apple-touch-icon.png"/>
+  
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Maven Vert.x Starter",
+      "applicationCategory": "Development Tools",
+      "applicationSubCategory": "Project Generator",
+      "softwareRequirements": "Java, Apache Maven",
+      "installUrl": "https://vertx-starter.jetdrone.xyz/#maven",
+      "operatingSystem": "any",
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://vertx-starter.jetdrone.xyz/apple-touch-icon.png",
+        "height": 512,
+        "width": 512
+      }
+    }
+  </script>
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Gradle Vert.x Starter",
+      "applicationCategory": "Development Tools",
+      "applicationSubCategory": "Project Generator",
+      "softwareRequirements": "Java, Gradle",
+      "installUrl": "https://vertx-starter.jetdrone.xyz/#gradle",
+      "operatingSystem": "any",
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://vertx-starter.jetdrone.xyz/apple-touch-icon.png",
+        "height": 512,
+        "width": 512
+      }
+    }
+  </script>
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "NPM Vert.x Starter",
+      "applicationCategory": "Development Tools",
+      "applicationSubCategory": "Project Generator",
+      "softwareRequirements": "Java, NPM, GraalVM",
+      "installUrl": "https://vertx-starter.jetdrone.xyz/#npm",
+      "operatingSystem": "any",
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://vertx-starter.jetdrone.xyz/apple-touch-icon.png",
+        "height": 512,
+        "width": 512
+      }
+    }
+  </script>
 </head>
 
 <body>
@@ -33,10 +97,10 @@
 
   <!-- the app -->
   <script src="js/vendor.dll.js"></script>
-  <script src="js/main.bundle.js?v0.1.63"></script>
+  <script src="js/main.bundle.js?v0.1.64"></script>
   <script>
       if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js?v0.1.63');
+      navigator.serviceWorker.register('sw.js?v0.1.64');
     }
   </script>
   <!-- Google Analytics script -->
