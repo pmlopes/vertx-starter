@@ -117,33 +117,6 @@
         </executions>
       </plugin>
       {{/if}}
-      {{#if metadata.graalNativeImage}}
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        <version>3.0.2</version>
-        <configuration>
-          <archive>
-            <manifest>
-              <mainClass>${vertx.verticle}</mainClass>
-            </manifest>
-          </archive>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>com.oracle.substratevm</groupId>
-        <artifactId>native-image-maven-plugin</artifactId>
-        <version>${graal.version}</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>native-image</goal>
-            </goals>
-            <phase>package</phase>
-          </execution>
-        </executions>
-      </plugin>
-      {{/if}}
       {{#containsDep dependencies "io.vertx" "vertx-grpc"}}
       <plugin>
         <groupId>org.xolstice.maven.plugins</groupId>
@@ -200,7 +173,6 @@
         </executions>
       </plugin>
       {{/containsDep}}
-      {{#unless metadata.graalNativeImage}}
       <plugin>
         <groupId>io.reactiverse</groupId>
         <artifactId>vertx-maven-plugin</artifactId>
@@ -218,7 +190,26 @@
           <redeploy>true</redeploy>
         </configuration>
       </plugin>
-      {{/unless}}
+      {{#if metadata.graalNativeImage}}
+      <plugin>
+        <groupId>com.oracle.substratevm</groupId>
+        <artifactId>native-image-maven-plugin</artifactId>
+        <version>${graal.version}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>native-image</goal>
+            </goals>
+            <phase>package</phase>
+          </execution>
+        </executions>
+        <configuration>
+          <imageName>{{metadata.name}}</imageName>
+          <mainClass>io.vertx.core.Launcher</mainClass>
+          <buildArgs>--enable-all-security-services -H:+ReportUnsupportedElementsAtRuntime --allow-incomplete-classpath</buildArgs>
+        </configuration>
+      </plugin>
+      {{/if}}
     </plugins>
   </build>
 </project>

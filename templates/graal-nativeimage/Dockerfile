@@ -11,11 +11,10 @@ ADD src app/src/
 WORKDIR /app
 # Build (java side)
 RUN ./mvnw package
-# Create new image from alpine
-FROM frolvlad/alpine-glibc:alpine-3.8
-RUN apk add --no-cache ca-certificates
+# Create new image from debian-slim (20Mb)
+FROM debian:stable-slim
 # Copy generated native executable from build-aot
-COPY --from=build-aot /app/target/{{lowerCase metadata.main}} /{{metadata.name}}
+COPY --from=build-aot /app/target/{{metadata.name}} /{{metadata.name}}
 COPY --from=build-aot /opt/graalvm-ce-{{metadata.graalVersion}}/jre/lib/amd64/libsunec.so /libsunec.so
 # Set the entrypoint
 ENTRYPOINT [ "/{{metadata.name}}" ]

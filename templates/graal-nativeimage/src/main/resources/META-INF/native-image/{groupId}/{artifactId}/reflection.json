@@ -1,0 +1,7 @@
+[
+  {
+    "name": "{{metadata.main}}",
+    "allDeclaredConstructors": true,
+    "allDeclaredMethods": true
+  }
+]

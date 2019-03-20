@@ -14,7 +14,7 @@
     ],
     "meta": [
       { "key": "bom", "value": "3.6.3" },
-      { "key": "graalVersion", "value": "1.0.0-rc13" }
+      { "key": "graalVersion", "value": "1.0.0-rc14" }
     ],
     "languages": [
       {
@@ -59,8 +59,8 @@
       "graal-nativeimage/Dockerfile",
       "graal-nativeimage/README.md",
       "graal-nativeimage/src/main/java/SVMSubstitutions.java",
-      "graal-nativeimage/src/main/resources/META-INF/native-image/io.vertx/vertx-core/native-image.properties",
-      "graal-nativeimage/src/main/resources/META-INF/native-image/io.vertx/vertx-core/reflection.json"
+      "graal-nativeimage/src/main/resources/META-INF/native-image/{groupId}/{artifactId}/native-image.properties",
+      "graal-nativeimage/src/main/resources/META-INF/native-image/{groupId}/{artifactId}/reflection.json"
     ],
     "blob": "mvnw.zip",
     "executables": [

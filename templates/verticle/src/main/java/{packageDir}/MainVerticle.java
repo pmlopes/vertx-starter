@@ -1,21 +1,11 @@
 package {{ metadata.package }};
 
-{{#if metadata.graalNativeImage}}
-import io.vertx.core.Vertx;
-{{/if}}
 import io.vertx.core.AbstractVerticle;
 {{#containsDep dependencies "io.vertx" "vertx-web"}}
 import io.vertx.ext.web.Router;
 {{/containsDep}}
 
 public class MainVerticle extends AbstractVerticle {
-
-  {{#if metadata.graalNativeImage}}
-  public static void main(String[] args) {
-    // TODO: configure your vertx options here
-    Vertx.vertx().deployVerticle(new MainVerticle());
-  }
-  {{/if}}
 
   @Override
   public void start() {
