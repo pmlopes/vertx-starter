@@ -206,7 +206,7 @@
         <configuration>
           <imageName>{{metadata.name}}</imageName>
           <mainClass>io.vertx.core.Launcher</mainClass>
-          <buildArgs>--enable-all-security-services -H:+ReportUnsupportedElementsAtRuntime --allow-incomplete-classpath</buildArgs>
+          <buildArgs>--enable-all-security-services --report-unsupported-elements-at-runtime --allow-incomplete-classpath</buildArgs>
         </configuration>
       </plugin>
       {{/if}}

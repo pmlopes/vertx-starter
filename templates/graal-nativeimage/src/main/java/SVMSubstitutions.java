@@ -63,36 +63,3 @@ final class Target_io_vertx_core_spi_resolver_ResolverProvider {
         return new io.vertx.core.impl.resolver.DefaultResolverProvider();
     }
 }
-
-@AutomaticFeature
-class RuntimeReflectionRegistrationFeature implements Feature {
-  public void beforeAnalysis(BeforeAnalysisAccess access) {
-    try {
-      // json types
-      RuntimeReflection.register(java.util.ArrayList.class.getDeclaredConstructor());
-      RuntimeReflection.register(java.util.LinkedHashMap.class.getDeclaredConstructor());
-
-      // commands
-      RuntimeReflection.register(io.vertx.core.impl.launcher.commands.RunCommand.class);
-      RuntimeReflection.register(io.vertx.core.impl.launcher.commands.RunCommand.class.getDeclaredConstructors());
-      RuntimeReflection.register(io.vertx.core.impl.launcher.commands.RunCommand.class.getDeclaredMethods());
-
-      RuntimeReflection.register(io.vertx.core.impl.launcher.commands.VertxIsolatedDeployer.class);
-      RuntimeReflection.register(io.vertx.core.impl.launcher.commands.VertxIsolatedDeployer.class.getDeclaredConstructors());
-      RuntimeReflection.register(io.vertx.core.impl.launcher.commands.VertxIsolatedDeployer.class.getDeclaredMethods());
-
-      // launcher reflection
-      RuntimeReflection.register(java.lang.Long.class);
-      RuntimeReflection.register(java.lang.Long.class.getDeclaredConstructors());
-
-      RuntimeReflection.register(java.lang.Integer.class);
-      RuntimeReflection.register(java.lang.Integer.class.getDeclaredConstructors());
-
-      // extras (grpc seems to need this)
-      RuntimeReflection.register(io.netty.channel.socket.nio.NioServerSocketChannel.class.getDeclaredConstructor());
-
-    } catch (NoSuchMethodException e) {
-      throw new RuntimeException(e);
-    }
-  }
-}

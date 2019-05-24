@@ -13,8 +13,8 @@
       { "key": "graalNativeImage", "label": "GraalVM native-image", "type": "checkbox" }
     ],
     "meta": [
-      { "key": "bom", "value": "3.7.0" },
-      { "key": "graalVersion", "value": "1.0.0-rc14" }
+      { "key": "bom", "value": "3.7.1" },
+      { "key": "graalVersion", "value": "19.0.0" }
     ],
     "languages": [
       {
