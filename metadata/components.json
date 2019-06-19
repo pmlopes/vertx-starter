@@ -707,5 +707,11 @@
     "artifactId": "logback-classic",
     "version": "1.2.3",
     "description": "Logback."
+  },
+  {
+    "groupId": "xyz.jetdrone",
+    "artifactId": "vertx.lambda.aws",
+    "version": "0.0.2",
+    "description": "Vert.x Lambda boilerplate for AWS."
   }
 ]

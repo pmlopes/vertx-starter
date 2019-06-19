@@ -1,0 +1,2 @@
+# List all available Lambdas here
+{{ metadata.package }}.{{ metadata.Lambda }}

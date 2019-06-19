@@ -384,5 +384,37 @@
       "wiki+blueprint/src/main/java/{packageDir}/database/package-info.java",
       "wiki+blueprint/src/main/java/{packageDir}/database/WikiDatabaseVerticle.java"
     ]
+  },
+  {
+    "id": "AWS Lambda Template",
+    "group": "lambda",
+    "description": "A bare bones native AWS Lambda application",
+    "dependencies": [
+      "xyz.jetdrone:vertx.lambda.aws",
+      "io.vertx:vertx-unit",
+      "junit:junit"
+    ],
+    "fields" :[
+      { "key": "Lambda", "label": "Lambda Name", "prefil": "MyLambda", "required": true }
+    ],
+    "ignoreFields": [
+      "graalNativeImage"
+    ],
+    "languages": [
+      {
+        "id": "java",
+        "templates": [
+          "lambda+aws/README.md",
+          "lambda+aws/pom.xml",
+
+          "lambda+aws/src/main/java/{packageDir}/{Lambda}.java",
+          "lambda+aws/src/main/resources/META-INF/services/xyz.jetdrone.vertx.lambda.aws.Lambda",
+          "lambda+aws/src/test/java/{packageDir}/{Lambda}Test.java"
+        ],
+        "ignoreTemplates": [
+          "verticle/src/main/java/{packageDir}/MainVerticle.java"
+        ]
+      }
+    ]
   }
 ]

@@ -81,9 +81,11 @@ function mergeTemplates(project, alreadyCollectedTemplates) {
   if (project.language.templates) {
     templates = templates.concat(project.language.templates);
   }
+  let ignoreTemplates = [];
   // merge preset templates
   if (project.preset) {
     templates = templates.concat(project.preset.templates || []);
+    ignoreTemplates = ignoreTemplates.concat(project.preset.ignoreTemplates || []);
     // merge preset language specific templates
     if (project.preset.languages) {
       const presetLanguages = project.preset.languages.filter(function (el) {
@@ -92,6 +94,7 @@ function mergeTemplates(project, alreadyCollectedTemplates) {
 
       if (presetLanguages.length === 1) {
         templates = templates.concat(presetLanguages[0].templates || []);
+        ignoreTemplates = ignoreTemplates.concat(presetLanguages[0].ignoreTemplates || []);
       }
     }
   }
@@ -100,6 +103,15 @@ function mergeTemplates(project, alreadyCollectedTemplates) {
     templates = templates.concat(el.templates || []);
     templates = templates.concat(el[project.language.id + 'Templates'] || []);
   });
+
+  // exclude the ignored templates
+  ignoreTemplates.forEach(function (el) {
+    let idx = templates.indexOf(el);
+    if (idx !== -1) {
+      templates.splice(idx, 1);
+    }
+  });
+
   return templates
 }
 

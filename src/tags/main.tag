@@ -10,17 +10,17 @@
     <h1 class="box">{ tool.id }<img if={ tool.icon } src="img/{ tool.icon }" width="32px" />&nbsp;{ tool.file }</h1>
     <form onsubmit={ generate }>
       <!-- Basic fields -->
-      <div each={ f, i in tool.fields } class="row">
+      <div each={ f, i in fields } class="row">
         <!-- iterate 2 at a time -->
         <virtual if={ i % 2 === 0 }>
           <div class="col-6">
-            <input name="{ tool.fields[i].key }" type={ parseFieldType(tool.fields[i]) } placeholder="{ tool.fields[i].label + (tool.fields[i].prefill ? ' e.g.: ' + tool.fields[i].prefill : '') }" required="{ tool.fields[i].required }">
-            <label if={ parseFieldType(tool.fields[i]) == 'checkbox' || parseFieldType(tool.fields[i]) == 'file' }><br><i>{ tool.fields[i].label + (tool.fields[i].prefill ? ' e.g.: ' + tool.fields[i].prefill : '') }</i></label>
+            <input name="{ fields[i].key }" type={ parseFieldType(fields[i]) } placeholder="{ fields[i].label + (fields[i].prefill ? ' e.g.: ' + fields[i].prefill : '') }" required="{ fields[i].required }">
+            <label if={ parseFieldType(fields[i]) == 'checkbox' || parseFieldType(fields[i]) == 'file' }><br><i>{ fields[i].label + (fields[i].prefill ? ' e.g.: ' + fields[i].prefill : '') }</i></label>
           </div>
           <div class="col-6">
             <!-- if there is a next one -->
-            <input if={ tool.fields[i+1] }  name="{ tool.fields[i+1].key }" type={ parseFieldType(tool.fields[i + 1]) } placeholder="{ tool.fields[i+1].label + (tool.fields[i+1].prefill ? ' e.g.: ' + tool.fields[i+1].prefill : '') }" required="{ tool.fields[i+1].required }">
-            <label if={ tool.fields[i+1] && (parseFieldType(tool.fields[i + 1]) == 'checkbox' || parseFieldType(tool.fields[i + 1]) == 'file') }><br><i>{ tool.fields[i+1].label + (tool.fields[i+1].prefill ? ' e.g.: ' + tool.fields[i+1].prefill : '') }</i></label>
+            <input if={ fields[i+1] }  name="{ fields[i+1].key }" type={ parseFieldType(fields[i + 1]) } placeholder="{ fields[i+1].label + (fields[i+1].prefill ? ' e.g.: ' + fields[i+1].prefill : '') }" required="{ fields[i+1].required }">
+            <label if={ fields[i+1] && (parseFieldType(fields[i + 1]) == 'checkbox' || parseFieldType(fields[i + 1]) == 'file') }><br><i>{ fields[i+1].label + (fields[i+1].prefill ? ' e.g.: ' + fields[i+1].prefill : '') }</i></label>
           </div>
         </virtual>
       </div>
@@ -218,6 +218,7 @@
           // state change, disable old download
           downloading: false,
           tool: tool,
+          fields: tool.fields,
           // defaults to the first language of the list
           presets: filteredPresets,
           presetGroups: filteredPresetsGroups,
@@ -229,6 +230,7 @@
           // state change, disable old download
           downloading: false,
           tool: tool,
+          fields: tool.fields,
           dependencies: []
         });
       }
@@ -310,7 +312,8 @@
         presetGroups: filteredPresetsGroups,
         preset: filteredPresets.indexOf(this.preset) === -1 ? null : this.preset,
         language: newLang,
-        dependencies: selection
+        dependencies: selection,
+        fields: this.tool.fields
       });
     };
 
@@ -376,10 +379,26 @@
         }
       });
 
+      let fields = [].concat(this.tool.fields);
+      // filter out the fields
+      if (newPreset.ignoreFields) {
+        // need to iterate and remove
+        let index = fields.length - 1;
+
+        while (index >= 0) {
+          if (newPreset.ignoreFields.indexOf(fields[index].key) !== -1) {
+            fields.splice(index, 1);
+          }
+
+          index -= 1;
+        }
+      }
+
       this.update({
         // state change, disable old download
         downloading: false,
         preset: newPreset,
+        fields: fields,
         dependencies: selection
       });
     };
@@ -396,6 +415,12 @@
     };
 
     this.setFieldValue = e => field => {
+
+      if (e.target[field.key] === undefined) {
+        // skip as it was ignored
+        return Promise.resolve();
+      }
+
       if (!field.type) field.type = "input";
       if (field.type === "file") {
         return new Promise((resolve, reject) => {
