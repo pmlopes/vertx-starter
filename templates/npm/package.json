@@ -39,9 +39,9 @@
   {{/each}}
   },
 
-  "mvnDependencies": {
+  "mvnDependencies": [
   {{#each npmMavenDependencies}}
-    "{{ groupId }}:{{ artifactId }}": "{{ version }}{{#if scope}}:{{ scope }}{{/if}}{{#if classifier}}:{{ classifier }}{{/if}}"{{#unless @last}},{{/unless}}
+    "{{ groupId }}:{{ artifactId }}{{#if classifier}}:jar:{{ classifier }}{{/if}}:{{ version }}"{{#unless @last}},{{/unless}}
   {{/each}}
-  }
+  ]
 }
