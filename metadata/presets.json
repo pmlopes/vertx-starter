@@ -390,7 +390,7 @@
     "group": "lambda",
     "description": "A bare bones native AWS Lambda application",
     "dependencies": [
-      "xyz.jetdrone:vertx.lambda.aws",
+      "xyz.jetdrone:vertx.lambda",
       "io.vertx:vertx-unit",
       "junit:junit"
     ],
@@ -408,7 +408,7 @@
           "lambda+aws/pom.xml",
 
           "lambda+aws/src/main/java/{packageDir}/{Lambda}.java",
-          "lambda+aws/src/main/resources/META-INF/services/xyz.jetdrone.vertx.lambda.aws.Lambda",
+          "lambda+aws/src/main/resources/META-INF/services/xyz.jetdrone.vertx.lambda.Lambda",
           "lambda+aws/src/test/java/{packageDir}/{Lambda}Test.java"
         ],
         "ignoreTemplates": [

@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import xyz.jetdrone.vertx.lambda.aws.Lambda;
+import xyz.jetdrone.vertx.lambda.Lambda;
 
 import java.util.ServiceLoader;
 

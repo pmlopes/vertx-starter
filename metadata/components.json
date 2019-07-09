@@ -710,8 +710,8 @@
   },
   {
     "groupId": "xyz.jetdrone",
-    "artifactId": "vertx.lambda.aws",
-    "version": "0.0.2",
+    "artifactId": "vertx.lambda",
+    "version": "0.0.4",
     "description": "Vert.x Lambda boilerplate for AWS."
   }
 ]

@@ -1,3 +1,4 @@
+package graal;
 
 import com.oracle.svm.core.annotate.*;
 import org.graalvm.nativeimage.*;

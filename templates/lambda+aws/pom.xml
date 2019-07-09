@@ -81,8 +81,8 @@
         <dependencies>
           <dependency>
             <groupId>xyz.jetdrone</groupId>
-            <artifactId>vertx.lambda.aws</artifactId>
-            <version>{{getDepValue dependencies "xyz.jetdrone" "vertx.lambda.aws" "version"}}</version>
+            <artifactId>vertx.lambda</artifactId>
+            <version>{{getDepValue dependencies "xyz.jetdrone" "vertx.lambda" "version"}}</version>
           </dependency>
         </dependencies>
         <configuration>

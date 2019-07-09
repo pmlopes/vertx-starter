@@ -2,26 +2,27 @@ package {{ metadata.package }};
 
 import io.vertx.core.eventbus.Message;
 import io.vertx.core.json.JsonObject;
-import xyz.jetdrone.vertx.lambda.aws.Lambda;
-import xyz.jetdrone.vertx.lambda.aws.event.APIGatewayProxyRequest;
-import xyz.jetdrone.vertx.lambda.aws.event.APIGatewayProxyResponse;
+import xyz.jetdrone.vertx.lambda.Lambda;
+import xyz.jetdrone.vertx.lambda.aws.event.*;
 
 /**
- * You can use a Lambda function to process requests from an Application Load Balancer.
+ * You can use a Lambda function to process any kind of events.
+ * AWS Lambda sends events as JSON messages so it is convenient
+ * to let use the generified interface.
  *
- * Elastic Load Balancing supports Lambda functions as a target for an Application Load Balancer.
- * Use load balancer rules to route HTTP requests to a function, based on path or header values.
- * Process the request and return an HTTP response from your Lambda function.
- *
- * Elastic Load Balancing invokes your Lambda function synchronously with an event that contains
- * the request body and metadata.
+ * As a utility helper most events can be converted to POJOs
+ * by using the provided implementations under the <pre>event</pre>
+ * package.
  */
 public class {{ metadata.Lambda }} implements Lambda<JsonObject> {
 
   @Override
   public void handle(Message<JsonObject> event) {
+    // assuming this lambda will handle API GW Proxy requests...
+
     // the payload should be a proxy request
     APIGatewayProxyRequest req = new APIGatewayProxyRequest(event.body());
+
     // print the payload
     System.out.println(req);
 
