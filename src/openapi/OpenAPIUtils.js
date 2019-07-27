@@ -45,7 +45,7 @@ function getOperations(openapi, failOnMissingOperationId) {
       result[operationId]['sanitizedOperationId'] = OpenAPISanitizers.sanitize(operationId);
 
       let joinedParameters = _.unionBy(result[operationId]['parameters'], path.parameters, "name") || [];
-      joinedParameters.map((op) => (op["$ref"]) ? openapi.refs.get(op["$ref"]) : op);
+      joinedParameters = joinedParameters.map((op) => (op["$ref"]) ? openapi.refs.get(op["$ref"]) : op);
       result[operationId]['parameters'] = joinedParameters;
     }
   }
