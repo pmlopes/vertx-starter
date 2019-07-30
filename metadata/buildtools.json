@@ -13,7 +13,7 @@
       { "key": "graalNativeImage", "label": "GraalVM native-image", "type": "checkbox" }
     ],
     "meta": [
-      { "key": "bom", "value": "3.7.1" },
+      { "key": "bom", "value": "3.8.0" },
       { "key": "graalVersion", "value": "19.1.0" }
     ],
     "languages": [
@@ -84,7 +84,7 @@
     ],
     "meta": [
       { "key": "plugin", "value": "0.3.1" },
-      { "key": "bom", "value": "3.7.0" }
+      { "key": "bom", "value": "3.8.0" }
     ],
     "languages": [
       {
@@ -190,7 +190,7 @@
       { "key": "version", "label": "Project Version", "prefill": "0.0.1-SNAPSHOT" }
     ],
     "meta": [
-      { "key": "bom", "value": "3.7.0" }
+      { "key": "bom", "value": "3.8.0" }
     ],
     "languages": [
       {
