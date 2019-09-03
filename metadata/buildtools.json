@@ -13,8 +13,8 @@
       { "key": "graalNativeImage", "label": "GraalVM native-image", "type": "checkbox" }
     ],
     "meta": [
-      { "key": "bom", "value": "3.8.0" },
-      { "key": "graalVersion", "value": "19.1.0" }
+      { "key": "bom", "value": "3.8.1" },
+      { "key": "graalVersion", "value": "19.2.0" }
     ],
     "languages": [
       {
@@ -58,7 +58,6 @@
     "graalNativeImageTemplates": [
       "graal-nativeimage/Dockerfile",
       "graal-nativeimage/README.md",
-      "graal-nativeimage/src/main/java/graal/SVMSubstitutions.java",
       "graal-nativeimage/src/main/resources/META-INF/native-image/{groupId}/{artifactId}/native-image.properties",
       "graal-nativeimage/src/main/resources/META-INF/native-image/{groupId}/{artifactId}/reflection.json"
     ],
@@ -84,7 +83,7 @@
     ],
     "meta": [
       { "key": "plugin", "value": "0.3.1" },
-      { "key": "bom", "value": "3.8.0" }
+      { "key": "bom", "value": "3.8.1" }
     ],
     "languages": [
       {
@@ -145,7 +144,7 @@
       { "key": "version", "label": "Project Version", "prefill": "0.0.1" }
     ],
     "meta": [
-      { "key": "es4x", "value": "0.7.3" }
+      { "key": "es4x", "value": "0.9.0" }
     ],
     "languages": [
       {
@@ -190,7 +189,7 @@
       { "key": "version", "label": "Project Version", "prefill": "0.0.1-SNAPSHOT" }
     ],
     "meta": [
-      { "key": "bom", "value": "3.8.0" }
+      { "key": "bom", "value": "3.8.1" }
     ],
     "languages": [
       {

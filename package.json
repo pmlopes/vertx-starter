@@ -10,19 +10,19 @@
     "create-vertx-app": "./src/cli_entrypoint.js"
   },
   "dependencies": {
-    "commander": "^2.19.0",
+    "commander": "^2.20.0",
     "handlebars": "^4.0.12",
     "handlebars-utils": "^1.0.6",
-    "inquirer": "^6.2.2",
-    "jszip": "^3.1.5",
+    "inquirer": "^6.5.2",
+    "jszip": "^3.2.2",
     "jszip-utils": "^0.0.2",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.15",
     "mkdirp": "^0.5.1",
     "swagger-parser": "^6.0.5"
   },
   "devDependencies": {
-    "@babel/core": "^7.1.6",
-    "@babel/preset-env": "^7.3.1",
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
     "babel-loader": "^8.0.4",
     "gulp": "^4.0.0",
     "gulp-concat": "^2.6.1",
@@ -38,9 +38,9 @@
     "riot-compiler": "^3.5.2",
     "riot-route": "^3.1.4",
     "riot-tag-loader": "^2.1.0",
-    "terser-webpack-plugin": "^1.1.0",
+    "terser-webpack-plugin": "^1.4.1",
     "through2": "^3.0.0",
-    "webpack": "^4.29.0",
+    "webpack": "^4.39.3",
     "webpack-stream": "^5.1.1",
     "wingcss": "^1.0.0-beta"
   }
