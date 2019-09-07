@@ -2,7 +2,7 @@
 
 // Names of the two caches used in this version of the service worker.
 // The id should expand from git on every deploy.
-const PRECACHE = 'v0.1.78';
+const PRECACHE = 'v0.1.80';
 const RUNTIME = 'runtime';
 
 // A list of local resources we always want to be cached.
