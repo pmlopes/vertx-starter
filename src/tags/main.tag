@@ -57,7 +57,7 @@
             </div>
             <div class="col-6">
               <!-- if there is a next one -->
-              <input if={ preset.fields[i+1] }  name="{ preset.fields[i+1].key }" type={ parseFieldType(preset.fields[i]) } placeholder="{ preset.fields[i+1].label + (preset.fields[i+1].prefill ? ' e.g.: ' + preset.fields[i+1].prefill : '') }" required="{ preset.fields[i+1].required }">
+              <input if={ preset.fields[i+1] }  name="{ preset.fields[i+1].key }" type={ parseFieldType(preset.fields[i+1]) } placeholder="{ preset.fields[i+1].label + (preset.fields[i+1].prefill ? ' e.g.: ' + preset.fields[i+1].prefill : '') }" required="{ preset.fields[i+1].required }">
               <label if={ preset.fields[i+1] && (parseFieldType(preset.fields[i + 1]) == 'checkbox' || parseFieldType(preset.fields[i + 1]) == 'file') }><br><i>{ preset.fields[i+1].label + (preset.fields[i+1].prefill ? ' e.g.: ' + preset.fields[i+1].prefill : '') }</i></label>
             </div>
           </virtual>
