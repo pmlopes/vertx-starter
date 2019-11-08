@@ -14,7 +14,7 @@
     ],
     "meta": [
       { "key": "bom", "value": "3.8.3" },
-      { "key": "graalVersion", "value": "19.2.0" }
+      { "key": "graalVersion", "value": "19.2.1" }
     ],
     "languages": [
       {
