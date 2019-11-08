@@ -12,7 +12,6 @@ const PRECACHE_URLS = [
   'index.html',
   'css/bundle.min.css',
   'js/main.bundle.js',
-  'js/vendor.dll.js',
   'img/stack.svg',
   'img/npm.svg',
   'favicon.ico',

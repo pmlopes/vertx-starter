@@ -123,12 +123,6 @@ gulp.task('webpack', function() {
     .pipe(gulp.dest('dist/js'));
 });
 
-gulp.task('webpack-vendor', function() {
-  return gulp.src('src/web_entrypoint.js')
-    .pipe(webpack(require('./vendor.webpack.config.js')))
-    .pipe(gulp.dest('dist/js'));
-});
-
 gulp.task('build', gulp.series('css', 'handlebars', 'metadata', 'kill-cache', 'copy-blobs', 'webpack'));
 
 // Default Task
