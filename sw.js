@@ -2,7 +2,7 @@
 
 // Names of the two caches used in this version of the service worker.
 // The id should expand from git on every deploy.
-const PRECACHE = 'v0.1.84';
+const PRECACHE = 'v0.1.85';
 const RUNTIME = 'runtime';
 
 // A list of local resources we always want to be cached.
@@ -11,8 +11,8 @@ const PRECACHE_URLS = [
   '/',
   'index.html',
   'css/bundle.min.css',
-  'js/vendors.bundle.js',
   'js/main.bundle.js',
+  'js/vendor.dll.js',
   'img/stack.svg',
   'img/npm.svg',
   'favicon.ico',
