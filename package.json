@@ -10,8 +10,8 @@
     "create-vertx-app": "./src/cli_entrypoint.js"
   },
   "dependencies": {
-    "commander": "^2.20.0",
-    "handlebars": "^4.5.1",
+    "commander": "^2.20.3",
+    "handlebars": "^4.5.3",
     "handlebars-utils": "^1.0.6",
     "inquirer": "^6.5.2",
     "jszip": "^3.2.2",
@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.7.2",
-    "@babel/preset-env": "^7.7.1",
+    "@babel/preset-env": "^7.18.2",
     "babel-loader": "^8.0.6",
     "gulp": "^4.0.2",
     "gulp-concat": "^2.6.1",
